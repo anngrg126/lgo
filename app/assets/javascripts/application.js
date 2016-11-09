@@ -50,7 +50,6 @@ function myFunction() {
 
 //fcn to remove extra image upload fields, separate b/c dynamically-added element
 $(document).on('click', '.remove_image_field', function(event){
-  console.log("test");
   $(this).closest(".upload_image").remove();
 });
 
