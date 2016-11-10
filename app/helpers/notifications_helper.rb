@@ -58,7 +58,169 @@ module NotificationsHelper
     else #Following
       text = link_notifier+ " followed you."
     end
-      
-    text
   end
+#  
+  def somehow_organize_by_stories(notifications_array)
+    stories_comments_author = []
+    stories_comments_commenters = []
+    stories_comments = []
+    stories_bookmarks = []
+    followers = []
+    messages = []
+    call_functions = []
+    
+    notifications_array.each do |n|
+      case n.notification_category_id
+      when 1 #Story
+#        stories.push()
+        story = Story.find(n.origin_id)
+        link = link_to story_title(story), story_path(story)
+        unless n.options == "followers"
+          # Story author notification
+          messages.push("Your story has been published! See it here: "+link)
+        else
+          poster = User.find(story.poster_id)
+          link_poster = link_to poster.full_name, dashboard_path(poster)
+          # Story poster's followers notification
+          messages.push(link_poster+" published a new story! See it here: "+link)
+        end
+      when 2 #Comment
+#        unless n.options == "commenters"
+#          stories_comments_author.push(Story.find(Comment.find(n.origin_id).story_id))
+          stories_comments.push(Story.find(Comment.find(n.origin_id).story_id))
+#          call_functions.push("comments_condense_author")
+          call_functions.push("comments_condense")
+#        else
+#          stories_comments_commenters.push(Story.find(Comment.find(n.origin_id).story_id))
+##          call_functions.push("comments_condense_commenter")
+#          call_functions.push("comments_condense")
+#        end
+      when 3 #Reaction
+        messages.push("this is a test")
+      when 4 #Bookmark
+        stories_bookmarks.push(Story.find(Bookmark.find(n.origin_id).story_id))
+        call_functions.push("bookmarks_consense")
+      else #Following
+        followers.push(User.find(n.notified_by_user_id))
+        call_functions.push("followings_condense")
+      end
+    end
+    call_functions.uniq
+    
+    if call_functions.include?("comments_condense")
+      optionsarray = [nil, "commenters"]
+      stories_comments.uniq!
+      stories_comments.each do |s|
+        commenters = []
+        optionsarray.each do |o|
+          unless notifications_array.where(notification_category_id: 2, options: o).empty?
+            notifications_array.where(notification_category_id: 2, options: o).each do |n|
+              if Comment.find(n.origin_id).story_id == s.id
+                variable = true
+                variable4 = s.id
+                commenters.push(User.find(n.notified_by_user_id))
+              end
+            end
+            commenter_links = []
+            commenters.uniq
+            commenters.each do |c|
+              commenter_links.push(link_to c.full_name, dashboard_path(c))
+            end 
+            link = link_to story_title(s), story_path(s)
+            unless commenter_links.empty?
+              if s.author_id == current_user.id
+                messages.push("#{commenter_links.to_sentence} commented on your story #{link}.")
+              else
+                messages.push("#{commenter_links.to_sentence} also commented on #{link}.")
+              end
+            end
+          end
+        end
+      end
+    end
+#    
+#    if call_functions.include?("comments_condense_commenter")
+#      #Case 2-B: Aggregate commenters on stories where user commented into one sentence
+#      stories_comments_commenters.uniq
+#      stories_comments_commenters.each do |s|
+#        commenters = []
+#        notifications_array.where(notification_category_id: 2, options: "commenters").each do |n|
+#          if Comment.find(n.origin_id).story_id == s.id
+#            commenters.push(User.find(n.notified_by_user_id))
+#          end
+#        end        
+#        commenter_links_for_commenters = []
+#        commenters.uniq
+#        commenters.each do |c|
+#          commenter_links_for_commenters.push(link_to c.full_name, dashboard_path(c))
+#        end
+#        link = link_to story_title(s), story_path(s)
+#        messages.push("#{commenter_links_for_commenters.to_sentence} also commented on #{link}.")
+#      end      
+#    end
+    
+#    if call_functions.include?("comments_condense_author")
+#      #Case 2-A: Aggregate commenters on author's story into one sentence
+#      stories_comments_author.uniq
+#      stories_comments_author.each do |s|
+#        commenters = []
+#        notifications_array.where(notification_category_id: 2, options: nil).each do |n|
+#          if Comment.find(n.origin_id).story_id == s.id
+#            commenters.push(User.find(n.notified_by_user_id))
+#          end
+#        end        
+#        commenter_links_for_author = []
+#        commenters.uniq
+#        commenters.each do |c|
+#          commenter_links_for_author.push(link_to c.full_name, dashboard_path(c))
+#        end
+#        link = link_to story_title(s), story_path(s)
+#        messages.push("#{commenter_links_for_author.to_sentence} commented on your story #{link}.")
+#      end  
+#    end
+#    
+
+    
+    if call_functions.include?("bookmarks_consense")
+      #Case 4: Aggregate commenters on stories where user commented into one sentence
+      stories_bookmarks.uniq
+      stories_bookmarks.each do |s|
+        bookmarkers = []
+        notifications_array.where(notification_category_id: 4).each do |n|
+          if Bookmark.find(n.origin_id).story_id == s.id
+            bookmarkers.push(User.find(n.notified_by_user_id))
+          end
+        end        
+        bookmarker_links = []
+        bookmarkers.uniq
+        bookmarkers.each do |b|
+          bookmarker_links.push(link_to b.full_name, dashboard_path(b))
+        end
+        link = link_to story_title(s), story_path(s)
+        messages.push("#{bookmarker_links.to_sentence} bookmarked your story #{link}.")
+      end      
+    end
+
+    if call_functions.include?("followings_condense")
+      #Case 5: Aggregate followers into one sentence
+      followers.uniq
+      follower_links = []
+      followers.each do |f|
+        follower_links.push(link_to f.full_name, dashboard_path(f))
+      end
+      messages.push("#{follower_links.to_sentence} followed you.")
+    end
+    
+    #All together here
+    messages.uniq!
+    content_tag(:div) {
+      messages.each do |m|
+        concat "<div>".html_safe
+        safe_concat m
+        concat "</div>".html_safe
+      end
+      }
+  end
+  
+  
 end
