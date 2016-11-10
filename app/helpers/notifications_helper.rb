@@ -179,10 +179,11 @@ module NotificationsHelper
         bookmarkers.uniq
         bookmarkers = bookmarkers.count
         link = link_to story_title(s), story_path(s)
+        link_bookmark = link_to "bookmarked", bookmarked_stories_dashboard_path(current_user)
         if bookmarkers == 1 
-          messages.push("Woohoo! Someone bookmarked your story #{link}")
+          messages.push("Woohoo! Someone #{link_bookmark} your story #{link}")
         else
-          messages.push("Woohoo! #{bookmarkers} people bookmarked your story #{link}")
+          messages.push("Woohoo! #{bookmarkers} people #{link_bookmark} your story #{link}")
         end
       end      
     end
