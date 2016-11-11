@@ -1,14 +1,17 @@
 h2 List of All Notifications:
 - unless @unread_notifications.empty?
-  == link_to "Mark all as read", mark_all_as_read_path(@uuser)
-- @notifications.each do |notification|
-  div.notification 
-    == notification_text(notification)
-    div
-      == " "+time_ago_in_words(notification.created_at)
-      |  ago
-    div.unread
-      - unless notification.read?
-        | UNREAD
-        div
-          == link_to "Mark as read", mark_as_read_path(notification), remote: true
+  == link_to "Mark all as read", mark_all_as_read_path(@user)
+  div
+    == somehow_organize_by_stories(@unread_notifications)
+/| OLD NOTIFICATIONS
+/- @unread_notifications.each do |notification|
+/  div.notification 
+/    == notification_text(notification)
+/      div
+/        == " "+time_ago_in_words(notification.created_at)
+/        |  ago
+/      div.unread
+/        - unless notification.read?
+/          | UNREAD
+/          div
+/            == link_to "Mark as read", mark_as_read_path(notification), remote: trues

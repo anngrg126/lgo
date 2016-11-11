@@ -11,13 +11,25 @@ class NotificationsController < ApplicationController
     end
   end
   
+#  def mark_as_read_array(id_array)
+#    @user = current_user
+#    id_array.each do |i|
+#      @notification = Notification.find(params[i])
+#      @notification.update read: true
+#    end
+#    respond_to do |format|
+#      if @notification.update(notification_params)
+#        format.html{redirect_to notifications_dashboard_path(@user) }
+#        format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json}
+#    end
+#  end
+  
   def mark_all_as_read
     @user = current_user
     @unread_notifications = Notification.where(user_id: @user.id, read: false)
     @unread_notifications.each do |notification|
       notification.update read: true
     end
-#    binding.pry
     if @unread_notifications.last.update(notification_params)
       redirect_to notifications_dashboard_path(@user)
     end

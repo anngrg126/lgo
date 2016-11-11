@@ -1,4 +1,5 @@
 module NotificationsHelper
+#  helper to list individual notifications
 #  def notification_text(notification)
 #    notifier = User.find(notification.notified_by_user_id)
 #    link_notifier = link_to notifier.full_name, dashboard_path(notifier)
@@ -72,8 +73,7 @@ module NotificationsHelper
     
     notifications_array.each do |n|
       case n.notification_category_id
-      when 1 #Story
-#        stories.push()
+      when 1
         story = Story.find(n.origin_id)
         link = link_to story_title(story), story_path(story)
         unless n.options == "followers"
@@ -85,16 +85,16 @@ module NotificationsHelper
           # Story poster's followers notification
           messages.push(link_poster+" published a new story! See it here: "+link)
         end
-      when 2 #Comment
+      when 2
         stories_comments.push(Story.find(Comment.find(n.origin_id).story_id))
         call_functions.push("comments_condense")
-      when 3 #Reaction
+      when 3
         stories_reactions.push(Story.find(Reaction.find(n.origin_id).story_id))        
         call_functions.push("reactions_condense")
-      when 4 #Bookmark
+      when 4
         stories_bookmarks.push(Story.find(Bookmark.find(n.origin_id).story_id))
         call_functions.push("bookmarks_consense")
-      else #Following
+      else
         followers.push(User.find(n.notified_by_user_id))
         call_functions.push("followings_condense")
       end
@@ -103,7 +103,7 @@ module NotificationsHelper
     
     if call_functions.include?("comments_condense")
       optionsarray = [nil, "commenters"]
-      stories_comments.uniq!.each do |s|
+      stories_comments.uniq.each do |s|
         optionsarray.each do |o|
           commenters = []
           unless notifications_array.where(notification_category_id: 2, options: o).empty?
@@ -113,8 +113,7 @@ module NotificationsHelper
               end
             end
             commenter_links = []
-            commenters.uniq!
-            commenters.each do |c|
+            commenters.uniq.each do |c|
               commenter_links.push(link_to c.full_name, dashboard_path(c))
             end 
             link = link_to story_title(s), story_path(s)
@@ -132,7 +131,7 @@ module NotificationsHelper
     
     if call_functions.include?("reactions_condense")
       optionsarray = ["1", "2", "3", "4", "5"]
-      stories_reactions.uniq!.each do |s|
+      stories_reactions.uniq.each do |s|
         reactors = []
         optionsarray.each do |o|
           unless notifications_array.where(notification_category_id: 3, options: o).empty?
@@ -142,8 +141,7 @@ module NotificationsHelper
               end
             end
             reactor_links = []
-            reactors.uniq!
-            reactors.each do |c|
+            reactors.uniq.each do |c|
               reactor_links.push(link_to c.full_name, dashboard_path(c))
             end 
             link = link_to story_title(s), story_path(s)
@@ -155,7 +153,7 @@ module NotificationsHelper
                 elsif o == "3"#LOL
                 messages.push("#{reactor_links.to_sentence} LOL'd your story #{link}")
               elsif o == "4"#Cool
-                messages.push("#{reactor_links.to_sentence} Cool's your story #{link}")
+                messages.push("#{reactor_links.to_sentence} Cool'd your story #{link}")
               elsif o == "5"#Love
                 messages.push("#{reactor_links.to_sentence} Loved your story #{link}")     
               end
@@ -167,8 +165,7 @@ module NotificationsHelper
     
     if call_functions.include?("bookmarks_consense")
       #Case 4: Aggregate commenters on stories where user commented into one sentence
-      stories_bookmarks.uniq
-      stories_bookmarks.each do |s|
+      stories_bookmarks.uniq.each do |s|
         bookmarkers = []
         notifications_array.where(notification_category_id: 4).each do |n|
           if Bookmark.find(n.origin_id).story_id == s.id
@@ -176,8 +173,7 @@ module NotificationsHelper
           end
         end        
         bookmarker_links = []
-        bookmarkers.uniq
-        bookmarkers = bookmarkers.count
+        bookmarkers = bookmarkers.uniq.count
         link = link_to story_title(s), story_path(s)
         link_bookmark = link_to "bookmarked", bookmarked_stories_dashboard_path(current_user)
         if bookmarkers == 1 
@@ -190,24 +186,21 @@ module NotificationsHelper
 
     if call_functions.include?("followings_condense")
       #Case 5: Aggregate followers into one sentence
-      followers.uniq
       follower_links = []
-      followers.each do |f|
+      followers.uniq.each do |f|
         follower_links.push(link_to f.full_name, dashboard_path(f))
       end
       messages.push("#{follower_links.to_sentence} followed you")
     end
     
     #All together here
-    messages.uniq!
     content_tag(:div) {
-      messages.each do |m|
+      messages.uniq.each do |m|
         concat "<div>".html_safe
         safe_concat m
         concat "</div>".html_safe
+        concat "<div class='unread'>UNREAD</div>".html_safe
       end
       }
   end
-  
-  
 end
