@@ -16,7 +16,7 @@ RSpec.feature "Updating Notifications" do
   end
   
   scenario "User can mark notifications as read", js: true do
-    visit(dashboard_path(@foo))
+    visit "/"
     click_link "Notifications"
     
     #followings notifications
@@ -28,7 +28,7 @@ RSpec.feature "Updating Notifications" do
   end
   
   scenario "User can mark all notifications as read" do
-    visit(dashboard_path(@foo))
+    visit "/"
     click_link "Notifications"
     
     #followings notifications

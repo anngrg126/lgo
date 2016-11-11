@@ -16,7 +16,7 @@ RSpec.feature "Listing Notifications" do
   end
   
   scenario "Shows list of user's notifications", js: true do
-    visit(dashboard_path(@foo))
+    visit "/"
     click_link "Notifications"
     
     #Note: notifications re: published stories are in spec/features/admin/stories/editing_story_spec.rb
@@ -32,7 +32,7 @@ RSpec.feature "Listing Notifications" do
     #Note: notifications re: reacting to stories are in spec/features/creating_reaction_spec.rb
     
     #followings notifications
-    expect(page).to have_content("#{@bar.full_name} followed you.")
+    expect(page).to have_content("#{@bar.full_name} followed you")
     expect(page).to have_link(@bar.full_name)
   end
 end

@@ -27,13 +27,13 @@ RSpec.feature "Adding Comments to Stories" do
     expect(page).to have_content(@comment1)
     expect(page.current_path).to eq(story_path(@story))
     
-    click_link "Sign out"
+    logout(:user)
     
     login_as(@foo, :scope => :user)
-    visit(dashboard_path(@foo))
+    visit "/"
     click_link "Notifications"
     
-    expect(page).to have_content("#{@bar.full_name} commented on your story, #{@story.final_title}")
+    expect(page).to have_content("#{@bar.full_name} commented on your story #{@story.final_title}")
     expect(page).to have_link(@story.final_title)
     expect(page).to have_link(@bar.full_name)
   end
