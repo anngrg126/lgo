@@ -78,17 +78,19 @@ module NotificationsHelper
       when 1
         story = Story.find(n.origin_id)
         link = link_to story_title(story), story_path(story)
+        ids = []
         unless n.options == "followers"
           # Story author notification
           messages.push("Your story has been published! See it here: "+link)
-          id_array.push(n.id)
+          ids.push(n.id)
         else
           poster = User.find(story.poster_id)
           link_poster = link_to poster.full_name, dashboard_path(poster)
           # Story poster's followers notification
           messages.push(link_poster+" published a new story! See it here: "+link)
-          id_array.push(n.id)
+          ids.push(n.id)
         end
+        id_array.push(ids)
       when 2
         stories_comments.push(Story.find(Comment.find(n.origin_id).story_id))
         call_functions.push("comments_condense")
@@ -220,23 +222,32 @@ module NotificationsHelper
     end
     
     #All together here
-    content_tag(:div) {
-      messages.uniq.each_with_index do |m, i|
-        if id_array[i].instance_of? Fixnum
-          @max_index = id_array[i]
+    ordered_ids = []
+    ordered_ids = id_array.sort_by{|x| x.max}
+    ordered_ids.reverse!
+    messages.uniq!
+    index = -1
+    output = [""]
+      
+    ordered_ids.each do |i|     
+      index = id_array.index(i)
+      output.push(content_tag(:div) {
+        if id_array[index].instance_of? Fixnum
+          @max_index = id_array[index]
         else
-          @max_index = id_array[i].max
+          @max_index = id_array[index].max
         end
         @noti = Notification.find(@max_index)
-        concat "<div id='#{id_array[i]}'>".html_safe
+        concat "<div id='#{id_array[index]}'>".html_safe
         concat "<div>".html_safe
-        safe_concat m
+        safe_concat messages[index]
         concat "</div>".html_safe
         concat "<div class='unread'>UNREAD</div>".html_safe
         concat "<div>#{time_ago_in_words(@noti.created_at)} ago</div>".html_safe
-        concat "<div class='mark_as_read'>#{link_to("Mark as read", mark_as_read_array_path(notification: id_array[i]), remote: true)}</div>".html_safe
+        concat "<div class='mark_as_read'>#{link_to("Mark as read", mark_as_read_array_path(notification: id_array[index]), remote: true)}</div>".html_safe
         concat "</div>".html_safe
-      end
-      }
+      })
+    end
+    return output.join(" ")
   end
 end

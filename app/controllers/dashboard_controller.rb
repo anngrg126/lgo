@@ -66,7 +66,8 @@ class DashboardController < ApplicationController
   
   def set_notifications
     @notifications = Notification.where(user_id: @user.id)
-    @unread_notifications = @notifications.where(read: false).order('greatest(created_at, updated_at)')
+    @unread_notifications = @notifications.where(read: false)
+    @read_notifications = @notifications.where(read: true)
   end
   
 #  def set_liked_stories
