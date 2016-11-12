@@ -61,7 +61,7 @@ module NotificationsHelper
 #    end
 #  end
 #  
-  def consolidate_unread_notifications(notifications_array)
+  def consolidate_notifications(notifications_array, read_boolean)
     stories_comments_author = []
     stories_comments_commenters = []
     stories_comments = []
@@ -242,9 +242,11 @@ module NotificationsHelper
         concat "<div>".html_safe
         safe_concat messages[index]
         concat "</div>".html_safe
-        concat "<div class='unread'>UNREAD</div>".html_safe
         concat "<div>#{time_ago_in_words(@noti.created_at)} ago</div>".html_safe
-        concat "<div class='mark_as_read'>#{link_to("Mark as read", mark_as_read_array_path(notification: id_array[index]), remote: true)}</div>".html_safe
+        if read_boolean == "false"
+          concat "<div class='unread'>UNREAD</div>".html_safe
+          concat "<div class='mark_as_read'>#{link_to("Mark as read", mark_as_read_array_path(notification: id_array[index]), remote: true)}</div>".html_safe
+        end
         concat "</div>".html_safe
       })
     end

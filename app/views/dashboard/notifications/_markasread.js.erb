@@ -1,4 +1,3 @@
-console.log("<%= j ids.to_s %>");
 $('div[id="<%= j ids.to_s %>"]').children('.unread, .mark_as_read').remove();
 
 $('#dashboard_notifications_counter').html("<%= j link_to 'Notifications: '+ Notification.where(user_id: current_user.id, read: false).count.to_s, notifications_dashboard_path(@user), remote: true %>");

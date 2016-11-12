@@ -5,7 +5,6 @@ class NotificationsController < ApplicationController
     @user = current_user
     @notification = Notification.find(params[:id])
     @notification.update read: true
-    binding.pry
     respond_to do |format|
       if @notification.update(notification_params)
         format.html {redirect_to notifications_dashboard_path(@user) }
