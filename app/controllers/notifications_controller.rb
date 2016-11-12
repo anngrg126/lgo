@@ -61,6 +61,53 @@ class NotificationsController < ApplicationController
     end
   end
   
+  def destroy_all_read_notifications
+    @user = current_user
+    @read_notifications = Notification.where(user_id: @user.id, read: true)
+    @read_notifications.each do |notification|
+      notification.destroy
+    end
+    if @read_notifications.last.destroy
+      redirect_to notifications_dashboard_path(@user)
+    end
+  end
+  
+  def destroy
+    @user = current_user
+    @notification = Notification.find(params[:notification])
+    type = 0
+    @ids = 0
+    if @notification.class == Array && @notification.length > 1
+      @ids = []
+      @notification.each do |n|
+        n.destroy
+        @ids.push(n.id)
+      end
+      type = 1
+    elsif @notification.class == Array 
+      @notification[0].destroy
+      type = 1
+      @ids = []
+      @ids.push(@notification[0].id)
+    else 
+      @ids = @notification.id
+      @notification.destroy
+    end
+    respond_to do |format|
+      if type == 1
+        if @notification.last.destroy
+          format.html {redirect_to notifications_dashboard_path(@user) }
+          format.js {render :partial => 'dashboard/notifications/destroy', :locals => {ids: @ids.to_json.gsub(",", ", ")}}
+        end
+      else
+        if @notification.destroy
+          format.html {redirect_to notifications_dashboard_path(@user) }
+          format.js {render :partial => 'dashboard/notifications/destroy', :locals => {ids: @ids.to_json.gsub(",", ", ")}}
+        end
+      end
+    end
+  end  
+  
   private
   
   def notification_params

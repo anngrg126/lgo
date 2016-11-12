@@ -21,6 +21,7 @@ RSpec.feature "Updating Notifications" do
     
     #followings notifications
     expect(page).to have_content("UNREAD")
+    expect(page).to have_link("Mark all as read")
     click_link "Mark as read"
     
     expect(page).not_to have_content("Mark as read")

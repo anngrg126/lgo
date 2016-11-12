@@ -247,6 +247,7 @@ module NotificationsHelper
           concat "<div class='unread'>UNREAD</div>".html_safe
           concat "<div class='mark_as_read'>#{link_to("Mark as read", mark_as_read_array_path(notification: id_array[index]), remote: true)}</div>".html_safe
         end
+        concat link_to("Delete", notification_path(notification: id_array[index]), method: :delete, remote: true)
         concat "</div>".html_safe
       })
     end
