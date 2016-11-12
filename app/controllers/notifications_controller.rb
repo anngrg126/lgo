@@ -1,4 +1,6 @@
 class NotificationsController < ApplicationController
+  before_action :authenticate_user!
+  
   def mark_as_read
     @user = current_user
     @notification = Notification.find(params[:id])
@@ -16,17 +18,21 @@ class NotificationsController < ApplicationController
     @user = current_user
     @notification = Notification.find(params[:notification])
     type = 0
-    if @notification.length > 1
+    if @notification.class == Array && @notification.length > 1
       @notification.each do |n|
         n.update read: true
       end
       type = 1
-    else
+    elsif @notification.class == Array 
       @notification[0].update read: true
+      type = 1
+    else 
+      @notification.update read: true
     end
     respond_to do |format|
-      if type = 1
+      if type == 1
         if @notification.last.update(notification_params)
+          @notification = @notification[0]
           format.html {redirect_to notifications_dashboard_path(@user) }
           format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json}
         end

@@ -228,14 +228,13 @@ module NotificationsHelper
           @max_index = id_array[i].max
         end
         @noti = Notification.find(@max_index)
+        concat "<div id='#{id_array[i]}'>".html_safe
         concat "<div>".html_safe
         safe_concat m
         concat "</div>".html_safe
         concat "<div class='unread'>UNREAD</div>".html_safe
-        concat time_ago_in_words(@noti.created_at)
-        concat " ago".html_safe
-        concat "<div></div>".html_safe
-        concat link_to("Mark as read", mark_as_read_array_path(notification: id_array[i]), remote: true)
+        concat "<div>#{time_ago_in_words(@noti.created_at)} ago</div>".html_safe
+        concat "<div class='mark_as_read'>#{link_to("Mark as read", mark_as_read_array_path(notification: id_array[i]), remote: true)}</div>".html_safe
       end
       }
   end
