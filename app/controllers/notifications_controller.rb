@@ -3,6 +3,7 @@ class NotificationsController < ApplicationController
     @user = current_user
     @notification = Notification.find(params[:id])
     @notification.update read: true
+    binding.pry
     respond_to do |format|
       if @notification.update(notification_params)
         format.html {redirect_to notifications_dashboard_path(@user) }
@@ -13,14 +14,27 @@ class NotificationsController < ApplicationController
   
   def mark_as_read_array
     @user = current_user
-    @notification = Notification.find(params[:notification])    
-    @notification.each do |n|
-      n.update read: true
+    @notification = Notification.find(params[:notification])
+    type = 0
+    if @notification.length > 1
+      @notification.each do |n|
+        n.update read: true
+      end
+      type = 1
+    else
+      @notification[0].update read: true
     end
     respond_to do |format|
-      if @notification.last.update(notification_params)
-        format.html {redirect_to notifications_dashboard_path(@user) }
-        format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.last.to_json}
+      if type = 1
+        if @notification.last.update(notification_params)
+          format.html {redirect_to notifications_dashboard_path(@user) }
+          format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json}
+        end
+      else
+        if @notification.update(notification_params)
+          format.html {redirect_to notifications_dashboard_path(@user) }
+          format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json}
+        end
       end
     end
   end

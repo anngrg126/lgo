@@ -235,7 +235,7 @@ module NotificationsHelper
         concat time_ago_in_words(@noti.created_at)
         concat " ago".html_safe
         concat "<div></div>".html_safe
-        concat link_to("Mark as read", mark_as_read_array_path(notification: id_array[i]))
+        concat link_to("Mark as read", mark_as_read_array_path(notification: id_array[i]), remote: true)
       end
       }
   end
