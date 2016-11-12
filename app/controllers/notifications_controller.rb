@@ -20,7 +20,7 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       if @notification.last.update(notification_params)
         format.html {redirect_to notifications_dashboard_path(@user) }
-        format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json}
+        format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.last.to_json}
       end
     end
   end

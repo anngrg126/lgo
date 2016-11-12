@@ -222,13 +222,19 @@ module NotificationsHelper
     #All together here
     content_tag(:div) {
       messages.uniq.each_with_index do |m, i|
-#        time_ago = 0
-        
-        
+        if id_array[i].instance_of? Fixnum
+          @max_index = id_array[i]
+        else
+          @max_index = id_array[i].max
+        end
+        @noti = Notification.find(@max_index)
         concat "<div>".html_safe
         safe_concat m
         concat "</div>".html_safe
         concat "<div class='unread'>UNREAD</div>".html_safe
+        concat time_ago_in_words(@noti.created_at)
+        concat " ago".html_safe
+        concat "<div></div>".html_safe
         concat link_to("Mark as read", mark_as_read_array_path(notification: id_array[i]))
       end
       }
