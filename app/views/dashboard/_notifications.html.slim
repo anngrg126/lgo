@@ -2,7 +2,7 @@ h2 List of All Notifications:
 - unless @unread_notifications.empty?
   == link_to "Mark all as read", mark_all_as_read_path(@user)
   div
-    == somehow_organize_by_stories(@unread_notifications)
+    == consolidate_unread_notifications(@unread_notifications)
 /| OLD NOTIFICATIONS
 /- @unread_notifications.each do |notification|
 /  div.notification 

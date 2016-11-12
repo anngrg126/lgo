@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   get 'notifications/:id/mark_as_read' => 'notifications#mark_as_read', as: :mark_as_read
   
   get 'notifications/mark_all_as_read' => 'notifications#mark_all_as_read', as: :mark_all_as_read
+  
+  get 'notifications/mark_as_read_array' => 'notifications#mark_as_read_array', as: :mark_as_read_array
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

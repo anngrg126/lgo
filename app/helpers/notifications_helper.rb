@@ -61,7 +61,7 @@ module NotificationsHelper
 #    end
 #  end
 #  
-  def somehow_organize_by_stories(notifications_array)
+  def consolidate_unread_notifications(notifications_array)
     stories_comments_author = []
     stories_comments_commenters = []
     stories_comments = []
@@ -69,7 +69,9 @@ module NotificationsHelper
     stories_reactions = []
     followers = []
     messages = []
+    id_array = []
     call_functions = []
+    @followers_id_array = []
     
     notifications_array.each do |n|
       case n.notification_category_id
@@ -79,11 +81,13 @@ module NotificationsHelper
         unless n.options == "followers"
           # Story author notification
           messages.push("Your story has been published! See it here: "+link)
+          id_array.push(n.id)
         else
           poster = User.find(story.poster_id)
           link_poster = link_to poster.full_name, dashboard_path(poster)
           # Story poster's followers notification
           messages.push(link_poster+" published a new story! See it here: "+link)
+          id_array.push(n.id)
         end
       when 2
         stories_comments.push(Story.find(Comment.find(n.origin_id).story_id))
@@ -95,6 +99,7 @@ module NotificationsHelper
         stories_bookmarks.push(Story.find(Bookmark.find(n.origin_id).story_id))
         call_functions.push("bookmarks_consense")
       else
+        followers.push(n.id)
         followers.push(User.find(n.notified_by_user_id))
         call_functions.push("followings_condense")
       end
@@ -105,11 +110,13 @@ module NotificationsHelper
       optionsarray = [nil, "commenters"]
       stories_comments.uniq.each do |s|
         optionsarray.each do |o|
+          ids = []
           commenters = []
           unless notifications_array.where(notification_category_id: 2, options: o).empty?
             notifications_array.where(notification_category_id: 2, options: o).each do |n|
               if Comment.find(n.origin_id).story_id == s.id
                 commenters.push(User.find(n.notified_by_user_id))
+                ids.push(n.id)
               end
             end
             commenter_links = []
@@ -120,8 +127,10 @@ module NotificationsHelper
             unless commenter_links.empty?
               if o == nil
                 messages.push("#{commenter_links.to_sentence} commented on your story #{link}")
+                id_array.push(ids)
               else
                 messages.push("#{commenter_links.to_sentence} also commented on #{link}")
+                id_array.push(ids)
               end
             end
           end
@@ -134,10 +143,12 @@ module NotificationsHelper
       stories_reactions.uniq.each do |s|
         reactors = []
         optionsarray.each do |o|
+          ids = []
           unless notifications_array.where(notification_category_id: 3, options: o).empty?
             notifications_array.where(notification_category_id: 3, options: o).each do |n|
               if Reaction.find(n.origin_id).story_id == s.id
                 reactors.push(User.find(n.notified_by_user_id))
+                ids.push(n.id)
               end
             end
             reactor_links = []
@@ -148,14 +159,19 @@ module NotificationsHelper
             unless reactor_links.empty?
               if o == "1"#like
                 messages.push("#{reactor_links.to_sentence} liked your story #{link}")
+                id_array.push(ids)
               elsif o == "2"#OMG
                 messages.push("#{reactor_links.to_sentence} OMG'd your story #{link}")
+                id_array.push(ids)
                 elsif o == "3"#LOL
                 messages.push("#{reactor_links.to_sentence} LOL'd your story #{link}")
+                id_array.push(ids)
               elsif o == "4"#Cool
                 messages.push("#{reactor_links.to_sentence} Cool'd your story #{link}")
+                id_array.push(ids)
               elsif o == "5"#Love
-                messages.push("#{reactor_links.to_sentence} Loved your story #{link}")     
+                messages.push("#{reactor_links.to_sentence} Loved your story #{link}") 
+                id_array.push(ids)
               end
             end
           end
@@ -167,19 +183,24 @@ module NotificationsHelper
       #Case 4: Aggregate commenters on stories where user commented into one sentence
       stories_bookmarks.uniq.each do |s|
         bookmarkers = []
+        ids = []
         notifications_array.where(notification_category_id: 4).each do |n|
           if Bookmark.find(n.origin_id).story_id == s.id
             bookmarkers.push(User.find(n.notified_by_user_id))
+            ids.push(n.id)
           end
         end        
         bookmarker_links = []
         bookmarkers = bookmarkers.uniq.count
+        
         link = link_to story_title(s), story_path(s)
         link_bookmark = link_to "bookmarked", bookmarked_stories_dashboard_path(current_user)
         if bookmarkers == 1 
           messages.push("Woohoo! Someone #{link_bookmark} your story #{link}")
+          id_array.push(ids)
         else
           messages.push("Woohoo! #{bookmarkers} people #{link_bookmark} your story #{link}")
+          id_array.push(ids)
         end
       end      
     end
@@ -187,19 +208,28 @@ module NotificationsHelper
     if call_functions.include?("followings_condense")
       #Case 5: Aggregate followers into one sentence
       follower_links = []
-      followers.uniq.each do |f|
+      ids = []
+      followers.uniq
+      ids = followers.find_all {|x| x.instance_of? Fixnum}
+      followers = followers.find_all {|x| !x.instance_of? Fixnum}
+      followers.each do |f|
         follower_links.push(link_to f.full_name, dashboard_path(f))
       end
       messages.push("#{follower_links.to_sentence} followed you")
+      id_array.push(ids)
     end
     
     #All together here
     content_tag(:div) {
-      messages.uniq.each do |m|
+      messages.uniq.each_with_index do |m, i|
+#        time_ago = 0
+        
+        
         concat "<div>".html_safe
         safe_concat m
         concat "</div>".html_safe
         concat "<div class='unread'>UNREAD</div>".html_safe
+        concat link_to("Mark as read", mark_as_read_array_path(notification: id_array[i]))
       end
       }
   end

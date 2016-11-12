@@ -2,3 +2,4 @@ $('a[href*="<%= j @notification.id.to_s%>"]').hide();
 $('a[href*="<%= j @notification.id.to_s%>"]').closest('div.notification').children('.unread').remove();
 $("#user_notifications").html("<%= j user_notifications_link %>");
 $('#dashboard_notifications_counter').html("<%= j link_to 'Notifications: '+ Notification.where(user_id: current_user.id, read: false).count.to_s, notifications_dashboard_path(@user), remote: true %>");
+console.log("test");

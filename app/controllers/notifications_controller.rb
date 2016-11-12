@@ -11,18 +11,19 @@ class NotificationsController < ApplicationController
     end
   end
   
-#  def mark_as_read_array(id_array)
-#    @user = current_user
-#    id_array.each do |i|
-#      @notification = Notification.find(params[i])
-#      @notification.update read: true
-#    end
-#    respond_to do |format|
-#      if @notification.update(notification_params)
-#        format.html{redirect_to notifications_dashboard_path(@user) }
-#        format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json}
-#    end
-#  end
+  def mark_as_read_array
+    @user = current_user
+    @notification = Notification.find(params[:notification])    
+    @notification.each do |n|
+      n.update read: true
+    end
+    respond_to do |format|
+      if @notification.last.update(notification_params)
+        format.html {redirect_to notifications_dashboard_path(@user) }
+        format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json}
+      end
+    end
+  end
   
   def mark_all_as_read
     @user = current_user
@@ -38,6 +39,6 @@ class NotificationsController < ApplicationController
   private
   
   def notification_params
-  params.permit(:read)
+    params.permit(:read)
   end
 end
