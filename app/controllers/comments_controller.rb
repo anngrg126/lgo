@@ -98,19 +98,21 @@ class CommentsController < ApplicationController
     #get array of id's of other users who commented
     user_array = []
     Story.find(comment.story_id).comments.each do |existingcomment|
-      unless comment.user_id == story.author_id || comment.user_id == existingcomment.user_id || existingcomment.user_id == story.author_id
+      unless comment.user_id == existingcomment.user_id || existingcomment.user_id == story.author_id
         user_array.push(existingcomment.user_id)
       end
     end
     user_array.uniq
     user_array.each do |existingcomment_userid|
       #others who commented get a notification
-      Notification.create(user_id: User.find(existingcomment_userid).id,
+      unless User.find(existingcomment_userid).id == current_user.id
+        Notification.create(user_id: User.find(existingcomment_userid).id,
                         notified_by_user_id: current_user.id,
                         notification_category_id: 2,
                         read: false,
                         origin_id: comment.id,
                         options: "commenters")
+      end
     end
   end
   

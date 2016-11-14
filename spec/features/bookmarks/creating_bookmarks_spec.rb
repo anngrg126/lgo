@@ -16,7 +16,6 @@ RSpec.feature "Adding Saves to Stories" do
   
   scenario "Permit a signed in user to save a story", :js => true do
     login_as(@bar, :scope => :user)
-    
     visit "/"
     click_link @story.final_title
   
@@ -26,13 +25,12 @@ RSpec.feature "Adding Saves to Stories" do
     expect(page).to have_content("Saves: 1")
     expect(page.current_path).to eq(story_path(@story))
     
-    click_link "Sign out"
+    logout(:user)
     
     login_as(@foo, :scope => :user)
-    visit(dashboard_path(@foo))
+    visit "/"
     click_link "Notifications"
-    
-    expect(page).to have_content("Woohoo! Someone bookmarked your story, #{@story.final_title}")
+    expect(page).to have_content("Woohoo! Someone bookmarked your story #{@story.final_title}")
     expect(page).to have_link(@story.final_title)
   end
   

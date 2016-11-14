@@ -1,2 +1,1 @@
-$("#flash_notice").html('<div class="callout success" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-check"></i> <%= j flash[:success] %></p></div>');
 $("#story_reaction_<%= @reaction.reaction_category_id %>").html('<%= j render "reactions/"+@reaction.reaction_category_id.to_s %>');

@@ -1,13 +1,13 @@
 class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :followings, :followers, :notifications]
   
-  before_action :set_authored_stories, only: [:show, :authored_stories, :notifications]  
-  before_action :set_posted_stories, only: [:show, :authored_stories, :notifications]  
-  before_action :set_bookmarked_stories, only: [:show, :bookmarked_stories, :notifications]
-  before_action :set_commented_stories, only: [:show, :commented_stories, :notifications]
-  before_action :set_followers, only: [:show, :followers, :notifications]
-  before_action :set_followings, only: [:show, :followings, :notifications]
-  before_action :set_notifications, only: [:show, :notifications]
+  before_action :set_authored_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
+  before_action :set_posted_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
+  before_action :set_bookmarked_stories, only: [:show, :bookmarked_stories, :notifications, :bookmarked_stories]
+  before_action :set_commented_stories, only: [:show, :commented_stories, :notifications, :bookmarked_stories]
+  before_action :set_followers, only: [:show, :followers, :notifications, :bookmarked_stories]
+  before_action :set_followings, only: [:show, :followings, :notifications, :bookmarked_stories]
+  before_action :set_notifications, only: [:show, :notifications, :bookmarked_stories]
   
   def show
   end
@@ -21,6 +21,7 @@ class DashboardController < ApplicationController
   def bookmarked_stories
     respond_to do |format|
       format.js {render :partial => 'dashboard/bookmarked_stories'} 
+      format.html
     end
   end
   
@@ -65,7 +66,8 @@ class DashboardController < ApplicationController
   
   def set_notifications
     @notifications = Notification.where(user_id: @user.id)
-    @unread_notifications = Notification.where(user_id: @user.id, read: false)
+    @unread_notifications = @notifications.where(read: false)
+    @read_notifications = @notifications.where(read: true)
   end
   
 #  def set_liked_stories

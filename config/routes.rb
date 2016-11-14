@@ -39,9 +39,14 @@ Rails.application.routes.draw do
   
   resources :registration_steps, only: [:show, :update]
   
+  resources :notifications, only: [:destroy]
   get 'notifications/:id/mark_as_read' => 'notifications#mark_as_read', as: :mark_as_read
   
   get 'notifications/mark_all_as_read' => 'notifications#mark_all_as_read', as: :mark_all_as_read
+  
+  get 'notifications/destroy_all_read_notifications' => 'notifications#destroy_all_read_notifications', as: :destroy_all_read_notifications
+  
+  get 'notifications/mark_as_read_array' => 'notifications#mark_as_read_array', as: :mark_as_read_array
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

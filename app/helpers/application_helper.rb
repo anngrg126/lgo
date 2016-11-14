@@ -2,9 +2,15 @@ module ApplicationHelper
   def signed_in_user
     unless current_page? registration_step_path(:basic_details)
       html = <<-HTML
-<p class="navbar-text">Signed in as #{current_user.email}.</p>
+<div class="navbar-text">Signed in as #{current_user.email}.</div>
 HTML
       html.html_safe
+    end
+  end
+  
+  def user_notifications_link
+    unless Notification.where(user_id: current_user.id, read: false).count == 0
+      link_to "Notifications: #{Notification.where(user_id: current_user.id, read: false).count}", notifications_dashboard_path(current_user)
     end
   end
 end

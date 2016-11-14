@@ -40,17 +40,17 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
     expect(page).to have_content("Loves: 1")
     expect(page.current_path).to eq(story_path(@story))
     
-    click_link "Sign out"
+    logout(:user)
     
     login_as(@foo, :scope => :user)
-    visit(dashboard_path(@foo))
+    visit "/"
     click_link "Notifications"
     
-    expect(page).to have_content("#{@bar.full_name} liked your story, #{@story.final_title}")
-    expect(page).to have_content("#{@bar.full_name} OMG'd your story, #{@story.final_title}")
-    expect(page).to have_content("#{@bar.full_name} LOL'd your story, #{@story.final_title}")
-    expect(page).to have_content("#{@bar.full_name} Cool'd your story, #{@story.final_title}")
-    expect(page).to have_content("#{@bar.full_name} Loved your story, #{@story.final_title}")
+    expect(page).to have_content("#{@bar.full_name} liked your story #{@story.final_title}")
+    expect(page).to have_content("#{@bar.full_name} OMG'd your story #{@story.final_title}")
+    expect(page).to have_content("#{@bar.full_name} LOL'd your story #{@story.final_title}")
+    expect(page).to have_content("#{@bar.full_name} Cool'd your story #{@story.final_title}")
+    expect(page).to have_content("#{@bar.full_name} Loved your story #{@story.final_title}")
     expect(page).to have_link(@bar.full_name)
     expect(page).to have_link(@story.final_title)
   end

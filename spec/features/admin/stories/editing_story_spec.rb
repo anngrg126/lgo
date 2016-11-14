@@ -49,10 +49,10 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content("Admin: #{@admin.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']")
     
-    click_link "Sign out"
+    logout(:user)
     
     login_as(@user, :scope => :user)
-    visit(dashboard_path(@user))
+    visit "/"
     click_link "Notifications"
     expect(page).to have_content("Your story has been published! See it here: ")
     expect(page).to have_link(@story.final_title)
@@ -71,7 +71,6 @@ RSpec.feature "Editing Stories" do
     fill_in "Final Title", with: @final_title2
 #    fill_in "Final Body", with: @final_body2
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story2.id.to_s, @final_body2)
-#    check 'Published'
     click_button "Update Story"
     
     expect(page).to have_content("Story has been updated")
@@ -90,7 +89,6 @@ RSpec.feature "Editing Stories" do
     
     fill_in "Final Title", with: ""
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, "")
-#    check 'Published'
     click_button "Update Story"
     
     expect(page).to have_content("Story has not been updated")
