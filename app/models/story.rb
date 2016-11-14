@@ -14,7 +14,7 @@ class Story < ApplicationRecord
   def validate_main_image?
     validate_main_image == 'true' || validate_main_image == true
   end
-  validates :final_title, presence: true, if: :validate_final_fields?
+  validates :final_title, presence: true, length: {maximum: 90}, if: :validate_final_fields?
   validates :final_body, presence: true, if: :validate_final_fields?
   validates :updated_title, presence: true, if: :validate_updated_fields?
   validates :updated_body, presence: true, if: :validate_updated_fields?
@@ -32,10 +32,10 @@ class Story < ApplicationRecord
   
   has_attached_file :main_image, styles: {
     medium: '300x300>', 
-    large: '1000x1000>' 
+    large: '1200x1200>' 
   }
   
-  validates_attachment :main_image, :content_type => { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }, :size => { in: 0..8.megabytes }, :presence => true, if: :validate_main_image?
+  validates_attachment :main_image, :content_type => { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }, :size => { in: 0..1.megabytes }, :presence => true, if: :validate_main_image?
   
   default_scope { order(created_at: :desc)}
   scope :published, -> { where(published: true) }

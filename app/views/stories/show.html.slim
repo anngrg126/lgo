@@ -1,3 +1,13 @@
+== content_for :og_url, request.base_url + request.original_fullpath
+- if @story.published? 
+  == content_for :og_image, @story.main_image.url(:large)
+  - if @story.last_user_to_update == "Admin"
+    == content_for :og_title, @story.final_title
+    == content_for :og_description, truncate(@story.final_body, length: 200)
+  - else
+    == content_for :og_title, @story.updated_title
+    == content_for :og_description, truncate(@story.updated_body, length: 200)
+
 div 
   == story_main_image_show(@story)
 h2

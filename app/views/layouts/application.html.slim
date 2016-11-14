@@ -6,11 +6,28 @@ html lang="en"
 
     title
       == content_for?(:title) ? yield(:title) : "Lets GiftOn"
+    
 
     == stylesheet_link_tag "application"
     == javascript_include_tag "application", 'data-turbolinks-track' => true
     == csrf_meta_tags
-
+    meta name="description"             content="Real-life gift stories and ideas."
+    <!-- Facebook -->
+    meta property="fb:app_id"           content="776198432492129"
+    meta property="og:site_name"        content="GiftOn"
+    
+    meta property="og:url"              content="#{content_for?(:og_url) ? yield(:og_url) : 'http://www.letsgifton.com'}"
+    meta property="og:title"            content="#{content_for?(:og_title) ? yield(:og_title) : 'GiftOn | Real-life gift stories and ideas.'}"
+    meta property="og:description"      content="#{content_for?(:og_description) ? yield(:og_description) : 'Get inspired by people\'s best & worst gift stories across all occasions.'}"
+    meta property="og:image"            content="#{content_for?(:og_image) ? yield(:og_image) : 'https://s3.amazonaws.com/letsgifton/GiftOn_OG_325x325.png'}"
+     <!-- Twitter -->
+    meta name="twitter:url"             content="#{content_for?(:og_url) ? yield(:og_url) : 'http://www.letsgifton.com'}"
+    meta name="twitter:card"            content="summary"
+    meta name="twitter:title"           content="#{content_for?(:og_title) ? yield(:og_title) : 'GiftOn | People-powered gift ideas.'}"
+    meta name="twitter:description"     content="#{content_for?(:og_description) ? yield(:og_description) : 'Get inspired by people\'s best & worst gift stories across all occasions.'}"
+    meta name="twitter:image"           content="#{content_for?(:og_image) ? yield(:og_image) : 'https://s3.amazonaws.com/letsgifton/GiftOn_OG_325x325.png'}"
+    meta name="twitter:site"            content="@letsgifton"
+    meta name="twitter:creator"         content="@letsgifton"
   body
     == render 'shared/header'
     == render 'shared/main'
