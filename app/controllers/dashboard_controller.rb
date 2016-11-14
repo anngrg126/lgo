@@ -1,12 +1,12 @@
 class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :followings, :followers, :notifications]
   
-  before_action :set_authored_stories, only: [:show, :authored_stories]  
-  before_action :set_posted_stories, only: [:show, :authored_stories]  
-  before_action :set_bookmarked_stories, only: [:show, :bookmarked_stories]
-  before_action :set_commented_stories, only: [:show, :commented_stories]
-  before_action :set_followers, only: [:show, :followers]
-  before_action :set_followings, only: [:show, :followings]
+  before_action :set_authored_stories, only: [:show, :authored_stories, :notifications]  
+  before_action :set_posted_stories, only: [:show, :authored_stories, :notifications]  
+  before_action :set_bookmarked_stories, only: [:show, :bookmarked_stories, :notifications]
+  before_action :set_commented_stories, only: [:show, :commented_stories, :notifications]
+  before_action :set_followers, only: [:show, :followers, :notifications]
+  before_action :set_followings, only: [:show, :followings, :notifications]
   before_action :set_notifications, only: [:show, :notifications]
   
   def show
@@ -44,7 +44,8 @@ class DashboardController < ApplicationController
   
   def notifications
     respond_to do |format|
-      format.js {render :partial => 'dashboard/notifications'} 
+      format.js {render :partial => 'dashboard/notifications'}
+      format.html
     end
   end
   

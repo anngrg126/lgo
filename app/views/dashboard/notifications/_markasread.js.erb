@@ -1,0 +1,3 @@
+console.log("test");
+$('a[href*="<%= j @notification.id.to_s%>"]').hide();
+$('a[href*="<%= j @notification.id.to_s%>"]').closest('div.notification').children('.unread').remove();
