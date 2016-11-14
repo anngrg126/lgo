@@ -31,8 +31,8 @@ class Story < ApplicationRecord
   validates_associated :pictures
   
   has_attached_file :main_image, styles: {
-    medium: '300x300>', 
-    large: '1200x1200>' 
+    medium: '600x314>', 
+    large: '1200x628>' 
   }
   
   validates_attachment :main_image, :content_type => { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }, :size => { in: 0..1.megabytes }, :presence => true, if: :validate_main_image?
