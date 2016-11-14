@@ -19,11 +19,23 @@ RSpec.feature "Deleting Notifications" do
     visit dashboard_path(@foo)
     click_link "Notifications"
     
-    expect(page).to have_link("Delete All Notifications")
     expect(page).to have_content("#{@bar.full_name} followed you")
     expect(page).to have_link(@bar.full_name)
     
     click_link "Delete"
+    expect(page).not_to have_content("#{@bar.full_name} followed you")
+    expect(page).not_to have_link(@bar.full_name)
+  end
+  
+   scenario "User deletes all notifications", js: true do
+    visit dashboard_path(@foo)
+    click_link "Notifications"
+    
+    expect(page).to have_link("Delete All Notifications")
+    expect(page).to have_content("#{@bar.full_name} followed you")
+    expect(page).to have_link(@bar.full_name)
+    
+    click_link "Delete All Notifications"
     expect(page).not_to have_content("#{@bar.full_name} followed you")
     expect(page).not_to have_link(@bar.full_name)
     

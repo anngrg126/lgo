@@ -3,8 +3,7 @@ class NotificationsController < ApplicationController
   
   def mark_as_read
     @user = current_user
-    @notification = Notification.find(params[:id])
-    @notification.update read: true
+    @notification = Notification.find(params[:id]).update(read: true)
     respond_to do |format|
       if @notification.update(notification_params)
         format.html {redirect_to notifications_dashboard_path(@user) }
@@ -52,24 +51,14 @@ class NotificationsController < ApplicationController
   
   def mark_all_as_read
     @user = current_user
-    @unread_notifications = Notification.where(user_id: @user.id, read: false)
-    @unread_notifications.each do |notification|
-      notification.update read: true
-    end
-    if @unread_notifications.last.update(notification_params)
-      redirect_to notifications_dashboard_path(@user)
-    end
+    @unread_notifications = Notification.where(user_id: @user.id, read: false).update_all(read: true)
+    redirect_to notifications_dashboard_path(@user)
   end
   
   def destroy_all_read_notifications
     @user = current_user
-    @read_notifications = Notification.where(user_id: @user.id, read: true)
-    @read_notifications.each do |notification|
-      notification.destroy
-    end
-    if @read_notifications.last.destroy
-      redirect_to notifications_dashboard_path(@user)
-    end
+    @read_notifications = Notification.where(user_id: @user.id, read: true).destroy_all
+    redirect_to notifications_dashboard_path(@user)
   end
   
   def destroy
