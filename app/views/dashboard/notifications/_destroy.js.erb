@@ -5,3 +5,7 @@ $('#dashboard_notifications_counter').html("<%= j link_to 'Notifications: '+ Not
 
 //update notificatios counter in navbar
 $("#user_notifications").html("<%= j user_notifications_link %>");
+
+<% if Notification.where(user_id: current_user.id, read: false).count == 0 %>
+  $("#new_notifications").remove();
+<% end %> 

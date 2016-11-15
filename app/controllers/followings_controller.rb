@@ -12,7 +12,7 @@ class FollowingsController < ApplicationController
         respond_to do |format|
           @user = User.find(@following.user_id)
           flash.now[:success] = "You are now following #{@user.full_name}"
-          format.js
+          format.js {render 'followings/create', :locals => {followings: Following.where(follower_id: current_user.id).count}}
         end
 #        format.html {redirect_to root_path}
       else
@@ -23,13 +23,14 @@ class FollowingsController < ApplicationController
   end
   
   def destroy
-    @following = Following.where(following_params).first
+    @user = current_user
+    @following = Following.find(params[:id])
     if @following.destroy
       destroy_notification(@following)
       respond_to do |format|
         @user = User.find(@following.user_id)
         flash.now[:success] = "You unfollowed #{@user.full_name}"
-        format.js
+        format.js {render 'followings/destroy', :locals => {followings: Following.where(follower_id: current_user.id).count}}
       end
 #      redirect_to dashboard_path(@user)
     else
@@ -55,7 +56,7 @@ class FollowingsController < ApplicationController
     unless Notification.where(notification_category_id: 5,
                        origin_id: following.id).empty?
       Notification.where(notification_category_id: 5,
-                       origin_id: following.id).first.destroy
+                       origin_id: following.id).destroy_all
     end
   end
 end

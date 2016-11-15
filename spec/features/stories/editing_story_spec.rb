@@ -27,8 +27,8 @@ RSpec.feature "Editing Stories" do
     
     expect(page).to have_content("Story has been updated")
     expect(page).to have_content(@updated_title)
-    expect(page).to have_content(@updated_body.truncate(150))
-    expect(page.current_path).to eq(dashboard_path(@user))   
+    expect(page).to have_content(@updated_body)
+    expect(page.current_path).to eq(story_path(@story))   
   end
   
   scenario "A user edits an unpublished story", js: true do
@@ -45,8 +45,8 @@ RSpec.feature "Editing Stories" do
     
     expect(page).to have_content("Story has been updated")
     expect(page).to have_content(@updated_title2)
-    expect(page).to have_content(@updated_body2.truncate(150))
-    expect(page.current_path).to eq(dashboard_path(@user2))   
+    expect(page).to have_content(@updated_body2)
+    expect(page.current_path).to eq(story_path(@story2))   
   end
   
   scenario "A user fails to edit a story", js: true do
