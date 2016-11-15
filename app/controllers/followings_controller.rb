@@ -30,7 +30,7 @@ class FollowingsController < ApplicationController
       respond_to do |format|
         @user = User.find(@following.user_id)
         flash.now[:success] = "You unfollowed #{@user.full_name}"
-        format.js
+        format.js {render 'followings/destroy', :locals => {followings: Following.where(follower_id: current_user.id).count}}
       end
 #      redirect_to dashboard_path(@user)
     else
