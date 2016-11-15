@@ -65,4 +65,25 @@ module DashboardHelper
       html = "<div>Written by: #{User.find(story.author_id).full_name}</div>".html_safe
     end
   end
+  
+  def user_reaction(story, user)
+    output = [""]
+    Reaction.where(story_id: story.id, user_id: user.id).each do |reaction|
+      output.push(content_tag(:span) {
+        case reaction.reaction_category_id
+        when 1
+          concat "Like".html_safe
+        when 2
+          concat "OMG".html_safe
+        when 3
+          concat "LOL".html_safe
+        when 4
+          concat "Cool".html_safe
+        when 5
+          concat "Love".html_safe
+        end
+        })
+    end
+    return output.join(" ")
+  end
 end
