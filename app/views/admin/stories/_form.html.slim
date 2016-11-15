@@ -43,10 +43,12 @@ p
   div
     = f.label :main_image, "Main Image"
     = f.file_field :main_image
+    p class="help-text" Dimensions: 1200 x 628 pixels, max size: 1MB
     span class="form-error" 
   div
-    = f.label :final_title, "Final Title"
+    = f.label :final_title, "Final Title" 
     = f.text_field :final_title, autofocus: true, value: (@story.updated_title ? @story.updated_title : @story.raw_title)
+    p class="help-text" Max. 90 characters (prefer &lt;70 characters)
     span class="form-error" 
   div
     = f.label :final_body, "Final Body"
