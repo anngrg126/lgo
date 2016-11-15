@@ -23,7 +23,8 @@ class FollowingsController < ApplicationController
   end
   
   def destroy
-    @following = Following.where(following_params).first
+    @user = current_user
+    @following = Following.find(params[:id])
     if @following.destroy
       destroy_notification(@following)
       respond_to do |format|
@@ -55,7 +56,7 @@ class FollowingsController < ApplicationController
     unless Notification.where(notification_category_id: 5,
                        origin_id: following.id).empty?
       Notification.where(notification_category_id: 5,
-                       origin_id: following.id).first.destroy
+                       origin_id: following.id).destroy_all
     end
   end
 end
