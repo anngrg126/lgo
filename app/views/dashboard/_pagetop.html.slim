@@ -31,7 +31,8 @@ div
   |  
   == link_to "Followers: #{@followers.count}", followers_dashboard_path(@user), remote: true
   |  
-  == link_to "Following: #{@followings.count}", followings_dashboard_path(@user), remote: true
+  span#dashboard_followings_counter
+    == link_to "Following: #{@followings.count}", followings_dashboard_path(@user), remote: true
   |  
   - if @user == current_user
     span#dashboard_notifications_counter

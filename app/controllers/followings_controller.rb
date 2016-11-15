@@ -12,7 +12,7 @@ class FollowingsController < ApplicationController
         respond_to do |format|
           @user = User.find(@following.user_id)
           flash.now[:success] = "You are now following #{@user.full_name}"
-          format.js
+          format.js {render 'followings/create', :locals => {followings: Following.where(follower_id: current_user.id).count}}
         end
 #        format.html {redirect_to root_path}
       else
