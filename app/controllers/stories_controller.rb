@@ -51,6 +51,18 @@ class StoriesController < ApplicationController
   def update
     if @story.published?
       @story.validate_updated_fields = true
+      @story.assign_attributes(story_params)
+      if @story.anonymous_changed?
+        if @story.anonymous
+          @story.poster_id = 3
+          destroy_notification(@story)
+          create_notification(@story)
+        else
+          @story.poster_id = @story.author_id
+          destroy_notification(@story)
+          create_notification(@story)
+        end
+      end
     else
       if @story.anonymous?
         @story.poster_id = nil
@@ -64,7 +76,7 @@ class StoriesController < ApplicationController
       else
         if @story.update(story_params)
           flash[:success] = "Story has been updated"
-          format.html {redirect_to dashboard_path(current_user)}
+          format.html {redirect_to story_path(@story)}
         else
           flash.now[:alert] = "Story has not been updated"
           format.html {render :edit} #renders edit tmplt again
@@ -76,6 +88,7 @@ class StoriesController < ApplicationController
   
   def destroy
     if @story.destroy
+      destroy_notification(@story)
       flash[:success] = "Story has been deleted"
       redirect_to stories_path
     end
@@ -95,5 +108,25 @@ class StoriesController < ApplicationController
   
   def redirect_cancel
     redirect_to story_path(@story) if params[:cancel]
+  end
+  
+  def create_notification(story)
+    #Notification for all people who follow the poster
+    followings = Following.where(user_id: story.poster_id)
+    followings.each do |follower|
+      Notification.create(user_id: follower.follower_id,
+                        notified_by_user_id: current_user.id,
+                        notification_category_id: 1,
+                        read: false,
+                        origin_id: story.id,
+                        options: "followers")
+    end
+  end
+  def destroy_notification(story)
+    unless Notification.where(notification_category_id: 1,
+                       origin_id: story.id).empty?
+      Notification.where(notification_category_id: 1,
+                       origin_id: story.id).each(&:destroy)
+    end
   end
 end
