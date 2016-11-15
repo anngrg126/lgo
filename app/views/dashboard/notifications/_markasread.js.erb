@@ -5,3 +5,8 @@ $('#dashboard_notifications_counter').html("<%= j link_to 'Notifications: '+ Not
 
 //update notificatios counter in navbar
 $("#user_notifications").html("<%= j user_notifications_link %>");
+
+//remove New Notifications & Mark all a read if no more new notifications
+<% if Notification.where(user_id: current_user.id, read: false).count == 0 %>
+  $("a[href*='mark_all_as_read']").remove();
+<% end %> 
