@@ -43,7 +43,7 @@ RSpec.feature "Editing Stories" do
     click_button "Update Story"
     
     expect(page).to have_content("Story has been updated")
-    expect(page.current_path).to eq(admin_story_path(@story))  
+    expect(page.current_path).to eq(admin_story_path(Story.find(@story.id).slug))  
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
     expect(page).to have_content("Admin: #{@admin.full_name}")
@@ -74,7 +74,7 @@ RSpec.feature "Editing Stories" do
     click_button "Update Story"
     
     expect(page).to have_content("Story has been updated")
-    expect(page.current_path).to eq(admin_story_path(@story2))  
+    expect(page.current_path).to eq(admin_story_path(Story.find(@story2.id).slug))  
     expect(page).to have_content(@final_title2)
     expect(page).to have_content(@final_body2)
     expect(page).to have_content("Published")

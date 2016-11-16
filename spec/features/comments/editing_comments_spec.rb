@@ -18,7 +18,7 @@ RSpec.feature "Editing Comments" do
     visit "/"
     click_link @story_foo.final_title
     
-    link = "a[href='/stories/#{@story_foo.id}/comments/#{@comment1.id}/edit']"
+    link = "a[href='/stories/#{@story_foo.slug}/comments/#{@comment1.id}/edit']"
     find(link).click
     expect(page).to have_field('Edit Comment', :with => @comment1.body)
     within("#edit_comment_#{@comment1.id}"){fill_in("Edit Comment", with: "OK read" )}

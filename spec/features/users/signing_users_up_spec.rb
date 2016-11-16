@@ -33,7 +33,7 @@ RSpec.feature "Users signup" do
     expect(page).to have_content("You have signed up successfully.")
     expect(page).to have_content("Signed in as #{@email}")
     expect(page).to have_link("Sign out")
-    expect(page.current_path).to eq(dashboard_path(User.find_by(email: @email).id)) 
+    expect(page.current_path).to eq(dashboard_path(User.find_by(email: @email).slug)) 
   end
   
   scenario "with invalid credentials - step 1" do

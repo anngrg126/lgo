@@ -60,6 +60,9 @@ gem 'rails-html-sanitizer'
 #gem for handling nested model attributes in one form
 gem 'cocoon'
 
+#gem for generating friendly urls
+gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

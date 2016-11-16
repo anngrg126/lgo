@@ -1,4 +1,7 @@
 class Story < ApplicationRecord
+  extend FriendlyId
+  friendly_id :generate_friendly_id, :use => [:slugged, :finders]
+  
   validates :raw_title, presence: true
   validates :raw_body, presence: true
   
@@ -40,4 +43,20 @@ class Story < ApplicationRecord
   default_scope { order(created_at: :desc)}
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
+  
+  def should_generate_new_friendly_id?
+    final_title_changed? || updated_title_changed? || raw_title_changed? || super
+  end
+  
+  def generate_friendly_id
+    [
+      [:updated_title, :id],
+      [:final_title, :id],
+      [:raw_title, :id]
+    ]
+  end
+  
+  
+  # Story.all.each(&:save!)
+  # Command for migrating old stories that do not have any slugs
 end
