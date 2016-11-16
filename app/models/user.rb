@@ -113,7 +113,4 @@ class User < ApplicationRecord
       [:first_name, :last_name, :id]
     ]
   end
-  
-  # User.all.each(&:save!)
-  # Command for migrating old users that do not have any slugs
 end
