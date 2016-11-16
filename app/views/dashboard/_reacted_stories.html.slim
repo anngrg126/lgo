@@ -1,0 +1,18 @@
+h2 List of All Reacted Stories:
+- @reacted_stories.uniq.each do |story|
+  div
+    == story_main_image(story)
+  div
+    == link_to story_title(story), story_path(story)
+  div
+    == user_reaction(story, @user)
+  div
+    == story_body(story)
+  div
+    small 
+      | Posted by: 
+      == link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
+  div
+    small
+      | Posted on: 
+      == story.created_at.strftime("%b %d, %Y")

@@ -11,6 +11,13 @@ RSpec.feature "Editing Stories" do
     @updated_title2 = Faker::Hipster::sentence
     @updated_body = Faker::Hipster::paragraph
     @updated_body2 = Faker::Hipster::paragraph
+    NotificationCategory.create([
+      {id: 1, name: "Story"},
+      {id: 2, name: "Comment"},
+      {id: 3, name: "Reaction"},
+      {id: 4, name: "Bookmark"},
+      {id: 5, name: "Following"}
+      ])
   end
   
   scenario "A user edits a published story", js: true do

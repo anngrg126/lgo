@@ -52,6 +52,7 @@ class StoriesController < ApplicationController
     if @story.published?
       @story.validate_updated_fields = true
       @story.assign_attributes(story_params)
+      notify_admin(@story)
       if @story.anonymous_changed?
         if @story.anonymous
           @story.poster_id = 3
@@ -121,6 +122,14 @@ class StoriesController < ApplicationController
                         origin_id: story.id,
                         options: "followers")
     end
+  end
+  def notify_admin(story)
+    Notification.create(user_id: story.admin_id,
+                        notified_by_user_id: current_user.id,
+                        notification_category_id: 1,
+                        read: false,
+                        origin_id: story.id,
+                        options: "admin")
   end
   def destroy_notification(story)
     unless Notification.where(notification_category_id: 1,

@@ -1,10 +1,11 @@
 class DashboardController < ApplicationController
-  before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :followings, :followers, :notifications]
+  before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications]
   
   before_action :set_authored_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
   before_action :set_posted_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
   before_action :set_bookmarked_stories, only: [:show, :bookmarked_stories, :notifications, :bookmarked_stories]
   before_action :set_commented_stories, only: [:show, :commented_stories, :notifications, :bookmarked_stories]
+  before_action :set_reacted_stories, only: [:show, :reacted_stories, :notifications, :bookmarked_stories]
   before_action :set_followers, only: [:show, :followers, :notifications, :bookmarked_stories]
   before_action :set_followings, only: [:show, :followings, :notifications, :bookmarked_stories]
   before_action :set_notifications, only: [:show, :notifications, :bookmarked_stories]
@@ -28,6 +29,12 @@ class DashboardController < ApplicationController
   def commented_stories
     respond_to do |format|
       format.js {render :partial => 'dashboard/commented_stories'} 
+    end
+  end
+  
+  def reacted_stories
+    respond_to do |format|
+      format.js {render :partial => 'dashboard/reacted_stories'}
     end
   end
   
@@ -70,13 +77,13 @@ class DashboardController < ApplicationController
     @read_notifications = @notifications.where(read: true)
   end
   
-#  def set_liked_stories
-#    if @user == current_user
-#      @liked_stories = Story.where.not(author_id: @user.id).joins(:story_likes).where(:story_likes => { :user_id => @user.id})
-#    else
-#      @liked_stories = Story.joins(:story_likes).where(:story_likes => { :user_id => @user.id})
-#    end
-#  end
+  def set_reacted_stories
+    if @user == current_user
+      @reacted_stories = Story.where.not(author_id: @user.id).joins(:reactions).where(:reactions => { :user_id => @user.id})
+    else
+      @reacted_stories = Story.joins(:reactions).where(:reactions => { :user_id => @user.id})
+    end
+  end
   
   def set_bookmarked_stories
     @bookmarked_stories = Story.where.not(author_id: @user.id).joins(:bookmarks).where(:bookmarks => { :user_id => @user.id})
