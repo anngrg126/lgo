@@ -8,9 +8,9 @@ RSpec.feature "Editing Stories" do
     @admin = FactoryGirl.create(:admin)
     @story = Story.find_by(author_id: @user.id)
     @story2 = Story.find_by(author_id: @user2.id)
-    @final_title1 = Faker::Hipster::sentence
+    @final_title1 = Faker::Hipster::sentence(4)
     @final_body1 = Faker::Hipster::paragraph
-    @final_title2 = Faker::Hipster::sentence
+    @final_title2 = Faker::Hipster::sentence(4)
     @final_body2 = Faker::Hipster::paragraph
     NotificationCategory.create([
       {id: 1, name: "Story"},
