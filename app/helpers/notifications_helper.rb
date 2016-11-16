@@ -79,15 +79,21 @@ module NotificationsHelper
         story = Story.find(n.origin_id)
         link = link_to story_title(story), story_path(story)
         ids = []
-        unless n.options == "followers"
-          # Story author notification
-          messages.push("Your story has been published! See it here: "+link)
+        if n.options == "admin"
+          # Story admin notification
+          author = User.find(story.author_id)
+          link_author = link_to author.full_name, dashboard_path(author)
+          messages.push(link_author+" updated a story where you are an admin. See it here: "+link)
           ids.push(n.id)
-        else
+        elsif n.options == "followers"
           poster = User.find(story.poster_id)
           link_poster = link_to poster.full_name, dashboard_path(poster)
           # Story poster's followers notification
           messages.push(link_poster+" published a new story! See it here: "+link)
+          ids.push(n.id)
+        else
+          # Story author notification
+          messages.push("Your story has been published! See it here: "+link)
           ids.push(n.id)
         end
         id_array.push(ids)
