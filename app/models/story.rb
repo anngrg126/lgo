@@ -49,14 +49,16 @@ class Story < ApplicationRecord
   end
   
   def generate_friendly_id
-    [
-      [:updated_title, :id],
-      [:final_title, :id],
-      [:raw_title, :id]
-    ]
+    if self.published?
+      if self.last_user_to_update == "Author"
+        "#{updated_title}-#{id}"
+      elsif self.last_user_to_update == "Admin"
+        "#{final_title}-#{id}"
+      else
+        "#{raw_title}-#{id}"
+      end
+    else
+      [:id]
+    end
   end
-  
-  
-  # Story.all.each(&:save!)
-  # Command for migrating old stories that do not have any slugs
 end

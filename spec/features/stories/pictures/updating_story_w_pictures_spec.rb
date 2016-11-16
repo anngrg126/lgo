@@ -5,8 +5,7 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
   before do
     @user = FactoryGirl.create(:user_with_unpublished_stories)
     login_as(@user, :scope => :user)
-    @story = Story.friendly.find_by(author_id: @user.id)
-    visit(story_path(@story))
+    visit(story_path(Story.find_by(author_id: @user.id)))
   end
   
   scenario "Logged-in user can add one picture to a story after creating" do
