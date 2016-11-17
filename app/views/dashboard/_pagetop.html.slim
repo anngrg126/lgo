@@ -12,7 +12,7 @@ div#user_registration
       == @user.about_me
   - if @user == current_user
     == link_to "Edit", edit_user_dashboard_registration_path(@user), remote: true
-    == link_to "Settings", profile_dashboard_path(@user), remote: true
+    == link_to "Settings", user_profile_dashboard_path(@user), remote: true
   - else
     == render partial: 'followings/form', locals: { user: @user, follower: current_user }
     
