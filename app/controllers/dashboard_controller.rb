@@ -58,6 +58,10 @@ class DashboardController < ApplicationController
   end
   
   def user_profile
+    respond_to do |format|
+      format.js {render :partial => 'dashboard/user_profile'}
+      format.html
+    end
   end
   
   private
