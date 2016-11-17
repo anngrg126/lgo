@@ -1,1 +1,27 @@
-h1 This is the user profile.
+h2 This is the user profile.
+
+h3 Account Basics
+
+div
+  p 
+    | Email: 
+    span
+      == @user.email
+  p 
+    | Password: 
+    span
+      | Link to change password
+  p 
+    | Gender: 
+    span
+      == @user.gender
+  p 
+    | Birthday: 
+    span
+      == @user.birthday
+div
+  p 
+    | Account
+  div 
+    | Link to deactivate account
+  
