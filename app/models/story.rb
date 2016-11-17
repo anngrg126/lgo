@@ -51,11 +51,11 @@ class Story < ApplicationRecord
   def generate_friendly_id
     if self.published?
       if self.last_user_to_update == "Author"
-        "#{updated_title}-#{id}"
+        [:updated_title, :id]
       elsif self.last_user_to_update == "Admin"
-        "#{final_title}-#{id}"
+        [:final_title, :id]
       else
-        "#{raw_title}-#{id}"
+        [:raw_title, :id]
       end
     else
       [:id]
