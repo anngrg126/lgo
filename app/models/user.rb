@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :generate_friendly_id, :use => [:slugged, :finders]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -99,5 +101,16 @@ class User < ApplicationRecord
     avatar_url = URI.parse(uri)
     avatar_url.scheme = 'https'
     avatar_url.to_s
+  end
+  
+  def should_generate_new_friendly_id?
+    first_name_changed? || last_name_changed? || super
+  end
+  
+  def generate_friendly_id
+    [
+      [:first_name, :last_name],
+      [:first_name, :last_name, :id]
+    ]
   end
 end

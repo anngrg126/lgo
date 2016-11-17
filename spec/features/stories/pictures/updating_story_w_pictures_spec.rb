@@ -5,7 +5,8 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
   before do
     @user = FactoryGirl.create(:user_with_unpublished_stories)
     login_as(@user, :scope => :user)
-    visit(story_path(Story.find_by(author_id: @user.id)))
+    @story = Story.friendly.find_by(author_id: @user.id)
+    visit(story_path(@story))
   end
   
   scenario "Logged-in user can add one picture to a story after creating" do
@@ -36,8 +37,11 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
     end
     click_button "Create Picture"
     
-    expect(page).to have_css("img[src*='image.png']", count:3)
-    expect(page).to have_content("Delete Picture", count: 3)
+    # cnt_images = Picture.where(story_id: @story.id).count
+    cnt_images=3
+    
+    expect(page).to have_css("img[src*='image.png']", :count => cnt_images)
+    expect(page).to have_content("Delete Picture", :count => cnt_images)
   end
   
   scenario "Logged-in user fails to add pictures to a story after creating", js: true do

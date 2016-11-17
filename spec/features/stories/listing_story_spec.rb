@@ -7,7 +7,7 @@ RSpec.feature "Listing Stories" do
     @story2 = Story.where(author_id: @user.id).last
     @anonymous_user = FactoryGirl.create(:anonymous_user, id: 1000)
     @user1 = FactoryGirl.create(:user_with_published_anonymous_stories, stories_count: 1)
-    @story3 = Story.find_by(author_id: @user1.id)
+    @story3 = Story.friendly.find_by(author_id: @user1.id)
   end
   
   scenario "List all stories" do

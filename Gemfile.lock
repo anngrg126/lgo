@@ -110,6 +110,8 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
       sprockets-es6 (>= 0.9.0)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     guard (2.14.0)
@@ -333,6 +335,7 @@ DEPENDENCIES
   font-awesome-rails
   foundation-icons-sass-rails
   foundation-rails
+  friendly_id (~> 5.1.0)
   guard-rspec
   jbuilder (~> 2.0)
   jquery-rails
