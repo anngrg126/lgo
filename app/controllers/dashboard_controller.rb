@@ -57,6 +57,9 @@ class DashboardController < ApplicationController
     end
   end
   
+  def user_profile
+  end
+  
   private
   
   def set_user
