@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   before_action :redirect_cancel, :only => [:update]
   
   def index
-    @stories = Story.published
+    @stories = Story.published.where(deleted_at: nil)
   end
   
   def new
@@ -88,7 +88,8 @@ class StoriesController < ApplicationController
   end
   
   def destroy
-    if @story.destroy
+    @story.deleted_at = DateTime.now
+    if @story.save
       destroy_notification(@story)
       flash[:success] = "Story has been deleted"
       redirect_to stories_path

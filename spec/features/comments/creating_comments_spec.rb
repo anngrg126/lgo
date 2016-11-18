@@ -4,7 +4,7 @@ RSpec.feature "Adding Comments to Stories" do
   before do
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story = Story.find_by(author_id: @foo.id)
+    @story = Story.where(author_id: @foo.id).where(deleted_at: nil).first
     @comment1 = Faker::Hipster::sentence
     NotificationCategory.create([
       {id: 1, name: "Story"},

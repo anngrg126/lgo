@@ -4,8 +4,8 @@ RSpec.feature "Listing Stories" do
   before do
     @user = FactoryGirl.create(:user_with_unpublished_stories, stories_count: 2)
     @admin = FactoryGirl.create(:admin)
-    @story1 = Story.where(author_id: @user.id).first
-    @story2 = Story.where(author_id: @user.id).last
+    @story1 = Story.where(author_id: @user.id).where(deleted_at: nil).first
+    @story2 = Story.where(author_id: @user.id).where(deleted_at: nil).last
     login_as(@admin, :scope => :user)
   end
   

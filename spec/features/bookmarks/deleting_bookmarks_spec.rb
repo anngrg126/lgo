@@ -4,8 +4,8 @@ RSpec.feature "Deleting Bookmarks" do
   before do
     @bar = FactoryGirl.create(:user_with_published_stories)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story_foo = Story.find_by(author_id: @foo.id)
-    @story_bar = Story.find_by(author_id: @bar.id)
+    @story_foo = Story.where(author_id: @foo.id).where(deleted_at: nil).first
+    @story_bar = Story.where(author_id: @bar.id).where(deleted_at: nil).first
     @bookmark = Bookmark.create(user: @foo, story: @story_bar)
   end
   

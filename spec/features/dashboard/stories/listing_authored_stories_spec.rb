@@ -4,10 +4,10 @@ RSpec.feature "Listing Stories" do
   before do
     @user = FactoryGirl.create(:user_with_unpublished_stories, stories_count: 4)
     @anonymous_user = FactoryGirl.create(:anonymous_user)
-    @story1 = Story.where(author_id: @user.id).first
-    @story2 = Story.where(author_id: @user.id).second
-    @story3 = Story.where(author_id: @user.id).third
-    @story4 = Story.where(author_id: @user.id).last
+    @story1 = Story.where(author_id: @user.id).where(deleted_at: nil).first
+    @story2 = Story.where(author_id: @user.id).where(deleted_at: nil).second
+    @story3 = Story.where(author_id: @user.id).where(deleted_at: nil).third
+    @story4 = Story.where(author_id: @user.id).where(deleted_at: nil).last
     @story3.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, poster_id: @user.id, last_user_to_update: "Admin", main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
     @story4.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, anonymous: true, poster_id: 1000, last_user_to_update: "Admin", main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
     @visitor = FactoryGirl.create(:user)
@@ -18,7 +18,7 @@ RSpec.feature "Listing Stories" do
     visit(dashboard_path(@user))
     expect(page).to have_content("Stories: 4")
     
-    expect(page).to have_content(Story.where(author_id: @user.id).count)
+    expect(page).to have_content(Story.where(author_id: @user.id).where(deleted_at: nil).count)
     expect(page).to have_content(@story1.raw_title)
     expect(page).to have_content(@story1.raw_body.truncate(150))
     expect(page).to have_link(@story1.raw_title)
