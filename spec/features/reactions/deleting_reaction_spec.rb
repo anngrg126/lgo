@@ -4,8 +4,8 @@ RSpec.feature "Deleting Reaction_Lol" do
   before do
     @bar = FactoryGirl.create(:user_with_published_stories)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story_foo = Story.where(author_id: @foo.id).where(deleted_at: nil).first
-    @story_bar = Story.where(author_id: @bar.id).where(deleted_at: nil).first
+    @story_foo = Story.where(author_id: @foo.id).not_deleted.first
+    @story_bar = Story.where(author_id: @bar.id).not_deleted.first
     ReactionCategory.create([
       {id: 1, name: 'like'}, 
       {id: 2, name: 'omg'}, 

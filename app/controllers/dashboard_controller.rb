@@ -64,11 +64,11 @@ class DashboardController < ApplicationController
   end
   
   def set_authored_stories
-    @authored_stories = Story.where(author_id: @user)
+    @authored_stories = Story.not_deleted.where(author_id: @user)
   end
   
   def set_posted_stories
-    @posted_stories = Story.where(poster_id: @user)
+    @posted_stories = Story.not_deleted.where(poster_id: @user)
   end
   
   def set_notifications
@@ -79,18 +79,18 @@ class DashboardController < ApplicationController
   
   def set_reacted_stories
     if @user == current_user
-      @reacted_stories = Story.where.not(author_id: @user.id).joins(:reactions).where(:reactions => { :user_id => @user.id})
+      @reacted_stories = Story.not_deleted.where.not(author_id: @user.id).joins(:reactions).where(:reactions => { :user_id => @user.id})
     else
-      @reacted_stories = Story.joins(:reactions).where(:reactions => { :user_id => @user.id})
+      @reacted_stories = Story.not_deleted.joins(:reactions).where(:reactions => { :user_id => @user.id})
     end
   end
   
   def set_bookmarked_stories
-    @bookmarked_stories = Story.where.not(author_id: @user.id).joins(:bookmarks).where(:bookmarks => { :user_id => @user.id})
+    @bookmarked_stories = Story.not_deleted.where.not(author_id: @user.id).joins(:bookmarks).where(:bookmarks => { :user_id => @user.id})
   end
   
   def set_commented_stories
-    @commented_stories = Story.joins(:comments).where(:comments => { :user_id => @user.id})
+    @commented_stories = Story.not_deleted.joins(:comments).where(:comments => { :user_id => @user.id})
   end
   
   def set_followers

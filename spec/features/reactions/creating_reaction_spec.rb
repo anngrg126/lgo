@@ -4,7 +4,7 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
   before do
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story = Story.where(author_id: @foo.id).where(deleted_at: nil).first
+    @story = Story.where(author_id: @foo.id).not_deleted.first
     ReactionCategory.create([
       {id: 1, name: 'like'}, 
       {id: 2, name: 'omg'}, 

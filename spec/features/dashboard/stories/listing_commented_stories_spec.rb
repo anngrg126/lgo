@@ -4,10 +4,10 @@ RSpec.feature "Listing Commented Stories" do
   before do
     @author = FactoryGirl.create(:user_with_published_stories, stories_count: 3)
     @user = FactoryGirl.create(:user_with_published_stories)
-    @story1 = Story.where(author_id: @author.id).where(deleted_at: nil).first
-    @story2 = Story.where(author_id: @author.id).where(deleted_at: nil).second
-    @story3 = Story.where(author_id: @author.id).where(deleted_at: nil).last
-    @story4 = Story.where(author_id: @user.id).where(deleted_at: nil).first
+    @story1 = Story.where(author_id: @author.id).not_deleted.first
+    @story2 = Story.where(author_id: @author.id).not_deleted.second
+    @story3 = Story.where(author_id: @author.id).not_deleted.last
+    @story4 = Story.where(author_id: @user.id).not_deleted.first
     
     @comment1 = Comment.create(user_id: @user.id, story_id: @story1.id, body: Faker::Hipster.sentence)
     @comment2 = Comment.create(user_id: @user.id, story_id: @story2.id, body: Faker::Hipster.sentence)

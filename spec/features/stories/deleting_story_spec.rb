@@ -5,7 +5,7 @@ RSpec.feature "Deleting Stories" do
   before do
     @user = FactoryGirl.create(:user_with_published_stories)
     login_as(@user, :scope => :user)
-    @story = Story.where(author_id: @user.id).where(deleted_at: nil).first
+    @story = Story.where(author_id: @user.id).not_deleted.first
   end
   
   scenario "A user deletes a story" do

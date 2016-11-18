@@ -4,7 +4,7 @@ class Admin::StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
   
   def index
-    @stories = Story.unpublished.where(deleted_at: nil)
+    @stories = Story.unpublished.not_deleted
   end
   
   def show
