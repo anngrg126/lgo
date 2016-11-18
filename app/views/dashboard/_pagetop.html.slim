@@ -1,9 +1,11 @@
 h1 Welcome to the Dashboard!
 
 div#user_registration
-  h4 
-    | Name: 
-    == @user.full_name
+  div#user_name
+    h4 
+      | Name: 
+      == @user.full_name
+  == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_name"), remote: true
   div
     = user_photo(@user)
   div 
@@ -11,7 +13,7 @@ div#user_registration
       | About Me: 
       == @user.about_me
   - if @user == current_user
-    == link_to "Edit", edit_user_dashboard_registration_path(@user), remote: true
+    == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "form"), remote: true
     == link_to "Settings", user_profile_dashboard_path(@user), remote: true
   - else
     == render partial: 'followings/form', locals: { user: @user, follower: current_user }

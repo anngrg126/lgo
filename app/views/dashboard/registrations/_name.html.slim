@@ -1,0 +1,15 @@
+== form_for resource, as: resource_name, url: registration_path(resource_name), remote: true do |f|
+
+  div.field
+    = f.label :first_name, "First Name"
+    = f.text_field :first_name, autofocus: true, class: "form-control"
+    span class="form-error"
+    
+  div.field
+    = f.label :last_name, "Last Name"
+    = f.text_field :last_name, autofocus: true, class: "form-control"
+    span class="form-error"
+
+  div.actions
+    = f.submit "Update", class: "button"
+    = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true

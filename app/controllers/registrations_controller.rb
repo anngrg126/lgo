@@ -10,8 +10,14 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
+    form_render = params[:form_render]
     respond_to do |format|
-      format.js
+      unless form_render == ""
+#        format.js
+        format.js {render :partial => 'devise/registrations/edit.js.erb', locals: {form_render: form_render}}
+      else
+        format.html#TEST; remove in a second
+      end
     end
   end
   
