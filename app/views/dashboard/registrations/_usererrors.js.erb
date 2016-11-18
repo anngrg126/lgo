@@ -4,7 +4,7 @@ $("#edit_user span.form-error").remove("p");
 $("#edit_user span.form-error.is-visible").removeClass("is-visible");
 
 <% if resource.errors.any? %>
-  $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:warning] %></p></div>');
+//  $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:warning] %></p></div>');
   <% field_array = ["first name", "last name"] %>  
   <% for i in 0..resource.errors.count-1 %>
     <% field_array.each do |field| %>
