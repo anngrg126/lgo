@@ -5,9 +5,11 @@ div#user_registration
     h4 
       | Name: 
       == @user.full_name
-  == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_name"), remote: true
-  div
-    = user_photo(@user)
+    == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_name"), remote: true
+  div#user_photo
+    div
+      == user_photo(@user)
+    == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_image"), remote: true
   div 
     - if @user.about_me?
       | About Me: 
