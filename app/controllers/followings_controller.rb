@@ -50,7 +50,8 @@ class FollowingsController < ApplicationController
                         notified_by_user_id: current_user.id,
                         notification_category_id: 5,
                         read: false,
-                        origin_id: following.id)
+                        origin_id: following.id,
+                        story_id: 0)
   end
   def destroy_notification(following)
     unless Notification.where(notification_category_id: 5,

@@ -52,7 +52,8 @@ class BookmarksController < ApplicationController
                         notified_by_user_id: current_user.id,
                         notification_category_id: 4,
                         read: false,
-                        origin_id: bookmark.id)
+                        origin_id: bookmark.id,
+                        story_id: story.id)
     end
   end
   def destroy_notification(bookmark)

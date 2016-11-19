@@ -44,7 +44,8 @@ class ReactionsController < ApplicationController
                           notification_category_id: 3,
                           read: false,
                           origin_id: reaction.id,
-                          options: reaction.reaction_category_id.to_s)
+                          options: reaction.reaction_category_id.to_s,
+                          story_id: story.id)
     end
   end
   def destroy_notification(reaction)

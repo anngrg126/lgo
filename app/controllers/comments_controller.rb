@@ -93,7 +93,8 @@ class CommentsController < ApplicationController
                           notified_by_user_id: current_user.id,
                           notification_category_id: 2,
                           read: false,
-                          origin_id: comment.id)
+                          origin_id: comment.id,
+                          story_id: story.id)
     end
     #get array of id's of other users who commented
     user_array = []
@@ -111,7 +112,8 @@ class CommentsController < ApplicationController
                         notification_category_id: 2,
                         read: false,
                         origin_id: comment.id,
-                        options: "commenters")
+                        options: "commenters",
+                        story_id: story.id)
       end
     end
   end

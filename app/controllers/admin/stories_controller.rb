@@ -70,7 +70,8 @@ class Admin::StoriesController < ApplicationController
                         notified_by_user_id: current_user.id,
                         notification_category_id: 1,
                         read: false,
-                        origin_id: story.id)
+                        origin_id: story.id,
+                        story_id: story.id)
     #Notification for all people who follow the poster
     followings = Following.where(user_id: story.poster_id)
     followings.each do |follower|
@@ -79,14 +80,13 @@ class Admin::StoriesController < ApplicationController
                         notification_category_id: 1,
                         read: false,
                         origin_id: story.id,
-                        options: "followers")
+                        options: "followers",
+                        story_id: story.id)
     end
   end
   def destroy_notification(story)
-    unless Notification.where(notification_category_id: 1,
-                       origin_id: story.id).empty?
-      Notification.where(notification_category_id: 1,
-                       origin_id: story.id).each(&:destroy)
+    unless Notification.where(story_id: story.id).empty?
+      Notification.where(story_id: story.id).each(&:destroy)                
     end
   end
 end
