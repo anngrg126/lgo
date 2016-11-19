@@ -4,4 +4,6 @@ $("#user_registration").html("<%= j render(:partial => '/dashboard/registrations
   $("#user_name").html("<%= j render(:partial => '/dashboard/registrations/name')%>");
 } else if ("<%= j form_render %>" == "user_image") {
   $("#user_photo").html("<%= j render(:partial => '/dashboard/registrations/image')%>");
-};;
+} else if ("<%= j form_render %>" == "user_about_me") {
+  $("#user_about_me").html("<%= j render(:partial => '/dashboard/registrations/about_me')%>");
+};

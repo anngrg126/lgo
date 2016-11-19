@@ -5,17 +5,17 @@ div#user_registration
     h4 
       | Name: 
       == @user.full_name
-    == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_name"), remote: true
+    == edit_user_name(@user)
   div#user_photo
     div
       == user_photo(@user)
-    == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_image"), remote: true
-  div 
-    - if @user.about_me?
-      | About Me: 
-      == @user.about_me
+    == edit_user_photo(@user)
+  div
+    div
+      == user_about_me(@user)
+    div#user_about_me
+      == edit_user_about_me(@user)
   - if @user == current_user
-    == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "form"), remote: true
     == link_to "Settings", user_profile_dashboard_path(@user), remote: true
   - else
     == render partial: 'followings/form', locals: { user: @user, follower: current_user }
