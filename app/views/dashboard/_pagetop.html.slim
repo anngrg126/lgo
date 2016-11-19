@@ -12,8 +12,9 @@ div#user_registration
     == edit_user_photo(@user)
   div
     div
-      == user_about_me(@user)
+      == user_about_me_title(@user)
     div#user_about_me
+      == user_about_me(@user)
       == edit_user_about_me(@user)
   - if @user == current_user
     == link_to "Settings", user_profile_dashboard_path(@user), remote: true

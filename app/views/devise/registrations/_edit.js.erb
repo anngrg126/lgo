@@ -1,6 +1,4 @@
-if ("<%= j form_render %>" == "form") {
-$("#user_registration").html("<%= j render(:partial => '/dashboard/registrations/form')%>");
-} else if ("<%= j form_render %>" == "user_name") {
+if ("<%= j form_render %>" == "user_name") {
   $("#user_name").html("<%= j render(:partial => '/dashboard/registrations/name')%>");
 } else if ("<%= j form_render %>" == "user_image") {
   $("#user_photo").html("<%= j render(:partial => '/dashboard/registrations/image')%>");
