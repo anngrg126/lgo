@@ -13,7 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
     form_render = params[:form_render]
     respond_to do |format|
       unless form_render == ""
-        if form_render == "user_password" || "user_email"
+        if form_render == "user_password" || form_render == "user_email"
           format.html {render 'devise/registrations/edit', locals: {form_render: form_render}}
         else
           format.js {render :partial => 'devise/registrations/edit.js.erb', locals: {form_render: form_render}}

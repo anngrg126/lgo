@@ -15,9 +15,10 @@ RSpec.feature "Showing Profile" do
     click_link "Settings"
     
     expect(page).to have_content(@user.email)
+    expect(page).to have_link("Change Email")
     expect(page).to have_link("Change Password")
     expect(page).to have_content(@user.birthday)
     expect(page).to have_content(@user.gender)
-    expect(page).to have_link("Deactivate Account")
+    expect(page).to have_link("Deactivate account")
   end
 end
