@@ -2,15 +2,16 @@ h2 This is the user profile.
 
 h3 Account Basics
 
-div
+div#user_account_settings
   p 
     | Email: 
     span
       == @user.email
+    br
+    == link_to "Change Email", edit_user_dashboard_registration_path(@user, form_render: "user_email")
   p 
     | Password: 
-    span
-      | Link to change password
+    == link_to "Change Password", edit_user_dashboard_registration_path(@user, form_render: "user_password")
   p 
     | Gender: 
     span
@@ -19,9 +20,10 @@ div
     | Birthday: 
     span
       == @user.birthday
-div
-  p 
-    | Account
-  div 
-    | Link to deactivate account
+  div
+    p 
+      | Account
+    div 
+      == link_to "Deactivate account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete
+
   

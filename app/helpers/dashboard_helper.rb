@@ -9,7 +9,7 @@ module DashboardHelper
   
   def edit_user_name(user)
     if user == current_user
-      link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_name"), remote: true
+      link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_name"), remote: true
     end
   end
   
@@ -18,7 +18,7 @@ module DashboardHelper
       unless user.image_file_name? || user.fbimage?
         link_to "Upload Photo", edit_user_dashboard_registration_path(user, form_render: "user_image"), remote: true
       else
-        link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_image"), remote: true
+        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_image"), remote: true
       end
     end
   end
@@ -26,9 +26,9 @@ module DashboardHelper
   def edit_user_about_me(user)
     if user == current_user
       if user.about_me == nil || user.about_me == ""
-        link_to "Add an about me", edit_user_dashboard_registration_path(@user, form_render: "user_about_me"), remote: true
+        link_to "Add an about me", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
       else
-        link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_about_me"), remote: true
+        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
       end
     end
   end

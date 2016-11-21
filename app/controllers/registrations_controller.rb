@@ -13,7 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
     form_render = params[:form_render]
     respond_to do |format|
       unless form_render == ""
-        if form_render == "user_password"
+        if form_render == "user_password" || "user_email"
           format.html {render 'devise/registrations/edit', locals: {form_render: form_render}}
         else
           format.js {render :partial => 'devise/registrations/edit.js.erb', locals: {form_render: form_render}}
@@ -35,7 +35,6 @@ class RegistrationsController < Devise::RegistrationsController
         else
           flash.now[:warning] = "Profile has not been updated"
           format.js {render :partial => 'dashboard/registrations/usererrors', :data => resource.to_json  }
-          format.html {render :edit, locals: {form_render: params[:form_render]}}
         end
       else
         if resource.update_with_password(account_update_params)
@@ -44,7 +43,6 @@ class RegistrationsController < Devise::RegistrationsController
           format.html { redirect_to dashboard_path(resource) }
         else
           flash.now[:warning] = "Profile has not been updated"
-          format.js {render :partial => 'dashboard/registrations/usererrors', :data => resource.to_json  }
           format.html {render :edit, locals: {form_render: params[:form_render]}}
         end
       end
@@ -67,7 +65,7 @@ class RegistrationsController < Devise::RegistrationsController
   
   def account_update_params
     if params[:user]
-      params.require(:user).permit(:first_name, :last_name, :about_me, :status, :birthday, :gender, :image, :fbimage, :testvar, :password, :password_confirmation, :current_password)
+      params.require(:user).permit(:first_name, :last_name, :about_me, :status, :birthday, :gender, :image, :fbimage, :password, :password_confirmation, :current_password, :email)
     else
       params.permit(:image)
     end
