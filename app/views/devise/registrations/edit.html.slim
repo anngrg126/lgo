@@ -1,0 +1,24 @@
+h2 
+  | Edit 
+  = resource_name.to_s.humanize
+  
+= form_for(resource, as: resource_name, url: registration_path(resource_name, with_password: true, form_render: form_render), html: { method: :put }) do |f|
+  - if form_render == "user_email"
+    div.field
+      = f.label :email
+      = f.email_field :email, autofocus: true
+      
+  - if form_render == "user_password"
+    div.field
+      == devise_password_field
+
+    div.field
+      == devise_password_confirmation_field
+
+  div.field
+    = devise_current_password_field
+
+  div.actions
+    = f.submit "Update"
+
+= link_to "Back", :back

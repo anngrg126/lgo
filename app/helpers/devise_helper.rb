@@ -49,4 +49,15 @@ module DeviseHelper
       html = "<label for='user_password_confirmation'>Confirm new password</label><input class='form-control' id='user_password_confirmation' autocomplete='off' name='user[password_confirmation]' type='password'>".html_safe
     end
   end
+  def devise_current_password_field
+    messages = resource.errors.full_messages.join(" ")
+    messages_array = resource.errors.full_messages
+    errormessage = messages_array.index{|s| s.include?("Current password")}
+    
+    if messages.include? "Current password" 
+      html = "<label for='user_current_password' class='is-invalid-label'>Current Password</label><input id='user_current_password' autocomplete='off' name='user[current_password]' type='password' class='is-invalid-input form-control'><span class='form-error is-visible'>#{messages_array[errormessage]}</span>".html_safe
+    else
+      html = "<label for='user_current_password'>Current password</label><input class='form-control' id='user_current_password' autocomplete='off' name='user[current_password]' type='password'>".html_safe
+    end
+  end
 end
