@@ -70,7 +70,7 @@ class Admin::StoriesController < ApplicationController
                         notified_by_user_id: current_user.id,
                         notification_category_id: 1,
                         read: false,
-                        origin_id: story.id,
+#                        origin_id: story.id,
                         story_id: story.id)
     #Notification for all people who follow the poster
     followings = Following.where(user_id: story.poster_id)
@@ -79,7 +79,7 @@ class Admin::StoriesController < ApplicationController
                         notified_by_user_id: current_user.id,
                         notification_category_id: 1,
                         read: false,
-                        origin_id: story.id,
+#                        origin_id: story.id,
                         options: "followers",
                         story_id: story.id)
     end
