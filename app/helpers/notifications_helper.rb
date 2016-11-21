@@ -76,7 +76,7 @@ module NotificationsHelper
     notifications_array.each do |n|
       case n.notification_category_id
       when 1
-        story = Story.find(n.story_id)
+        story = Story.find(n.origin_id)
         link = link_to story_title(story), story_path(story)
         ids = []
         if n.options == "admin"

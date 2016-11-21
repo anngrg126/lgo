@@ -120,9 +120,9 @@ class StoriesController < ApplicationController
                         notified_by_user_id: current_user.id,
                         notification_category_id: 1,
                         read: false,
-#                        origin_id: story.id,
+                        origin_id: story.id,
                         options: "followers",
-                        story_id: story.id)
+                        story_id: 0)
     end
   end
   def notify_admin(story)
@@ -130,7 +130,7 @@ class StoriesController < ApplicationController
                         notified_by_user_id: current_user.id,
                         notification_category_id: 1,
                         read: false,
-#                        origin_id: story.id,
+                        origin_id: story.id,
                         options: "admin",
                         story_id: story.id)
   end
