@@ -5,5 +5,5 @@ ActionMailer::Base.smtp_settings = {
     port: 587,
     enable_starttls_auto: true,
     format: :html,
-    from: 'GiftOn Team <hello@letsgifton.com>'
+    from: 'GiftOn <hello@letsgifton.com>'
 }

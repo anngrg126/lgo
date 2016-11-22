@@ -26,4 +26,14 @@ class NotificationsMailer < ApplicationMailer
       end
     end
   end
+  
+  def admin_story_email(story)
+    @story = story
+    @author = User.find(story.author_id)
+    
+    mail(
+      to: "tatyana@letsgifton.com",
+      subject: "#{@author.first_name} submitted a new story to GiftOn"
+      )
+  end
 end
