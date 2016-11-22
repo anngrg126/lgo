@@ -1,12 +1,50 @@
 module DashboardHelper
   def user_photo(user)
-    if @user.image_file_name?
-      image_tag @user.image.url(:medium)
-    elsif @user.fbimage?
-      image_tag(@user.largesquareimage)
+    if user.image_file_name?
+      image_tag user.image.url(:medium)
+    elsif user.fbimage?
+      image_tag(user.largesquareimage)
+    end
+  end
+  
+  def edit_user_name(user)
+    if user == current_user
+      link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_name"), remote: true
+    end
+  end
+  
+  def edit_user_photo(user)
+    if user == current_user
+      unless user.image_file_name? || user.fbimage?
+        link_to "Upload Photo", edit_user_dashboard_registration_path(user, form_render: "user_image"), remote: true
+      else
+        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_image"), remote: true
+      end
+    end
+  end
+  
+  def edit_user_about_me(user)
+    if user == current_user
+      if user.about_me == nil || user.about_me == ""
+        link_to "Add an about me", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
+      else
+        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
+      end
+    end
+  end
+  
+  def user_about_me(user)
+    unless user.about_me.blank?
+      body = "<div>#{user.about_me}</div>".html_safe
+    end
+  end
+  
+  def user_about_me_title(user)
+    unless user.about_me.blank?
+      body = "<div'>About Me</div>".html_safe
     else
-      if @user == current_user
-        link_to "Upload Photo", edit_user_dashboard_registration_path(@user), remote: true
+      if user == current_user
+        body = "<div>About Me</div>".html_safe
       end
     end
   end

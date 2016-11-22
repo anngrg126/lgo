@@ -41,6 +41,8 @@ FactoryGirl.define do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     about_me { Faker::Hipster.sentence }
+    birthday { Faker::Date.birthday(min_age = 18, max_age = 65) }
+    gender {"female"}
     
     factory :admin do
       admin true

@@ -6,12 +6,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   
-  has_many :stories  
-  has_many :bookmarks
-  has_many :followings
-  has_many :followers, through: :followings, class_name: "User"
+  has_many :stories, dependent: :destroy  
+  has_many :bookmarks, dependent: :destroy
+  has_many :followings, dependent: :destroy
+  has_many :followers, through: :followings, class_name: "User", dependent: :destroy
   has_many :reactions, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :comments, dependent: :destroy
   
   cattr_accessor :form_steps do
     %w(basic_details)

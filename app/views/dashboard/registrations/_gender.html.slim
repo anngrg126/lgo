@@ -1,0 +1,12 @@
+== form_for resource, as: resource_name, url: registration_path(resource_name), remote: true do |f|
+  div.form-group
+    = f.radio_button :gender, 'male'
+    = f.label :gender_male, 'Male'
+    = f.radio_button :gender, 'female', :checked => 'checked'
+    = f.label :gender_female, 'Female'
+    = f.radio_button :gender, nil, :id => :custom_defined_gender
+    = f.label :gender_custom, 'Custom'
+    input#free_system_input
+    span.form-error
+  = f.submit "Update", class: "button"
+  = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
