@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body
+    == consolidate_notifications(@new_notifications, "true")
+    
+    p See you soon,
+
+    p 
+      | Your friends at 
+      a[href="www.letsgifton.com", target="_blank"] GiftOn
+
+    == render partial: "mailers/footer"
