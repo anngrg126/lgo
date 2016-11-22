@@ -25,6 +25,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 function myFunction() {
+  console.log("myfcn running");
   //fcn to show custom gender field
   $('input[type="radio"]').change(function() {
     var id = $(this).attr('id');
@@ -62,6 +63,14 @@ $(document).ready(function() {
 document.addEventListener("trix-file-accept", function(event) {
   event.preventDefault()
 })
+
+//fcn to...
+$( document ).ajaxComplete(function( event,request, settings ) {
+  $("#custom_defined_gender").click(function(){
+    myFunction();
+  });
+});
+
 
 $(document).ready(myFunction);
 $(document).on('turbolinks:load', myFunction);

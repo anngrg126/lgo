@@ -56,4 +56,16 @@ RSpec.feature "Editing Account Settings" do
     expect(page).to have_content("Profile has not been updated")
     expect(page).to have_content("Email can't be blank")
   end
+  
+  scenario "Logged-in user edits her gender via the dashboard", js:true do
+    login_as(@user, :scope => :user)
+    visit(dashboard_path(@user))
+    click_link "Settings"
+    
+    link = "a[href*='user_gender']"
+    find(link).click
+    choose('user_gender_male')
+    click_button "Update"
+    expect(page).to have_content("Profile has been updated")
+  end
 end

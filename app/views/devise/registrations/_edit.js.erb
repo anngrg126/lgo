@@ -4,4 +4,7 @@ if ("<%= j form_render %>" == "user_name") {
   $("#user_photo").html("<%= j render(:partial => '/dashboard/registrations/image')%>");
 } else if ("<%= j form_render %>" == "user_about_me") {
   $("#user_about_me").html("<%= j render(:partial => '/dashboard/registrations/about_me')%>");
+} else if ("<%= j form_render %>" == "user_gender") {
+  $("#user_gender").html("<%= j render(:partial => '/dashboard/registrations/gender')%>");
+  $('input[type="radio"]').removeAttr("checked").delay(800);
 };

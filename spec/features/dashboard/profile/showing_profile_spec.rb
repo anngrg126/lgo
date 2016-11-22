@@ -18,7 +18,8 @@ RSpec.feature "Showing Profile" do
     expect(page).to have_link("Change Email")
     expect(page).to have_link("Change Password")
     expect(page).to have_content(@user.birthday)
-    expect(page).to have_content(@user.gender)
+#    expect(page).to have_content(@user.gender)
+    expect(page).to have_selector('input[type=radio][checked=checked][value=female]')
     expect(page).to have_link("Deactivate account")
   end
 end

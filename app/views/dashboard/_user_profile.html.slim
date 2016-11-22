@@ -1,6 +1,6 @@
 h2 This is the user profile.
 
-h3 Account Basics
+h3 Account Settings
 
 div#user_account_settings
   p 
@@ -13,18 +13,18 @@ div#user_account_settings
     | Password: 
     == link_to "Change Password", edit_user_dashboard_registration_path(@user, form_render: "user_password")
   p 
-    | Gender: 
-    = form_for @user, url: registration_path(@user), remote: true do |f|
-      div.form-group
-        = f.radio_button :gender, 'male'
-        = f.label :gender_male, 'Male'
-        = f.radio_button :gender, 'female'
-        = f.label :gender_female, 'Female'
-        = f.radio_button :gender, nil, :id => :custom_defined_gender
-        = f.label :gender_custom, 'Custom'
-        input#free_system_input
-    == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_gender")
-    /== render partial: 'dashboard/registrations/profile_js', formats: [:js], locals: {gender: @user.gender}
+    | Gender:
+    div#user_gender
+      = form_for @user, url: registration_path(@user), remote: true do |f|
+        div.form-group
+          = f.radio_button :gender, 'male', disabled: true
+          = f.label :gender_male, 'Male'
+          = f.radio_button :gender, 'female', disabled: true
+          = f.label :gender_female, 'Female'
+          = f.radio_button :gender, nil, :id => :custom_defined_gender, disabled: true
+          = f.label :gender_custom, 'Custom'
+          input#free_system_input
+      == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_gender"), remote: true
   p 
     | Birthday: 
     span
