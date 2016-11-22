@@ -3,6 +3,19 @@ html
   head
     meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
   body
+    p 
+      | Hi 
+      - if @user.first_name
+        == @user.first_name
+      - else
+        == @resource.email
+      | ,
+    
+    p 
+      | You have 
+      == @new_notifications.count 
+      |  new updates from your friends and followers at GiftOn.
+  
     == consolidate_notifications(@new_notifications, "true")
     
     p See you soon,
