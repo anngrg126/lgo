@@ -3,6 +3,7 @@ class NotificationsMailer < ApplicationMailer
   
   def notifications_email(user)
     @user = user
+    email_with_name = %("#{@user.full_name}" ,#{@user.email}>)
     @new_notifications = Notification.where(user_id: @user.id, read: false, updated_at: (Time.now - 24.hours)..Time.now)
     
     if @new_notifications.count > 0
@@ -13,12 +14,12 @@ class NotificationsMailer < ApplicationMailer
       @notifiers.uniq!
       if @notifiers.count > 3
         mail(
-          to: @user.email,
+          to: email_with_name,
           subject: '#{@new_notifications.count} new notifications from #{@notifiers.first(3).join(", ")}, and #{@notifiers.count-3} more'
           )
       else
         mail(
-          to: @user.email,
+          to: email_with_name,
           subject: '#{@new_notifications.count} new notifications from #{@notifiers.to_sentence}'
           )
       end
