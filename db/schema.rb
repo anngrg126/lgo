@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116020755) do
+ActiveRecord::Schema.define(version: 20161119003442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20161116020755) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "options"
+    t.integer  "story_id"
     t.index ["notification_category_id"], name: "index_notifications_on_notification_category_id", using: :btree
     t.index ["notified_by_user_id"], name: "index_notifications_on_notified_by_user_id", using: :btree
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
@@ -148,6 +149,7 @@ ActiveRecord::Schema.define(version: 20161116020755) do
     t.boolean  "review",                  default: false
     t.string   "last_user_to_update"
     t.string   "slug"
+    t.datetime "deleted_at"
     t.index ["admin_id"], name: "index_stories_on_admin_id", using: :btree
     t.index ["author_id"], name: "index_stories_on_author_id", using: :btree
     t.index ["poster_id"], name: "index_stories_on_poster_id", using: :btree

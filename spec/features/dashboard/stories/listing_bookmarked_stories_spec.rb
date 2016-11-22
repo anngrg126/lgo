@@ -4,9 +4,9 @@ RSpec.feature "Listing Bookmarked Stories" do
   before do
     @author = FactoryGirl.create(:user_with_published_stories, stories_count: 2)
     @user = FactoryGirl.create(:user_with_published_stories)
-    @story1 = Story.where(author_id: @author.id).first
-    @story2 = Story.where(author_id: @author.id).last
-    @story3 = Story.find_by(author_id: @user.id)
+    @story1 = Story.where(author_id: @author.id).active.first
+    @story2 = Story.where(author_id: @author.id).active.last
+    @story3 = Story.where(author_id: @user.id).active.first
     
     @bookmark1 = Bookmark.create(user_id: @user.id, story_id: @story1.id)
     @bookmark2 = Bookmark.create(user_id: @user.id, story_id: @story2.id)
