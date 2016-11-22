@@ -26,6 +26,7 @@ class StoriesController < ApplicationController
         if @story.save
           flash[:success] = "Story has been submitted"
           format.html {redirect_to dashboard_path(current_user)}
+          NotificationsMailer.admin_story_email(@story).deliver_now
         end
       end
       unless @story.save
