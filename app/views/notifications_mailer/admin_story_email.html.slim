@@ -6,9 +6,9 @@ html
     p Hi,
     
     p 
-      == link_to @author.full_name, dashboard_url(@author)
+      == link_to @author.full_name, dashboard_url(@author), target: "_blank"
       |  submitted a new story to GiftOn. See it here: 
-      == link_to "Story", admin_story_url(@story)
+      == link_to "Story", admin_story_url(@story), target: "_blank"
     
     p Preview:
     

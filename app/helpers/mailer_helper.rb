@@ -15,17 +15,17 @@ module MailerHelper
       case n.notification_category_id
       when 1
         story = Story.find(n.story_id)
-        link = link_to story_title(story), story_url(story)
+        link = link_to story_title(story), story_url(story), target: "_blank"
         ids = []
         if n.options == "admin"
           # Story admin notification
           author = User.find(story.author_id)
-          link_author = link_to author.full_name, dashboard_url(author)
+          link_author = link_to author.full_name, dashboard_url(author), target: "_blank"
           messages.push(link_author+" updated a story where you are an admin. See it here: "+link)
           ids.push(n.id)
         elsif n.options == "followers"
           poster = User.find(story.poster_id)
-          link_poster = link_to poster.full_name, dashboard_url(poster)
+          link_poster = link_to poster.full_name, dashboard_url(poster), target: "_blank"
           # Story poster's followers notification
           messages.push(link_poster+" published a new story! See it here: "+link)
           ids.push(n.id)
@@ -67,9 +67,9 @@ module MailerHelper
             end
             commenter_links = []
             commenters.uniq.each do |c|
-              commenter_links.push(link_to c.full_name, dashboard_url(c))
+              commenter_links.push(link_to c.full_name, dashboard_url(c), target: "_blank")
             end 
-            link = link_to story_title(s), story_url(s)
+            link = link_to story_title(s), story_url(s), target: "_blank"
             unless commenter_links.empty?
               if o == nil
                 messages.push("#{commenter_links.to_sentence} commented on your story #{link}")
@@ -99,9 +99,9 @@ module MailerHelper
             end
             reactor_links = []
             reactors.uniq.each do |c|
-              reactor_links.push(link_to c.full_name, dashboard_url(c))
+              reactor_links.push(link_to c.full_name, dashboard_url(c), target: "_blank") 
             end 
-            link = link_to story_title(s), story_url(s)
+            link = link_to story_title(s), story_url(s), target: "_blank"
             unless reactor_links.empty?
               if o == "1"#like
                 messages.push("#{reactor_links.to_sentence} liked your story #{link}")
@@ -139,8 +139,8 @@ module MailerHelper
         bookmarker_links = []
         bookmarkers = bookmarkers.uniq.count
         
-        link = link_to story_title(s), story_url(s)
-        link_bookmark = link_to "bookmarked", bookmarked_stories_dashboard_url(current_user)
+        link = link_to story_title(s), story_url(s), target: "_blank"
+        link_bookmark = link_to "bookmarked", bookmarked_stories_dashboard_url(current_user), target: "_blank"
         if bookmarkers == 1 
           messages.push("Woohoo! Someone #{link_bookmark} your story #{link}")
           id_array.push(ids)
@@ -159,7 +159,7 @@ module MailerHelper
       ids = followers.find_all {|x| x.instance_of? Fixnum}
       followers = followers.find_all {|x| !x.instance_of? Fixnum}
       followers.each do |f|
-        follower_links.push(link_to f.full_name, dashboard_url(f))
+        follower_links.push(link_to f.full_name, dashboard_url(f), target: "_blank")
       end
       messages.push("#{follower_links.to_sentence} followed you")
       id_array.push(ids)
