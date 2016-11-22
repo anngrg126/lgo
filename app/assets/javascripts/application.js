@@ -63,7 +63,7 @@ document.addEventListener("trix-file-accept", function(event) {
   event.preventDefault()
 })
 
-//fcn to...
+//fcn to show/hide custom gender field when updating information via user dashboard
 $( document ).ajaxComplete(function( event,request, settings ) {
   $("#custom_defined_gender").click(function(){
     myFunction();

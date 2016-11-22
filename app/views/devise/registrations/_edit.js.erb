@@ -1,5 +1,3 @@
-console.log("<%= j form_render %>");
-
 if ("<%= j form_render %>" == "user_name") {
   $("#user_name").html("<%= j render(:partial => '/dashboard/registrations/name')%>");
 } else if ("<%= j form_render %>" == "user_image") {
@@ -10,6 +8,5 @@ if ("<%= j form_render %>" == "user_name") {
   $("#user_gender").html("<%= j render(:partial => '/dashboard/registrations/gender')%>");
   $('input[type="radio"]').removeAttr("checked").delay(800);
 } else if ("<%= j form_render %>" == "user_birthday") {
-  console.log("test");
   $("#user_birthday").html("<%= j render(:partial => '/dashboard/registrations/birthday')%>");
 };
