@@ -1,0 +1,6 @@
+== form_for resource, as: resource_name, url: registration_path(resource_name), remote: true do |f|
+  div
+    = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}
+    span.form-error
+  = f.submit "Update", class: "button"
+  = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true

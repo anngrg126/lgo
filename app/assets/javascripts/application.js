@@ -25,7 +25,6 @@ $(document).on('turbolinks:load', function() {
 });
 
 function myFunction() {
-  console.log("myfcn running");
   //fcn to show custom gender field
   $('input[type="radio"]').change(function() {
     var id = $(this).attr('id');
