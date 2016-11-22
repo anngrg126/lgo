@@ -6,7 +6,7 @@ RSpec.feature "Deleting Stories" do
     @user = FactoryGirl.create(:user_with_unpublished_stories)
     @admin = FactoryGirl.create(:admin)
     login_as(@admin, :scope => :user)
-    @story = Story.find_by(author_id: @user.id)
+    @story = Story.where(author_id: @user.id).active.first
     
   end
   

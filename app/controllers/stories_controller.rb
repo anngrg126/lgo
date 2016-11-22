@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   before_action :redirect_cancel, :only => [:update]
   
   def index
-    @stories = Story.published
+    @stories = Story.published.active
   end
   
   def new
@@ -88,7 +88,8 @@ class StoriesController < ApplicationController
   end
   
   def destroy
-    if @story.destroy
+    @story.deleted_at = DateTime.now
+    if @story.save
       destroy_notification(@story)
       flash[:success] = "Story has been deleted"
       redirect_to stories_path
@@ -119,8 +120,9 @@ class StoriesController < ApplicationController
                         notified_by_user_id: current_user.id,
                         notification_category_id: 1,
                         read: false,
-                        origin_id: story.id,
-                        options: "followers")
+#                        origin_id: story.id,
+                        options: "followers",
+                        story_id: story.id)
     end
   end
   def notify_admin(story)
@@ -128,14 +130,13 @@ class StoriesController < ApplicationController
                         notified_by_user_id: current_user.id,
                         notification_category_id: 1,
                         read: false,
-                        origin_id: story.id,
-                        options: "admin")
+#                        origin_id: story.id,
+                        options: "admin",
+                        story_id: story.id)
   end
   def destroy_notification(story)
-    unless Notification.where(notification_category_id: 1,
-                       origin_id: story.id).empty?
-      Notification.where(notification_category_id: 1,
-                       origin_id: story.id).each(&:destroy)
+    unless Notification.where(story_id: story.id).empty?
+      Notification.where(story_id: story.id).each(&:destroy)                
     end
   end
 end
