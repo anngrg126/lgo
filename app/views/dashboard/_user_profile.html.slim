@@ -14,12 +14,25 @@ div#user_account_settings
     == link_to "Change Password", edit_user_dashboard_registration_path(@user, form_render: "user_password")
   p 
     | Gender: 
-    span
-      == @user.gender
+    = form_for @user, url: registration_path(@user), remote: true do |f|
+      div.form-group
+        = f.radio_button :gender, 'male'
+        = f.label :gender_male, 'Male'
+        = f.radio_button :gender, 'female'
+        = f.label :gender_female, 'Female'
+        = f.radio_button :gender, nil, :id => :custom_defined_gender
+        = f.label :gender_custom, 'Custom'
+        input#free_system_input
+    == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_gender")
+    /== render partial: 'dashboard/registrations/profile_js', formats: [:js], locals: {gender: @user.gender}
   p 
     | Birthday: 
     span
       == @user.birthday
+    = form_for @user, url: registration_path(@user), remote: true do |f|
+      div.form-group
+        = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}
+    == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_birthdy")
   div
     p 
       | Account
