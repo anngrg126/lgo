@@ -5,8 +5,8 @@ RSpec.feature "Editing Stories" do
   before do
     @user = FactoryGirl.create(:user_with_published_stories)
     @user2 = FactoryGirl.create(:user_with_unpublished_stories)
-    @story = Story.where(author_id: @user.id).not_deleted.first
-    @story2 = Story.where(author_id: @user2.id).not_deleted.first
+    @story = Story.where(author_id: @user.id).active.first
+    @story2 = Story.where(author_id: @user2.id).active.first
     @updated_title = Faker::Hipster::sentence
     @updated_title2 = Faker::Hipster::sentence
     @updated_body = Faker::Hipster::paragraph

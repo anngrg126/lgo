@@ -4,8 +4,8 @@ RSpec.feature "Deleting Comments" do
   before do
     @bar = FactoryGirl.create(:user_with_published_stories)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story_foo = Story.where(author_id: @foo.id).not_deleted.first
-    @story_bar = Story.where(author_id: @bar.id).not_deleted.first
+    @story_foo = Story.where(author_id: @foo.id).active.first
+    @story_bar = Story.where(author_id: @bar.id).active.first
     
     @comment1 = Comment.create(body: Faker::Hipster::word, user: @foo, story: @story_foo)
     @comment2 = Comment.create(body: Faker::Hipster::sentence, user: @bar, story: @story_foo)

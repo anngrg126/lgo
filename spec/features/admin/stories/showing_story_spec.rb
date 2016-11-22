@@ -5,8 +5,8 @@ RSpec.feature "Showing Stories" do
     @user = FactoryGirl.create(:user_with_unpublished_stories)
     @user2 = FactoryGirl.create(:user_with_unpublished_review_stories)
     @admin = FactoryGirl.create(:admin)
-    @story = Story.where(author_id: @user.id).not_deleted.first
-    @story2 = Story.where(author_id: @user2.id).not_deleted.first
+    @story = Story.where(author_id: @user.id).active.first
+    @story2 = Story.where(author_id: @user2.id).active.first
     login_as(@admin, :scope => :user)
     
   end

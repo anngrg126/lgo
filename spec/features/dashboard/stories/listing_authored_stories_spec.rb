@@ -4,10 +4,10 @@ RSpec.feature "Listing Stories" do
   before do
     @user = FactoryGirl.create(:user_with_unpublished_stories, stories_count: 4)
     @anonymous_user = FactoryGirl.create(:anonymous_user)
-    @story1 = Story.where(author_id: @user.id).not_deleted.first
-    @story2 = Story.where(author_id: @user.id).not_deleted.second
-    @story3 = Story.where(author_id: @user.id).not_deleted.third
-    @story4 = Story.where(author_id: @user.id).not_deleted.last
+    @story1 = Story.where(author_id: @user.id).active.first
+    @story2 = Story.where(author_id: @user.id).active.second
+    @story3 = Story.where(author_id: @user.id).active.third
+    @story4 = Story.where(author_id: @user.id).active.last
     @story3.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, poster_id: @user.id, last_user_to_update: "Admin", main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
     @story4.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, anonymous: true, poster_id: 1000, last_user_to_update: "Admin", main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
     @visitor = FactoryGirl.create(:user)

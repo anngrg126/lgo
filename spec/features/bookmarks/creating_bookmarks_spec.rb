@@ -4,7 +4,7 @@ RSpec.feature "Adding Saves to Stories" do
   before do
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story = Story.where(author_id: @foo.id).not_deleted.first
+    @story = Story.where(author_id: @foo.id).active.first
     NotificationCategory.create([
       {id: 1, name: "Story"},
       {id: 2, name: "Comment"},

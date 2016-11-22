@@ -4,7 +4,7 @@ RSpec.feature "Showing Stories" do
   before do
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story =Story.where(author_id: @foo.id).not_deleted.first
+    @story =Story.where(author_id: @foo.id).active.first
     
   end
   

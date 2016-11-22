@@ -5,7 +5,7 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
   before do
     @user = FactoryGirl.create(:user_with_unpublished_stories)
     login_as(@user, :scope => :user)
-    @story = Story.where(author_id: @user.id).not_deleted.first
+    @story = Story.where(author_id: @user.id).active.first
     visit(story_path(@story))
   end
   

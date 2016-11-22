@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   before_action :redirect_cancel, :only => [:update]
   
   def index
-    @stories = Story.published.not_deleted
+    @stories = Story.published.active
   end
   
   def new
