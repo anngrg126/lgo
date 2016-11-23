@@ -8,6 +8,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in @user
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
       redirect_to dashboard_path(@user)
+      create_subscription(user)
     else
       # if @user is NOT a new record
       session["devise.facebook_data"] = request.env["omniauth.auth"]
@@ -21,4 +22,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to root_path, alert: "Login failed"
   end
   
+  private
+  
+  def create_subscription(user)
+    if SubscriptionPreference.where(user_id: user.id).empty?
+      SubscriptionPreference.create(user_id: user.id)
+    end
+  end
 end
