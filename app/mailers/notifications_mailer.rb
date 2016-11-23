@@ -16,12 +16,12 @@ class NotificationsMailer < ApplicationMailer
       if @notifiers.count > 3
         mail(
           to: email_with_name,
-          subject: "#{@new_notifications.count} new notifications from #{@notifiers.first(3).join(", ")}, and #{@notifiers.count-3} more at GiftOn"
+          subject: "#{@new_notifications.count} new notifications from #{@notifiers.first(3).join(", ")}, and #{@notifiers.count-3} more"
           )
       else
         mail(
           to: email_with_name,
-          subject: "#{@new_notifications.count} new notifications from #{@notifiers.to_sentence} at GiftOn"
+          subject: "#{@new_notifications.count} new notifications from #{@notifiers.to_sentence}"
           )
       end
     end
@@ -33,7 +33,7 @@ class NotificationsMailer < ApplicationMailer
     
     mail(
       to: "tatyana@letsgifton.com",
-      subject: "#{@author.first_name} submitted a new story to GiftOn"
+      subject: "#{@author.first_name} submitted a new story"
       )
   end
 end

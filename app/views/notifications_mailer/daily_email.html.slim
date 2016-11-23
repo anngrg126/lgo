@@ -14,9 +14,14 @@ html
     p 
       | You have 
       == @new_notifications.count 
-      |  new updates from your friends and followers at GiftOn.
+      |  new updates from your friends and followers.
   
     == consolidate_notifications(@new_notifications, "true")
+    
+    p 
+      | Visit your dashboard to 
+      == link_to "view all your notifications", notifications_dashboard_url(@user)
+      | .
     
     p See you soon,
 
