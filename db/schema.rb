@@ -159,10 +159,10 @@ ActiveRecord::Schema.define(version: 20161123171451) do
 
   create_table "subscription_preferences", force: :cascade do |t|
     t.integer  "user_id"
-    t.boolean  "daily_email"
+    t.boolean  "daily_email",  default: true
     t.boolean  "weekly_email"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["user_id"], name: "index_subscription_preferences_on_user_id", using: :btree
   end
 
