@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_action :redirect_cancel, :only => [:update]
   
   def index
-    @comment = @story.comments.all
+    @comment = @story.comments.active
   end
   
   def create
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
       flash[:warning] = "Please sign in to continue"
       redirect_to new_user_session_path
     else
-      @comment = @story.comments.build(comment_params)
+      @comment = @story.comments.active.build(comment_params)
       @comment.user = current_user    
       respond_to do |format|
         if @comment.save
@@ -59,7 +59,8 @@ class CommentsController < ApplicationController
       flash[:alert] = "You can only edit your own comments"
       redirect_to story_path(@story)
     else
-      if @comment.destroy
+      @comment.deleted_at = DateTime.now
+      if @comment.save
         destroy_notification(@comment)
         flash[:success] = "Comment has been deleted"
         redirect_to story_path(@story)
@@ -98,7 +99,7 @@ class CommentsController < ApplicationController
     end
     #get array of id's of other users who commented
     user_array = []
-    Story.find(comment.story_id).comments.each do |existingcomment|
+    Story.find(comment.story_id).comments.active.each do |existingcomment|
       unless comment.user_id == existingcomment.user_id || existingcomment.user_id == story.author_id
         user_array.push(existingcomment.user_id)
       end
