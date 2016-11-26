@@ -21,3 +21,12 @@ NotificationCategory.create([
   { name: 'Bookmark' },
   { name: 'Following' }
 ])
+
+TagCategory.create([
+  { name: 'Relationship' }, 
+  { name: 'Occasion' },
+  { name: 'Type' },
+  { name: 'Interests' },
+  { name: 'To_recipient' },
+  { name: 'Collection' }
+])
