@@ -175,7 +175,6 @@ ActiveRecord::Schema.define(version: 20161126233545) do
   create_table "tags", force: :cascade do |t|
     t.integer  "tag_category_id"
     t.string   "name"
-    t.boolean  "primary"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["tag_category_id"], name: "index_tags_on_tag_category_id", using: :btree

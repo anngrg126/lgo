@@ -3,7 +3,6 @@ class CreateTags < ActiveRecord::Migration[5.0]
     create_table :tags do |t|
       t.references :tag_category, foreign_key: true
       t.string :name
-      t.boolean :primary
 
       t.timestamps
     end
