@@ -8,7 +8,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in @user
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
       redirect_to dashboard_path(@user)
-      create_subscription(user)
+      create_subscription(@user)
     else
       # if @user is NOT a new record
       session["devise.facebook_data"] = request.env["omniauth.auth"]
