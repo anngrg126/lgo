@@ -23,13 +23,13 @@ NotificationCategory.create([
 ])
 
 TagCategory.create([
-  { name: 'Relationship' }, 
-  { name: 'Occasion' },
-  { name: 'Type' },
-  { name: 'Interests' },
-  { name: 'To_recipient' },
-  { name: 'Gifton_reaction' },
-  { name: 'Collection' }
+  { category: 'Relationship' }, 
+  { category: 'Occasion' },
+  { category: 'Type' },
+  { category: 'Interests' },
+  { category: 'To_recipient' },
+  { category: 'Gifton_reaction' },
+  { category: 'Collection' }
 ])
 
 Tag.create([
@@ -53,7 +53,6 @@ Tag.create([
 {  tag_category_id: 5 , name: 'sister_in_law' },
 {  tag_category_id: 5 , name: 'family_in_law' },
 {  tag_category_id: 5 , name: 'friend' },
-{  tag_category_id: 5 , name: 'sister' },
 {  tag_category_id: 5 , name: 'sister' },
 {  tag_category_id: 5 , name: 'brother' },
 {  tag_category_id: 5 , name: 'mother' },
