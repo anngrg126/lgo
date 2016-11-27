@@ -11,6 +11,8 @@ class Admin::StoriesController < ApplicationController
   end
   
   def edit
+    @relationship_tags = Tag.where(tag_category: 1).map{|t| [t.name]}
+    @occasion_tags = Tag.where(tag_category: 2).map{|t| [t.name]}
   end
   
   def destroy
@@ -50,7 +52,7 @@ class Admin::StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image)
+    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image, classifications_attribute: [:story_id, :tag_id, :primary])
   end
   
   def require_admin

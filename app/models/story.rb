@@ -35,6 +35,8 @@ class Story < ApplicationRecord
   accepts_nested_attributes_for :pictures, limit: 15, reject_if: :all_blank
   validates_associated :pictures
   
+  accepts_nested_attributes_for :classifications
+  
   has_attached_file :main_image, styles: {
     medium: '600x314>', 
     large: '1200x628>' 
