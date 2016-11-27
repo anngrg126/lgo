@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20161127004912) do
   create_table "classifications", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "story_id"
+    t.boolean  "primary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["story_id"], name: "index_classifications_on_story_id", using: :btree
