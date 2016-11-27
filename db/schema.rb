@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161127004912) do
+ActiveRecord::Schema.define(version: 20161127023723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,5 +243,5 @@ ActiveRecord::Schema.define(version: 20161127004912) do
   add_foreign_key "stories", "users", column: "author_id"
   add_foreign_key "stories", "users", column: "poster_id"
   add_foreign_key "subscription_preferences", "users"
-  add_foreign_key "tags", "tag_categories"
+  add_foreign_key "tags", "tag_categories", on_delete: :cascade
 end
