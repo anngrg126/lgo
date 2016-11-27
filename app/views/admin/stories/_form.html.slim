@@ -62,15 +62,50 @@ p
         div[style="display: block"]
           == c.check_box(:tag_id, {multiple: true}, rt[1], nil)
           == c.label rt[0]
-      /== c.select(:tag_id, @relationship_tags)
-    == f.fields_for :classifications, @story.classifications.build do |c|
       h4 Occasion
-      /== c.select(:tag_id, @occasion_tags)
       - @occasion_tags.each do |ot|
         div[style="display: block"]
           == c.check_box(:tag_id, {multiple: true}, ot[1], nil)
           div[style="display: inline-block"]
             == c.label ot[0]
+      h4 Type
+      - @type_tags.each do |tt|
+        div[style="display: block"]
+          == c.check_box(:tag_id, {multiple: true}, tt[1], nil)
+          div[style="display: inline-block"]
+            == c.label tt[0]
+      h4 Interests
+      - @interests_tags.each do |it|
+        div[style="display: block"]
+          == c.check_box(:tag_id, {multiple: true}, it[1], nil)
+          div[style="display: inline-block"]
+            == c.label it[0]
+          - if it[0] == "other"
+            = c.label :description
+            = c.text_field :description
+      h4 To Recipient
+      - @to_recipient_tags.each do |trt|
+        div[style="display: block"]
+          == c.check_box(:tag_id, {multiple: true, :id => :other_to_recipient}, trt[1], nil)
+          div[style="display: inline-block"]
+            == c.label trt[0]
+          - if trt[0] == "other"
+            = c.label :description
+            = c.text_field :description
+      h4 GiftOn's Reaction
+      - @gifton_reaction_tags.each do |grt|
+        div[style="display: block"]
+          == c.check_box(:tag_id, {multiple: true}, grt[1], nil)
+          div[style="display: inline-block"]
+            == c.label grt[0]
+      h4 Collections
+      - @collection_tags.each do |ct|
+        div[style="display: block"]
+          == c.check_box(:tag_id, {multiple: true}, ct[1], nil)
+          div[style="display: inline-block"]
+            == c.label ct[0]
+      /== c.select(:tag_id, @relationship_tags)
+      /== c.select(:tag_id, @occasion_tags)
       
   div
     = f.submit class: "button", data:  {confirm: "Are you sure you want to publish the story?"}
