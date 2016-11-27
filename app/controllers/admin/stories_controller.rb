@@ -14,8 +14,14 @@ class Admin::StoriesController < ApplicationController
     if @story.classifications.empty?
       @story.classifications.build
     end
+#    @class_count = Story.where(id: @story.id).joins(:classifications).joins(:tags).where(tags: {tag_category: 1}).count
     @relationship_tags = Tag.where(tag_category: 1).map{|t| [t.name, t.id]}
     @occasion_tags = Tag.where(tag_category: 2).map{|t| [t.name, t.id]}
+    @type_tags = Tag.where(tag_category: 3).map{|t| [t.name, t.id]}
+    @interests_tags = Tag.where(tag_category: 4).map{|t| [t.name, t.id]}
+    @to_recipient_tags = Tag.where(tag_category: 5).map{|t| [t.name, t.id]}
+    @gifton_reaction = Tag.where(tag_category: 6).map{|t| [t.name, t.id]}
+    @collection_tags = Tag.where(tag_category: 7).map{|t| [t.name, t.id]}
   end
   
   def destroy
