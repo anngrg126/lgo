@@ -40,8 +40,13 @@ class Admin::StoriesController < ApplicationController
       @story.poster_id = 3
     end
     @story.last_user_to_update = "Admin"
+    params[:story][:classifications_attributes].each {|index, parms| 
+      parms[:tag_id].each { |tag|
+        @story.classifications.create(tag_id: tag)  
+      }
+    }
     respond_to do |format|
-      if @story.update(story_params)
+      if @story.update(story_params_standalone)
         create_notification(@story)
         flash[:success] = "Story has been updated"
         format.html {redirect_to admin_story_path(@story)}
@@ -55,7 +60,11 @@ class Admin::StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image, classifications_attributes: [:id, :story_id, :tag_id, :primary])
+    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image, classifications_attributes: [:id, :story_id, {:tag_id => []}, :primary])
+  end
+  
+  def story_params_standalone
+    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image)
   end
   
   def require_admin

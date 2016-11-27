@@ -55,13 +55,23 @@ p
     == f.trix_editor :final_body 
     span class="form-error"
   div
-    p Tags  
+    p Tags 
     == f.fields_for :classifications do |c|
       p Relationship
-      == c.select(:tag_id, @relationship_tags)
+      - @relationship_tags.each do |rt|
+        == c.label rt[0]
+        == c.check_box(:tag_id, {multiple: true}, rt[1], nil)
+      /== c.select(:tag_id, @relationship_tags)
     == f.fields_for :classifications do |c|
       p Occasion
-      == c.select(:tag_id, @occasion_tags)
+      /== c.select(:tag_id, @occasion_tags)
+      ui
+        - @occasion_tags.each do |ot|
+          li
+            == c.check_box(:tag_id, {multiple: true}, ot[1], nil)
+            div[style="display: inline-block"]
+              == c.label ot[0]
+      
   div
     = f.submit class: "button", data:  {confirm: "Are you sure you want to publish the story?"}
   script
