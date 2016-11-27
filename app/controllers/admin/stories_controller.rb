@@ -11,16 +11,16 @@ class Admin::StoriesController < ApplicationController
   end
   
   def edit
-    if @story.classifications.empty?
-      @story.classifications.build
-    end
+#    if @story.classifications.empty?
+    @story.classifications.build
+#    end
 #    @class_count = Story.where(id: @story.id).joins(:classifications).joins(:tags).where(tags: {tag_category: 1}).count
     @relationship_tags = Tag.where(tag_category: 1).map{|t| [t.name, t.id]}
     @occasion_tags = Tag.where(tag_category: 2).map{|t| [t.name, t.id]}
     @type_tags = Tag.where(tag_category: 3).map{|t| [t.name, t.id]}
     @interests_tags = Tag.where(tag_category: 4).map{|t| [t.name, t.id]}
     @to_recipient_tags = Tag.where(tag_category: 5).map{|t| [t.name, t.id]}
-    @gifton_reaction = Tag.where(tag_category: 6).map{|t| [t.name, t.id]}
+    @gifton_reaction_tags = Tag.where(tag_category: 6).map{|t| [t.name, t.id]}
     @collection_tags = Tag.where(tag_category: 7).map{|t| [t.name, t.id]}
   end
   
@@ -48,7 +48,9 @@ class Admin::StoriesController < ApplicationController
     @story.last_user_to_update = "Admin"
     params[:story][:classifications_attributes].each {|index, parms| 
       parms[:tag_id].each { |tag|
-        @story.classifications.create(tag_id: tag)  
+        if @story.classifications.where(tag_id: tag).empty?
+          @story.classifications.create(tag_id: tag)
+        end
       }
     }
     respond_to do |format|
