@@ -55,6 +55,14 @@ p
     == f.trix_editor :final_body 
     span class="form-error"
   div
+    p Tags  
+    == f.fields_for :classifications do |c|
+      p Relationship
+      == c.select(:tag_id, @relationship_tags)
+    == f.fields_for :classifications do |c|
+      p Occasion
+      == c.select(:tag_id, @occasion_tags)
+  div
     = f.submit class: "button", data:  {confirm: "Are you sure you want to publish the story?"}
   script
     == render partial: 'trix_input_id.js.erb', story: @story

@@ -11,8 +11,11 @@ class Admin::StoriesController < ApplicationController
   end
   
   def edit
-    @relationship_tags = Tag.where(tag_category: 1).map{|t| [t.name]}
-    @occasion_tags = Tag.where(tag_category: 2).map{|t| [t.name]}
+    if @story.classifications.empty?
+      @story.classifications.build
+    end
+    @relationship_tags = Tag.where(tag_category: 1).map{|t| [t.name, t.id]}
+    @occasion_tags = Tag.where(tag_category: 2).map{|t| [t.name, t.id]}
   end
   
   def destroy
@@ -52,7 +55,7 @@ class Admin::StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image, classifications_attribute: [:story_id, :tag_id, :primary])
+    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image, classifications_attributes: [:id, :story_id, :tag_id, :primary])
   end
   
   def require_admin
@@ -67,6 +70,8 @@ class Admin::StoriesController < ApplicationController
   end
   
   def create_notification(story)
+    ##update this so that notification only sent out if the published attribute changed!!!!
+    
     #Notification to story author
     Notification.create(user_id: story.author_id,
                         notified_by_user_id: current_user.id,
