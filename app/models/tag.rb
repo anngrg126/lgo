@@ -3,5 +3,6 @@ class Tag < ApplicationRecord
   
   validates :name, uniqueness: true
   
+  has_many :classifications
   has_many :stories, through: :classifications
 end

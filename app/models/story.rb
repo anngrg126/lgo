@@ -29,6 +29,7 @@ class Story < ApplicationRecord
   has_many :pictures, dependent: :destroy
   has_many :reactions, dependent: :destroy
   has_many :reaction_categories, through: :reactions
+  has_many :classifications
   has_many :tags, through: :classifications
 
   accepts_nested_attributes_for :pictures, limit: 15, reject_if: :all_blank
