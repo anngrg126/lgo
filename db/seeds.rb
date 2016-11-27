@@ -135,5 +135,6 @@ Tag.create([
 {  tag_category_id: 7 , name: 'gifts_that_start_traditions' },
 {  tag_category_id: 7 , name: 'white_elephant' },
 {  tag_category_id: 7 , name: 'holidays_with_kids' },
-{  tag_category_id: 7 , name: 'all_in_the_presentation' }
+{  tag_category_id: 7 , name: 'all_in_the_presentation' },
+{  tag_category_id: 7 , name: 'other' }
   ])

@@ -46,12 +46,14 @@ class Admin::StoriesController < ApplicationController
       @story.poster_id = 3
     end
     @story.last_user_to_update = "Admin"
+    i = 0
     params[:story][:classifications_attributes].each {|index, parms| 
       parms[:tag_id].each { |tag|
         if @story.classifications.where(tag_id: tag).empty?
           unless parms[:description].empty?
             if Tag.find(tag).name == "other"
-              @story.classifications.create(tag_id: tag, description: parms[:description])
+              @story.classifications.create(tag_id: tag, description: parms[:description][i])
+              i +=1
             else 
               @story.classifications.create(tag_id: tag)
             end
