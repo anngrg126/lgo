@@ -55,7 +55,9 @@ class Admin::StoriesController < ApplicationController
     }
     respond_to do |format|
       if @story.update(story_params_standalone)
-        create_notification(@story)
+        if @story.published_changed?
+          create_notification(@story)
+        end
         flash[:success] = "Story has been updated"
         format.html {redirect_to admin_story_path(@story)}
       else
