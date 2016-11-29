@@ -28,7 +28,7 @@ RSpec.feature "Editing Stories" do
     click_link @story.raw_title
     click_link "Edit Story"
     
-    expect(page).to have_content("#{@story.user(:author_id).full_name}")
+    expect(page).to have_content("#{User.find(@story.author_id).full_name}")
     expect(page).to have_content(@story.created_at.strftime("%b %d, %Y"))
     expect(page).to have_content("Not Anonymous")
     expect(page).to have_content(@story.raw_title)
