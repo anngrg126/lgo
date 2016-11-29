@@ -13,13 +13,16 @@ RSpec.feature "Showing Dashboard" do
     
     expect(page).to have_content(@user.full_name)
     expect(page).to have_content(@user.about_me)
+    
+    visit(dashboard_path(@user2))
+    expect(page).not_to have_content("About Me")
   end
   
-  scenario "Logged-in user with blank 'About Me' does not see 'About Me' title" do
+  scenario "Logged-in user with blank 'About Me' sees a call to action to update About Me" do
     login_as(@user2, :scope => :user)
     visit(dashboard_path(@user2))
     
-    expect(page).not_to have_content("About Me")
+    expect(page).to have_link("Add an about me")
   end
   
   scenario "Non-logged-in user can go to other user's dashboards" do
@@ -27,6 +30,8 @@ RSpec.feature "Showing Dashboard" do
     
     click_link "#{@user.full_name}"
     expect(page).to have_current_path(dashboard_path(@user))
+    expect(page).not_to have_link("Edit")
+    expect(page).not_to have_link("Settings")
   end
 
 end

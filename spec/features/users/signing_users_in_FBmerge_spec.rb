@@ -11,7 +11,7 @@ RSpec.feature "Existing users sign in via Facebook" do
   scenario "with valid credentials" do
     visit "/"
     
-    click_link "Sign in"
+    click_link "Login"
     click_link "Sign in with Facebook"
     
     expect(page).to have_content("Successfully signed in from Facebook.")

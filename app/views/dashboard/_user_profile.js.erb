@@ -1,0 +1,7 @@
+$("#dashboard_partial").html("<%= j render partial: 'user_profile.html.slim' %>");
+
+if ("<%= j @user.gender %>" === "male" || "<%= j @user.gender %>" === "female") {
+} else {
+  $('#custom_defined_gender').prop('checked', true);
+  $('#free_system_input').show().val("<%= j @user.gender %>");
+};
