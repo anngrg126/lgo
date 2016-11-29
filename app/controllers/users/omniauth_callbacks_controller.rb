@@ -26,7 +26,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
   def create_subscription(user)
     if SubscriptionPreference.where(user_id: user.id).empty?
-      SubscriptionPreference.create(user_id: user.id)
+      # Add all the default subscription preferences here
+      SubscriptionPreference.create(user_id: user.id, setting_name: "daily_email", setting_value: true)
+      SubscriptionPreference.create(user_id: user.id, setting_name: "weekly_email", setting_value: true)
     end
   end
 end
