@@ -37,7 +37,7 @@ class StoriesController < ApplicationController
   end
   
   def show
-    @comment = @story.comments.build
+    @comment = @story.comments.active.build
     @bookmark = @story.bookmarks.build
   end
   
