@@ -105,7 +105,7 @@ p
           == c.check_box(:tag_id, {multiple: true}, ct[1], nil)
           div[style="display: inline-block"]
             == c.label ct[0]
-           - if trt[0] == "other"
+          - if ct[0] == "other"
             = c.label :description
             = c.text_field :description, {multiple: true}
       
