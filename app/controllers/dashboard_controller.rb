@@ -97,7 +97,7 @@ class DashboardController < ApplicationController
   end
   
   def set_commented_stories
-    @commented_stories = Story.active.joins(:comments).where(:comments => { :user_id => @user.id})
+    @commented_stories = Story.active.joins(:comments).where(:comments => { :user_id => @user.id, :deleted_at => nil})
   end
   
   def set_followers
