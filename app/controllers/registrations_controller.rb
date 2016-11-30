@@ -58,7 +58,7 @@ class RegistrationsController < Devise::RegistrationsController
       else
         if resource.update_with_password(account_update_params)
           flash[:success] = "Profile has been updated"
-          sign_in(@user, bypass: true)
+          bypass_sign_in(@user)
           format.html { redirect_to dashboard_path(resource) }
         else
           flash.now[:warning] = "Profile has not been updated"
