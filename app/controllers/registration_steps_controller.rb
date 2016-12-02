@@ -15,7 +15,7 @@ class RegistrationStepsController < ApplicationController
     params[:user][:status] = 'active' if step == "basic_details"
     respond_to do |format|
       if @user.update_attributes(user_update_params)
-        sign_in(@user, bypass: true)
+        bypass_sign_in(@user)
         format.html { render_wizard @user }
       else
         flash.now[:warning] = "User has not been created"

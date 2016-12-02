@@ -58,7 +58,7 @@ class RegistrationsController < Devise::RegistrationsController
       else
         if resource.update_with_password(account_update_params)
           flash[:success] = "Profile has been updated"
-          sign_in(@user, bypass: true)
+          bypass_sign_in(@user)
           format.html { redirect_to dashboard_path(resource) }
         else
           flash.now[:warning] = "Profile has not been updated"
@@ -96,7 +96,9 @@ class RegistrationsController < Devise::RegistrationsController
   
   def create_subscription(user)
     if SubscriptionPreference.where(user_id: user.id).empty?
-      SubscriptionPreference.create(user_id: user.id)
+      # Add all the default subscription preferences here
+      SubscriptionPreference.create(user_id: user.id, setting_name: "daily_email", setting_value: true)
+      SubscriptionPreference.create(user_id: user.id, setting_name: "weekly_email", setting_value: true)
     end
   end
 end
