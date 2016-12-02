@@ -104,6 +104,7 @@ Tag.create([
 {  tag_category_id: 2 , name: 'visits_parties' },
 {  tag_category_id: 2 , name: 'housewarming' },
 {  tag_category_id: 2 , name: 'wedding' },
+{  tag_category_id: 2 , name: 'other' },
 {  tag_category_id: 3 , name: 'diy' },
 {  tag_category_id: 3 , name: 'budget' },
 {  tag_category_id: 3 , name: 'experience' },
