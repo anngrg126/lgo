@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body
+    p Hi,
+    
+    p 
+      == link_to @author.full_name, dashboard_url(@author), target: "_blank"
+      |  submitted a new story to GiftOn. See it here: 
+      == link_to "Story", admin_story_url(@story), target: "_blank"
+    
+    p Preview:
+    
+    h3 
+      == @story.raw_title
+    
+    p 
+      == @story.raw_body
+    
+    p See you soon,
+
+    p 
+      | Your friends at 
+      a[href="www.letsgifton.com", target="_blank"] GiftOn
+
+    == render partial: "mailers/footer"

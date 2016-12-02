@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body
+    p 
+      | Hi 
+      - if @user.first_name
+        == @user.first_name
+      - else
+        == @resource.email
+      | ,
+    
+    p 
+      | You have 
+      == @new_notifications.count 
+      |  new updates from your friends and followers.
+  
+    == consolidate_notifications(@new_notifications, "true")
+    
+    p 
+      | Visit your dashboard to 
+      == link_to "view all your notifications", notifications_dashboard_url(@user)
+      | .
+    
+    p See you soon,
+
+    p 
+      | Your friends at 
+      a[href="www.letsgifton.com", target="_blank"] GiftOn
+
+    == render partial: "mailers/footer"

@@ -54,7 +54,7 @@ class Admin::StoriesController < ApplicationController
   end
   
   def require_admin
-    unless current_user.admin?
+    unless current_user && current_user.admin?
       redirect_to root_path
       flash[:alert] = "Error."
     end
