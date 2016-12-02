@@ -116,6 +116,7 @@ Tag.create([
 {  tag_category_id: 3 , name: 'sentimental' },
 {  tag_category_id: 3 , name: 'surprise' },
 {  tag_category_id: 3 , name: 'thoughtful' },
+{  tag_category_id: 3 , name: 'other' },
 {  tag_category_id: 6 , name: 'aww' },
 {  tag_category_id: 6 , name: 'lol' },
 {  tag_category_id: 6 , name: 'win' },
