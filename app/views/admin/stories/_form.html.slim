@@ -62,7 +62,6 @@ p
         div[style="display: block"]
           == c.check_box(:tag_id, {multiple: true}, rt[1], nil)
           == c.label rt[0]
-      /== c.select(:tag_id, @relationship_tags)
       h4 Occasion
       - @occasion_tags.each do |ot|
         div[style="display: block"]
@@ -85,7 +84,7 @@ p
             = c.label :description
             = c.text_field :description, {multiple: true}
       h4 To Recipient
-      - @to_recipient_tags.each do |trt|
+      - @to_recpient_tags.each do |trt|
         div[style="display: block"]
           == c.check_box(:tag_id, {multiple: true, :id => :other_to_recipient}, trt[1], nil)
           div[style="display: inline-block"]
@@ -108,6 +107,8 @@ p
           - if trt[0] == "other"
             = c.label :description
             = c.text_field :description, {multiple: true}
+      /== c.select(:tag_id, @relationship_tags)
+      /== c.select(:tag_id, @occasion_tags)
       
   div
     = f.submit class: "button", data:  {confirm: "Are you sure you want to publish the story?"}
