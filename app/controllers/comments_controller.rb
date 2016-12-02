@@ -104,7 +104,7 @@ class CommentsController < ApplicationController
         user_array.push(existingcomment.user_id)
       end
     end
-    user_array.uniq
+    user_array.distinct!
     user_array.each do |existingcomment_userid|
       #others who commented get a notification
       unless User.find(existingcomment_userid).id == current_user.id
