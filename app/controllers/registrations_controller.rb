@@ -48,6 +48,18 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
   end
+  
+  def destroy
+    @user.deactivated_at = DateTime.now
+    if @user.save
+      # destroy_notifications(@user)
+      # deactivate_stories(@user)
+      # deactivate_comments(@user)
+      flash[:success] = "Account has been deactivated"
+      sign_out @user
+      redirect_to new_user_session_path
+    end
+  end
 
   protected
   
