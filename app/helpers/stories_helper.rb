@@ -53,4 +53,49 @@ module StoriesHelper
     body.gsub!('<ul>', ' ')
     truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
   end
+  
+  def admin_tag_story(array)
+    def primary_tag(tagvar, tag)
+      if tagvar == @to_recipient_tags || tagvar == @occasion_tags
+          concat "<input id='story_classifications_attributes_0_primary' value='#{tag[1]}' name='story[classifications_attributes][0][primary]' type='checkbox'>".html_safe
+        end
+    end
+    
+    array.each do |tagvar|
+      #print correct header
+      case tagvar
+      when @relationship_tags
+        concat "<h4>Relationship</h4>".html_safe
+      when @to_recipient_tags
+        concat "<h4>Recipient</h4>".html_safe
+      when @occasion_tags
+        concat "<h4>Occasion</h4>".html_safe
+      when @type_tags
+        concat "<h4>Type of Gift</h4>".html_safe
+      when @interests_tags
+        concat "<h4>Interests</h4>".html_safe
+      when @gifton_reaction_tags
+        concat "<h4>GiftOn's Reaction</h4>".html_safe
+      when @collection_tags
+        concat "<h4>Collection</h4>".html_safe
+      end
+      #add check boxes
+      i = 0
+      j = nil
+      tagvar.each do |tag|
+        unless tag[0] == "other"
+          concat "<div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{tag[1]}' value='#{tag[1]}' name='story[classifications_attributes][0][tag_id][]' type='checkbox'><label for='story_classifications_attributes_0_family'>#{tag[0].humanize}</label>".html_safe
+          i += 1
+          primary_tag(tagvar, tag)
+        else
+          j = tag
+        end
+        if i == tagvar.length-1 && !j.nil?
+          concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{j[1]}' value='#{j[1]}' name='story[classifications_attributes][0][tag_id][]' type='checkbox'><label for='story_classifications_attributes_0_family'>#{j[0].humanize}</label><input id='story_classifications_attributes_0_description' multiple='multiple' name='story[classifications_attributes][0][description][]' type='text'>".html_safe
+          primary_tag(tagvar, tag)
+        end
+        concat "</div>".html_safe
+      end
+    end
+  end
 end

@@ -15,13 +15,13 @@ class Admin::StoriesController < ApplicationController
     @story.classifications.build
 #    end
 #    @class_count = Story.where(id: @story.id).joins(:classifications).joins(:tags).where(tags: {tag_category: 1}).count
-    @relationship_tags = Tag.where(tag_category: 1).map{|t| [t.name, t.id]}
-    @occasion_tags = Tag.where(tag_category: 2).map{|t| [t.name, t.id]}
-    @type_tags = Tag.where(tag_category: 3).map{|t| [t.name, t.id]}
-    @interests_tags = Tag.where(tag_category: 4).map{|t| [t.name, t.id]}
-    @to_recipient_tags = Tag.where(tag_category: 5).map{|t| [t.name, t.id]}
-    @gifton_reaction_tags = Tag.where(tag_category: 6).map{|t| [t.name, t.id]}
-    @collection_tags = Tag.where(tag_category: 7).map{|t| [t.name, t.id]}
+    @relationship_tags = Tag.where(tag_category: 1).order(name: :asc).map{|t| [t.name, t.id]}
+    @occasion_tags = Tag.where(tag_category: 2).order(name: :asc).map{|t| [t.name, t.id]}
+    @type_tags = Tag.where(tag_category: 3).order(name: :asc).map{|t| [t.name, t.id]}
+    @interests_tags = Tag.where(tag_category: 4).order(name: :asc).map{|t| [t.name, t.id]}
+    @to_recipient_tags = Tag.where(tag_category: 5).order(name: :asc).map{|t| [t.name, t.id]}
+    @gifton_reaction_tags = Tag.where(tag_category: 6).order(name: :asc).map{|t| [t.name, t.id]}
+    @collection_tags = Tag.where(tag_category: 7).order(name: :asc).map{|t| [t.name, t.id]}
   end
   
   def destroy
@@ -50,15 +50,17 @@ class Admin::StoriesController < ApplicationController
     params[:story][:classifications_attributes].each {|index, parms| 
       parms[:tag_id].each { |tag|
         if @story.classifications.where(tag_id: tag).empty?
+          @classification = @story.classifications.create(tag_id: tag)
           unless parms[:description].empty?
             if Tag.find(tag).name == "other"
-              @story.classifications.create(tag_id: tag, description: parms[:description][i])
+              @classification.update(description: parms[:description][i])
               i +=1
-            else 
-              @story.classifications.create(tag_id: tag)
             end
-          else
-            @story.classifications.create(tag_id: tag)
+          end
+          unless parms[:primary].empty?
+            if parms[:primary].include?(tag)
+              @classification.update(primary: true)
+            end
           end
         end
       }
