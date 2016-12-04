@@ -53,6 +53,16 @@ div
     | User Uploaded Images:
     - @story.pictures.each do |picture|
       = image_tag picture.image.url
+div
+  - unless @story.classifications.empty?
+    | Story Tags:
+    - @story.classifications.each do |classif|
+      div
+        = Tag.find(classif.tag_id).name
+        - if classif.description?
+          span _#{TagCategory.find(Tag.find(classif.tag_id).tag_category_id).category.downcase}: #{classif.description}
+        - if classif.primary?
+          span  &#40;primary&#41;
 p
   | Admin: 
   - if @story.admin_id?
