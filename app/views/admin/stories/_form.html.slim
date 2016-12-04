@@ -58,6 +58,9 @@ p
     p Tags 
     == f.fields_for :classifications, @story.classifications.build do |c|
       -  admin_tag_story([@relationship_tags, @to_recipient_tags, @occasion_tags, @type_tags, @interests_tags, @gifton_reaction_tags, @collection_tags])
+      /== c.select(:tag_id, @relationship_tags)
+      /== c.select(:tag_id, @occasion_tags)
+      
   div
     = f.submit class: "button", data:  {confirm: "Are you sure you want to publish the story?"}
   script

@@ -57,7 +57,7 @@ module StoriesHelper
   def admin_tag_story(array)
     def primary_tag(tagvar, tag)
       if tagvar == @to_recipient_tags || tagvar == @occasion_tags
-          concat "<input id='story_classifications_attributes_0_primary' value='#{tag[1]}' name='story[classifications_attributes][0][primary]' type='checkbox'>".html_safe
+          concat "<input id='story_classifications_attributes_0_primary' value='#{tag[1]}' name='story[classifications_attributes][0][primary][]' type='checkbox'>".html_safe
         end
     end
     
@@ -91,8 +91,8 @@ module StoriesHelper
           j = tag
         end
         if i == tagvar.length-1 && !j.nil?
-          concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{j[1]}' value='#{j[1]}' name='story[classifications_attributes][0][tag_id][]' type='checkbox'><label for='story_classifications_attributes_0_family'>#{j[0].humanize}</label><input id='story_classifications_attributes_0_description' multiple='multiple' name='story[classifications_attributes][0][description][]' type='text'>".html_safe
-          primary_tag(tagvar, tag)
+          concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{j[1]}' value='#{j[1]}' name='story[classifications_attributes][0][tag_id][]' type='checkbox'><label for='story_classifications_attributes_0_family'>#{j[0].humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][]' type='text'>".html_safe
+          primary_tag(tagvar, j)
         end
         concat "</div>".html_safe
       end

@@ -19,7 +19,7 @@ class Admin::StoriesController < ApplicationController
     @occasion_tags = Tag.where(tag_category: 2).order(name: :asc).map{|t| [t.name, t.id]}
     @type_tags = Tag.where(tag_category: 3).order(name: :asc).map{|t| [t.name, t.id]}
     @interests_tags = Tag.where(tag_category: 4).order(name: :asc).map{|t| [t.name, t.id]}
-    @to_recipient_tags = Tag.where(tag_category: 5).order(name: :asc).map{|t| [t.name, t.id]}
+    @to_recipient_tags = Tag.where(tag_category: 5).order(name: :asc).except().map{|t| [t.name, t.id]}
     @gifton_reaction_tags = Tag.where(tag_category: 6).order(name: :asc).map{|t| [t.name, t.id]}
     @collection_tags = Tag.where(tag_category: 7).order(name: :asc).map{|t| [t.name, t.id]}
   end
@@ -57,7 +57,7 @@ class Admin::StoriesController < ApplicationController
               i +=1
             end
           end
-          unless parms[:primary].empty?
+          if parms[:primary]
             if parms[:primary].include?(tag)
               @classification.update(primary: true)
             end
