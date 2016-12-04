@@ -68,8 +68,10 @@ module StoriesHelper
         concat "<h4>Relationship</h4>".html_safe
       when @to_recipient_tags
         concat "<h4>Recipient</h4>".html_safe
+        concat "<p>Must have one primary recipient.</p>".html_safe
       when @occasion_tags
         concat "<h4>Occasion</h4>".html_safe
+        concat "<p>Must have one primary occasion.</p>".html_safe
       when @type_tags
         concat "<h4>Type of Gift</h4>".html_safe
       when @interests_tags
