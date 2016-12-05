@@ -8,6 +8,7 @@ class Story < ApplicationRecord
   attr_accessor :validate_final_fields
   attr_accessor :validate_updated_fields
   attr_accessor :validate_main_image
+#  attr_accessor :validate_classifications
   def validate_final_fields?
     validate_final_fields == 'true' || validate_final_fields == true
   end
@@ -17,6 +18,9 @@ class Story < ApplicationRecord
   def validate_main_image?
     validate_main_image == 'true' || validate_main_image == true
   end
+#  def validate_classifications?
+#    validate_classifications == 'true' || validate_classifications == true
+#  end
   validates :final_title, presence: true, length: {maximum: 90}, if: :validate_final_fields?
   validates :final_body, presence: true, if: :validate_final_fields?
   validates :updated_title, presence: true, if: :validate_updated_fields?
@@ -24,18 +28,19 @@ class Story < ApplicationRecord
   
   belongs_to :user
   
-  has_many :comments, dependent: :destroy  # If story gets deleted, the depending comment also gets deleted
+  has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :pictures, dependent: :destroy
   has_many :reactions, dependent: :destroy
   has_many :reaction_categories, through: :reactions
-  has_many :classifications
+  has_many :classifications, dependent: :destroy
   has_many :tags, through: :classifications
 
   accepts_nested_attributes_for :pictures, limit: 15, reject_if: :all_blank
   validates_associated :pictures
   
   accepts_nested_attributes_for :classifications
+#  validates_associated :classifications, if: :validate_classifications?
   
   has_attached_file :main_image, styles: {
     medium: '600x314>', 
