@@ -35,6 +35,7 @@ class Admin::StoriesController < ApplicationController
   def update
     @story.validate_final_fields = true
     @story.validate_main_image = true
+    @story.classifications.build.validate_classifications = true
     @story.admin_id = current_user[:id]
     unless @story.published? 
       @story.published = true
@@ -46,28 +47,28 @@ class Admin::StoriesController < ApplicationController
       @story.poster_id = 3
     end
     @story.last_user_to_update = "Admin"
-    i = 0
-    params[:story][:classifications_attributes].each {|index, parms| 
-      parms[:tag_id].each { |tag|
-        if @story.classifications.where(tag_id: tag).empty?
-          @classification = @story.classifications.create(tag_id: tag)
-          unless parms[:description].empty?
-            parms[:description].delete_if{|i|i==""}
-            if Tag.find(tag).name == "other"
-              @classification.update(description: parms[:description][i])
-              i +=1
-            end
-          end
-          if parms[:primary]
-            if parms[:primary].include?(tag)
-              @classification.update(primary: true)
-            end
-          end
-        end
-      }
-    }
     respond_to do |format|
-      if @story.update(story_params_standalone)
+      if @story.update(story_params)
+        i = 0
+        params[:story][:classifications_attributes].each {|index, parms| 
+          parms[:tag_id].each { |tag|
+            if @story.classifications.where(tag_id: tag).empty?
+              @classification = @story.classifications.create(tag_id: tag)
+              unless parms[:description].empty?
+                parms[:description].delete_if{|i|i==""}
+                if Tag.find(tag).name == "other"
+                  @classification.update(description: parms[:description][i])
+                  i +=1
+                end
+              end
+              if parms[:primary]
+                if parms[:primary].include?(tag)
+                  @classification.update(primary: true)
+                end
+              end
+            end
+          }
+        }
         if @story.published_changed?
           create_notification(@story)
         end
@@ -83,7 +84,7 @@ class Admin::StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image, classifications_attributes: [:id, :story_id, :primary, :description, :tag_id])
+    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image, classifications_attributes: [:id, :story_id, :primary, :description => [], :tag_id => []])
   end
   
   def story_params_standalone
@@ -102,8 +103,6 @@ class Admin::StoriesController < ApplicationController
   end
   
   def create_notification(story)
-    ##update this so that notification only sent out if the published attribute changed!!!!
-    
     #Notification to story author
     Notification.create(user_id: story.author_id,
                         notified_by_user_id: current_user.id,
@@ -111,6 +110,7 @@ class Admin::StoriesController < ApplicationController
                         read: false,
 #                        origin_id: story.id,
                         story_id: story.id)
+    
     #Notification for all people who follow the poster
     followings = Following.where(user_id: story.poster_id)
     followings.each do |follower|
@@ -125,7 +125,7 @@ class Admin::StoriesController < ApplicationController
   end
   def destroy_notification(story)
     unless Notification.where(story_id: story.id).empty?
-      Notification.where(story_id: story.id).each(&:destroy)                
+      Notification.where(story_id: story.id).each(&:destroy)   
     end
   end
 end

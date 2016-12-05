@@ -8,7 +8,6 @@ class Story < ApplicationRecord
   attr_accessor :validate_final_fields
   attr_accessor :validate_updated_fields
   attr_accessor :validate_main_image
-#  attr_accessor :validate_classifications
   def validate_final_fields?
     validate_final_fields == 'true' || validate_final_fields == true
   end
