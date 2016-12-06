@@ -55,7 +55,6 @@ class StoriesController < ApplicationController
       @story.assign_attributes(story_params)
       notify_admin(@story)
       if @story.anonymous_changed?
-        binding.pry
         if @story.anonymous
           @story.poster_id = 3
           destroy_notification(@story)
