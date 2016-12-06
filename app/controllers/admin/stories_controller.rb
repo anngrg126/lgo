@@ -35,7 +35,42 @@ class Admin::StoriesController < ApplicationController
   def update
     @story.validate_final_fields = true
     @story.validate_main_image = true
-    @story.classifications.build.validate_classifications = true
+    
+    i = 0
+    @all_classifications = []
+    if params[:story][:classifications_attributes].to_unsafe_h.values[0].include?("tag_id")
+      params[:story][:classifications_attributes].each {|index, parms| 
+        parms[:tag_id].each { |tag|
+          if @story.classifications.where(tag_id: tag).empty?
+            @classification = @story.classifications.create(tag_id: tag)
+            unless parms[:description].empty?
+              parms[:description].delete_if{|i|i==""}
+              if Tag.find(tag).name == "other"
+                @classification.update(description: parms[:description][i])
+                i +=1
+              end
+            end
+            if parms[:primary]
+              if parms[:primary].include?(tag)
+                @classification.update(primary: true)
+              end
+            end
+          end
+          @all_classifications.push(@classification)
+        }
+      }
+    end
+    @story.validate_tags_exist = true
+    
+#    @story.check_tags
+#    binding.pry
+#    Classification.check_all_classifications(@all_classifications)
+
+#    @story.classifications.build.validate_classifications = true
+#    @classification = @story.classifications.build(params[:story][:classifications_attributes].to_unsafe_h.values[0])
+#    @classification.validate_classifications = true
+    
+    
     @story.admin_id = current_user[:id]
     unless @story.published? 
       @story.published = true
@@ -46,29 +81,9 @@ class Admin::StoriesController < ApplicationController
     else
       @story.poster_id = 3
     end
-    @story.last_user_to_update = "Admin"
+    @story.last_user_to_update = "Admin"  
     respond_to do |format|
-      if @story.update(story_params)
-        i = 0
-        params[:story][:classifications_attributes].each {|index, parms| 
-          parms[:tag_id].each { |tag|
-            if @story.classifications.where(tag_id: tag).empty?
-              @classification = @story.classifications.create(tag_id: tag)
-              unless parms[:description].empty?
-                parms[:description].delete_if{|i|i==""}
-                if Tag.find(tag).name == "other"
-                  @classification.update(description: parms[:description][i])
-                  i +=1
-                end
-              end
-              if parms[:primary]
-                if parms[:primary].include?(tag)
-                  @classification.update(primary: true)
-                end
-              end
-            end
-          }
-        }
+      if @story.update(story_params_standalone) #standalone params, otherwise incorrect classifications are created
         if @story.published_changed?
           create_notification(@story)
         end

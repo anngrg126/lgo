@@ -8,6 +8,7 @@ class Story < ApplicationRecord
   attr_accessor :validate_final_fields
   attr_accessor :validate_updated_fields
   attr_accessor :validate_main_image
+  attr_accessor :validate_tags_exist
   def validate_final_fields?
     validate_final_fields == 'true' || validate_final_fields == true
   end
@@ -17,9 +18,18 @@ class Story < ApplicationRecord
   def validate_main_image?
     validate_main_image == 'true' || validate_main_image == true
   end
-#  def validate_classifications?
-#    validate_classifications == 'true' || validate_classifications == true
-#  end
+  def validate_tags_exist?
+    validate_tags_exist == 'true' || validate_tags_exist == true
+  end
+    
+  validate :check_tags_exist?, if: :validate_tags_exist?
+#    
+  def check_tags_exist?
+    if self.classifications.count == 0
+      self.errors.add(:classifications, "You need tags.")
+    end
+  end
+    
   validates :final_title, presence: true, length: {maximum: 90}, if: :validate_final_fields?
   validates :final_body, presence: true, if: :validate_final_fields?
   validates :updated_title, presence: true, if: :validate_updated_fields?
