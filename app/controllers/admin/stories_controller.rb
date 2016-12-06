@@ -35,14 +35,14 @@ class Admin::StoriesController < ApplicationController
   def update
     @story.validate_final_fields = true
     @story.validate_main_image = true
-    
+    @published_changed = nil 
     i = 0
     if params[:story][:classifications_attributes].to_unsafe_h.values[0].include?("tag_id")
       params[:story][:classifications_attributes].each {|index, parms| 
         parms[:tag_id].each { |tag|
           if @story.classifications.where(tag_id: tag).empty?
             @classification = @story.classifications.create(tag_id: tag)
-            unless parms[:description].empty?
+            if parms[:description]
               parms[:description].delete_if{|i|i==""}
               if Tag.find(tag).name == "other"
                 @classification.update(description: parms[:description][i])
@@ -58,15 +58,16 @@ class Admin::StoriesController < ApplicationController
         }
       }
     end
+  
     @story.validate_tags_exist = true
     unless @story.classifications.empty?
       @story.validate_all_tags = true
     end
-    
     @story.admin_id = current_user[:id]
     unless @story.published? 
       @story.published = true
       @story.admin_published_at = DateTime.current
+      @published_changed = true
     end
     unless @story.anonymous?
       @story.poster_id = @story.author_id
@@ -76,7 +77,7 @@ class Admin::StoriesController < ApplicationController
     @story.last_user_to_update = "Admin"  
     respond_to do |format|
       if @story.update(story_params_standalone) #standalone params, otherwise incorrect classifications are created
-        if @story.published_changed?
+        if @published_changed
           create_notification(@story)
         end
         flash[:success] = "Story has been updated"
