@@ -9,6 +9,8 @@ class Story < ApplicationRecord
   attr_accessor :validate_updated_fields
   attr_accessor :validate_main_image
   attr_accessor :validate_tags_exist
+  attr_accessor :validate_all_tags
+  
   def validate_final_fields?
     validate_final_fields == 'true' || validate_final_fields == true
   end
@@ -21,13 +23,36 @@ class Story < ApplicationRecord
   def validate_tags_exist?
     validate_tags_exist == 'true' || validate_tags_exist == true
   end
+  def validate_all_tags?
+    validate_all_tags == 'true' || validate_all_tags == true
+  end
     
   validate :check_tags_exist?, if: :validate_tags_exist?
+  validate :check_all_tags?, if: :validate_all_tags?
 #    
   def check_tags_exist?
     if self.classifications.count == 0
       self.errors.add(:classifications, "You need tags.")
     end
+  end
+  
+  def check_all_tags?
+    #first, make sure there's at least one tag with a tag_category = 1 (relationship)
+    all_cats = []
+    self.classifications.each do |classifi|
+      all_cats.push(Tag.find(classifi.tag_id).tag_category_id)
+    end
+    unless all_cats.include?(5)
+      self.errors.add(:classifications, "Story must have at least one Recipient tag")
+    end
+    unless all_cats.include?(2)
+      self.errors.add(:classifications, "Story must have at least one Occasion tag")
+    end
+#    all_tags.each do |tag_id|
+#      if Tag.find()
+#    end
+#    binding.pry
+    #self.errors.add(:classifications, "MESSAGE")
   end
     
   validates :final_title, presence: true, length: {maximum: 90}, if: :validate_final_fields?
@@ -49,7 +74,6 @@ class Story < ApplicationRecord
   validates_associated :pictures
   
   accepts_nested_attributes_for :classifications
-#  validates_associated :classifications, if: :validate_classifications?
   
   has_attached_file :main_image, styles: {
     medium: '600x314>', 

@@ -38,7 +38,7 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
       $('#story_<%= j "main_image" %>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i] %></p>");
     <% end %>
     <% if @story.errors.full_messages[i].downcase.include? "classifications" %>
-      $("#classification_tags").addClass("is-visible").html("<p><%= @story.errors.values[i].join(" ") %></p>");
+      $("#classification_tags").addClass("is-visible").html("<p><%= @story.errors.values[0].to_sentence %></p>");
     <% end %>
   <% end %>
   

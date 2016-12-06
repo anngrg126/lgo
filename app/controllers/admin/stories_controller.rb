@@ -37,7 +37,6 @@ class Admin::StoriesController < ApplicationController
     @story.validate_main_image = true
     
     i = 0
-    @all_classifications = []
     if params[:story][:classifications_attributes].to_unsafe_h.values[0].include?("tag_id")
       params[:story][:classifications_attributes].each {|index, parms| 
         parms[:tag_id].each { |tag|
@@ -56,14 +55,15 @@ class Admin::StoriesController < ApplicationController
               end
             end
           end
-          @all_classifications.push(@classification)
         }
       }
     end
     @story.validate_tags_exist = true
-    
-#    @story.check_tags
-#    binding.pry
+    unless @story.classifications.empty?
+      @story.validate_all_tags = true
+      #need to, at some point, push in existing classifications, if they exist
+      
+    end
 #    Classification.check_all_classifications(@all_classifications)
 
 #    @story.classifications.build.validate_classifications = true
