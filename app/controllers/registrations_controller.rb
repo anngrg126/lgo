@@ -52,9 +52,9 @@ class RegistrationsController < Devise::RegistrationsController
   def destroy
     @user.deactivated_at = DateTime.now
     if @user.save
-      # destroy_notifications(@user)
-      # deactivate_stories(@user)
-      # deactivate_comments(@user)
+      destroy_notifications(@user)
+      deactivate_stories(@user)
+      deactivate_comments(@user)
       flash[:success] = "Account has been deactivated"
       sign_out @user
       redirect_to new_user_session_path
@@ -86,4 +86,26 @@ class RegistrationsController < Devise::RegistrationsController
   def redirect_cancel
     redirect_to dashboard_path(resource) if params[:cancel]
   end
+  
+  def destroy_notifications(user)
+      Notification.where(user_id: user.id).each(&:destroy)  
+  end
+  
+  def deactivate_stories(user)
+    Story.active.where(:author_id => user.id).update_all("author_deactive = true")
+    # @stories = Story.active.where(author_id: user.id)
+    # @stories.each do |story|
+    #   story.update(deactivated: true)
+    # end
+  end
+  
+  def deactivate_comments(user)
+    Comment.active.where(:user_id => user.id).update_all("author_deactive = true") 
+    # @comments = Comment.active.where(user_id: user.id)
+    # @comments.each do |comment|
+    #   comment.update(deactivated: true)
+    # end
+  end
+  
+  
 end
