@@ -61,15 +61,7 @@ class Admin::StoriesController < ApplicationController
     @story.validate_tags_exist = true
     unless @story.classifications.empty?
       @story.validate_all_tags = true
-      #need to, at some point, push in existing classifications, if they exist
-      
     end
-#    Classification.check_all_classifications(@all_classifications)
-
-#    @story.classifications.build.validate_classifications = true
-#    @classification = @story.classifications.build(params[:story][:classifications_attributes].to_unsafe_h.values[0])
-#    @classification.validate_classifications = true
-    
     
     @story.admin_id = current_user[:id]
     unless @story.published? 
@@ -90,6 +82,9 @@ class Admin::StoriesController < ApplicationController
         flash[:success] = "Story has been updated"
         format.html {redirect_to admin_story_path(@story)}
       else
+        if @story.begin_cleanse == true
+          @story.cleanse_primary
+        end
         flash.now[:alert] = "Story has not been updated"
         format.html {render :edit}
         format.js {render :partial => 'admin/stories/storyerrors', :data => @story.to_json }
