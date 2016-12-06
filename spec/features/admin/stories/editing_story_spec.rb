@@ -79,48 +79,53 @@ RSpec.feature "Editing Stories" do
     
     login_as(@user, :scope => :user)
     visit "/"
-#    expect(page).to have_content("ewuhfjksnd")
     click_link "Notifications"
     expect(page).to have_content("Your story has been published! See it here: ")
     expect(page).to have_link(@story.final_title)
   end
   
-#  scenario "An admin edits an updated story", js: true do
-#    login_as(@admin, :scope => :user)
-#    visit "/admin"
-#    
-#    click_link @story2.raw_title
-#    click_link "Edit Story"
-#    
-#    expect(page).to have_content(@story2.updated_title)
-#    expect(page).to have_content(@story2.updated_body)
-#    
-#    fill_in "Final Title", with: @final_title2
-##    fill_in "Final Body", with: @final_body2
-#    fill_in_trix_editor('story_final_body_trix_input_story_'+@story2.id.to_s, @final_body2)
-#    click_button "Update Story"
-#    
-#    expect(page).to have_content("Story has been updated")
-#    expect(page.current_path).to eq(admin_story_path(Story.find(@story2.id).slug))  
-#    expect(page).to have_content(@final_title2)
-#    expect(page).to have_content(@final_body2)
-#    expect(page).to have_content("Published")
-#  end
-#  
-#  scenario "An admin fails to edit a story", js: true do
-#    login_as(@admin, :scope => :user)
-#    visit "/admin"
-#    
-#    click_link @story.raw_title
-#    click_link "Edit Story"
-#    
-#    fill_in "Final Title", with: ""
-#    fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, "")
-#    click_button "Update Story"
-#    
-#    expect(page).to have_content("Story has not been updated")
-#    expect(page).to have_content("Main image can't be blank")
-#    expect(page).to have_content("Title can't be blank")
-#    expect(page).to have_content("Body can't be blank")
-#  end
+  scenario "An admin edits an updated story", js: true do
+    login_as(@admin, :scope => :user)
+    visit "/admin"
+    
+    click_link @story2.raw_title
+    click_link "Edit Story"
+    
+    expect(page).to have_content(@story2.updated_title)
+    expect(page).to have_content(@story2.updated_body)
+    
+    fill_in "Final Title", with: @final_title2
+#    fill_in "Final Body", with: @final_body2
+    fill_in_trix_editor('story_final_body_trix_input_story_'+@story2.id.to_s, @final_body2)
+    find("input[type='checkbox'][id*='1']").set(true) #family
+    find("input[type='checkbox'][id*='3']").set(true) #brother
+    find("input[id*=primary][value='3']").set(true) #brother-primary
+    find("input[type='checkbox'][id*='6']").set(true) #birthday
+    find("input[id*=primary][value='6']").set(true) #birthday-primary
+    click_button "Update Story"
+    
+    expect(page).to have_content("Story has been updated")
+    expect(page.current_path).to eq(admin_story_path(Story.find(@story2.id).slug))  
+    expect(page).to have_content(@final_title2)
+    expect(page).to have_content(@final_body2)
+    expect(page).to have_content("Published")
+  end
+  
+  scenario "An admin fails to edit a story", js: true do
+    login_as(@admin, :scope => :user)
+    visit "/admin"
+    
+    click_link @story.raw_title
+    click_link "Edit Story"
+    
+    fill_in "Final Title", with: ""
+    fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, "")
+    click_button "Update Story"
+    
+    expect(page).to have_content("Story has not been updated")
+    expect(page).to have_content("Main image can't be blank")
+    expect(page).to have_content("Title can't be blank")
+    expect(page).to have_content("Body can't be blank")
+    expect(page).to have_content("You need tags.")
+  end
 end

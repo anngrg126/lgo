@@ -37,26 +37,28 @@ class Admin::StoriesController < ApplicationController
     @story.validate_main_image = true
     @published_changed = nil 
     i = 0
-    if params[:story][:classifications_attributes].to_unsafe_h.values[0].include?("tag_id")
-      params[:story][:classifications_attributes].each {|index, parms| 
-        parms[:tag_id].each { |tag|
-          if @story.classifications.where(tag_id: tag).empty?
-            @classification = @story.classifications.create(tag_id: tag)
-            if parms[:description]
-              parms[:description].delete_if{|i|i==""}
-              if Tag.find(tag).name == "other"
-                @classification.update(description: parms[:description][i])
-                i +=1
+    if params[:story][:classifications_attributes]
+      if params[:story][:classifications_attributes].to_unsafe_h.values[0].include?("tag_id")
+        params[:story][:classifications_attributes].each {|index, parms| 
+          parms[:tag_id].each { |tag|
+            if @story.classifications.where(tag_id: tag).empty?
+              @classification = @story.classifications.create(tag_id: tag)
+              if parms[:description]
+                parms[:description].delete_if{|i|i==""}
+                if Tag.find(tag).name == "other"
+                  @classification.update(description: parms[:description][i])
+                  i +=1
+                end
+              end
+              if parms[:primary]
+                if parms[:primary].include?(tag)
+                  @classification.update(primary: true)
+                end
               end
             end
-            if parms[:primary]
-              if parms[:primary].include?(tag)
-                @classification.update(primary: true)
-              end
-            end
-          end
+          }
         }
-      }
+      end
     end
   
     @story.validate_tags_exist = true
