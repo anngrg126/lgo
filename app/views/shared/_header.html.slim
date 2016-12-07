@@ -21,60 +21,56 @@ div.title-bar[data-responsive-toggle="tags-menu" data-hide-for="medium"]
   .menu-icon.dark[type="button" data-toggle]
   div.title-bar-title Browse Stories
 
-div.top-bar[id="tags-menu"]
-  ul.dropdown.menu.expanded[data-dropdown-menu style="max-width: 1000px;"]
-    li 
-      a[type="button" href="#"]
-        i.fa.fa-search[aria-hidden="true"]
+#tags-menu.row[style="overflow: visible;"]
+  .columns.medium-1
+    a[type="button" href="#" data-toggle="example-dropdown"] 
+      i.fa.fa-search[aria-hidden="true"]
+    #example-dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
       ul.menu.medium-horizontal
         li
           input[type="search"]
         li
           button.button[type="button"] Search
-    li
-      a[href="#"] Occasion
-      ul.medium-horizontal.menu
-        li
-          a[href="#"] A
-        li
-          a[href="#"] B
-        li
-          a[href="#"] C
-    li
-      a[href="#"] Relationship
-      ul.menu.vertical.medium-horizontal
-        li
-          a[href="#"] Significant Other
-        li
-          a[href="#"] Family
-        li
-          a[href="#"] Friends
-        li
-          a[href="#"] Family
-        li
-          a[href="#"] Parents
-        li
-          a[href="#"] Siblings
-    li
-      a[href="#"] Type of Gift
-      ul.menu.vertical.medium-horizontal
-        li
-          a[href="#"] G
-        li
-          a[href="#"] H
-        li
-          a[href="#"] I
-    li
-      a[href="#"] Interests
-      ul.menu.vertical.medium-horizontal
-        li
-          a[href="#"] G
-        li
-          a[href="#"] H
-        li
-          a[href="#"] I
-    li
-      a.inline-block.no_pad[href="#"] Aww&nbsp;
-      a.inline-block.no_pad[href="#"] &nbsp;LOL&nbsp;
-      a.inline-block.no_pad[href="#"] &nbsp;Win!&nbsp;
-      a.inline-block.no_pad[href="#"] &nbsp;Fail&nbsp;
+  .columns.large-9.medium-8[style="overflow: visible;"]
+    div.center
+      a[href="#" data-toggle="example-dropdown2"] Occasion&nbsp;
+      #example-dropdown2.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
+        ul.medium-horizontal.menu
+          li
+            a[href="#"] A
+          li
+            a[href="#"] B
+          li
+            a[href="#"] C
+      a[href="#" data-toggle="example-dropdown3"]  &nbsp;Relationship&nbsp;
+      #example-dropdown3.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
+        ul.medium-horizontal.menu
+          li
+            a[href="#"] A
+          li
+            a[href="#"] B
+          li
+            a[href="#"] C
+      a[href="#" data-toggle="example-dropdown4"]  &nbsp;Type of Gift&nbsp;
+      #example-dropdown4.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
+        ul.medium-horizontal.menu
+          li
+            a[href="#"] A
+          li
+            a[href="#"] B
+          li
+            a[href="#"] C
+      a[href="#" data-toggle="example-dropdown5"]  &nbsp;Interests&nbsp;
+      #example-dropdown5.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
+        ul.medium-horizontal.menu
+          li
+            a[href="#"] A
+          li
+            a[href="#"] B
+          li
+            a[href="#"] C
+  .columns.large-2.medium-3.rightalgn[style="white-space: nowrap;"]
+    a.inline-block.no_pad[href="#"] Aww&nbsp;
+    a.inline-block.no_pad[href="#"] &nbsp;LOL&nbsp;
+    a.inline-block.no_pad[href="#"] &nbsp;Win!&nbsp;
+    a.inline-block.no_pad[href="#"] &nbsp;Fail&nbsp;
