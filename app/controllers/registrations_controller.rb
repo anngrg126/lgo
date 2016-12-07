@@ -6,7 +6,26 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    super
+    build_resource(sign_up_params)
+
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end
+    create_subscription(resource)
   end
 
   def edit
@@ -39,7 +58,7 @@ class RegistrationsController < Devise::RegistrationsController
       else
         if resource.update_with_password(account_update_params)
           flash[:success] = "Profile has been updated"
-          sign_in(@user, bypass: true)
+          bypass_sign_in(@user)
           format.html { redirect_to dashboard_path(resource) }
         else
           flash.now[:warning] = "Profile has not been updated"
@@ -87,6 +106,13 @@ class RegistrationsController < Devise::RegistrationsController
     redirect_to dashboard_path(resource) if params[:cancel]
   end
   
+  def create_subscription(user)
+    if SubscriptionPreference.where(user_id: user.id).empty?
+      # Add all the default subscription preferences here
+      SubscriptionPreference.create(user_id: user.id, setting_name: "daily_email", setting_value: true)
+      SubscriptionPreference.create(user_id: user.id, setting_name: "weekly_email", setting_value: true)
+    end
+  end
   def destroy_notifications(user)
       Notification.where(user_id: user.id).each(&:destroy)
       Notification.where(notified_by_user_id: user.id).each(&:destroy)

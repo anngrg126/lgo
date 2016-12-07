@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :reactions, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :subscription_preferences, dependent: :destroy
   
   cattr_accessor :form_steps do
     %w(basic_details)
