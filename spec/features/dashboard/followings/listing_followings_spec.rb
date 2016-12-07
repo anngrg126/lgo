@@ -15,7 +15,7 @@ RSpec.feature "Listing Followings" do
     visit(dashboard_path(@foo))
     click_link "Followers"
     
-    expect(page).to have_content(Following.where(user: @foo).count)
+    expect(page).to have_content(Following.follower_active.where(user: @foo).count)
     expect(page).to have_content("Followers: 1")
     expect(page).to have_content(@bar.full_name) 
   end
@@ -25,7 +25,7 @@ RSpec.feature "Listing Followings" do
     visit(dashboard_path(@foo))
     click_link "Following"
     
-    expect(page).to have_content(Following.where(follower_id: @foo).count)
+    expect(page).to have_content(Following.following_active.where(follower_id: @foo).count)
     expect(page).to have_content("Following: 1")
     expect(page).to have_content(@car.full_name) 
     expect(page).to have_content("Unfollow")
@@ -34,7 +34,7 @@ RSpec.feature "Listing Followings" do
   scenario "Shows list of user's followers", js: true do
     
     visit(dashboard_path(@foo))
-    expect(page).to have_content(Following.where(user: @foo).count)
+    expect(page).to have_content(Following.follower_active.where(user: @foo).count)
     
     click_link "Followers"
     expect(page).to have_content("Followers: 1")
@@ -44,7 +44,7 @@ RSpec.feature "Listing Followings" do
   scenario "Shows list of users who owner follows", js: true do
     
     visit(dashboard_path(@foo))
-    expect(page).to have_content(Following.where(follower_id: @foo).count)
+    expect(page).to have_content(Following.following_active.where(follower_id: @foo).count)
     click_link "Following"
     
     expect(page).to have_content("Following: 1")
