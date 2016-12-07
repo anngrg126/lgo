@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206181041) do
+ActiveRecord::Schema.define(version: 20161207010712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,10 +28,10 @@ ActiveRecord::Schema.define(version: 20161206181041) do
     t.text     "body"
     t.integer  "story_id"
     t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.datetime "deleted_at"
-    t.boolean  "author_deactive"
+    t.boolean  "author_deactive", default: false
     t.index ["story_id"], name: "index_comments_on_story_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end

@@ -18,17 +18,9 @@ class ApplicationController < ActionController::Base
   
   def activate_stories(user)
     Story.active.where(:author_id => user.id).update_all("author_deactive = false")
-    # @stories = Story.active.where(author_id: user.id)
-    # @stories.each do |story|
-    #   story.update(deactivated: false)
-    # end
   end
   
   def activate_comments(user)
     Comment.active.where(:user_id => user.id).update_all("author_deactive = false")
-    # @comments = Comment.active.where(user_id: user.id)
-    # @comments.each do |comment|
-    #   comment.update(deactivated: false)
-    # end
   end
 end

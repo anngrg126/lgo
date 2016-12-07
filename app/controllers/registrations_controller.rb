@@ -88,23 +88,18 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def destroy_notifications(user)
-      Notification.where(user_id: user.id).each(&:destroy)  
+      Notification.where(user_id: user.id).each(&:destroy)
+      Notification.where(notified_by_user_id: user.id).each(&:destroy)
   end
   
   def deactivate_stories(user)
     Story.active.where(:author_id => user.id).update_all("author_deactive = true")
-    # @stories = Story.active.where(author_id: user.id)
-    # @stories.each do |story|
-    #   story.update(deactivated: true)
-    # end
+    Story.active.where(:author_id => user.id).update_all("poster_id = 3")
+    Story.active.where(:author_id => user.id).update_all("anonymous = true")
   end
   
   def deactivate_comments(user)
     Comment.active.where(:user_id => user.id).update_all("author_deactive = true") 
-    # @comments = Comment.active.where(user_id: user.id)
-    # @comments.each do |comment|
-    #   comment.update(deactivated: true)
-    # end
   end
   
   
