@@ -119,9 +119,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def deactivate_stories(user)
-    Story.active.where(:author_id => user.id).update_all("author_deactive = true")
-    Story.active.where(:author_id => user.id).update_all("poster_id = 3")
-    Story.active.where(:author_id => user.id).update_all("anonymous = true")
+    Story.active.where(:author_id => user.id).update_all({:author_deactive => true, :poster_id => 3, :anonymous => true})
   end
   
   def deactivate_comments(user)
