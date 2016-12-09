@@ -7,8 +7,15 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-
     resource.save
+    if resource.errors.messages.include?(:email)
+      resource.errors.messages[:email].each do |e|
+        if e.include?('has already been taken')
+          e.replace(" has already been taken. Returning users, please #{view_context.link_to("login", new_user_session_path)}." )
+        end
+      end
+    end
+    
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
