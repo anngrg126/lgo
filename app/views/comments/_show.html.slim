@@ -1,5 +1,5 @@
 h2 Comments
-- persisted_comments = @story.comments.active.reject { |comment| comment.new_record? }
+- persisted_comments = @story.comments.active.where(author_deactive: false).reject { |comment| comment.new_record? }
 - if persisted_comments.any?
   - persisted_comments.each do |comment|
     div id="comment_#{comment.id}"

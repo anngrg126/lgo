@@ -7,8 +7,15 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-
     resource.save
+    if resource.errors.messages.include?(:email)
+      resource.errors.messages[:email].each do |e|
+        if e.include?('has already been taken')
+          e.replace(" has already been taken. Returning users, please #{view_context.link_to("login", new_user_session_path)}." )
+        end
+      end
+    end
+    
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
@@ -67,6 +74,18 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
   end
+  
+  def destroy
+    @user.deactivated_at = DateTime.now
+    if @user.save
+      destroy_notifications(@user)
+      deactivate_stories(@user)
+      deactivate_comments(@user)
+      flash[:success] = "Account has been deactivated"
+      sign_out @user
+      redirect_to new_user_session_path
+    end
+  end
 
   protected
   
@@ -101,4 +120,18 @@ class RegistrationsController < Devise::RegistrationsController
       SubscriptionPreference.create(user_id: user.id, setting_name: "weekly_email", setting_value: true)
     end
   end
+  def destroy_notifications(user)
+      Notification.where(user_id: user.id).each(&:destroy)
+      Notification.where(notified_by_user_id: user.id).each(&:destroy)
+  end
+  
+  def deactivate_stories(user)
+    Story.active.where(:author_id => user.id).update_all({:author_deactive => true, :poster_id => 3, :anonymous => true})
+  end
+  
+  def deactivate_comments(user)
+    Comment.active.where(:user_id => user.id).update_all("author_deactive = true") 
+  end
+  
+  
 end

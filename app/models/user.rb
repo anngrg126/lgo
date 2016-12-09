@@ -27,6 +27,8 @@ class User < ApplicationRecord
   validates :gender, presence: true, if: :active?
   validates_with AttachmentSizeValidator, attributes: :image, less_than: 8.megabytes
   
+  scope :author_deactive, -> { where.not(deactivated_at: nil) }
+  
   def active?
     #active is set by registration_steps 
     #controller; active+db is set by 

@@ -101,10 +101,10 @@ class DashboardController < ApplicationController
   end
   
   def set_followers
-    @followers = Following.where(user_id: @user.id)
+    @followers = Following.follower_active.where(user_id: @user.id)
   end
   
   def set_followings
-    @followings = Following.where(follower_id: @user.id)
+    @followings = Following.following_active.where(follower_id: @user.id)
   end
 end
