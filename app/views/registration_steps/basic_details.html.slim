@@ -1,3 +1,6 @@
+
+== javascript_include_tag "registration_steps", 'data-turbolinks-track' => true
+
 p Only one more step:
 
 = form_for @user, :url => wizard_path, :method => :put, remote: true do |f|
@@ -17,7 +20,7 @@ p Only one more step:
     = f.label :gender, "Gender"
     = f.radio_button :gender, 'male'
     = f.label :gender_male, 'Male'
-    = f.radio_button :gender, 'female', :checked => 'checked'
+    = f.radio_button :gender, 'female'
     = f.label :gender_female, 'Female'
     = f.radio_button :gender, nil, :id => :custom_defined_gender
     = f.label :gender_custom, 'Custom'

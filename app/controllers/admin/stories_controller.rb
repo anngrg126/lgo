@@ -16,17 +16,15 @@ class Admin::StoriesController < ApplicationController
 #    end
 #    @class_count = Story.where(id: @story.id).joins(:classifications).joins(:tags).where(tags: {tag_category: 1}).count
     
-    @story_tags = ActiveRecord::Base.connection.exec_query("Select tags.*, c.tag_id as ctag, c.primary 
-    from tags left outer join (Select * from classifications where story_id="+@story.id.to_s+") c
-    on tags.id = c.tag_id order by tag_category_id asc").to_a
+    @story_tags = Tag.joins('LEFT JOIN "classifications" ON "classifications"."tag_id" = "tags"."id" AND "classifications"."story_id"='+@story.id.to_s)
     
-    @relationship_tags = @story_tags.select {|i| i["tag_category_id"] ==1 }
-    @occasion_tags = @story_tags.select {|i| i["tag_category_id"] ==2 }
-    @type_tags = @story_tags.select {|i| i["tag_category_id"] ==3 }
-    @interests_tags = @story_tags.select {|i| i["tag_category_id"] ==4 }
-    @to_recipient_tags = @story_tags.select {|i| i["tag_category_id"] ==5 }
-    @gifton_reaction_tags = @story_tags.select {|i| i["tag_category_id"] ==6 }
-    @collection_tags = @story_tags.select {|i| i["tag_category_id"] ==7 }
+    @relationship_tags = @story_tags.where(tag_category_id:1)
+    @occasion_tags = @story_tags.where(tag_category_id:2)
+    @type_tags = @story_tags.where(tag_category_id:3)
+    @interests_tags = @story_tags.where(tag_category_id:4)
+    @to_recipient_tags = @story_tags.where(tag_category_id:5)
+    @gifton_reaction_tags = @story_tags.where(tag_category_id:6)
+    @collection_tags = @story_tags.where(tag_category_id:7)
   end
   
   def destroy
@@ -57,8 +55,8 @@ class Admin::StoriesController < ApplicationController
                 end
               end
               if parms[:primary]
-                if parms[:primary][:recipient_tags] || parms[:primary][:occasion_tags]
-                  if parms[:primary][:recipient_tags].include?(tag) || parms[:primary][:occasion_tags].include?(tag)
+                if parms[:primary]["5"] || parms[:primary]["2"]
+                  if parms[:primary]["5"].include?(tag) || parms[:primary]["2"].include?(tag)
                     @classification.update(primary: true)
                   end
                 end
