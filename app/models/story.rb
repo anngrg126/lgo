@@ -28,45 +28,49 @@ class Story < ApplicationRecord
   def check_all_tags?
     all_cats = []
     all_tags = []
-    self.classifications.each do |classifi|
-      tag = Tag.find(classifi.tag_id)
-      all_cats.push(tag.tag_category_id)
-      if tag.tag_category_id == 5 || tag.tag_category_id == 2
-        all_tags.push(classifi.tag_id)
-      end
-    end
-    unless all_cats.include?(5)
-      self.errors.add(:classifications, "Story must have at least one Recipient tag")
-    end
-    unless all_cats.include?(2)
-      self.errors.add(:classifications, "Story must have at least one Occasion tag")
-    end
-    
-    sub_classi = []
-    all_tags.each do |x|
-      sub_classi.push(self.classifications.where(tag_id: x))
-    end
-    primary_recipient = 0
-    primary_occasion = 0
-    sub_classi.each do |y|
-      y.each do |z|
-        if z.primary == true && Tag.find(z.tag_id).tag_category_id == 5
-          primary_recipient += 1
-        end
-        if z.primary == true && Tag.find(z.tag_id).tag_category_id == 2
-          primary_occasion += 1
+    if self.classifications.length == 0
+      self.errors.add(:classifications, "You need tags.")
+    else
+      self.classifications.each do |classifi|
+        tag = Tag.find(classifi.tag_id)
+        all_cats.push(tag.tag_category_id)
+        if tag.tag_category_id == 5 || tag.tag_category_id == 2
+          all_tags.push(classifi.tag_id)
         end
       end
-    end
-    if primary_recipient == 0
-      self.errors.add(:classifications, "Story must have at least one primary Recipient tag")
-    elsif primary_recipient > 1
-      self.errors.add(:classifications, "Story cannot have more than one primary Recipient tag")
-    end
-    if primary_occasion == 0
-      self.errors.add(:classifications, "Story must have at least one primary Occasion tag")
-    elsif primary_occasion > 1
-      self.errors.add(:classifications, "Story cannot have more than one primary Occasion tag")
+      unless all_cats.include?(5)
+        self.errors.add(:classifications, "Story must have at least one Recipient tag")
+      end
+      unless all_cats.include?(2)
+        self.errors.add(:classifications, "Story must have at least one Occasion tag")
+      end
+
+      sub_classi = []
+      all_tags.each do |x|
+        sub_classi.push(self.classifications.where(tag_id: x))
+      end
+      primary_recipient = 0
+      primary_occasion = 0
+      sub_classi.each do |y|
+        y.each do |z|
+          if z.primary == true && Tag.find(z.tag_id).tag_category_id == 5
+            primary_recipient += 1
+          end
+          if z.primary == true && Tag.find(z.tag_id).tag_category_id == 2
+            primary_occasion += 1
+          end
+        end
+      end
+      if primary_recipient == 0
+        self.errors.add(:classifications, "Story must have at least one primary Recipient tag")
+      elsif primary_recipient > 1
+        self.errors.add(:classifications, "Story cannot have more than one primary Recipient tag")
+      end
+      if primary_occasion == 0
+        self.errors.add(:classifications, "Story must have at least one primary Occasion tag")
+      elsif primary_occasion > 1
+        self.errors.add(:classifications, "Story cannot have more than one primary Occasion tag")
+      end
     end
   end
     
