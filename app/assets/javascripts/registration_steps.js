@@ -23,3 +23,4 @@ $(document).ready(function() {
 });
 
 $(document).ready(myFunction);
+$(document).on('turbolinks:load', myFunction);

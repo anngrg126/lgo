@@ -48,6 +48,5 @@ $( document ).ajaxComplete(function( event,request, settings ) {
   });
 });
 
-
 $(document).ready(myFunction);
 $(document).on('turbolinks:load', myFunction);

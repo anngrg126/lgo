@@ -26,7 +26,6 @@ class Story < ApplicationRecord
   validate :check_all_tags?, if: :validate_all_tags?
   
   def check_all_tags?
-    all_cats = []
     all_tags = []
     if self.classifications.length == 0
       self.errors.add(:classifications, "You need tags.")

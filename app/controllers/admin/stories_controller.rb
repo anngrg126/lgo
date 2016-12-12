@@ -51,8 +51,10 @@ class Admin::StoriesController < ApplicationController
                 end
               end
               if parms[:primary]
-                if parms[:primary].include?(tag)
-                  @classification.update(primary: true)
+                if parms[:primary]["5"] || parms[:primary]["2"]
+                  if parms[:primary]["5"].include?(tag) || parms[:primary]["2"].include?(tag)
+                    @classification.update(primary: true)
+                  end
                 end
               end
             end
