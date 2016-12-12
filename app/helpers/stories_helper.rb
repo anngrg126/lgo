@@ -54,16 +54,61 @@ module StoriesHelper
     truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
   end
   
-  def admin_tag_story(array)
-    def primary_tag(tagvar, tag)
-      if tagvar == @to_recipient_tags || tagvar == @occasion_tags
-          concat "<input id='story_classifications_attributes_0_primary' value='#{tag[1]}' name='story[classifications_attributes][0][primary][]' type='checkbox'>".html_safe
+  def admin_tag_story(story, tag_scope_array)
+    #consolidate all needed info that belong to a story
+    #this does not hit the DB b/c of the includes query
+    #in admin/stories_controller.rb
+    @tag_array = []
+    @primary_array = []
+    @other_array = []
+    story.classifications.each do |c|
+      unless c.tag_id == nil
+        @tag_array.push(c.tag_id)
+      end
+      if c.primary == true
+        @primary_array.push(c.tag_id)
+      end
+      if c.description != nil
+        @other_array.push([c.tag_id, c.description])
+      end
+    end
+    def primary_tag(scope, tag)
+      if scope == @to_recipient_tags || scope == @occasion_tags
+        if @primary_array.include?(tag.id)
+          checked = "checked"
+        else
+          checked = nil
         end
+        concat "<input id='story_classifications_attributes_0_primary' value='#{tag.id}' name='story[classifications_attributes][0][primary][]' type='checkbox' #{checked}>".html_safe
+      end
     end
     
-    array.each do |tagvar|
-      #print correct header
-      case tagvar
+    #method to add un/checked checkboxes to form
+    def add_checkbox(scope, tag) 
+      if @tag_array.include?(tag.id)
+        checked = "checked=''"
+      else
+        checked = nil
+      end
+      unless tag.name == "other"
+        concat "<div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{tag.id}' value='#{tag.id}' name='story[classifications_attributes][0][tag_id][]' type='checkbox' #{checked}><label for='story_classifications_attributes_0_family'>#{tag.name.humanize}</label>".html_safe
+        @i += 1
+        primary_tag(scope, tag)
+      else
+        @j = tag
+        @j_checked = checked
+      end
+      if @i == scope.length-1 && !@j.nil?
+        binding.pry
+        concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{@j.id}' value='#{@j.id}' name='story[classifications_attributes][0][tag_id][]' #{@j_checked} type='checkbox'><label for='story_classifications_attributes_0_family'>#{@j.name.humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][]' type='text'>".html_safe
+        primary_tag(scope, @j)
+      end
+      concat "</div>".html_safe
+    end
+    
+    tag_scope_array.each do |scope|
+#      print correct header
+      case scope
       when @relationship_tags
         concat "<h4>Relationship</h4>".html_safe
       when @to_recipient_tags
@@ -81,22 +126,10 @@ module StoriesHelper
       when @collection_tags
         concat "<h4>Collection</h4>".html_safe
       end
-      #add check boxes
-      i = 0
-      j = nil
-      tagvar.each do |tag|
-        unless tag[0] == "other"
-          concat "<div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{tag[1]}' value='#{tag[1]}' name='story[classifications_attributes][0][tag_id][]' type='checkbox'><label for='story_classifications_attributes_0_family'>#{tag[0].humanize}</label>".html_safe
-          i += 1
-          primary_tag(tagvar, tag)
-        else
-          j = tag
-        end
-        if i == tagvar.length-1 && !j.nil?
-          concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{j[1]}' value='#{j[1]}' name='story[classifications_attributes][0][tag_id][]' type='checkbox'><label for='story_classifications_attributes_0_family'>#{j[0].humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][]' type='text'>".html_safe
-          primary_tag(tagvar, j)
-        end
-        concat "</div>".html_safe
+      @i = 0
+      @j = nil
+      scope.each do |tag|
+        add_checkbox(scope, tag)
       end
     end
   end
