@@ -97,10 +97,14 @@ module StoriesHelper
       else
         @j = tag
         @j_checked = checked
+        @other_array.each do |other|
+          if other[0] == @j.id
+            @j_other = other[1]
+          end
+        end
       end
       if @i == scope.length-1 && !@j.nil?
-        binding.pry
-        concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{@j.id}' value='#{@j.id}' name='story[classifications_attributes][0][tag_id][]' #{@j_checked} type='checkbox'><label for='story_classifications_attributes_0_family'>#{@j.name.humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][]' type='text'>".html_safe
+        concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{@j.id}' value='#{@j.id}' name='story[classifications_attributes][0][tag_id][]' #{@j_checked} type='checkbox'><label for='story_classifications_attributes_0_family'>#{@j.name.humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][]' type='text' placeholder=#{@j_other}>".html_safe
         primary_tag(scope, @j)
       end
       concat "</div>".html_safe
