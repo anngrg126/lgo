@@ -8,9 +8,7 @@ class Story < ApplicationRecord
   attr_accessor :validate_final_fields
   attr_accessor :validate_updated_fields
   attr_accessor :validate_main_image
-  attr_accessor :validate_tags_exist
   attr_accessor :validate_all_tags
-  attr_accessor :begin_cleanse
   
   def validate_final_fields?
     validate_final_fields == 'true' || validate_final_fields == true
@@ -21,21 +19,11 @@ class Story < ApplicationRecord
   def validate_main_image?
     validate_main_image == 'true' || validate_main_image == true
   end
-  def validate_tags_exist?
-    validate_tags_exist == 'true' || validate_tags_exist == true
-  end
   def validate_all_tags?
     validate_all_tags == 'true' || validate_all_tags == true
   end
     
-  validate :check_tags_exist?, if: :validate_tags_exist?
   validate :check_all_tags?, if: :validate_all_tags?
-#    
-  def check_tags_exist?
-    if self.classifications.count == 0
-      self.errors.add(:classifications, "You need tags.")
-    end
-  end
   
   def check_all_tags?
     all_cats = []
@@ -73,19 +61,13 @@ class Story < ApplicationRecord
     if primary_recipient == 0
       self.errors.add(:classifications, "Story must have at least one primary Recipient tag")
     elsif primary_recipient > 1
-      self.errors.add(:classifications, "Story cannot have more than one primary Recipient tag (all primary tags have been removed, try again)")
-      self.begin_cleanse = true
+      self.errors.add(:classifications, "Story cannot have more than one primary Recipient tag")
     end
     if primary_occasion == 0
       self.errors.add(:classifications, "Story must have at least one primary Occasion tag")
     elsif primary_occasion > 1
-      self.errors.add(:classifications, "Story cannot have more than one primary Occasion tag (all primary tags have been removed, try again)")
-      self.begin_cleanse = true
+      self.errors.add(:classifications, "Story cannot have more than one primary Occasion tag")
     end
-  end
-  
-  def cleanse_primary
-    self.classifications.where(primary: true).each(&:destroy)
   end
     
   validates :final_title, presence: true, length: {maximum: 90}, if: :validate_final_fields?

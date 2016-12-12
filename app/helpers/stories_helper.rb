@@ -100,7 +100,6 @@ module StoriesHelper
         @other_array.each do |other|
           if other[0] == @j.id
             @j_other = "value= "+ other[1].to_s.gsub(/ /,"&#32;")
-#            binding.pry
           end
         end
       end

@@ -1,13 +1,14 @@
 class Admin::StoriesController < ApplicationController
 #  before_action :authenticate_user!, except: [:index, :show]
   before_action :require_admin
-  before_action :set_story, only: [:show, :edit, :update, :destroy]
+  before_action :set_story, only: [:update, :destroy]
   
   def index
     @stories = Story.unpublished.active
   end
   
   def show
+    @story = Story.includes(:classifications).find(params[:id])
   end
   
   def edit
@@ -59,11 +60,9 @@ class Admin::StoriesController < ApplicationController
         }
       end
     end
-  
-    @story.validate_tags_exist = true
-    unless @story.classifications.empty?
-      @story.validate_all_tags = true
-    end
+    
+    @story.validate_all_tags = true
+    
     @story.admin_id = current_user[:id]
     unless @story.published? 
       @story.published = true
