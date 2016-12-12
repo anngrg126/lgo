@@ -40,7 +40,6 @@ class Admin::StoriesController < ApplicationController
       if params[:story][:classifications_attributes].to_unsafe_h.values[0].include?("tag_id")
         params[:story][:classifications_attributes].each {|index, parms| 
           parms[:tag_id].each { |tag|
-            binding.pry
             if @story.classifications.where(tag_id: tag).empty?
               @classification = @story.classifications.create(tag_id: tag)
               if parms[:description]
@@ -61,10 +60,10 @@ class Admin::StoriesController < ApplicationController
       end
     end
   
-#    @story.validate_tags_exist = true
-#    unless @story.classifications.empty?
-#      @story.validate_all_tags = true
-#    end
+    @story.validate_tags_exist = true
+    unless @story.classifications.empty?
+      @story.validate_all_tags = true
+    end
     @story.admin_id = current_user[:id]
     unless @story.published? 
       @story.published = true

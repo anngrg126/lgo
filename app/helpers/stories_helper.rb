@@ -55,9 +55,9 @@ module StoriesHelper
   end
   
   def admin_tag_story(story, tag_scope_array)
-    #consolidate all needed info that belong to a story
+    #consolidate relevant info that belongs to a story
     #this does not hit the DB b/c of the includes query
-    #in admin/stories_controller.rb
+    #in the admin/stories_controller.rb
     @tag_array = []
     @primary_array = []
     @other_array = []
@@ -99,12 +99,13 @@ module StoriesHelper
         @j_checked = checked
         @other_array.each do |other|
           if other[0] == @j.id
-            @j_other = other[1]
+            @j_other = "value= "+ other[1].to_s.gsub(/ /,"&#32;")
+#            binding.pry
           end
         end
       end
       if @i == scope.length-1 && !@j.nil?
-        concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{@j.id}' value='#{@j.id}' name='story[classifications_attributes][0][tag_id][]' #{@j_checked} type='checkbox'><label for='story_classifications_attributes_0_family'>#{@j.name.humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][]' type='text' placeholder=#{@j_other}>".html_safe
+        concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{@j.id}' value='#{@j.id}' name='story[classifications_attributes][0][tag_id][]' #{@j_checked} type='checkbox'><label for='story_classifications_attributes_0_family'>#{@j.name.humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][]' type='text' #{@j_other}>".html_safe
         primary_tag(scope, @j)
       end
       concat "</div>".html_safe
