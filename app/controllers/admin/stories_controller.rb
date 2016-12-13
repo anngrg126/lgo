@@ -63,9 +63,7 @@ class Admin::StoriesController < ApplicationController
       end
     end
     
-    unless @story.classifications.empty?
-      @story.validate_all_tags = true
-    end
+    @story.validate_all_tags = true
     
     @story.admin_id = current_user[:id]
     unless @story.published? 
