@@ -29,18 +29,20 @@ class Story < ApplicationRecord
     if self.classifications.count == 0
       self.errors.add(:classifications, "You need tags.")
     else
-      all_tags = []
-      self.classifications.each do |classifi|
-        tag = Tag.find(classifi.tag_id)
-        all_tags.push(tag.tag_category_id)
-      end
+      primary_tags = []
       recipient_category = TagCategory.find_by(category: 'To_recipient')
       occasion_category = TagCategory.find_by(category: 'Occasion')
-      unless all_tags.include?(recipient_category.id)
-        self.errors.add(:classifications, "Story must have at least one Recipient tag")
+      self.classifications.each do |c|
+        if c.primary == true
+          tag = Tag.find(c.tag_id)
+          primary_tags.push(tag.tag_category_id)
+        end
       end
-      unless all_tags.include?(occasion_category.id)
-        self.errors.add(:classifications, "Story must have at least one Occasion tag")
+      unless primary_tags.include?(recipient_category.id)
+        self.errors.add(:classifications, "Story must have at least one primary Recipient tag")
+      end
+      unless primary_tags.include?(occasion_category.id)
+        self.errors.add(:classifications, "Story must have at least one primary Occasion tag")
       end
     end
   end

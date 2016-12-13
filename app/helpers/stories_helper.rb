@@ -84,7 +84,7 @@ module StoriesHelper
         else
           checked = nil
         end
-        concat "<input id='story_classifications_attributes_0_primary' value='#{tag.id}' name='story[classifications_attributes][0][primary][#{tag_name}][]' type='radio' #{checked}>".html_safe
+        concat "<input id='story_classifications_attributes_0_primary' value='#{tag.id}' name='story[classifications_attributes][0][primary][#{tag_name}][]' type='radio' #{checked} required>".html_safe
       end
     end
     
