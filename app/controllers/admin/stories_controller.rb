@@ -1,27 +1,26 @@
 class Admin::StoriesController < ApplicationController
 #  before_action :authenticate_user!, except: [:index, :show]
   before_action :require_admin
-  before_action :set_story, only: [:show, :edit, :update, :destroy]
+  before_action :set_story, only: [:update, :destroy]
   
   def index
     @stories = Story.unpublished.active
   end
   
   def show
+    @story = Story.includes(:classifications).find(params[:id])
   end
   
   def edit
-#    if @story.classifications.empty?
-    @story.classifications.build
-#    end
-#    @class_count = Story.where(id: @story.id).joins(:classifications).joins(:tags).where(tags: {tag_category: 1}).count
-    @relationship_tags = Tag.where(tag_category: 1).order(name: :asc).map{|t| [t.name, t.id]}
-    @occasion_tags = Tag.where(tag_category: 2).order(name: :asc).map{|t| [t.name, t.id]}
-    @type_tags = Tag.where(tag_category: 3).order(name: :asc).map{|t| [t.name, t.id]}
-    @interests_tags = Tag.where(tag_category: 4).order(name: :asc).map{|t| [t.name, t.id]}
-    @to_recipient_tags = Tag.where(tag_category: 5).order(name: :asc).except().map{|t| [t.name, t.id]}
-    @gifton_reaction_tags = Tag.where(tag_category: 6).order(name: :asc).map{|t| [t.name, t.id]}
-    @collection_tags = Tag.where(tag_category: 7).order(name: :asc).map{|t| [t.name, t.id]}
+    @story = Story.includes(:classifications).find(params[:id])
+    
+    @relationship_tags = Tag.relationship.order(name: :asc)
+    @occasion_tags = Tag.occasion.order(name: :asc)
+    @type_tags = Tag.type.order(name: :asc)
+    @interests_tags = Tag.interests.order(name: :asc)
+    @to_recipient_tags = Tag.recipient.order(name: :asc)
+    @gifton_reaction_tags = Tag.gifton_reaction.order(name: :asc)
+    @collection_tags = Tag.collection.order(name: :asc)
   end
   
   def destroy
@@ -36,6 +35,7 @@ class Admin::StoriesController < ApplicationController
     @story.validate_final_fields = true
     @story.validate_main_image = true
     @published_changed = nil 
+    delete_old_tags(@story)
     i = 0
     if params[:story][:classifications_attributes]
       if params[:story][:classifications_attributes].to_unsafe_h.values[0].include?("tag_id")
@@ -51,8 +51,10 @@ class Admin::StoriesController < ApplicationController
                 end
               end
               if parms[:primary]
-                if parms[:primary].include?(tag)
-                  @classification.update(primary: true)
+                if parms[:primary][:recipient] || parms[:primary][:occasion]
+                  if parms[:primary][:recipient].include?(tag) || parms[:primary][:occasion].include?(tag)
+                    @classification.update(primary: true)
+                  end
                 end
               end
             end
@@ -60,11 +62,9 @@ class Admin::StoriesController < ApplicationController
         }
       end
     end
-  
-    @story.validate_tags_exist = true
-    unless @story.classifications.empty?
-      @story.validate_all_tags = true
-    end
+    
+    @story.validate_all_tags = true
+    
     @story.admin_id = current_user[:id]
     unless @story.published? 
       @story.published = true
@@ -85,9 +85,6 @@ class Admin::StoriesController < ApplicationController
         flash[:success] = "Story has been updated"
         format.html {redirect_to admin_story_path(@story)}
       else
-        if @story.begin_cleanse == true
-          @story.cleanse_primary
-        end
         flash.now[:alert] = "Story has not been updated"
         format.html {render :edit}
         format.js {render :partial => 'admin/stories/storyerrors', :data => @story.to_json }
@@ -139,6 +136,12 @@ class Admin::StoriesController < ApplicationController
   def destroy_notification(story)
     unless Notification.where(story_id: story.id).empty?
       Notification.where(story_id: story.id).each(&:destroy)   
+    end
+  end
+  
+  def delete_old_tags(story)
+    unless Classification.where(story_id: story.id).empty?
+       Classification.where(story_id: story.id).each(&:destroy)   
     end
   end
 end
