@@ -63,7 +63,8 @@ p
         span _#{TagCategory.find(Tag.find(classif.tag_id).tag_category_id).category.downcase}: #{classif.description}
       - if classif.primary?
         span  &#40;primary&#41;
-      = link_to "Delete", admin_story_classification_path(@story, classif), method: :delete, class: "btn"
+      - unless classif.primary == true 
+        = link_to "Delete", admin_story_classification_path(@story, classif), method: :delete, class: "btn"
       br
 p
   | Admin: 
