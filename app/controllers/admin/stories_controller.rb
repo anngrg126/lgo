@@ -51,8 +51,8 @@ class Admin::StoriesController < ApplicationController
                 end
               end
               if parms[:primary]
-                if parms[:primary]["5"] || parms[:primary]["2"]
-                  if parms[:primary]["5"].include?(tag) || parms[:primary]["2"].include?(tag)
+                if parms[:primary][:recipient] || parms[:primary][:occasion]
+                  if parms[:primary][:recipient].include?(tag) || parms[:primary][:occasion].include?(tag)
                     @classification.update(primary: true)
                   end
                 end
@@ -63,7 +63,9 @@ class Admin::StoriesController < ApplicationController
       end
     end
     
-    @story.validate_all_tags = true
+    unless @story.classifications.empty?
+      @story.validate_all_tags = true
+    end
     
     @story.admin_id = current_user[:id]
     unless @story.published? 
@@ -142,6 +144,6 @@ class Admin::StoriesController < ApplicationController
   def delete_old_tags(story)
     unless Classification.where(story_id: story.id).empty?
        Classification.where(story_id: story.id).each(&:destroy)   
-     end
-   end
+    end
+  end
 end

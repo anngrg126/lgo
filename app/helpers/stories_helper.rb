@@ -72,28 +72,28 @@ module StoriesHelper
         @other_array.push([c.tag_id, c.description])
       end
     end
-    def primary_tag(scope, tag)
+    def primary_tag(scope, tag, tag_name)
       if scope == @to_recipient_tags || scope == @occasion_tags
         if @primary_array.include?(tag.id)
           checked = "checked"
         else
           checked = nil
         end
-        concat "<input id='story_classifications_attributes_0_primary' value='#{tag.id}' name='story[classifications_attributes][0][primary][]' type='checkbox' #{checked}>".html_safe
+        concat "<input id='story_classifications_attributes_0_primary' value='#{tag.id}' name='story[classifications_attributes][0][primary][#{tag_name}][]' type='radio' #{checked}>".html_safe
       end
     end
     
     #method to add un/checked checkboxes to form
-    def add_checkbox(scope, tag) 
+    def add_checkbox(scope, tag, tag_name) 
       if @tag_array.include?(tag.id)
-        checked = "checked=''"
+        checked = "checked"
       else
         checked = nil
       end
       unless tag.name == "other"
         concat "<div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{tag.id}' value='#{tag.id}' name='story[classifications_attributes][0][tag_id][]' type='checkbox' #{checked}><label for='story_classifications_attributes_0_family'>#{tag.name.humanize}</label>".html_safe
         @i += 1
-        primary_tag(scope, tag)
+        primary_tag(scope, tag, tag_name)
       else
         @j = tag
         @j_checked = checked
@@ -105,7 +105,7 @@ module StoriesHelper
       end
       if @i == scope.length-1 && !@j.nil?
         concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{@j.id}' value='#{@j.id}' name='story[classifications_attributes][0][tag_id][]' #{@j_checked} type='checkbox'><label for='story_classifications_attributes_0_family'>#{@j.name.humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][]' type='text' #{@j_other}>".html_safe
-        primary_tag(scope, @j)
+        primary_tag(scope, @j, tag_name)
       end
       concat "</div>".html_safe
     end
@@ -114,26 +114,33 @@ module StoriesHelper
 #      print correct header
       case scope
       when @relationship_tags
+        tag_name = "relationship"
         concat "<h4>Relationship</h4>".html_safe
       when @to_recipient_tags
+        tag_name = "recipient"
         concat "<h4>Recipient</h4>".html_safe
         concat "<p>Must have one primary recipient.</p>".html_safe
       when @occasion_tags
+        tag_name = "occasion"
         concat "<h4>Occasion</h4>".html_safe
         concat "<p>Must have one primary occasion.</p>".html_safe
       when @type_tags
+        tag_name = "type"
         concat "<h4>Type of Gift</h4>".html_safe
       when @interests_tags
+        tag_name = "interest"
         concat "<h4>Interests</h4>".html_safe
       when @gifton_reaction_tags
+        tag_name = "gifton_reaction"
         concat "<h4>GiftOn's Reaction</h4>".html_safe
       when @collection_tags
+        tag_name = "collection"
         concat "<h4>Collection</h4>".html_safe
       end
       @i = 0
       @j = nil
       scope.each do |tag|
-        add_checkbox(scope, tag)
+        add_checkbox(scope, tag, tag_name)
       end
     end
   end
