@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20161207010712) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
   end
 
+  create_table "classifications", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "story_id"
+    t.boolean  "primary"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
+    t.index ["story_id"], name: "index_classifications_on_story_id", using: :btree
+    t.index ["tag_id"], name: "index_classifications_on_tag_id", using: :btree
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "story_id"
@@ -169,6 +180,20 @@ ActiveRecord::Schema.define(version: 20161207010712) do
     t.index ["user_id"], name: "index_subscription_preferences_on_user_id", using: :btree
   end
 
+  create_table "tag_categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "category"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer  "tag_category_id"
+    t.string   "name"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["tag_category_id"], name: "index_tags_on_tag_category_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -207,6 +232,8 @@ ActiveRecord::Schema.define(version: 20161207010712) do
 
   add_foreign_key "bookmarks", "stories"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "classifications", "stories"
+  add_foreign_key "classifications", "tags"
   add_foreign_key "comments", "stories"
   add_foreign_key "comments", "users"
   add_foreign_key "followings", "users"
@@ -221,4 +248,5 @@ ActiveRecord::Schema.define(version: 20161207010712) do
   add_foreign_key "stories", "users", column: "author_id"
   add_foreign_key "stories", "users", column: "poster_id"
   add_foreign_key "subscription_preferences", "users"
+  add_foreign_key "tags", "tag_categories", on_delete: :cascade
 end

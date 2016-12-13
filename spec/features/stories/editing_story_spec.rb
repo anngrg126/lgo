@@ -32,9 +32,9 @@ RSpec.feature "Editing Stories" do
     fill_in_trix_editor('story_updated_body_trix_input_story_'+@story.id.to_s, @updated_body)
     click_button "Update Story"
     
-    expect(page).to have_content("Story has been updated")
     expect(page).to have_content(@updated_title)
     expect(page).to have_content(@updated_body)
+    expect(page).to have_content("Story has been updated")
     expect(page.current_path).to eq(story_path(Story.find(@story.id).slug))   
   end
   

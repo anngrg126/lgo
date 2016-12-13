@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   
   namespace :admin do
     root to: 'stories#index'
-    resources :stories
+    resources :stories do
+      resources :classifications, only: [:destroy]
+    end
   end
   
   resources :dashboard, except: [:index] do

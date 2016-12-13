@@ -25,23 +25,6 @@ $(document).on('turbolinks:load', function() {
 });
 
 function myFunction() {
-  //fcn to show custom gender field
-  $('input[type="radio"]').change(function() {
-    var id = $(this).attr('id');
-    if(id=="custom_defined_gender") {
-      $("#free_system_input").show();
-    } else {
-      $("#free_system_input").hide();
-    };
-  });
-  
-  //fcn to set value of custom gender
-  $('#free_system_input').keyup( function(){
-    if ( $(this).val() !== "" ) { $('#custom_defined_gender').val($(this).val());
-    } else { $('#custom_defined_gender').val("custom");
-    };
-  });
-  
   //fcns to append extra image upload fields
   $('#add_image_fields').click(function(){
     $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
@@ -51,11 +34,6 @@ function myFunction() {
 //fcn to remove extra image upload fields, separate b/c dynamically-added element
 $(document).on('click', '.remove_image_field', function(event){
   $(this).closest(".upload_image").remove();
-});
-
-//fcn to load all radio buttons as unchecked
-$(document).ready(function() {
-  $('input[type="radio"]').removeAttr("checked");
 });
 
 //fcn to hinder built-in capability of trix editor to accept embedded files
@@ -69,7 +47,6 @@ $( document ).ajaxComplete(function( event,request, settings ) {
     myFunction();
   });
 });
-
 
 $(document).ready(myFunction);
 $(document).on('turbolinks:load', myFunction);

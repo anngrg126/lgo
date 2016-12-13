@@ -1,3 +1,8 @@
+<% @story.errors.each do |attr, error| %>
+  console.log("<%= j attr.id2name %>");
+  console.log("<%= j error %>");
+<% end %>
+    
 <% action_array = ["new_story", "edit_story_#{@story[:id]}"] %>
 <% if controller.action_name == "create" %>
   <% array_index = 0 %>
@@ -31,6 +36,9 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
       $('label[for="story_<%= j "main_image" %>"]').addClass("is-invalid-label");
       $('#story_<%= j "main_image" %>').addClass("is-invalid-input");
       $('#story_<%= j "main_image" %>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i] %></p>");
+    <% end %>
+    <% if @story.errors.full_messages[i].downcase.include? "classifications" %>
+      $("#classification_tags").addClass("is-visible").html("<p><%= @story.errors.values[0].to_sentence %></p>");
     <% end %>
   <% end %>
   

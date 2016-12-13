@@ -98,13 +98,14 @@ module NotificationsHelper
         end
         id_array.push(ids)
       when 2
-        stories_comments.push(Story.find(Comment.find(n.origin_id).story_id))
+#        stories_comments.push(Story.find(Comment.find(n.origin_id).story_id))
+        stories_comments.push(Story.find(n.story_id))
         call_functions.push("comments_condense")
       when 3
-        stories_reactions.push(Story.find(Reaction.find(n.origin_id).story_id))        
+        stories_reactions.push(Story.find(n.story_id))
         call_functions.push("reactions_condense")
       when 4
-        stories_bookmarks.push(Story.find(Bookmark.find(n.origin_id).story_id))
+        stories_bookmarks.push(Story.find(n.story_id))
         call_functions.push("bookmarks_consense")
       else
         followers.push(n.id)
@@ -149,9 +150,10 @@ module NotificationsHelper
     if call_functions.include?("reactions_condense")
       optionsarray = ["1", "2", "3", "4", "5"]
       stories_reactions.uniq.each do |s|
-        reactors = []
         optionsarray.each do |o|
+          reactors = []
           ids = []
+          reactor_links = []
           unless notifications_array.where(notification_category_id: 3, options: o).empty?
             notifications_array.where(notification_category_id: 3, options: o).each do |n|
               if Reaction.find(n.origin_id).story_id == s.id
@@ -159,7 +161,6 @@ module NotificationsHelper
                 ids.push(n.id)
               end
             end
-            reactor_links = []
             reactors.uniq.each do |c|
               reactor_links.push(link_to c.full_name, dashboard_path(c))
             end 
@@ -171,7 +172,7 @@ module NotificationsHelper
               elsif o == "2"#OMG
                 messages.push("#{reactor_links.to_sentence} OMG'd your story #{link}")
                 id_array.push(ids)
-                elsif o == "3"#LOL
+              elsif o == "3"#LOL
                 messages.push("#{reactor_links.to_sentence} LOL'd your story #{link}")
                 id_array.push(ids)
               elsif o == "4"#Cool

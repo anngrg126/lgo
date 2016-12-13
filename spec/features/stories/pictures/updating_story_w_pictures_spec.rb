@@ -32,7 +32,8 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
     attach_file('image[]', './spec/fixtures/image.png')
     
     click_link "Add another image"
-    within('#new_picture > div > .upload_image') do
+    
+    within('#new_picture > div > .upload_image:nth-child(3)') do
       attach_file('image[]', './spec/fixtures/image.png')
     end
     click_button "Create Picture"

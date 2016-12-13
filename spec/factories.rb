@@ -9,6 +9,7 @@ FactoryGirl.define do
   factory :story do
     raw_title { Faker::Hipster.sentence }
     raw_body { Faker::Hipster.paragraph }
+    published false
     after(:create) do |story|
       create(:picture, story: story, story_id: story.id )
     end
