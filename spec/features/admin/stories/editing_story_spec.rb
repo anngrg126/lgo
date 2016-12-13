@@ -120,6 +120,9 @@ RSpec.feature "Editing Stories" do
     
     fill_in "Final Title", with: ""
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, "")
+    find("input[id*=primary][value='3']").set(true)
+    find("input[id*=primary][value='6']").set(true)
+    
     click_button "Update Story"
     
     expect(page).to have_content("Story has not been updated")
