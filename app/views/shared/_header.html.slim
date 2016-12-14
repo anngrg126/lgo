@@ -16,11 +16,11 @@ header role="banner"
       - else
         == link_to "Sign Up", new_user_registration_path
         == link_to "Login", new_user_session_path
-hr       
 div.title-bar.center.show-for-small-only
   .row
     .columns.small-4
-      button[data-toggle="tags-menu"] Browse
+      div[data-responsive-toggle="tags-menu" data-hide-for="medium"]
+        button[type="button" data-toggle] Browse
     .columns.small-4
       a[href="#"] Share
     .columns.small-4
@@ -31,68 +31,68 @@ div.title-bar.center.show-for-small-only
       input.input-group-field[type="search"]
       div.input-group-button
         input.button[type="button" value="Search"]
-  /.menu-icon.dark[type="button" data-toggle]
-#tags-menu.navrow[data-toggler=".visible"]
+    /.menu-icon.dark[type="button" data-toggle]
+.row#tags-menu
   .columns
-    h6 For Ideas
-    div.link-container
-      button[data-toggle="occasion_dropdown"] 
-        | Occasion&nbsp;
-        i.fa.fa-chevron-circle-down[aria-hidden="true"]
-      #occasion_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
+    ul#navbar-tier2.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
+      li
+        h6 For Ideas
+      li
+        a.btn-link[href="#" data-remote=true] 
+          | Occasion&nbsp;
+          i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+        ul.vertical.menu.occasion
           li
-            a[href="#"] A
+            a[href="#"] 1A
           li
-            a[href="#"] B
+            a[href="#"] 1B
           li
-            a[href="#"] C
-      button[data-toggle="relationship_dropdown"] 
-        | Relationship&nbsp;
-        i.fa.fa-chevron-circle-down[aria-hidden="true"]
-      #relationship_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
+            a[href="#"] 1C
+      li
+        a.btn-link[href="#"]
+          | Relationship&nbsp;
+          i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+        ul.vertical.menu.relationship
           li
-            a[href="#"] A
+            a[href="#"] 2A
           li
-            a[href="#"] B
+            a[href="#"] 2B
+      li
+        a.btn-link[href="#"] 
+          | Type of Gift&nbsp;
+          i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+        ul.vertical.menu.type
           li
-            a[href="#"] C
-      button[data-toggle="type_dropdown"] 
-        | Type of Gift&nbsp;
-        i.fa.fa-chevron-circle-down[aria-hidden="true"]
-      #type_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
+            a[href="#"] 3A
           li
-            a[href="#"] A
+            a[href="#"] 3B
+      li
+        a.btn-link[href="#"] 
+          | Interests&nbsp;
+          i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+        ul.vertical.menu.interests
           li
-            a[href="#"] B
+            a[href="#"] 4A
           li
-            a[href="#"] C
-      button[data-toggle="interests_dropdown"] 
-        | Interests&nbsp;
-        i.fa.fa-chevron-circle-down[aria-hidden="true"]
-      #interests_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
-          li
-            a[href="#"] A
-          li
-            a[href="#"] B
-          li
-            a[href="#"] C
-    div[style="display: inline-block;"]
-      h6 For Fun
-      div.link-container
-        a.inline-block[href="#"] Aww&nbsp;
-        a.inline-block[href="#"] LOL&nbsp;
-        a.inline-block[href="#"] Win!&nbsp;
-        a.inline-block[href="#"] Fail&nbsp;
-    button.float-right.hide-for-small-only[type="button" data-toggle="search_dropdown"] 
+            a[href="#"] 4B
+    ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
+      li
+        h6 For Fun
+      li
+        a.btn-link.inline-block[href="#"] Aww
+      li
+        a.btn-link.inline-block[href="#"] LOL
+      li
+        a.btn-link.inline-block[href="#"] Win!
+      li
+        a.btn-link.inline-block[href="#"] Fail
+    button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown2" style="padding: 0.7rem 1rem;"] 
       | &nbsp;
-      i.fa.fa-search[aria-hidden="true"]
-    #search_dropdown.dropdown-pane.bottom[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50";]
+      i.fa.fa-search.bottom[aria-hidden="true"]
+    #search_dropdown2.dropdown-pane.bottom[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50" style="top: 147px;"]
       ul.menu.medium-horizontal
         li
           input[type="search"]
         li
           button.button[type="button"] Search
+hr 
