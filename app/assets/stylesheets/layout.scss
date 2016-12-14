@@ -7,6 +7,42 @@
 
 $text-color: #fff;
 
+//BEGIN header styles
+#tags-menu h6 {
+  text-transform: uppercase;
+  border-right: 2px solid black;
+  display: inline-block;
+  padding-right: 15px;
+  margin-right: 15px;
+  font-weight: 500;
+}
+#tags-menu .link-container {
+  margin-right: 15px;
+  display: inline-block;
+}
+
+#tags-menu .link-container > button, #tags-menu .link-container > a {
+  margin-right: 15px;
+}
+@media only screen and (max-width: 40.063em) {
+  #tags-menu h6 {
+    border-right: none;
+    text-transform: none;
+    display: block;
+  }
+  #tags-menu .link-container > button, #tags-menu .link-container > a {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    padding-left: 15px;
+  }
+  #search_dropdown_mobile, #tags-menu {
+    display: none;
+  }
+}
+
+//END header styles
+
 // BEGIN footer styles
 
 .footer {
@@ -94,4 +130,7 @@ trix-toolbar .button_groups {
 }
 .rightalgn {
   text-align: right;
+}
+.visible {
+  display: block !important;
 }

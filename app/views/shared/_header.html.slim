@@ -16,61 +16,83 @@ header role="banner"
       - else
         == link_to "Sign Up", new_user_registration_path
         == link_to "Login", new_user_session_path
-        
-div.title-bar[data-responsive-toggle="tags-menu" data-hide-for="medium"]
-  .menu-icon.dark[type="button" data-toggle]
-  div.title-bar-title Browse Stories
-
-#tags-menu.row[style="overflow: visible;"]
-  .columns.medium-1
-    a[type="button" href="#" data-toggle="example-dropdown"] 
+hr       
+div.title-bar.center.show-for-small-only
+  .row
+    .columns.small-4
+      button[data-toggle="tags-menu"] Browse
+    .columns.small-4
+      a[href="#"] Share
+    .columns.small-4
+      button[type="button" data-toggle="search_dropdown_mobile"] 
+        i.fa.fa-search[aria-hidden="true"]
+  #search_dropdown_mobile.row[data-toggler=".visible"]
+    div.input-group
+      input.input-group-field[type="search"]
+      div.input-group-button
+        input.button[type="button" value="Search"]
+  /.menu-icon.dark[type="button" data-toggle]
+#tags-menu.navrow[data-toggler=".visible"]
+  .columns
+    h6 For Ideas
+    div.link-container
+      button[data-toggle="occasion_dropdown"] 
+        | Occasion&nbsp;
+        i.fa.fa-chevron-circle-down[aria-hidden="true"]
+      #occasion_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
+        ul.medium-horizontal.menu
+          li
+            a[href="#"] A
+          li
+            a[href="#"] B
+          li
+            a[href="#"] C
+      button[data-toggle="relationship_dropdown"] 
+        | Relationship&nbsp;
+        i.fa.fa-chevron-circle-down[aria-hidden="true"]
+      #relationship_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
+        ul.medium-horizontal.menu
+          li
+            a[href="#"] A
+          li
+            a[href="#"] B
+          li
+            a[href="#"] C
+      button[data-toggle="type_dropdown"] 
+        | Type of Gift&nbsp;
+        i.fa.fa-chevron-circle-down[aria-hidden="true"]
+      #type_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
+        ul.medium-horizontal.menu
+          li
+            a[href="#"] A
+          li
+            a[href="#"] B
+          li
+            a[href="#"] C
+      button[data-toggle="interests_dropdown"] 
+        | Interests&nbsp;
+        i.fa.fa-chevron-circle-down[aria-hidden="true"]
+      #interests_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
+        ul.medium-horizontal.menu
+          li
+            a[href="#"] A
+          li
+            a[href="#"] B
+          li
+            a[href="#"] C
+    div[style="display: inline-block;"]
+      h6 For Fun
+      div.link-container
+        a.inline-block[href="#"] Aww&nbsp;
+        a.inline-block[href="#"] LOL&nbsp;
+        a.inline-block[href="#"] Win!&nbsp;
+        a.inline-block[href="#"] Fail&nbsp;
+    button.float-right.hide-for-small-only[type="button" data-toggle="search_dropdown"] 
+      | &nbsp;
       i.fa.fa-search[aria-hidden="true"]
-    #example-dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
+    #search_dropdown.dropdown-pane.bottom[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50";]
       ul.menu.medium-horizontal
         li
           input[type="search"]
         li
           button.button[type="button"] Search
-  .columns.large-9.medium-8[style="overflow: visible;"]
-    div.center
-      a[href="#" data-toggle="example-dropdown2"] Occasion&nbsp;
-      #example-dropdown2.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
-          li
-            a[href="#"] A
-          li
-            a[href="#"] B
-          li
-            a[href="#"] C
-      a[href="#" data-toggle="example-dropdown3"]  &nbsp;Relationship&nbsp;
-      #example-dropdown3.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
-          li
-            a[href="#"] A
-          li
-            a[href="#"] B
-          li
-            a[href="#"] C
-      a[href="#" data-toggle="example-dropdown4"]  &nbsp;Type of Gift&nbsp;
-      #example-dropdown4.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
-          li
-            a[href="#"] A
-          li
-            a[href="#"] B
-          li
-            a[href="#"] C
-      a[href="#" data-toggle="example-dropdown5"]  &nbsp;Interests&nbsp;
-      #example-dropdown5.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
-          li
-            a[href="#"] A
-          li
-            a[href="#"] B
-          li
-            a[href="#"] C
-  .columns.large-2.medium-3.rightalgn[style="white-space: nowrap;"]
-    a.inline-block.no_pad[href="#"] Aww&nbsp;
-    a.inline-block.no_pad[href="#"] &nbsp;LOL&nbsp;
-    a.inline-block.no_pad[href="#"] &nbsp;Win!&nbsp;
-    a.inline-block.no_pad[href="#"] &nbsp;Fail&nbsp;
