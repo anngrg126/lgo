@@ -63,6 +63,9 @@ gem 'cocoon'
 #gem for generating friendly urls
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 
+#gem for handling search using elastic search
+gem 'searchkick'
+
 #gem for handling cron jobs
 gem 'whenever', :require => false
 
