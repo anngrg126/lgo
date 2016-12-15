@@ -29,6 +29,29 @@ $text-color: #fff;
 #navbar-tier2 a.btn-link, #navbar-tier2B a.btn-link {
   padding-right: 0;
 }
+#tags-menu > .columns {
+  width: auto;
+}
+#tags-menu .is-dropdown-submenu {
+  padding: 15px 10px;;
+}
+#tags-menu .occasion {
+  min-width: 500px;
+}
+#tags-menu .relationship, #tags-menu .interests {
+  min-width: 300px;
+}
+#tags-menu .type {
+  min-width: 400px;
+}
+#navbar-tier2 ul .columns {
+  font-size: 90%;
+  padding: 0 5px;
+}
+#navbar-tier2 .list-header {
+  text-transform: uppercase;
+  font-weight: 500;
+}
 
 @media only screen and (max-width: 40.063em) {
   #navbar-tier2, #navbar-tier2B {
@@ -40,6 +63,18 @@ $text-color: #fff;
   }
   #search_dropdown_mobile {
     display: none;
+  }
+  #tags-menu > .columns {
+    width: 100%;
+  }
+  #tags-menu .occasion, #tags-menu .relationship, #tags-menu .type, #tags-menu .interests {
+    min-width: auto;
+  }
+  #tags-menu .is-drilldown li.hide-for-small-only {
+    display: none !important;
+  }
+  #tags-menu > .columns:nth-child(2) .is-drilldown {
+    height: 450px;
   }
 }
 //END header styles
