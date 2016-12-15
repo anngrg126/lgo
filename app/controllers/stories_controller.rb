@@ -4,7 +4,16 @@ class StoriesController < ApplicationController
   before_action :redirect_cancel, :only => [:update]
   
   def index
-    @stories = Story.published.active
+    if params[:search]
+      @results = (Story.search params[:search], operator: "or")
+      @stories = @results.results
+      if @results.count <=0
+        flash[:warning] = "No records matched : "+ params[:search]
+        redirect_to root_path
+      end
+    else
+      @stories = Story.published.active
+    end
   end
   
   def new

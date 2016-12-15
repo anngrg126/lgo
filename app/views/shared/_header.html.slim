@@ -91,8 +91,9 @@ div.title-bar.center.show-for-small-only
       | &nbsp;
       i.fa.fa-search[aria-hidden="true"]
     #search_dropdown.dropdown-pane.bottom[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50";]
-      ul.menu.medium-horizontal
-        li
-          input[type="search"]
-        li
-          button.button[type="button"] Search
+      = form_tag root_path, :method => :get do
+        ul.menu.medium-horizontal
+          li#txt_search
+            input[type="search" name="search" id="search"]
+          li
+            = submit_tag "Search"
