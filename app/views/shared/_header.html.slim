@@ -1,21 +1,28 @@
-header role="banner"
-  nav
-    div
-      == link_to "Home", root_path
-    div
-      - if user_signed_in?
-        - unless current_page? registration_step_path(:basic_details)
-          div
-            == link_to "My Dashboard", dashboard_path(current_user)
-          div
-            == link_to "Sign out", destroy_user_session_path, method: :delete
-          div class="navbar-right"
-            == signed_in_user
-          div#user_notifications
-            == user_notifications_link
-      - else
-        == link_to "Sign Up", new_user_registration_path
-        == link_to "Login", new_user_session_path
+nav.column.row
+  div.top-bar
+    div.top-bar-left
+       ul.menu
+        li
+          == link_to root_path, class: "no_pad" do
+            img[src="https://s3.amazonaws.com/letsgifton/GiftOnLogo.png" alt="GiftOn: Real-life gift stories and Ideas"]
+        li.menu-text 
+          a.menu-text.no_pad[href="#"] Browse
+        li.menu-text Share
+    div.top-bar-right
+      div
+        - if user_signed_in?
+          - unless current_page? registration_step_path(:basic_details)
+            div
+              == link_to "My Dashboard", dashboard_path(current_user)
+            div
+              == link_to "Sign out", destroy_user_session_path, method: :delete
+            div class="navbar-right"
+              == signed_in_user
+            div#user_notifications
+              == user_notifications_link
+        - else
+          == link_to "Sign Up", new_user_registration_path, class: "button"
+          == link_to "Login", new_user_session_path, class: "button hollow"
 div.title-bar.center.show-for-small-only
   .row
     .columns.small-4
