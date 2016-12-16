@@ -76,7 +76,7 @@ class Story < ApplicationRecord
   after_commit :reindex_story
   
   def reindex_story
-    story.reindex # or reindex_async
+    Story.reindex # or reindex_async
   end
   
   def should_index?
