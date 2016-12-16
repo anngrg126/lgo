@@ -25,6 +25,14 @@ $(document).on('turbolinks:load', function() {
 });
 
 function myFunction() {
+  //fcn to populate text of "Back" button in responsive menu  
+  if ($("#navbar-tier2").hasClass("drilldown")) {
+    $(this).find(".occasion .js-drilldown-back").html('<a tabindex="0">Browse by Occasion</a>');
+    $(this).find(".relationship .js-drilldown-back").html('<a tabindex="0">Browse by Relationship</a>');
+    $(this).find(".type .js-drilldown-back").html('<a tabindex="0">Browse by Type</a>');
+    $(this).find(".interests .js-drilldown-back").html('<a tabindex="0">Browse by Interests</a>');
+  }
+  
   //fcns to append extra image upload fields
   $('#add_image_fields').click(function(){
     $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');

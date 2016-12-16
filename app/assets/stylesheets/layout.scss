@@ -8,39 +8,116 @@
 $text-color: #fff;
 
 //BEGIN header styles
-#tags-menu h6 {
+#navbar-tier2, #navbar-tier2B {
+  display: inline-block;
+}
+#navbar-tier2 h6, #navbar-tier2B h6 {
   text-transform: uppercase;
   border-right: 2px solid black;
   display: inline-block;
   padding-right: 15px;
-  margin-right: 15px;
+  font-weight: 500;
+  margin-bottom: 0;
+  margin-left: 15px;
+}
+#navbar-tier2B h6 {
+  margin-left: 30px;
+}
+#navbar-tier2 .btn-link i, #navbar-tier2B .btn-link i {
+  vertical-align: baseline;
+} 
+#navbar-tier2 a.btn-link, #navbar-tier2B a.btn-link {
+  padding-right: 0;
+}
+#tags-menu > .columns {
+  width: auto;
+}
+#tags-menu .is-dropdown-submenu {
+  padding: 15px 10px;;
+}
+#tags-menu .occasion {
+  min-width: 500px;
+}
+#tags-menu .relationship, #tags-menu .interests {
+  min-width: 300px;
+}
+#tags-menu .type {
+  min-width: 400px;
+}
+#navbar-tier2 ul .columns {
+  font-size: 90%;
+  padding: 0 5px;
+}
+#navbar-tier2 .list-header {
+  text-transform: uppercase;
   font-weight: 500;
 }
-#tags-menu .link-container {
-  margin-right: 15px;
+#navbar-tier2 ul .row {
+  margin: 0;
+}
+.top-bar img {
+  max-height: 40px;
+}
+.top-bar .menu-text {
+  text-transform: uppercase;
+  vertical-align: bottom;
+  padding-bottom: 0;
+}
+.top-bar a.button {
+  padding: 0.4em 0.5em;
+}
+.top-bar.row > div {
+  position: relative;
+}
+.top-bar.row > div ul {
   display: inline-block;
 }
-
-#tags-menu .link-container > button, #tags-menu .link-container > a {
-  margin-right: 15px;
+.top-bar .menu-right {
+  position: absolute; 
+  bottom: 8px; 
+  right: 0;
+}
+.top-bar .menu-right > a{
+  vertical-align: bottom;
+  padding-right: 15px; 
+  position: relative; 
+  top: 0.25em; 
+  font-size: 90%;
+}
+.top-bar .menu-right > div {
+  display: inline-block;
 }
 @media only screen and (max-width: 40.063em) {
-  #tags-menu h6 {
-    border-right: none;
-    text-transform: none;
+  #navbar-tier2, #navbar-tier2B {
     display: block;
   }
-  #tags-menu .link-container > button, #tags-menu .link-container > a {
-    display: inline-block;
-    width: 100%;
-    text-align: left;
-    padding-left: 15px;
+  #navbar-tier2 h6, #navbar-tier2B h6 {
+    border-right: none;
+    margin-left: 15px;
   }
-  #search_dropdown_mobile, #tags-menu {
+  #search_dropdown_mobile {
     display: none;
   }
+  #tags-menu > .columns {
+    width: 100%;
+  }
+  #tags-menu .occasion, #tags-menu .relationship, #tags-menu .type, #tags-menu .interests {
+    min-width: auto;
+  }
+  #tags-menu .is-drilldown li.hide-for-small-only {
+    display: none !important;
+  }
+  #tags-menu > .columns:nth-child(2) .is-drilldown {
+    height: 515px;
+  }
+  .top-bar img {
+    max-height: 30px;
+  }
+  #navbar-tier2 ul .columns {
+    font-size: 100%;
+    padding: 0 5px;
+  }
 }
-
 //END header styles
 
 // BEGIN footer styles
@@ -94,7 +171,7 @@ $text-color: #fff;
   display: none;
 }
 
-//style for rick text editor
+//style for rich text editor
 trix-toolbar .button_groups {
   button.code {
     display: none;

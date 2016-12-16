@@ -1,8 +1,13 @@
-header role="banner"
-  nav
+nav
+  div.top-bar.row
     div
-      == link_to "Home", root_path
-    div
+      ul.menu
+        li
+          == link_to root_path, class: "no_pad" do
+            img[src="https://s3.amazonaws.com/letsgifton/GiftOnLogo.png" alt="GiftOn: Real-life gift stories and Ideas"]
+        li.menu-text.hide-for-small-only
+          a.menu-text.no_pad[href="#"] Browse
+        li.menu-text.hide-for-small-only Share
       - if user_signed_in?
         - unless current_page? registration_step_path(:basic_details)
           div
@@ -14,13 +19,17 @@ header role="banner"
           div#user_notifications
             == user_notifications_link
       - else
-        == link_to "Sign Up", new_user_registration_path
-        == link_to "Login", new_user_session_path
-hr       
-div.title-bar.center.show-for-small-only
+        div.menu-right
+          a.hide-for-small-only[href="#"] My Notifications
+          div
+            == link_to "Join Us", new_user_registration_path, class: "button"
+          div.hide-for-small-only
+            == link_to "Login", new_user_session_path, class: "button hollow"
+div.top-bar.center.show-for-small-only
   .row
     .columns.small-4
-      button[data-toggle="tags-menu"] Browse
+      div[data-responsive-toggle="tags-menu" data-hide-for="medium"]
+        button[type="button" data-toggle] Browse
     .columns.small-4
       a[href="#"] Share
     .columns.small-4
@@ -31,69 +40,212 @@ div.title-bar.center.show-for-small-only
       input.input-group-field[type="search"]
       div.input-group-button
         input.button[type="button" value="Search"]
-  /.menu-icon.dark[type="button" data-toggle]
-#tags-menu.navrow[data-toggler=".visible"]
+    /.menu-icon.dark[type="button" data-toggle]
+.row#tags-menu
+  .columns.show-for-small-only
+    ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
+      li
+        h6 For Fun
+      li
+        a.btn-link.inline-block[href="#"] Aww
+      li
+        a.btn-link.inline-block[href="#"] LOL
+      li
+        a.btn-link.inline-block[href="#"] Win!
+      li
+        a.btn-link.inline-block[href="#"] Fail
   .columns
-    h6 For Ideas
-    div.link-container
-      button[data-toggle="occasion_dropdown"] 
-        | Occasion&nbsp;
-        i.fa.fa-chevron-circle-down[aria-hidden="true"]
-      #occasion_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
-          li
-            a[href="#"] A
-          li
-            a[href="#"] B
-          li
-            a[href="#"] C
-      button[data-toggle="relationship_dropdown"] 
-        | Relationship&nbsp;
-        i.fa.fa-chevron-circle-down[aria-hidden="true"]
-      #relationship_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
-          li
-            a[href="#"] A
-          li
-            a[href="#"] B
-          li
-            a[href="#"] C
-      button[data-toggle="type_dropdown"] 
-        | Type of Gift&nbsp;
-        i.fa.fa-chevron-circle-down[aria-hidden="true"]
-      #type_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
-          li
-            a[href="#"] A
-          li
-            a[href="#"] B
-          li
-            a[href="#"] C
-      button[data-toggle="interests_dropdown"] 
-        | Interests&nbsp;
-        i.fa.fa-chevron-circle-down[aria-hidden="true"]
-      #interests_dropdown.dropdown-pane[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50"]
-        ul.medium-horizontal.menu
-          li
-            a[href="#"] A
-          li
-            a[href="#"] B
-          li
-            a[href="#"] C
-    div[style="display: inline-block;"]
-      h6 For Fun
-      div.link-container
-        a.inline-block[href="#"] Aww&nbsp;
-        a.inline-block[href="#"] LOL&nbsp;
-        a.inline-block[href="#"] Win!&nbsp;
-        a.inline-block[href="#"] Fail&nbsp;
-    button.float-right.hide-for-small-only[type="button" data-toggle="search_dropdown"] 
+    ul#navbar-tier2.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
+      li
+        h6 For Ideas
+      li
+        a.btn-link[href="#" data-remote=true] 
+          | Occasion&nbsp;
+          i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+        ul.vertical.menu.occasion
+          .row
+            .columns.medium-3.small-12
+                li.list-header Popular
+                li
+                  a[href="#"] Just because
+                li
+                  a[href="#"] Birthday
+                li
+                  a[href="#"] Holidays
+            .columns.medium-3.small-6
+                li.list-header All
+                li
+                  a[href="#"] Anniversary
+                li
+                  a[href="#"] Birthday
+                li
+                  a[href="#"] Engagement
+                li
+                  a[href="#"] Father's Day
+                li
+                  a[href="#"] Going away
+                li
+                  a[href="#"] Graduation
+                li
+                  a[href="#"] Holidays
+            .columns.medium-3.small-6.medium-push-3
+              li.hide-for-small-only &nbsp;
+              li.list-header To Say
+              li
+                a[href="#"] Congratulations
+              li
+                a[href="#"] I love you
+              li
+                a[href="#"] I miss you
+              li
+                a[href="#"] Sorry
+              li
+                a[href="#"] Thank you
+              li
+                a[href="#"] You can do it
+            .columns.medium-3.small-6.medium-pull-3.small-pull-6
+                li &nbsp;
+                li
+                  a[href="#"] Just because
+                li
+                  a[href="#"] Travel souvenirs
+                li
+                  a[href="#"] Mother's Day
+                li
+                  a[href="#"] Showers
+                li
+                  a[href="#"] New baby
+                li
+                  a[href="#"] Valentine's Day
+                li
+                  a[href="#"] Visits &amp; parties
+                li
+                  a[href="#"] Wedding
+            
+      li
+        a.btn-link[href="#"]
+          | Relationship&nbsp;
+          i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+        ul.vertical.menu.relationship
+          .row
+            .columns.medium-6
+              li.list-header Popular
+              li
+                a[href="#"] Significant other
+              li
+                a[href="#"] Family
+              li
+                a[href="#"] Friends
+            .columns.medium-6
+              li.list-header All
+              li
+                a[href="#"] Family
+              li
+                a[href="#"] Parents
+              li
+                a[href="#"] Siblings
+              li
+                a[href="#"] Friends
+              li
+                a[href="#"] I just met you
+              li
+                a[href="#"] Kids
+              li
+                a[href="#"] Professional
+              li
+                a[href="#"] Significant other
+              li
+                a[href="#"] Significant other's family
+      li
+        a.btn-link[href="#"] 
+          | Type of Gift&nbsp;
+          i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+        ul.vertical.menu.type
+          .row
+            .columns.medium-4
+              li.list-header Popular
+              li
+                a[href="#"] DIY
+              li
+                a[href="#"] Thoughtful
+              li
+                a[href="#"] Budget
+            .columns.medium-4
+              li.list-header All
+              li
+                a[href="#"] Budget
+              li
+                a[href="#"] DIY
+              li
+                a[href="#"] Experience
+              li
+                a[href="#"] Fun &amp; Gag
+              li
+                a[href="#"] Group
+              li
+                a[href="#"] Last Minute
+            .columns.medium-4
+              li.hide-for-small-only &nbsp;
+              li
+                a[href="#"] Personalized
+              li
+                a[href="#"] Plan in Advance
+              li
+                a[href="#"] Romantic
+              li
+                a[href="#"] Suprise
+              li
+                a[href="#"] Thoughtful
+              
+      li
+        a.btn-link[href="#"] 
+          | Interests&nbsp;
+          i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+        ul.vertical.menu.interests
+          .row
+            .columns.medium-6
+              li.list-header All
+              li
+                a[href="#"] Hobbies
+              li
+                a[href="#"] Crafts
+              li
+                a[href="#"] Reading
+              li
+                a[href="#"] Cooking
+            .columns.medium-6
+              li.hide-for-small-only &nbsp;
+              li
+                a[href="#"] Food
+              li
+                a[href="#"] Pop culture
+              li
+                a[href="#"] Health &amp; fitness
+              li
+                a[href="#"] Travel &amp; adventure
+              li
+                a[href="#"] Sports
+  .columns.hide-for-small-only
+    ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
+      li
+        h6 For Fun
+      li
+        a.btn-link.inline-block[href="#"] Aww
+      li
+        a.btn-link.inline-block[href="#"] LOL
+      li
+        a.btn-link.inline-block[href="#"] Win!
+      li
+        a.btn-link.inline-block[href="#"] Fail
+  .columns
+    button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
       | &nbsp;
-      i.fa.fa-search[aria-hidden="true"]
-    #search_dropdown.dropdown-pane.bottom[data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="50";]
+      i.fa.fa-search.bottom[aria-hidden="true"]
+    #search_dropdown.dropdown-pane.bottom[data-dropdown data-hover="true" data-hover-pane="true"]
       = form_tag root_path, :method => :get do
         ul.menu.medium-horizontal
           li#txt_search
             input[type="search" name="search" id="search"]
           li
-            = submit_tag "Search"
+            = submit_tag "Search", class: "button"
+hr 
