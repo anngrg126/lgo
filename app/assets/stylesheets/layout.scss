@@ -52,6 +52,9 @@ $text-color: #fff;
   text-transform: uppercase;
   font-weight: 500;
 }
+#navbar-tier2 ul .row {
+  margin: 0;
+}
 .top-bar img {
   max-height: 40px;
 }
@@ -60,8 +63,29 @@ $text-color: #fff;
   vertical-align: bottom;
   padding-bottom: 0;
 }
-.top-bar-right .button {
-  padding: 0.2em;
+.top-bar a.button {
+  padding: 0.4em 0.5em;
+}
+.top-bar.row > div {
+  position: relative;
+}
+.top-bar.row > div ul {
+  display: inline-block;
+}
+.top-bar .menu-right {
+  position: absolute; 
+  bottom: 8px; 
+  right: 0;
+}
+.top-bar .menu-right > a{
+  vertical-align: bottom;
+  padding-right: 15px; 
+  position: relative; 
+  top: 0.25em; 
+  font-size: 90%;
+}
+.top-bar .menu-right > div {
+  display: inline-block;
 }
 @media only screen and (max-width: 40.063em) {
   #navbar-tier2, #navbar-tier2B {
@@ -84,7 +108,14 @@ $text-color: #fff;
     display: none !important;
   }
   #tags-menu > .columns:nth-child(2) .is-drilldown {
-    height: 450px;
+    height: 515px;
+  }
+  .top-bar img {
+    max-height: 30px;
+  }
+  #navbar-tier2 ul .columns {
+    font-size: 100%;
+    padding: 0 5px;
   }
 }
 //END header styles

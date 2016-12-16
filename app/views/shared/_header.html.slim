@@ -1,29 +1,31 @@
-nav.column.row
-  div.top-bar
-    div.top-bar-left
-       ul.menu
+nav
+  div.top-bar.row
+    div
+      ul.menu
         li
           == link_to root_path, class: "no_pad" do
             img[src="https://s3.amazonaws.com/letsgifton/GiftOnLogo.png" alt="GiftOn: Real-life gift stories and Ideas"]
-        li.menu-text 
+        li.menu-text.hide-for-small-only
           a.menu-text.no_pad[href="#"] Browse
-        li.menu-text Share
-    div.top-bar-right
-      div
-        - if user_signed_in?
-          - unless current_page? registration_step_path(:basic_details)
-            div
-              == link_to "My Dashboard", dashboard_path(current_user)
-            div
-              == link_to "Sign out", destroy_user_session_path, method: :delete
-            div class="navbar-right"
-              == signed_in_user
-            div#user_notifications
-              == user_notifications_link
-        - else
-          == link_to "Sign Up", new_user_registration_path, class: "button"
-          == link_to "Login", new_user_session_path, class: "button hollow"
-div.title-bar.center.show-for-small-only
+        li.menu-text.hide-for-small-only Share
+      - if user_signed_in?
+        - unless current_page? registration_step_path(:basic_details)
+          div
+            == link_to "My Dashboard", dashboard_path(current_user)
+          div
+            == link_to "Sign out", destroy_user_session_path, method: :delete
+          div class="navbar-right"
+            == signed_in_user
+          div#user_notifications
+            == user_notifications_link
+      - else
+        div.menu-right
+          a.hide-for-small-only[href="#"] My Notifications
+          div
+            == link_to "Sign Up", new_user_registration_path, class: "button"
+          div.hide-for-small-only
+            == link_to "Login", new_user_session_path, class: "button hollow"
+div.top-bar.center.show-for-small-only
   .row
     .columns.small-4
       div[data-responsive-toggle="tags-menu" data-hide-for="medium"]
@@ -61,7 +63,7 @@ div.title-bar.center.show-for-small-only
           | Occasion&nbsp;
           i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
         ul.vertical.menu.occasion
-          .row[style="margin: 0;"]
+          .row
             .columns.medium-3.small-12
                 li.list-header Popular
                 li
@@ -125,7 +127,7 @@ div.title-bar.center.show-for-small-only
           | Relationship&nbsp;
           i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
         ul.vertical.menu.relationship
-          .row[style="margin: 0;"]
+          .row
             .columns.medium-6
               li.list-header Popular
               li
@@ -159,7 +161,7 @@ div.title-bar.center.show-for-small-only
           | Type of Gift&nbsp;
           i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
         ul.vertical.menu.type
-          .row[style="margin: 0;"]
+          .row
             .columns.medium-4
               li.list-header Popular
               li
@@ -200,7 +202,7 @@ div.title-bar.center.show-for-small-only
           | Interests&nbsp;
           i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
         ul.vertical.menu.interests
-          .row[style="margin: 0;"]
+          .row
             .columns.medium-6
               li.list-header All
               li
