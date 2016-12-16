@@ -12,7 +12,7 @@ class StoriesController < ApplicationController
         redirect_to root_path
       end
     elsif params[:search_tag]
-      @results = (Story.search params[:search_tag], fields: [:tags])
+      @results = (Story.search params[:search_tag], fields: [tags: :exact])
       @stories = @results.results
       if @results.count <=0
         flash[:warning] = "No records matched : "+ params[:search_tag]
