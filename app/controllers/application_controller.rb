@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery with: :exception
   
-  before_action :set_tags, only: [:show, :index, :new]
+  before_action :set_tags, only: [:show, :index, :new, :edit]
   
   def set_tags
     @tags = Tag.all.group_by(&:name)

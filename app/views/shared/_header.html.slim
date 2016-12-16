@@ -36,11 +36,12 @@ div.top-bar.center.show-for-small-only
       button[type="button" data-toggle="search_dropdown_mobile"] 
         i.fa.fa-search[aria-hidden="true"]
   #search_dropdown_mobile.row[data-toggler=".visible"]
-    div.input-group
-      input.input-group-field[type="search"]
-      div.input-group-button
-        input.button[type="button" value="Search"]
-    /.menu-icon.dark[type="button" data-toggle]
+    = form_tag root_path, method: :get do
+      div.input-group
+        input[type="search" name="search" id="search" class="input-group-field"]
+        div.input-group-button
+          = submit_tag "Search", class: "button"
+    /.menu-icon.dark[type="button" data-toggle]  
 .row#tags-menu
   .columns.show-for-small-only
     ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
@@ -131,31 +132,31 @@ div.top-bar.center.show-for-small-only
             .columns.medium-6
               li.list-header Popular
               li
-                a[href="#"] Significant other
+                a[href="#{stories_path}?search_tag=#{tag_search("significant other")}"] Significant other
               li
-                a[href="#"] Family
+                a[href="#{stories_path}?search_tag=#{tag_search("family")}"] Family
               li
-                a[href="#"] Friends
+                a[href="#{stories_path}?search_tag=#{tag_search("friends")}"] Friends
             .columns.medium-6
               li.list-header All
               li
-                a[href="#"] Family
+                a[href="#{stories_path}?search_tag=#{tag_search("family")}"] Family
               li
-                a[href="#"] Parents
+                a[href="#{stories_path}?search_tag=#{tag_search("parents")}"] Parents
               li
-                a[href="#"] Siblings
+                a[href="#{stories_path}?search_tag=#{tag_search("siblings")}"] Siblings
               li
-                a[href="#"] Friends
+                a[href="#{stories_path}?search_tag=#{tag_search("friends")}"] Friends
               li
-                a[href="#"] I just met you
+                a[href="#{stories_path}?search_tag=#{tag_search("i just met you")}"] I just met you
               li
-                a[href="#"] Kids
+                a[href="#{stories_path}?search_tag=#{tag_search("kids")}"] Kids
               li
-                a[href="#"] Professional
+                a[href="#{stories_path}?search_tag=#{tag_search("professional")}"] Professional
               li
-                a[href="#"] Significant other
+                a[href="#{stories_path}?search_tag=#{tag_search("significant other")}"] Significant other
               li
-                a[href="#"] Significant other's family
+                a[href="#{stories_path}?search_tag=#{tag_search("significant other's family")}"] Significant other's family
       li
         a.btn-link[href="#"] 
           | Type of Gift&nbsp;
@@ -183,7 +184,7 @@ div.top-bar.center.show-for-small-only
               li
                 a[href="#"] Group
               li
-                a[href="#"] Last Minute
+                a[href="#{stories_path}?search_tag=last&#32;minute"] Last Minute
             .columns.medium-4
               li.hide-for-small-only &nbsp;
               li
@@ -241,11 +242,11 @@ div.top-bar.center.show-for-small-only
     button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
       | &nbsp;
       i.fa.fa-search.bottom[aria-hidden="true"]
-    #search_dropdown.dropdown-pane.bottom[data-dropdown data-hover="true" data-hover-pane="true"]
-      = form_tag root_path, :method => :get do
-        ul.menu.medium-horizontal
-          li#txt_search
-            input[type="search" name="search" id="search"]
-          li
-            = submit_tag "Search", class: "button"
+#search_dropdown.dropdown-pane.bottom[data-dropdown]
+  = form_tag root_path, :method => :get do
+    ul.menu.medium-horizontal
+      li
+        input[type="search" name="search" id="search"]
+      li
+        = submit_tag "Search", class: "button"
 hr 

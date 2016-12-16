@@ -117,6 +117,9 @@ $text-color: #fff;
     font-size: 100%;
     padding: 0 5px;
   }
+  .top-bar input {
+    max-width: none;
+  }
 }
 //END header styles
 
