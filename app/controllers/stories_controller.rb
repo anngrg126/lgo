@@ -11,6 +11,13 @@ class StoriesController < ApplicationController
         flash[:warning] = "No records matched : "+ params[:search]
         redirect_to root_path
       end
+    elsif params[:search_tag]
+      @results = (Story.search params[:search_tag], fields: [:tags])
+      @stories = @results.results
+      if @results.count <=0
+        flash[:warning] = "No records matched : "+ params[:search_tag]
+        redirect_to root_path
+      end
     else
       @stories = Story.published.active
     end
