@@ -142,4 +142,9 @@ module StoriesHelper
       end
     end
   end
+  
+  def tag_search(tag_name)
+    @tags.select{|name| name == tag_name}.first[1][0].name
+  end
+  
 end
