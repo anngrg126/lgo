@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery with: :exception
   
+  before_action :set_tags, only: [:show, :index, :new]
+  
+  def set_tags
+    @tags = Tag.all.group_by(&:name)
+  end
+  
   def after_sign_in_path_for(resource)
 #    request.env['omniauth.origin'] || stored_location_for(resource) || root_path
     @user = current_user
