@@ -2,6 +2,8 @@ class Admin::StoriesController < ApplicationController
 #  before_action :authenticate_user!, except: [:index, :show]
   before_action :require_admin
   before_action :set_story, only: [:update, :destroy]
+  before_action :set_tags, only: [:show, :index, :new, :edit]
+  before_action :set_tags, only: [:show, :index, :new, :edit]
   
   def index
     @stories = Story.unpublished.active
@@ -143,5 +145,9 @@ class Admin::StoriesController < ApplicationController
     unless Classification.where(story_id: story.id).empty?
        Classification.where(story_id: story.id).each(&:destroy)   
     end
+  end
+  
+  def set_tags
+    @tags = Tag.all.group_by(&:name)
   end
 end

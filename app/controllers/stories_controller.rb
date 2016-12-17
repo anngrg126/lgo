@@ -1,7 +1,8 @@
 class StoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_story, only: [:show, :edit, :update, :destroy, :check_for_cancel]
-  before_action :redirect_cancel, :only => [:update]
+  before_action :redirect_cancel, :only => [:update
+  before_action :set_tags, only: [:show, :index, :new, :edit]
   
   def index
     if params[:search]
@@ -156,4 +157,8 @@ class StoriesController < ApplicationController
       Notification.where(story_id: story.id).each(&:destroy)                
     end
   end
+    
+    def set_tags
+      @tags = Tag.all.group_by(&:name)
+    end
 end

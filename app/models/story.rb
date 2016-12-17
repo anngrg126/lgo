@@ -84,11 +84,12 @@ class Story < ApplicationRecord
   end
   
   def search_data
-    attrs = attributes.dup
-    relational = {
-      tags: tags.map(&:name)
-    }
-    attrs.merge! relational
+   attrs = attributes.dup
+   relational = {
+     # tags: tags.map(&:name)
+     tags: tags.map { |t| t.name =='other' ? story.classifications.where(tag_id: t.id).first.description : t.name }
+   }
+   attrs.merge! relational
   end
   
   validates_attachment :main_image, :content_type => { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }, :size => { in: 0..1.megabytes }, :presence => true, if: :validate_main_image?

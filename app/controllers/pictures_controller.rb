@@ -2,6 +2,7 @@ class PicturesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_story
   before_action :set_picture, only: [:edit, :update, :destroy]
+  before_action :set_tags, only: [:show, :index, :new, :edit]
   
   def new
     @story = Story.find(params[:story_id])
@@ -51,4 +52,9 @@ class PicturesController < ApplicationController
   def set_picture
     @picture = Picture.find(params[:id])
   end
+  
+  def set_tags
+    @tags = Tag.all.group_by(&:name)
+  end
+  
 end
