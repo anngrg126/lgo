@@ -1,4 +1,4 @@
-class CreateSearchQueryLog < ActiveRecord::Migration[5.0]
+class CreateSearchQueryLogs < ActiveRecord::Migration[5.0]
   def change
     create_table :search_query_logs do |t|
       t.string :query_string
