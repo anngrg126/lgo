@@ -22,7 +22,7 @@ nav
         div.menu-right
           a.hide-for-small-only[href="#"] My Notifications
           div
-            == link_to "Join Us", new_user_registration_path, class: "button"
+            == link_to "Join us", new_user_registration_path, class: "button"
           div.hide-for-small-only
             == link_to "Login", new_user_session_path, class: "button hollow"
 div.top-bar.center.show-for-small-only
@@ -48,13 +48,13 @@ div.top-bar.center.show-for-small-only
       li
         h6 For Fun
       li
-        a.btn-link.inline-block[href="#"] Aww
+        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
       li
-        a.btn-link.inline-block[href="#"] LOL
+        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
       li
-        a.btn-link.inline-block[href="#"] Win!
+        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
       li
-        a.btn-link.inline-block[href="#"] Fail
+        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
   .columns
     ul#navbar-tier2.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
       li
@@ -107,21 +107,21 @@ div.top-bar.center.show-for-small-only
             .columns.medium-3.small-6.medium-pull-3.small-pull-6
                 li &nbsp;
                 li
-                  a[href="#"] Just because
+                  a[href="#{stories_path}?search_tag=#{tag_search("just because")}"] Just because
                 li
-                  a[href="#"] Travel souvenirs
+                  a[href="#{stories_path}?search_tag=#{tag_search("travel souvenirs")}"] Travel souvenirs
                 li
-                  a[href="#"] Mother's Day
+                  a[href="#{stories_path}?search_tag=#{tag_search("mother's day")}"] Mother's Day
                 li
-                  a[href="#"] Showers
+                  a[href="#{stories_path}?search_tag=#{tag_search("showers")}"] Showers
                 li
-                  a[href="#"] New baby
+                  a[href="#{stories_path}?search_tag=#{tag_search("new baby")}"] New baby
                 li
-                  a[href="#"] Valentine's Day
+                  a[href="#{stories_path}?search_tag=#{tag_search("valentine's day")}"] Valentine's Day
                 li
-                  a[href="#"] Visits &amp; parties
+                  a[href="#{stories_path}?search_tag=#{tag_search("visits and parties")}"] Visits &amp; parties
                 li
-                  a[href="#"] Wedding
+                  a[href="#{stories_path}?search_tag=#{tag_search("wedding")}"] Wedding
             
       li
         a.btn-link[href="#"]
@@ -166,37 +166,39 @@ div.top-bar.center.show-for-small-only
             .columns.medium-4
               li.list-header Popular
               li
-                a[href="#"] DIY
+                a[href="#{stories_path}?search_tag=#{tag_search("diy")}"] DIY
               li
-                a[href="#"] Thoughtful
+                a[href="#{stories_path}?search_tag=#{tag_search("thoughtful")}"] Thoughtful
               li
-                a[href="#"] Budget
+                a[href="#{stories_path}?search_tag=#{tag_search("budget")}"] Budget
             .columns.medium-4
               li.list-header All
               li
-                a[href="#"] Budget
+                a[href="#{stories_path}?search_tag=#{tag_search("budget")}"] Budget
               li
-                a[href="#"] DIY
+                a[href="#{stories_path}?search_tag=#{tag_search("diy")}"] DIY
               li
-                a[href="#"] Experience
+                a[href="#{stories_path}?search_tag=#{tag_search("experience")}"] Experience
               li
-                a[href="#"] Fun &amp; Gag
+                a[href="#{stories_path}?search_tag=#{tag_search("fun and gag")}"] Fun &amp; Gag
               li
-                a[href="#"] Group
+                a[href="#{stories_path}?search_tag=#{tag_search("group")}"] Group
               li
-                a[href="#{stories_path}?search_tag=last&#32;minute"] Last Minute
+                a[href="#{stories_path}?search_tag=#{tag_search("last minute")}"] Last Minute
             .columns.medium-4
               li.hide-for-small-only &nbsp;
               li
-                a[href="#"] Personalized
+                a[href="#{stories_path}?search_tag=#{tag_search("personalized")}"] Personalized
               li
-                a[href="#"] Plan in Advance
+                a[href="#{stories_path}?search_tag=#{tag_search("plan in advance")}"] Plan in Advance
               li
-                a[href="#"] Romantic
+                a[href="#{stories_path}?search_tag=#{tag_search("romantic")}"] Romantic
               li
-                a[href="#"] Suprise
+                a[href="#{stories_path}?search_tag=#{tag_search("sentimental")}"] Sentimental
               li
-                a[href="#"] Thoughtful
+                a[href="#{stories_path}?search_tag=#{tag_search("surprise")}"] Suprise
+              li
+                a[href="#{stories_path}?search_tag=#{tag_search("thoughtful")}"] Thoughtful
               
       li
         a.btn-link[href="#"] 
@@ -207,37 +209,37 @@ div.top-bar.center.show-for-small-only
             .columns.medium-6
               li.list-header All
               li
-                a[href="#"] Hobbies
+                a[href="#{stories_path}?search_tag=#{tag_search("hobbies")}"] Hobbies
               li
-                a[href="#"] Crafts
+                a[href="#{stories_path}?search_tag=#{tag_search("crafts")}"] Crafts
               li
-                a[href="#"] Reading
+                a[href="#{stories_path}?search_tag=#{tag_search("reading")}"] Reading
               li
-                a[href="#"] Cooking
+                a[href="#{stories_path}?search_tag=#{tag_search("cooking")}"] Cooking
             .columns.medium-6
               li.hide-for-small-only &nbsp;
               li
-                a[href="#"] Food
+                a[href="#{stories_path}?search_tag=#{tag_search("food")}"] Food
               li
-                a[href="#"] Pop culture
+                a[href="#{stories_path}?search_tag=#{tag_search("pop culture")}"] Pop culture
               li
-                a[href="#"] Health &amp; fitness
+                a[href="#{stories_path}?search_tag=#{tag_search("health and fitness")}"] Health &amp; fitness
               li
-                a[href="#"] Travel &amp; adventure
+                a[href="#{stories_path}?search_tag=#{tag_search("travel and adventure")}"] Travel &amp; adventure
               li
-                a[href="#"] Sports
+                a[href="#{stories_path}?search_tag=#{tag_search("sports")}"] Sports
   .columns.hide-for-small-only
     ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
       li
         h6 For Fun
       li
-        a.btn-link.inline-block[href="#"] Aww
+        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
       li
-        a.btn-link.inline-block[href="#"] LOL
+        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
       li
-        a.btn-link.inline-block[href="#"] Win!
+        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
       li
-        a.btn-link.inline-block[href="#"] Fail
+        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
   .columns
     button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
       | &nbsp;

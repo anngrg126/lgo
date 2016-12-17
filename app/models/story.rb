@@ -87,7 +87,7 @@ class Story < ApplicationRecord
    attrs = attributes.dup
    relational = {
      # tags: tags.map(&:name)
-     tags: tags.map { |t| t.name =='other' ? story.classifications.where(tag_id: t.id).first.description : t.name }
+     tags: tags.map { |t| t.name =='other' ? classifications.where(tag_id: t.id).first.description : t.name }
    }
    attrs.merge! relational
   end
