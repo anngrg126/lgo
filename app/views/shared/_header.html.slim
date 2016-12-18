@@ -21,8 +21,8 @@ nav
       - else
         div.menu-right
           a.hide-for-small-only[href="#"] My Notifications
-          div
-            == link_to "Join us", new_user_registration_path, class: "button"
+          div[style="padding-right: 0.5em;"]
+            == link_to "Join", new_user_registration_path, class: "button"
           div.hide-for-small-only
             == link_to "Login", new_user_session_path, class: "button hollow"
 div.top-bar.center.show-for-small-only

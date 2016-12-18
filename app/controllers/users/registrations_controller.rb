@@ -1,6 +1,6 @@
-class RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController
   before_action :redirect_cancel, :only => [:update]
-  before_action :set_tags, only: [:show, :index, :new, :edit]
+  before_action :set_tags
 
   def new 
     super

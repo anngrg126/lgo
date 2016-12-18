@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
   before_action :set_followers, only: [:show, :followers, :notifications, :bookmarked_stories]
   before_action :set_followings, only: [:show, :followings, :notifications, :bookmarked_stories]
   before_action :set_notifications, only: [:show, :notifications, :bookmarked_stories]
-  before_action :set_tags, only: [:show, :index, :new, :edit]
+  before_action :set_tags
   
   def show
   end

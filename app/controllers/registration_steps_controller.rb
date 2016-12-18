@@ -1,5 +1,6 @@
 class RegistrationStepsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_tags, only: [:show, :index, :new, :edit]
   
   include Wicked::Wizard
   
@@ -33,5 +34,8 @@ class RegistrationStepsController < ApplicationController
   def finish_wizard_path
     flash[:primary] = "You have signed up successfully."
     dashboard_path(current_user)
+  end
+  def set_tags
+    @tags = Tag.all.group_by(&:name)
   end
 end
