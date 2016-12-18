@@ -121,8 +121,10 @@ module NotificationsHelper
         optionsarray.each do |o|
           ids = []
           commenters = []
-          unless notifications_array.where(notification_category_id: 2, options: o).empty?
-            notifications_array.where(notification_category_id: 2, options: o).each do |n|
+          unless notifications_array.group_by(&:notification_category_id).select{|n| n == 2}.first[1].group_by(&:options).select{|opt| opt == o}.empty?
+#          unless notifications_array.where(notification_category_id: 2, options: o).empty?
+            notifications_array.group_by(&:notification_category_id).select{|n| n == 2}.first[1].group_by(&:options).select{|opt| opt == o}.first[1].each do |n|
+#            notifications_array.where(notification_category_id: 2, options: o).each do |n|
               if Comment.find(n.origin_id).story_id == s.id
                 commenters.push(User.find(n.notified_by_user_id))
                 ids.push(n.id)
@@ -154,8 +156,10 @@ module NotificationsHelper
           reactors = []
           ids = []
           reactor_links = []
-          unless notifications_array.where(notification_category_id: 3, options: o).empty?
-            notifications_array.where(notification_category_id: 3, options: o).each do |n|
+#          unless notifications_array.where(notification_category_id: 3, options: o).empty?
+          unless notifications_array.group_by(&:notification_category_id).select{|n| n == 3}.first[1].group_by(&:options).select{|opt| opt == o}.empty?
+#            notifications_array.where(notification_category_id: 3, options: o).each do |n|
+            notifications_array.group_by(&:notification_category_id).select{|n| n == 3}.first[1].group_by(&:options).select{|opt| opt == o}.first[1].each do |n|
               if Reaction.find(n.origin_id).story_id == s.id
                 reactors.push(User.find(n.notified_by_user_id))
                 ids.push(n.id)
@@ -193,7 +197,8 @@ module NotificationsHelper
       stories_bookmarks.uniq.each do |s|
         bookmarkers = []
         ids = []
-        notifications_array.where(notification_category_id: 4).each do |n|
+#        notifications_array.where(notification_category_id: 4).each do |n|
+        notifications_array.group_by(&:notification_category_id).select{|n| n == 4}.first[1].each do |n|
           if Bookmark.find(n.origin_id).story_id == s.id
             bookmarkers.push(User.find(n.notified_by_user_id))
             ids.push(n.id)
@@ -244,7 +249,8 @@ module NotificationsHelper
         else
           @max_index = id_array[index].max
         end
-        @noti = Notification.find(@max_index)
+#        @noti = Notification.find(@max_index)
+        @noti = @user.notifications.group_by(&:id).select{|id| id == @max_index}.first[1][0]
         concat "<div id='#{id_array[index]}'>".html_safe
         concat "<div>".html_safe
         safe_concat messages[index]

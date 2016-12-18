@@ -68,21 +68,46 @@ class DashboardController < ApplicationController
   private
   
   def set_user
-    @user = User.friendly.find(params[:id])
+#    @user = User.friendly.find(params[:id])
+    if @user == current_user
+      @user = User.includes(:stories).friendly.find(params[:id])
+    else
+      @user = User.includes(:stories, :notifications).friendly.find(params[:id])
+    end
   end
   
   def set_authored_stories
-    @authored_stories = Story.active.where(author_id: @user)
+#    @authored_stories = Story.active.where(author_id: @user)
+    @authored_stories = @user.stories
   end
   
   def set_posted_stories
-    @posted_stories = Story.active.where(poster_id: @user)
+#    @posted_stories = Story.active.where(poster_id: @user)
+    @postings = @user.stories.active.group_by(&:poster_id)
+    unless @postings.select{|poster_id| poster_id == @user.id}.empty?
+      @posted_stories = @postings.select{|poster_id| poster_id == @user.id}.first[1]
+    else
+      @posted_stories = nil
+    end
   end
   
   def set_notifications
-    @notifications = Notification.where(user_id: @user.id)
-    @unread_notifications = @notifications.where(read: false)
-    @read_notifications = @notifications.where(read: true)
+#    @notifications = Notification.where(user_id: @user.id)
+#    @read_notifications = @notifications.where(read: true)
+#    @unread_notifications = @notifications.where(read: false)
+    @notifications = @user.notifications.group_by(&:read)
+    
+    unless @notifications.select{|read| read == false}.empty? 
+      @unread_notifications = @notifications.select{|read| read == false}.first[1]
+    else 
+      @unread_notifications = []
+    end
+    
+    unless @notifications.select{|read| read == true}.empty? 
+      @read_notifications = @notifications.select{|read| read == true}.first[1]
+    else 
+      @read_notifications = []
+    end 
   end
   
   def set_reacted_stories
