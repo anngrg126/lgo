@@ -83,6 +83,10 @@ class Story < ApplicationRecord
     deleted_at.nil? # only index active records
   end
   
+  def active?
+    deleted_at.nil?
+  end
+  
   def search_data
    attrs = attributes.dup
    relational = {
