@@ -121,7 +121,7 @@ class StoriesController < ApplicationController
   end
   
   def set_story
-    @story = Story.find(params[:id])
+    @story = Story.includes(:user).find(params[:id])
     #to make sure users can only get to their own stories
     #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
   end

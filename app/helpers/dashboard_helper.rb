@@ -98,9 +98,14 @@ module DashboardHelper
   
   def story_by(story)
     if story.poster_id?
-      html = "<div>Posted by: #{User.find(story.poster_id).full_name}</div>".html_safe
+#      html = "<div>Posted by: #{User.find(story.poster_id).full_name}</div>".html_safe
+      unless story.anonymous
+        html = "<div>Posted by: #{story.user.full_name}</div>".html_safe
+      else
+        html = "<div>Posted by: #{User.find(story.poster_id).full_name}</div>".html_safe
+      end
     else
-      html = "<div>Written by: #{User.find(story.author_id).full_name}</div>".html_safe
+      html = "<div>Written by: #{story.user.full_name}</div>".html_safe
     end
   end
   

@@ -10,7 +10,8 @@ class FollowingsController < ApplicationController
       if @following.save
         create_notification @following
         respond_to do |format|
-          @user = User.find(@following.user_id)
+#          @user = User.find(@following.user_id)
+          @user = @following.user
           flash.now[:success] = "You are now following #{@user.full_name}"
           format.js {render 'followings/create', :locals => {followings: Following.where(follower_id: current_user.id).count}}
         end
@@ -28,7 +29,8 @@ class FollowingsController < ApplicationController
     if @following.destroy
       destroy_notification(@following)
       respond_to do |format|
-        @user = User.find(@following.user_id)
+#        @user = User.find(@following.user_id)
+        @user = @following.user
         flash.now[:success] = "You unfollowed #{@user.full_name}"
         format.js {render 'followings/destroy', :locals => {followings: Following.where(follower_id: current_user.id).count}}
       end

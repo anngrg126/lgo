@@ -32,15 +32,23 @@ module StoriesHelper
   
   def story_by_show(story)
     if story.published?
-      link = link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
-      partial =  render partial: 'followings/form', locals: { user: User.find(story.poster_id), follower: current_user }
+#      link = link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
+      unless story.anonymous?
+        @s_user = story.user
+#        link = link_to "#{story.user.full_name}", dashboard_path(story.user))
+      else
+        @s_user = User.find(story.poster_id)
+#        link = link_to "#{User.find(story.poster_id).full_namy}", dashboard_path(User.find(story.poster_id))
+      end
+      link = link_to "#{@s_user.full_name}", dashboard_path(@s_user)
+      partial =  render partial: 'followings/form', locals: { user: @s_user, follower: current_user }
       html = "<div>Posted by: #{link}</div><div>#{partial}</div>".html_safe
      
     else
       if story.anonymous?
         html = "<div>Posted by: Anonymous</div>"
       else
-        link = link_to "#{User.find(story.author_id).full_name}", dashboard_path(User.find(story.author_id))
+        link = link_to "#{story.user.full_name}", dashboard_path(story.user)
         html = "<div>Posted by: #{link}".html_safe
       end
     end

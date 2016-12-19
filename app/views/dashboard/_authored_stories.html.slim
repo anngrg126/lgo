@@ -30,4 +30,8 @@
       == story.created_at.strftime("%b %d, %Y")
     p
       | Posted by: 
-      == "#{User.find(story.poster_id).full_name}"
+      /== "#{User.find(story.poster_id).full_name}"
+      - unless story.anonymous
+        == "#{story.user.full_name}"
+      - else
+        == "#{User.find(story.poster_id).full_name}"

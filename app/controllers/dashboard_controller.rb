@@ -70,9 +70,9 @@ class DashboardController < ApplicationController
   def set_user
 #    @user = User.friendly.find(params[:id])
     if @user == current_user
-      @user = User.includes(:stories).friendly.find(params[:id])
-    else
       @user = User.includes(:stories, :notifications).friendly.find(params[:id])
+    else
+      @user = User.includes(:stories).friendly.find(params[:id])
     end
   end
   
