@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Adding Saves to Stories" do
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_published_stories)
     @story = Story.where(author_id: @foo.id).active.first

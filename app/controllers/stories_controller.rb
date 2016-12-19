@@ -73,7 +73,8 @@ class StoriesController < ApplicationController
       notify_admin(@story)
       if @story.anonymous_changed?
         if @story.anonymous
-          @story.poster_id = 3
+#          @story.poster_id = User.where(anonymous: true).first.id
+          @story.poster_id = @anonymous_user.id
           destroy_notification(@story)
           create_notification(@story)
         else
@@ -124,6 +125,7 @@ class StoriesController < ApplicationController
     @story = Story.includes(:user).find(params[:id])
     #to make sure users can only get to their own stories
     #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
+    @anonymous_user = User.where(anonymous: true).first
   end
   
   def redirect_cancel
@@ -158,7 +160,7 @@ class StoriesController < ApplicationController
     end
   end
     
-    def set_tags
-      @tags = Tag.all.group_by(&:name)
-    end
+  def set_tags
+    @tags = Tag.all.group_by(&:name)
+  end
 end

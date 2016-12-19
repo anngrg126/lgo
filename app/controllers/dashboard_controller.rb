@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_profile]
+  before_action :set_anonymous_user
   
   before_action :set_authored_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
   before_action :set_posted_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
@@ -83,7 +84,8 @@ class DashboardController < ApplicationController
   
   def set_posted_stories
 #    @posted_stories = Story.active.where(poster_id: @user)
-    unless @user.id == 3 || @user.id == 1000 #replace this with unless @user.anonymous == true
+#    unless @user.id == 3 || @user.id == 1000
+    unless @user.id == @anonymous_user.id
       @postings = @user.stories.active.published.group_by(&:poster_id)
       unless @postings.select{|poster_id| poster_id == @user.id}.empty?
         @posted_stories = @postings.select{|poster_id| poster_id == @user.id}.first[1]
@@ -140,5 +142,9 @@ class DashboardController < ApplicationController
   
   def set_tags
     @tags = Tag.all.group_by(&:name)
+  end
+  
+  def set_anonymous_user
+    @anonymous_user = User.where(anonymous: true).first
   end
 end

@@ -4,6 +4,7 @@ require 'support/macros'
 RSpec.feature "Users signup" do
   
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
     @email = Faker::Internet.email
     @password = Faker::Internet.password
     @password2 = Faker::Internet.password

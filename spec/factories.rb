@@ -1,4 +1,4 @@
-FactoryGirl.define do  
+FactoryGirl.define do
   factory :picture do
     image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/image.png', 'image/png') }
 #    image_file_name {'image.png'}
@@ -53,7 +53,7 @@ FactoryGirl.define do
       email "anonymous@example.com"
       first_name "Brad"
       last_name "The Penguin"
-      id 1000
+      anonymous true
     end
     
     factory :user_with_unpublished_stories do
@@ -92,7 +92,8 @@ FactoryGirl.define do
       end
     
       after(:create) do |user, evaluator|
-        create_list(:published_anonymous_story, evaluator.stories_count, user: user, author_id: user.id, poster_id: 1000)
+        create_list(:published_anonymous_story, evaluator.stories_count, user: user, author_id: user.id, poster_id: 1)
+        #1 is anonymous_user id because that user is created first in the test suite
       end
     end
     

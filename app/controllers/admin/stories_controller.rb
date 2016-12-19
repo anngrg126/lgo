@@ -4,6 +4,7 @@ class Admin::StoriesController < ApplicationController
   before_action :set_story, only: [:update, :destroy]
   before_action :set_tags, only: [:show, :index, :new, :edit]
   before_action :set_tags, only: [:show, :index, :new, :edit]
+  before_action :set_anonymous_user, only: [:update]
   
   def index
     @stories = Story.unpublished.active
@@ -76,7 +77,7 @@ class Admin::StoriesController < ApplicationController
     unless @story.anonymous?
       @story.poster_id = @story.author_id
     else
-      @story.poster_id = 3
+      @story.poster_id = @anonymous_user.id
     end
     @story.last_user_to_update = "Admin"  
     respond_to do |format|
@@ -149,5 +150,9 @@ class Admin::StoriesController < ApplicationController
   
   def set_tags
     @tags = Tag.all.group_by(&:name)
+  end
+  
+  def set_anonymous_user
+    @anonymous_user = User.where(anonymous: true).first
   end
 end

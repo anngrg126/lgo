@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "ListingFollowings" do 
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
     NotificationCategory.create([
       {id: 1, name: "Story"},
       {id: 2, name: "Comment"},

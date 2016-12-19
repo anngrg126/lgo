@@ -37,7 +37,7 @@ module StoriesHelper
         @s_user = story.user
 #        link = link_to "#{story.user.full_name}", dashboard_path(story.user))
       else
-        @s_user = User.find(story.poster_id)
+        @s_user = @anonymous_user
 #        link = link_to "#{User.find(story.poster_id).full_namy}", dashboard_path(User.find(story.poster_id))
       end
       link = link_to "#{@s_user.full_name}", dashboard_path(@s_user)

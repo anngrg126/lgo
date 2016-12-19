@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Listing Followings" do 
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
     @foo = FactoryGirl.create(:user)
     @bar = FactoryGirl.create(:user)
     @car = FactoryGirl.create(:user)

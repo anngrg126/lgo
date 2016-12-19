@@ -3,6 +3,7 @@ require 'support/macros'
 
 RSpec.feature "Editing Account Settings" do 
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
     @user = FactoryGirl.create(:user)
     @new_password = Faker::Internet.password
     @new_email = Faker::Internet.email

@@ -102,7 +102,7 @@ module DashboardHelper
       unless story.anonymous
         html = "<div>Posted by: #{story.user.full_name}</div>".html_safe
       else
-        html = "<div>Posted by: #{User.find(story.poster_id).full_name}</div>".html_safe
+        html = "<div>Posted by: #{@anonymous_user.full_name}</div>".html_safe
       end
     else
       html = "<div>Written by: #{story.user.full_name}</div>".html_safe

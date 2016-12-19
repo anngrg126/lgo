@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.feature "Listing Stories" do 
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
+    @anonymous_user.update_attributes(id: 1)
     @user = FactoryGirl.create(:user_with_published_stories, stories_count: 2)
     @story1 = Story.where(author_id: @user.id).active.first
     @story2 = Story.where(author_id: @user.id).active.last
-    @anonymous_user = FactoryGirl.create(:anonymous_user, id: 1000)
     @user1 = FactoryGirl.create(:user_with_published_anonymous_stories, stories_count: 1)
     @story3 = Story.friendly.find_by(author_id: @user1.id)
   end

@@ -34,4 +34,4 @@
       - unless story.anonymous
         == "#{story.user.full_name}"
       - else
-        == "#{User.find(story.poster_id).full_name}"
+        == "#{@anonymous_user.full_name}"
