@@ -7,11 +7,11 @@ class Admin::StoriesController < ApplicationController
   before_action :set_anonymous_user, only: [:update]
   
   def index
-    @stories = Story.unpublished.active
+    @stories = Story.includes(:user).unpublished.active
   end
   
   def show
-    @story = Story.includes(:classifications).find(params[:id])
+    @story = Story.includes(:classifications, :tags).find(params[:id])
   end
   
   def edit
@@ -112,7 +112,8 @@ class Admin::StoriesController < ApplicationController
   end
   
   def set_story
-    @story = Story.find(params[:id])
+    @story = Story.includes(:user).find(params[:id])
+    @anonymous_user = User.where(anonymous: true).first
   end
   
   def create_notification(story)

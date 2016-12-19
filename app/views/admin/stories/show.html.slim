@@ -1,6 +1,7 @@
 p
   | Original Author: 
-  == link_to "#{User.find(@story.author_id).full_name}", dashboard_path(User.find(@story.author_id))
+  /== link_to "#{User.find(@story.author_id).full_name}", dashboard_path(User.find(@story.author_id))
+  == link_to "#{@story.user.full_name}", dashboard_path(@story.user)
 p 
   | Submitted At: 
   == @story.created_at.strftime("%b %d, %Y")
@@ -23,7 +24,11 @@ p
 - if @story.poster_id?
   div
     | Posted by: 
-    == link_to "#{User.find(@story.poster_id).full_name}", dashboard_path(User.find(@story.poster_id))
+    - unless @story.anonymous?
+      == link_to "#{@story.user.full_name}", dashboard_path(@story.user)
+    - else
+      == link_to "#{@anonymous_user.full_name}", dashboard_path(@anonymous_user)
+    /== link_to "#{User.find(@story.poster_id).full_name}", dashboard_path(User.find(@story.poster_id))
 h2
   | Raw Title: 
   == @story.raw_title
@@ -57,18 +62,20 @@ p
   - unless @story.classifications.empty?
     | Story Tags:
     br
-    - @story.classifications.each do |classif|
-      = Tag.find(classif.tag_id).name
-      - if classif.description?
-        span _#{TagCategory.find(Tag.find(classif.tag_id).tag_category_id).category.downcase}: #{classif.description}
-      - if classif.primary?
+    - @story.classifications.group_by(&:tag_id).each do |classif|
+      /= Tag.find(classif.tag_id).name
+      == @story.tags.group_by(&:id).select{|id| id == classif[0]}.first[1][0].name
+      - if classif[1].first.description?
+        span &nbsp;#{TagCategory.find(Tag.find(classif[1].first.tag_id).tag_category_id).category.downcase}: #{classif[1].first.description}
+      - if classif[1].first.primary?
         span  &#40;primary&#41;
-      - unless classif.primary == true 
-        = link_to "Delete", admin_story_classification_path(@story, classif), method: :delete, class: "btn"
+      - unless classif[1].first.primary == true 
+        = link_to "Delete", admin_story_classification_path(@story, classif[1].first), method: :delete, class: "btn"
       br
 p
   | Admin: 
   - if @story.admin_id?
+    
     = link_to "#{User.find(@story.admin_id).full_name}", dashboard_path(User.find(@story.admin_id))
   - else
     | Unclaimed
