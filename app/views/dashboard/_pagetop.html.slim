@@ -25,7 +25,7 @@ div
   - if @user == current_user
     == link_to "Stories: #{@authored_stories.length}", authored_stories_dashboard_path(@user), remote: true
     |   
-    == link_to "Reactions: #{@reacted_stories.distinct.count}", reacted_stories_dashboard_path(@user), remote: true
+    == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
     |  
     == link_to "Saves: #{@bookmarked_stories.length}", bookmarked_stories_dashboard_path(@user), remote: true
     |  
@@ -33,7 +33,7 @@ div
   - else
     == link_to "Stories: #{@posted_stories.length}", authored_stories_dashboard_path(@user), remote: true
     |   
-    == link_to "Reactions: #{@reacted_stories.count}", reacted_stories_dashboard_path(@user), remote: true
+    == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
   |  
   == link_to "Followers: #{@followers.count}", followers_dashboard_path(@user), remote: true
   |  

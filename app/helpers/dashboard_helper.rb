@@ -111,7 +111,8 @@ module DashboardHelper
   
   def user_reaction(story, user)
     output = [""]
-    Reaction.where(story_id: story.id, user_id: user.id).each do |reaction|
+#    Reaction.where(story_id: story.id, user_id: user.id).each do |reaction|
+    @user.reactions.group_by(&:story_id).select{|story_id| story_id == story.id}.first[1].each do |reaction|
       output.push(content_tag(:span) {
         case reaction.reaction_category_id
         when 1

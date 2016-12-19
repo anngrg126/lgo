@@ -12,6 +12,7 @@ class DashboardController < ApplicationController
   before_action :set_notifications, only: [:show, :notifications, :bookmarked_stories]
   before_action :set_tags
   before_action :set_bookmark_posters, only: [:bookmarked_stories]
+  before_action :set_reaction_posters, only: [:reacted_stories]
   
   def show
   end
@@ -73,7 +74,10 @@ class DashboardController < ApplicationController
 #    @user = User.friendly.find(params[:id])
     @user = User.includes(:stories).friendly.find(params[:id])
     if @user == current_user
-      @user = User.includes(:stories, :notifications, :comments, :reactions).friendly.find(params[:id])
+      @user = User.includes(:stories, :followers, :followings, :notifications, :comments).friendly.find(params[:id])
+      #note: can make more efficient by also including reactions, and moving set_reacted_stories to a nested route in def show. Same for bookmarks.
+    else
+      @user = User.includes(:stories, :followers, :followings).friendly.find(params[:id])
     end
   end
   
@@ -117,11 +121,33 @@ class DashboardController < ApplicationController
   end
   
   def set_reacted_stories
+    @reacted_stories = []
     if @user == current_user
-      @reacted_stories = Story.active.where.not(author_id: @user.id).joins(:reactions).where(:reactions => { :user_id => @user.id})
+      @user.reactions.includes(:story).each do |reaction|
+        if reaction.story.active?
+          unless reaction.story.author_id == @user.id
+            @reacted_stories.push(reaction.story)
+          end
+        end
+      end
+#      @reacted_stories = Story.active.where.not(author_id: @user.id).joins(:reactions).where(:reactions => { :user_id => @user.id})
     else
-      @reacted_stories = Story.active.joins(:reactions).where(:reactions => { :user_id => @user.id})
+      @user.reactions.includes(:story).each do |reaction|
+        if reaction.story.active?
+          @reacted_stories.push(reaction.story)
+        end
+      end
+#      @reacted_stories = Story.active.joins(:reactions).where(:reactions => { :user_id => @user.id})
     end
+    @reacted_stories.uniq!
+  end
+  def set_reaction_posters
+    @r_posters = []
+    @reacted_stories.group_by(&:poster_id).each do |r|
+      @r_posters.push(r[0])
+    end
+    @r_posters.uniq!
+    @r_users = User.where(id: @r_posters).group_by(&:id)
   end
   
   def set_bookmarked_stories
@@ -150,11 +176,13 @@ class DashboardController < ApplicationController
   end
   
   def set_followers
-    @followers = Following.follower_active.where(user_id: @user.id)
+    @followers = @user.followers
+#    @followers = Following.follower_active.where(user_id: @user.id)
   end
   
   def set_followings
-    @followings = Following.following_active.where(follower_id: @user.id)
+    @followings = @user.followings
+#    @followings = Following.following_active.where(follower_id: @user.id)
   end
   
   def set_tags
