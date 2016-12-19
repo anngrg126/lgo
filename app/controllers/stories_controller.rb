@@ -5,22 +5,23 @@ class StoriesController < ApplicationController
   before_action :set_tags, only: [:show, :index, :new, :edit]
   
   def index
+    @anonymous_user = User.where(anonymous: true).first
     if params[:search]
-      @results = (Story.search params[:search], operator: "or")
+      @results = (Story.includes(:user).search params[:search], operator: "or")
       @stories = @results.results
       if @results.count <=0
         flash[:warning] = "No records matched : "+ params[:search]
         redirect_to root_path
       end
     elsif params[:search_tag]
-      @results = (Story.search params[:search_tag], fields: [tags: :exact])
+      @results = (Story.includes(:user).search params[:search_tag], fields: [tags: :exact])
       @stories = @results.results
       if @results.count <=0
         flash[:warning] = "No records matched : "+ params[:search_tag]
         redirect_to root_path
       end
     else
-      @stories = Story.published.active
+      @stories = Story.includes(:user).published.active
     end
   end
   
