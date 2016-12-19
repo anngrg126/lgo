@@ -31,7 +31,7 @@ div
     |  
     == link_to "Comments: #{@commented_stories.count}", commented_stories_dashboard_path(@user), remote: true
   - else
-    == link_to "Stories: #{@posted_stories.published.count}", authored_stories_dashboard_path(@user), remote: true
+    == link_to "Stories: #{@posted_stories.count}", authored_stories_dashboard_path(@user), remote: true
     |   
     == link_to "Reactions: #{@reacted_stories.count}", reacted_stories_dashboard_path(@user), remote: true
   |  

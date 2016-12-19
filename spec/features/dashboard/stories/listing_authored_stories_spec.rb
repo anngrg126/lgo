@@ -74,7 +74,7 @@ RSpec.feature "Listing Stories" do
     expect(page).not_to have_content(@story4.final_body.truncate(150))
     expect(page).not_to have_link(@story4.final_title)   
     
-    visit(dashboard_path(@anonymous_user))
+      visit(dashboard_path(@anonymous_user))
     
     expect(page).to have_content(@story4.final_title)
     expect(page).to have_content(@story4.final_body.truncate(150))

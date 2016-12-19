@@ -83,11 +83,15 @@ class DashboardController < ApplicationController
   
   def set_posted_stories
 #    @posted_stories = Story.active.where(poster_id: @user)
-    @postings = @user.stories.active.group_by(&:poster_id)
-    unless @postings.select{|poster_id| poster_id == @user.id}.empty?
-      @posted_stories = @postings.select{|poster_id| poster_id == @user.id}.first[1]
+    unless @user.id == 3 || @user.id == 1000 #replace this with unless @user.anonymous == true
+      @postings = @user.stories.active.published.group_by(&:poster_id)
+      unless @postings.select{|poster_id| poster_id == @user.id}.empty?
+        @posted_stories = @postings.select{|poster_id| poster_id == @user.id}.first[1]
+      else
+        @posted_stories = []
+      end
     else
-      @posted_stories = nil
+      @posted_stories = Story.active.where(poster_id: @user)
     end
   end
   
