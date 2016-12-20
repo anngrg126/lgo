@@ -13,6 +13,7 @@ class DashboardController < ApplicationController
   before_action :set_tags
   before_action :set_bookmark_posters, only: [:bookmarked_stories]
   before_action :set_reaction_posters, only: [:reacted_stories]
+  before_action :set_followings_users, only:  [:followings]
   
   def show
   end
@@ -176,13 +177,27 @@ class DashboardController < ApplicationController
   end
   
   def set_followers
-    @followers = @user.followers
+    @followers = []
+    @user.followers.each do |follower|
+      if follower.not_deactive?
+        @followers.push(follower)
+      end
+    end
+    @followers.uniq!
 #    @followers = Following.follower_active.where(user_id: @user.id)
   end
   
   def set_followings
-    @followings = @user.followings
-#    @followings = Following.following_active.where(follower_id: @user.id)
+    @followings = Following.following_active.where(follower_id: @user.id)
+  end
+  def set_followings_users
+    @f_ids = []
+    @followings_users = []
+    @followings.each do |following|
+      @f_ids.push(following.user_id)
+    end
+    @f_ids.uniq!
+    @followings_users = User.where(id: @f_ids)
   end
   
   def set_tags

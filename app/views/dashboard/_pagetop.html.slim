@@ -35,10 +35,10 @@ div
     |   
     == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
   |  
-  == link_to "Followers: #{@followers.count}", followers_dashboard_path(@user), remote: true
+  == link_to "Followers: #{@followers.length}", followers_dashboard_path(@user), remote: true
   |  
   span#dashboard_followings_counter
-    == link_to "Following: #{@followings.count}", followings_dashboard_path(@user), remote: true
+    == link_to "Following: #{@followings.length}", followings_dashboard_path(@user), remote: true
   |  
   - if @user == current_user
     span#dashboard_notifications_counter

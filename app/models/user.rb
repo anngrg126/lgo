@@ -29,6 +29,10 @@ class User < ApplicationRecord
   
   scope :author_deactive, -> { where.not(deactivated_at: nil) }
   
+  def not_deactive?
+    deactivated_at.nil?
+  end
+  
   def active?
     #active is set by registration_steps 
     #controller; active+db is set by 
