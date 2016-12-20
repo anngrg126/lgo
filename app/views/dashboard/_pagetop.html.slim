@@ -42,4 +42,4 @@ div
   |  
   - if @user == current_user
     span#dashboard_notifications_counter
-      == link_to "Notifications: #{@unread_notifications.count}", notifications_dashboard_path(@user), remote: true
+      == link_to "Notifications: #{@unread_notifications.length}", notifications_dashboard_path(@user), remote: true
