@@ -4,7 +4,6 @@ module FollowingsHelper
 #    method_name =  already_follows ? :delete : :post 
 #    link_text = already_follows ? "Unfollow" : "Follow"  
 #    follower_id = current_user ? follower.id : 0
-#    - binding.pry
     unless current_user
       link_to "Follow", followings_path(user_id: user.id, follower_id: 0), method: :post, class: "button"
     else

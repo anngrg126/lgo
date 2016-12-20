@@ -14,6 +14,7 @@ class DashboardController < ApplicationController
   before_action :set_bookmark_posters, only: [:bookmarked_stories]
   before_action :set_reaction_posters, only: [:reacted_stories]
   before_action :set_followings_users, only:  [:followings]
+  before_action :set_commented_story_posters, only:  [:commented_stories]
   
   def show
   end
@@ -75,7 +76,7 @@ class DashboardController < ApplicationController
 #    @user = User.friendly.find(params[:id])
     @user = User.includes(:stories).friendly.find(params[:id])
     if @user == current_user
-      @user = User.includes(:stories, :followers, :followings, :notifications, :comments).friendly.find(params[:id])
+      @user = User.includes(:stories, :followers, :followings, :notifications).friendly.find(params[:id])
       #note: can make more efficient by also including reactions, and moving set_reacted_stories to a nested route in def show. Same for bookmarks.
     else
       @user = User.includes(:stories, :followers, :followings).friendly.find(params[:id])
@@ -162,6 +163,7 @@ class DashboardController < ApplicationController
     end
     @bookmarked_stories.uniq!
   end
+  
   def set_bookmark_posters
     @b_posters = []
     @bookmarked_stories.group_by(&:poster_id).each do |b|
@@ -173,7 +175,26 @@ class DashboardController < ApplicationController
   end
   
   def set_commented_stories
-    @commented_stories = Story.active.joins(:comments).where(:comments => { :user_id => @user.id, :deleted_at => nil})
+    @commented_stories = []
+    @user.comments.includes(:story).each do |comment|
+      if comment.story.active?
+        unless comment.story.author_id == @user.id
+          @commented_stories.push(comment.story)
+        end
+      end
+    end
+    @commented_stories.uniq!
+#    @commented_stories = Story.active.joins(:comments).where(:comments => { :user_id => @user.id, :deleted_at => nil})
+  end
+  
+  def set_commented_story_posters
+    @c_posters = []
+    @commented_stories.group_by(&:poster_id).each do |c|
+      @c_posters.push(c[0])
+    end
+    @c_posters.uniq!
+    @c_users = User.where(id: @c_posters).group_by(&:id)
+#    @bookmarked_stories = Story.active.where.not(author_id: @user.id).joins(:bookmarks).where(:bookmarks => { :user_id => @user.id})
   end
   
   def set_followers
