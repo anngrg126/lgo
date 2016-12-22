@@ -1,260 +1,261 @@
-div[data-sticky-container]
-  div.sticky[data-sticky data-margin-top= "0"]
-    nav
-      div.top-bar.row
-        div[style="line-height: 0.8;"]
-          ul.menu
-            li.gifton_logo
-              == link_to root_path, class: "no_pad" do
-                img[src="https://s3.amazonaws.com/letsgifton/GiftOnLogo.png" alt="GiftOn: Real-life gift stories and Ideas"]
-            li.menu-text.hide-for-small-only[class="#{@active_browse}"]
-              button.menu-text[class="#{@active_browse}"] 
-                h5 Browse
-            li.menu-text.hide-for-small-only[class="#{@active_share}"]
-              h5
-                == link_to "Share", new_story_path, class: "menu-text #{@active_share}"
-          - if user_signed_in?
-            - unless current_page? registration_step_path(:basic_details)
-              div
-                == link_to "My Dashboard", dashboard_path(current_user)
-              div
-                == link_to "Sign out", destroy_user_session_path, method: :delete
-              div class="navbar-right"
-                == signed_in_user
-              div#user_notifications
+div#stickhere
+  div[data-sticky-container]
+    div.sticky[data-sticky data-margin-top= "0" style="width: 100%;" anchor="stickhere"]
+      nav
+        div.top-bar.row
+          div[style="line-height: 0.8;"]
+            ul.menu
+              li.gifton_logo
+                == link_to root_path, class: "no_pad" do
+                  img[src="https://s3.amazonaws.com/letsgifton/GiftOnLogo.png" alt="GiftOn: Real-life gift stories and Ideas"]
+              li.menu-text.hide-for-small-only[class="#{@active_browse}"]
+                button.menu-text#browse_navbar[class="#{@active_browse}" data-toggle="tags-menu"] 
+                  h5 Browse
+              li.menu-text.hide-for-small-only[class="#{@active_share}"]
+                h5
+                  == link_to "Share", new_story_path, class: "menu-text #{@active_share}"
+            - if user_signed_in?
+              - unless current_page? registration_step_path(:basic_details)
+                div
+                  == link_to "My Dashboard", dashboard_path(current_user)
+                div
+                  == link_to "Sign out", destroy_user_session_path, method: :delete
+                div class="navbar-right"
+                  == signed_in_user
+                div#user_notifications
+                  == user_notifications_link
+            - else
+              div.menu-right
                 == user_notifications_link
-          - else
-            div.menu-right
-              == user_notifications_link
-              div[style="padding-right: 0.5em;"]
-                == link_to "Join", new_user_registration_path, class: "button"
-              div.hide-for-small-only
-                == link_to "Login", new_user_session_path, class: "button hollow"
-    div.top-bar.center.show-for-small-only
-      .row
-        .columns.small-4[class="#{@active_browse}"]
-          div[data-responsive-toggle="tags-menu" data-hide-for="medium"]
-            button[type="button" data-toggle class="menu-text #{@active_browse}" style="padding: 0;"] 
-              h6 Browse
-        .columns.small-4[class="#{@active_share}"]
-          h6
-            == link_to "Share", new_story_path, class: "menu-text #{@active_share}"
-        .columns.small-4
-          button[type="button" data-toggle="search_dropdown_mobile"] 
-            i.fa.fa-search[aria-hidden="true"]
-      #search_dropdown_mobile.row[data-toggler=".visible"]
-        = form_tag root_path, method: :get do
-          div.input-group
-            input[type="search" name="search" id="search" class="input-group-field"]
-            div.input-group-button
-              = submit_tag "Search", class: "button"
-        /.menu-icon.dark[type="button" data-toggle]  
-    .row#tags-menu[style="line-height: 0.8;"]
-      .columns.show-for-small-only
-        ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
-          li
-            h6 For Fun
-          li
-            a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
-          li
-            a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
-          li
-            a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
-          li
-            a.btn-link.btn-right.inline-block.fail[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
-      .columns
-        ul#navbar-tier2.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
-          li
-            h6 For Ideas
-          li
-            a.btn-link[href="#" data-remote=true] 
-              | Occasion&nbsp;
-              i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
-            ul.vertical.menu.occasion
-              .row
-                .columns.medium-3.small-12
+                div[style="padding-right: 0.5em;"]
+                  == link_to "Join", new_user_registration_path, class: "button"
+                div.hide-for-small-only
+                  == link_to "Login", new_user_session_path, class: "button hollow"
+      div.top-bar.center.show-for-small-only
+        .row
+          .columns.small-4[class="#{@active_browse}"]
+            div[data-responsive-toggle="tags-menu" data-hide-for="medium"]
+              button#browse_navbar[type="button" data-toggle class="menu-text #{@active_browse}" style="padding: 0;"] 
+                h6 Browzzzee
+          .columns.small-4[class="#{@active_share}"]
+            h6
+              == link_to "Share", new_story_path, class: "menu-text #{@active_share}"
+          .columns.small-4
+            button[type="button" data-toggle="search_dropdown_mobile"] 
+              i.fa.fa-search[aria-hidden="true"]
+        #search_dropdown_mobile.row[data-toggler=".visible"]
+          = form_tag root_path, method: :get do
+            div.input-group
+              input[type="search" name="search" id="search" class="input-group-field"]
+              div.input-group-button
+                = submit_tag "Search", class: "button"
+          /.menu-icon.dark[type="button" data-toggle]  
+      .row.is-hidden#tags-menu[style="line-height: 0.8;" data-toggler="is-hidden"]
+        .columns.show-for-small-only
+          ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
+            li
+              h6 For Fun
+            li
+              a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
+            li
+              a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
+            li
+              a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
+            li
+              a.btn-link.btn-right.inline-block.fail[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
+        .columns
+          ul#navbar-tier2.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
+            li
+              h6 For Ideas
+            li
+              a.btn-link[href="#" data-remote=true] 
+                | Occasion&nbsp;
+                i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+              ul.vertical.menu.occasion
+                .row
+                  .columns.medium-3.small-12
+                      li.list-header Popular
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("just because")}"] Just because
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("birthday")}"] Birthday
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("holidays")}"] Holidays
+                  .columns.medium-3.small-6
+                      li.list-header All
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("anniversary")}"] Anniversary
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("birthday")}"] Birthday
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("engagement")}"] Engagement
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("father's day")}"] Father's Day
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("going away")}"] Going away
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("graduation")}"] Graduation
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("holidays")}"] Holidays
+                  .columns.medium-3.small-6.medium-push-3
+                    li.hide-for-small-only &nbsp;
+                    li.list-header To Say
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("congratulations")}"] Congratulations
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("i love you")}"] I love you
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("i miss you")}"] I miss you
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("sorry")}"] Sorry
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("thank you")}"] Thank you
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("you can do it")}"] You can do it
+                  .columns.medium-3.small-6.medium-pull-3.small-pull-6
+                      li &nbsp;
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("just because")}"] Just because
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("travel souvenirs")}"] Travel souvenirs
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("mother's day")}"] Mother's Day
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("showers")}"] Showers
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("new baby")}"] New baby
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("valentine's day")}"] Valentine's Day
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("visits and parties")}"] Visits &amp; parties
+                      li
+                        a[href="#{stories_path}?search_tag=#{tag_search("wedding")}"] Wedding
+
+            li
+              a.btn-link[href="#"]
+                | Relationship&nbsp;
+                i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+              ul.vertical.menu.relationship
+                .row
+                  .columns.medium-6
                     li.list-header Popular
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("just because")}"] Just because
+                      a[href="#{stories_path}?search_tag=#{tag_search("significant other")}"] Significant other
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("birthday")}"] Birthday
+                      a[href="#{stories_path}?search_tag=#{tag_search("family")}"] Family
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("holidays")}"] Holidays
-                .columns.medium-3.small-6
+                      a[href="#{stories_path}?search_tag=#{tag_search("friends")}"] Friends
+                  .columns.medium-6
                     li.list-header All
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("anniversary")}"] Anniversary
+                      a[href="#{stories_path}?search_tag=#{tag_search("family")}"] Family
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("birthday")}"] Birthday
+                      a[href="#{stories_path}?search_tag=#{tag_search("parents")}"] Parents
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("engagement")}"] Engagement
+                      a[href="#{stories_path}?search_tag=#{tag_search("siblings")}"] Siblings
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("father's day")}"] Father's Day
+                      a[href="#{stories_path}?search_tag=#{tag_search("friends")}"] Friends
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("going away")}"] Going away
+                      a[href="#{stories_path}?search_tag=#{tag_search("i just met you")}"] I just met you
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("graduation")}"] Graduation
+                      a[href="#{stories_path}?search_tag=#{tag_search("kids")}"] Kids
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("holidays")}"] Holidays
-                .columns.medium-3.small-6.medium-push-3
-                  li.hide-for-small-only &nbsp;
-                  li.list-header To Say
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("congratulations")}"] Congratulations
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("i love you")}"] I love you
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("i miss you")}"] I miss you
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("sorry")}"] Sorry
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("thank you")}"] Thank you
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("you can do it")}"] You can do it
-                .columns.medium-3.small-6.medium-pull-3.small-pull-6
-                    li &nbsp;
+                      a[href="#{stories_path}?search_tag=#{tag_search("professional")}"] Professional
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("just because")}"] Just because
+                      a[href="#{stories_path}?search_tag=#{tag_search("significant other")}"] Significant other
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("travel souvenirs")}"] Travel souvenirs
+                      a[href="#{stories_path}?search_tag=#{tag_search("significant other's family")}"] Significant other's family
+            li
+              a.btn-link[href="#"] 
+                | Type of Gift&nbsp;
+                i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+              ul.vertical.menu.type
+                .row
+                  .columns.medium-4
+                    li.list-header Popular
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("mother's day")}"] Mother's Day
+                      a[href="#{stories_path}?search_tag=#{tag_search("diy")}"] DIY
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("showers")}"] Showers
+                      a[href="#{stories_path}?search_tag=#{tag_search("thoughtful")}"] Thoughtful
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("new baby")}"] New baby
+                      a[href="#{stories_path}?search_tag=#{tag_search("budget")}"] Budget
+                  .columns.medium-4
+                    li.list-header All
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("valentine's day")}"] Valentine's Day
+                      a[href="#{stories_path}?search_tag=#{tag_search("budget")}"] Budget
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("visits and parties")}"] Visits &amp; parties
+                      a[href="#{stories_path}?search_tag=#{tag_search("diy")}"] DIY
                     li
-                      a[href="#{stories_path}?search_tag=#{tag_search("wedding")}"] Wedding
+                      a[href="#{stories_path}?search_tag=#{tag_search("experience")}"] Experience
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("fun and gag")}"] Fun &amp; Gag
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("group")}"] Group
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("last minute")}"] Last Minute
+                  .columns.medium-4
+                    li.hide-for-small-only &nbsp;
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("personalized")}"] Personalized
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("plan in advance")}"] Plan in Advance
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("romantic")}"] Romantic
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("sentimental")}"] Sentimental
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("surprise")}"] Suprise
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("thoughtful")}"] Thoughtful
 
-          li
-            a.btn-link[href="#"]
-              | Relationship&nbsp;
-              i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
-            ul.vertical.menu.relationship
-              .row
-                .columns.medium-6
-                  li.list-header Popular
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("significant other")}"] Significant other
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("family")}"] Family
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("friends")}"] Friends
-                .columns.medium-6
-                  li.list-header All
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("family")}"] Family
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("parents")}"] Parents
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("siblings")}"] Siblings
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("friends")}"] Friends
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("i just met you")}"] I just met you
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("kids")}"] Kids
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("professional")}"] Professional
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("significant other")}"] Significant other
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("significant other's family")}"] Significant other's family
-          li
-            a.btn-link[href="#"] 
-              | Type of Gift&nbsp;
-              i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
-            ul.vertical.menu.type
-              .row
-                .columns.medium-4
-                  li.list-header Popular
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("diy")}"] DIY
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("thoughtful")}"] Thoughtful
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("budget")}"] Budget
-                .columns.medium-4
-                  li.list-header All
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("budget")}"] Budget
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("diy")}"] DIY
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("experience")}"] Experience
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("fun and gag")}"] Fun &amp; Gag
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("group")}"] Group
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("last minute")}"] Last Minute
-                .columns.medium-4
-                  li.hide-for-small-only &nbsp;
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("personalized")}"] Personalized
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("plan in advance")}"] Plan in Advance
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("romantic")}"] Romantic
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("sentimental")}"] Sentimental
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("surprise")}"] Suprise
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("thoughtful")}"] Thoughtful
-
-          li
-            a.btn-link[href="#"] 
-              | Interests&nbsp;
-              i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
-            ul.vertical.menu.interests
-              .row
-                .columns.medium-6
-                  li.list-header All
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("hobbies")}"] Hobbies
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("crafts")}"] Crafts
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("reading")}"] Reading
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("cooking")}"] Cooking
-                .columns.medium-6
-                  li.hide-for-small-only &nbsp;
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("food")}"] Food
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("pop culture")}"] Pop culture
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("health and fitness")}"] Health &amp; fitness
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("travel and adventure")}"] Travel &amp; adventure
-                  li
-                    a[href="#{stories_path}?search_tag=#{tag_search("sports")}"] Sports
-      .columns.hide-for-small-only
-        ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
-          li
-            h6 For Fun
-          li
-            a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
-          li
-            a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
-          li
-            a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
-          li
-            a.btn-link.btn-right.inline-block.fail[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
-      .columns
-        button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
-          | &nbsp;
-          i.fa.fa-search.bottom[aria-hidden="true"]
-    #search_dropdown.dropdown-pane.bottom[data-dropdown]
-      = form_tag root_path, :method => :get do
-        ul.menu.medium-horizontal
-          li
-            input[type="search" name="search" id="search"]
-          li
-            = submit_tag "Search", class: "button"
+            li
+              a.btn-link[href="#"] 
+                | Interests&nbsp;
+                i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+              ul.vertical.menu.interests
+                .row
+                  .columns.medium-6
+                    li.list-header All
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("hobbies")}"] Hobbies
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("crafts")}"] Crafts
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("reading")}"] Reading
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("cooking")}"] Cooking
+                  .columns.medium-6
+                    li.hide-for-small-only &nbsp;
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("food")}"] Food
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("pop culture")}"] Pop culture
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("health and fitness")}"] Health &amp; fitness
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("travel and adventure")}"] Travel &amp; adventure
+                    li
+                      a[href="#{stories_path}?search_tag=#{tag_search("sports")}"] Sports
+        .columns.hide-for-small-only
+          ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
+            li
+              h6 For Fun
+            li
+              a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
+            li
+              a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
+            li
+              a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
+            li
+              a.btn-link.btn-right.inline-block.fail[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
+        .columns
+          button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
+            | &nbsp;
+            i.fa.fa-search.bottom[aria-hidden="true"]
+      #search_dropdown.dropdown-pane.bottom[data-dropdown]
+        = form_tag root_path, :method => :get do
+          ul.menu.medium-horizontal
+            li
+              input[type="search" name="search" id="search"]
+            li
+              = submit_tag "Search", class: "button"

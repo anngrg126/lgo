@@ -1,6 +1,17 @@
 .sticky {
   width: 100%;
 }
+#tags-menu {
+  padding: 0.3rem 0 0;
+  border-bottom: 1px solid $medium-gray;
+  border-bottom-style: inset;
+  border-width: 1px;
+  background-color: $ultra-light-gray;
+  -webkit-box-shadow: inset 0px 5px 10px -7px $dark-gray;
+  -moz-box-shadow: inset 0px 5px 10px -7px $dark-gray;
+  box-shadow: inset 0px 5px 10px -7px $dark-gray;
+  max-width: none;
+}
 #navbar-tier2, #navbar-tier2B {
   display: inline-block;
 }
@@ -42,17 +53,6 @@
 #navbar-tier2 a.btn-link.btn-right.fail:hover, #navbar-tier2B a.btn-link.btn-right.fail:hover {
   color: scale-color($primary-color, $lightness: -15%);
 }
-#tags-menu {
-  padding: 0.3rem 0 0;
-  border-bottom: 1px solid $medium-gray;
-  border-bottom-style: inset;
-  border-width: 1px;
-  background-color: $ultra-light-gray;
-  -webkit-box-shadow: inset 0px 5px 10px -7px $dark-gray;
-  -moz-box-shadow: inset 0px 5px 10px -7px $dark-gray;
-  box-shadow: inset 0px 5px 10px -7px $dark-gray;
-  max-width: none;
-}
 #tags-menu > .columns {
   width: auto;
 }
@@ -92,6 +92,7 @@ nav .top-bar.row {
   text-transform: uppercase;
   vertical-align: bottom;
   padding-bottom: 0;
+  line-height: 1;
 }
 .top-bar .menu-text h5 {
   margin-bottom: 0;
@@ -144,6 +145,13 @@ nav .menu .active > a {
   background-color: transparent;
 }
 @media only screen and (max-width: 40.063em) {
+  .top-bar .menu-text {
+    vertical-align: baseline;
+    line-height: inherit;
+  }
+  #tags-menu.is-hidden {
+    display: auto !important;
+  }
   nav .top-bar.row {
     border-bottom: none;
   }
@@ -207,6 +215,9 @@ nav .menu .active > a {
   }
   .top-bar.center {
     padding: 0;
+  }
+  .top-bar.center h6 a {
+    line-height: normal;
   }
   .top-bar.center .row.visible {
     background-color: $ultra-light-gray;

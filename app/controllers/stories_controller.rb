@@ -58,6 +58,7 @@ class StoriesController < ApplicationController
   
   def show
     @active_browse = "active"
+    @browse_visible = "open"
     @comment = @story.comments.active.build
     @bookmark = @story.bookmarks.build
   end
@@ -161,7 +162,7 @@ class StoriesController < ApplicationController
     end
   end
     
-    def set_tags
-      @tags = Tag.all.group_by(&:name)
-    end
+  def set_tags
+    @tags = Tag.all.group_by(&:name)
+  end
 end
