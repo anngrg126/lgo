@@ -22,8 +22,9 @@
 //$(function(){  });
 $(document).on('turbolinks:load', function() {
   $(document).foundation();
+  $(window).trigger('load.zf.sticky');
+  $(".sticky").width("100%").css("max-width", "none");
 });
-
 function myFunction() {
   //fcn to populate text of "Back" button in responsive menu  
   if ($("#navbar-tier2").hasClass("drilldown")) {
@@ -37,15 +38,6 @@ function myFunction() {
   $('#add_image_fields').click(function(){
     $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
   });
-  
-  //fcn to toggle active class on navbar
-   var current_url = window.location.href.substr(window.location.href
-.split("/")+1);
-  console.log(current_url);
-   $("nav .menu-text").each(function(){
-      if($(this).attr("href") == current_url || $(this).attr("current_url") == '' )
-      $(this).addClass("active");
-   })
 };
 
 //fcn to remove extra image upload fields, separate b/c dynamically-added element

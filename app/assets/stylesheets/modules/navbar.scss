@@ -9,7 +9,6 @@
   border-right: 2px solid $dark-gray;
   display: inline-block;
   padding-right: 15px;
-  font-weight: 500;
   margin-bottom: 0;
   margin-left: 15px;
 }
@@ -75,7 +74,6 @@
 }
 #navbar-tier2 .list-header {
   text-transform: uppercase;
-  font-weight: 500;
 }
 #navbar-tier2 ul .row {
   margin: 0;
@@ -94,6 +92,10 @@ nav .top-bar.row {
   text-transform: uppercase;
   vertical-align: bottom;
   padding-bottom: 0;
+}
+.top-bar .menu-text h5 {
+  margin-bottom: 0;
+  line-height: 1;
 }
 .top-bar .menu-text:hover {
   color: $primary-color;
@@ -155,6 +157,10 @@ nav .menu .active > a {
   #search_dropdown_mobile {
     display: none;
   }
+  #tags-menu {
+    position: relative;
+    z-index: 100;
+  }
   #tags-menu > .columns {
     width: 100%;
   }
@@ -180,6 +186,10 @@ nav .menu .active > a {
   #navbar-tier2 a.btn-link:hover, #navbar-tier2B a.btn-link:hover, #navbar-tier2 a.btn-link:focus, #navbar-tier2B a.btn-link:focus {
     color: $topbar-link-color-hover;
     border-bottom: none;
+  }
+  .top-bar.center h6 {
+    margin-bottom: 0;
+    line-height: 1.5;
   }
   .top-bar.center input {
     max-width: none;
