@@ -20,6 +20,9 @@
 //= require_tree .
 
 //$(function(){  });
+
+
+//foundation first because myFunction for navbar depends on foundation running
 $(document).on('turbolinks:load', function() {
   $(document).foundation();
   //fcn to reinitialize sticky or non-sticky navbar with turbolinks + window resizing
@@ -27,8 +30,17 @@ $(document).on('turbolinks:load', function() {
   $(".sticky").css("max-width", "none");
   console.log("running-zf");
 });
+
+
 function myFunction() {
   //*NAVBAR*
+  //add or remove hidden class to navbar 
+  if ($(window).width() > 639) {
+    $("#tags-menu").addClass("is-hidden");
+  } else {
+    $("#tags-menu").removeClass("is-hidden");
+  };
+  
   //fcn to populate text of "Back" button in responsive menu  
   if ($("#navbar-tier2").hasClass("drilldown")) {
     $(this).find(".occasion .js-drilldown-back").html('<a tabindex="0">Browse by Occasion</a>');
@@ -40,40 +52,57 @@ function myFunction() {
   if ($("#browse_navbar").hasClass('active')) {
     $("#tags-menu").removeClass("is-hidden");
     $(".data-sticky-container").css("height", $(".sticky").height());
-    console.log("running");
-//    $("#tags-menu").removeClass("hidden");
-//  } else {
-//    $("#tags-menu").addClass("hidden");
-//  }
-////    $(window).trigger('load.zf.sticky');
-//    Foundation.plugin(Sticky, 'Sticky');
   };
-  
+  if ($(window).width() < 640) {
+    console.log("yeahhh");
+    $("#browse_navbar").removeClass('active');
+    $("#browse_navbar").closest(".columns").removeClass('active');
+  };
   
   //*STORY FORM*
   //fcns to append extra image upload fields
   $('#add_image_fields').click(function(){
     $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
   });
+  
 };
 
 //*STORY FORM*
 //fcn to remove extra image upload fields, separate b/c dynamically-added element
+
+$(document).on('click', '#browse_navbar', function(event){
+  if ($(window).width() > 639) {
+    if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      $(this).parent().removeClass('active');
+      $(".sticky-container").css("height", $(".sticky").height());
+    } else {
+      $(this).addClass('active');
+      $(this).parent().addClass('active');
+      $(".sticky-container").css("height", $(".sticky").height());
+    };
+  } else {
+    if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      $(this).closest(".columns").removeClass('active');
+      $(".sticky-container").css("height", $(".sticky").height());
+    } else {
+      $(this).addClass('active');
+      $(this).closest(".columns").addClass('active');
+      $(".sticky-container").css("height", $(".sticky").height());
+    };
+  };
+});
+
+//*NAVBAR
 $(document).on('click', '.remove_image_field', function(event){
   $(this).closest(".upload_image").remove();
 });
+
 //fcn to hinder built-in capability of trix editor to accept embedded files
 document.addEventListener("trix-file-accept", function(event) {
   event.preventDefault()
 })
 
-//*REGISTRATION STEPS
-//fcn to show/hide custom gender field when updating information via user dashboard
-$( document ).ajaxComplete(function( event,request, settings ) {
-  $("#custom_defined_gender").click(function(){
-    myFunction();
-  });
-});
-
-$(document).ready(myFunction);
+//$(document).ready(myFunction);
 $(document).on('turbolinks:load', myFunction);

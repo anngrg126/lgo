@@ -1,6 +1,7 @@
 .sticky {
   width: 100%;
 }
+.sticky button:focus {outline:0;}
 #tags-menu {
   padding: 0.3rem 0 0;
   border-bottom: 1px solid $medium-gray;
@@ -149,9 +150,6 @@ nav .menu .active > a {
     vertical-align: baseline;
     line-height: inherit;
   }
-  #tags-menu.is-hidden {
-    display: auto !important;
-  }
   nav .top-bar.row {
     border-bottom: none;
   }
@@ -194,6 +192,9 @@ nav .menu .active > a {
   #navbar-tier2 a.btn-link:hover, #navbar-tier2B a.btn-link:hover, #navbar-tier2 a.btn-link:focus, #navbar-tier2B a.btn-link:focus {
     color: $topbar-link-color-hover;
     border-bottom: none;
+  }
+  .top-bar.center .columns {
+    line-height: normal;
   }
   .top-bar.center h6 {
     margin-bottom: 0;
