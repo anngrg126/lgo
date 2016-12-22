@@ -10,10 +10,15 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
- *= require foundation_and_overrides
- *= require font-awesome
- *= require trix
 
  */
+
+@import 'tools/variables';
+@import 'settings';
+@import 'foundation';
+@import 'foundation-icons';
+@import 'foundation_and_overrides';
+@import 'font-awesome';
+@import 'trix';
+@import 'components/*';
+@import 'modules/*';

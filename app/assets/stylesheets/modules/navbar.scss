@@ -1,13 +1,3 @@
-@import 'settings';
-@import 'foundation';
-
-.full-width {
-  max-width: 1400px;
-}
-
-$text-color: #fff;
-
-//BEGIN header styles
 #navbar-tier2, #navbar-tier2B {
   display: inline-block;
 }
@@ -64,7 +54,7 @@ $text-color: #fff;
   padding-bottom: 0;
 }
 .top-bar a.button {
-  padding: 0.4em 0.5em;
+  @extend .small-button;
 }
 .top-bar.row > div {
   position: relative;
@@ -120,97 +110,4 @@ $text-color: #fff;
   .top-bar input {
     max-width: none;
   }
-}
-//END header styles
-
-// BEGIN footer styles
-
-.footer {
-  background-color: #2980b9;
-  padding: 2rem 4rem;
-  text-align: center;
-  color: $text-color;
-  i {
-    font-size: 100px;
-  }
-}
-
-.footer {
-  h4 {
-    color: $text-color;
-    font-size: 1em;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-top: 2.5rem;
-    margin-bottom: 10px;
-  }
-  p, a {
-    font-weight: 300; 
-    font-size: .8em;
-    color: $text-color;
-  }
-}
-
-@media only screen and (min-width: 40.063em) {
-.footer {
-  .columns:nth-child(n+2) {
-    border-left: 1px solid scale-color($text-color, $lightness: -30%);
-//    min-height: 280px;
-  }
- }
-}
-
-.footer-links {
-  list-style-type: none;
-  li {
-    margin-top: .5em;
-  }
-}
-
-//END Footer Styles
-
-//style for text box when users choose "other" radio button
-#free_system_input {
-  display: none;
-}
-
-//style for rich text editor
-trix-toolbar .button_groups {
-  button.code {
-    display: none;
-  }
-  button.nesting-level.increase {
-    display: none;
-  }
-  button.nesting-level.decrease {
-    display: none;
-  }
-  button.quote {
-    display: none;
-  }
-  button.link {
-    display: none;
-  }
-}
-
-//general override Foundation
-.button {
-  margin: 0;
-}
-
-//general styles
-.inline-block {
-  display: inline-block !important;
-}
-.no_pad {
-  padding: 0 !important;
-}
-.center {
-  text-align: center;
-}
-.rightalgn {
-  text-align: right;
-}
-.visible {
-  display: block !important;
 }
