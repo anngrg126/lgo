@@ -56,7 +56,7 @@ RSpec.feature "Users signup" do
     fill_in "Email", with: Faker::Internet.email
     fill_in "Password", with: @password2
     
-    click_button "Join"
+    click_button "Sign up"
     
     click_button "Submit"
     
