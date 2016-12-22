@@ -19,6 +19,12 @@
 #navbar-tier2 a.btn-link, #navbar-tier2B a.btn-link {
   padding-right: 0;
 }
+#tags-menu {
+  padding: 0.3rem 0 0;
+  border-bottom: 1px solid $medium-gray;
+  border-bottom-style: inset;
+  border-width: 1px;
+}
 #tags-menu > .columns {
   width: auto;
 }
@@ -45,6 +51,12 @@
 #navbar-tier2 ul .row {
   margin: 0;
 }
+nav .top-bar.row {
+  padding-bottom: 0;
+  -webkit-box-shadow: 0px 5px 10px -7px $medium-gray;
+  -moz-box-shadow: 0px 5px 10px -7px $medium-gray;
+  box-shadow: 0px 5px 10px -7px $medium-gray;
+}
 .top-bar img {
   max-height: 40px;
 }
@@ -52,6 +64,19 @@
   text-transform: uppercase;
   vertical-align: bottom;
   padding-bottom: 0;
+}
+.top-bar .menu-text:hover {
+  color: $primary-color;
+}
+.top-bar ul>.menu-text {
+  border-bottom: 3px solid transparent;
+  padding: 0 0 5px 0;
+}
+.top-bar ul>.menu-text.active {
+  border-bottom: 3px solid $primary-color;
+}
+.top-bar .menu-text .menu-text.active {
+  color: $primary-color;
 }
 .top-bar a.button {
   @extend .small-button;
@@ -71,11 +96,17 @@
   vertical-align: bottom;
   padding-right: 0.5em; 
   position: relative; 
-  top: 0.25em; 
+//  top: 0.25em; 
   font-size: 90%;
 }
 .top-bar .menu-right > div {
   display: inline-block;
+}
+.gifton_logo {
+  padding-bottom: 5px;
+}
+nav .menu .active > a {
+  background-color: transparent;
 }
 @media only screen and (max-width: 40.063em) {
   #navbar-tier2, #navbar-tier2B {
