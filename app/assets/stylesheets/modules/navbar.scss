@@ -1,3 +1,6 @@
+.sticky {
+  width: 100%;
+}
 #navbar-tier2, #navbar-tier2B {
   display: inline-block;
 }
@@ -49,6 +52,7 @@
   -webkit-box-shadow: inset 0px 5px 10px -7px $dark-gray;
   -moz-box-shadow: inset 0px 5px 10px -7px $dark-gray;
   box-shadow: inset 0px 5px 10px -7px $dark-gray;
+  max-width: none;
 }
 #tags-menu > .columns {
   width: auto;
@@ -78,6 +82,10 @@
 }
 nav .top-bar.row {
   padding-bottom: 0;
+  max-width: none;
+  border-bottom: 1px solid $medium-gray;
+  border-bottom-style: inset;
+  border-width: 1px;
 }
 .top-bar img {
   max-height: 40px;
@@ -134,6 +142,9 @@ nav .menu .active > a {
   background-color: transparent;
 }
 @media only screen and (max-width: 40.063em) {
+  nav .top-bar.row {
+    border-bottom: none;
+  }
   #navbar-tier2, #navbar-tier2B {
     display: block;
   }
@@ -154,7 +165,7 @@ nav .menu .active > a {
     display: none !important;
   }
   #tags-menu > .columns:nth-child(2) .is-drilldown {
-    height: 530px;
+    height: 550px;
   }
   .top-bar img {
     max-height: 30px;
@@ -163,7 +174,48 @@ nav .menu .active > a {
     font-size: 100%;
     padding: 0 5px;
   }
-  .top-bar input {
+  #navbar-tier2 a.btn-link, #navbar-tier2B a.btn-link {
+    border-bottom: none;
+  }
+  #navbar-tier2 a.btn-link:hover, #navbar-tier2B a.btn-link:hover, #navbar-tier2 a.btn-link:focus, #navbar-tier2B a.btn-link:focus {
+    color: $topbar-link-color-hover;
+    border-bottom: none;
+  }
+  .top-bar.center input {
     max-width: none;
+  }
+  .top-bar.center .input-group-field {
+    margin-left: 1rem;
+  }
+  .top-bar.center .input-group {
+    margin-top: 1rem;
+  }
+  .top-bar.center > div:first-child {
+    border-bottom: 1px solid $medium-gray;
+    border-bottom-style: inset;
+    border-width: 1px;
+  }
+  .top-bar.center {
+    padding: 0;
+  }
+  .top-bar.center .row.visible {
+    background-color: $ultra-light-gray;
+    border-bottom: 1px solid $medium-gray;
+    border-bottom-style: inset;
+    border-width: 1px;
+  }
+  .top-bar.center .columns {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid transparent;
+  }
+  .top-bar.center div.active {
+    border-bottom: 3px solid $primary-color;
+  }
+  .top-bar.center div .active {
+    color: $primary-color;
+  }
+  .top-bar.center div .active {
+    color: scale-color($primary-color, $lightness: -15%);
   }
 }

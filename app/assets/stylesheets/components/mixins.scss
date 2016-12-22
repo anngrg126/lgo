@@ -4,6 +4,7 @@
 
 .inactive-link {
   color: $middark-gray;
+  border-bottom: 3px solid transparent;
 }
 .inactive-link:hover {
   color: scale-color($middark-gray, $lightness: +15%);
