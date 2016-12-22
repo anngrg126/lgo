@@ -32,7 +32,7 @@ div.top-bar.center.show-for-small-only
       div[data-responsive-toggle="tags-menu" data-hide-for="medium"]
         button[type="button" data-toggle] Browse
     .columns.small-4
-      a[href="#"] Share
+      == link_to "Share", new_story_path, class: "menu-text #{@active_share}"
     .columns.small-4
       button[type="button" data-toggle="search_dropdown_mobile"] 
         i.fa.fa-search[aria-hidden="true"]
@@ -49,13 +49,13 @@ div.top-bar.center.show-for-small-only
       li
         h6 For Fun
       li
-        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
+        a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
       li
-        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
+        a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
       li
-        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
+        a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
       li
-        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
+        a.btn-link.btn-right.inline-block.fail[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
   .columns
     ul#navbar-tier2.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
       li
@@ -234,13 +234,13 @@ div.top-bar.center.show-for-small-only
       li
         h6 For Fun
       li
-        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
+        a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
       li
-        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
+        a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
       li
-        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
+        a.btn-link.btn-right.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
       li
-        a.btn-link.inline-block[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
+        a.btn-link.btn-right.inline-block.fail[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
   .columns
     button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
       | &nbsp;

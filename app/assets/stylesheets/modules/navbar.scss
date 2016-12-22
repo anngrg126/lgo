@@ -3,7 +3,7 @@
 }
 #navbar-tier2 h6, #navbar-tier2B h6 {
   text-transform: uppercase;
-  border-right: 2px solid black;
+  border-right: 2px solid $dark-gray;
   display: inline-block;
   padding-right: 15px;
   font-weight: 500;
@@ -13,17 +13,42 @@
 #navbar-tier2B h6 {
   margin-left: 30px;
 }
-#navbar-tier2 .btn-link i, #navbar-tier2B .btn-link i {
-  vertical-align: baseline;
-} 
 #navbar-tier2 a.btn-link, #navbar-tier2B a.btn-link {
   padding-right: 0;
+  color: $topbar-link-color;
+  border-bottom: 2px solid transparent;
+}
+#navbar-tier2 a.btn-link:hover, #navbar-tier2B a.btn-link:hover {
+  color: $topbar-link-color-hover;
+  border-bottom: 2px solid $topbar-link-color-hover;
+}
+#navbar-tier2 .btn-link i, #navbar-tier2B .btn-link i {
+  vertical-align: baseline;
+  color: $primary-color;
+} 
+#navbar-tier2 a.btn-link:hover i, #navbar-tier2B a.btn-link:hover i {
+  color: scale-color($primary-color, $lightness: -15%);
+}
+#navbar-tier2 a.btn-link.btn-right:hover, #navbar-tier2B a.btn-link.btn-right:hover {
+  border-bottom: 2px solid transparent;
+}
+
+#navbar-tier2 a.btn-link.btn-right.fail, #navbar-tier2B a.btn-link.btn-right.fail {
+  color: $primary-color;
+  font-weight: 500;
+}
+#navbar-tier2 a.btn-link.btn-right.fail:hover, #navbar-tier2B a.btn-link.btn-right.fail:hover {
+  color: scale-color($primary-color, $lightness: -15%);
 }
 #tags-menu {
   padding: 0.3rem 0 0;
   border-bottom: 1px solid $medium-gray;
   border-bottom-style: inset;
   border-width: 1px;
+  background-color: $ultra-light-gray;
+  -webkit-box-shadow: inset 0px 5px 10px -7px $dark-gray;
+  -moz-box-shadow: inset 0px 5px 10px -7px $dark-gray;
+  box-shadow: inset 0px 5px 10px -7px $dark-gray;
 }
 #tags-menu > .columns {
   width: auto;
@@ -53,9 +78,6 @@
 }
 nav .top-bar.row {
   padding-bottom: 0;
-  -webkit-box-shadow: 0px 5px 10px -7px $medium-gray;
-  -moz-box-shadow: 0px 5px 10px -7px $medium-gray;
-  box-shadow: 0px 5px 10px -7px $medium-gray;
 }
 .top-bar img {
   max-height: 40px;
@@ -77,6 +99,9 @@ nav .top-bar.row {
 }
 .top-bar .menu-text .menu-text.active {
   color: $primary-color;
+}
+.top-bar .menu-text .menu-text.active:hover {
+  color: scale-color($primary-color, $lightness: -15%);
 }
 .top-bar a.button {
   @extend .small-button;
