@@ -1,4 +1,4 @@
-function myFunction() {
+function myFunction2() {
   //fcn to show custom gender field
   $('input[type="radio"]').change(function() {
     var id = $(this).attr('id');
@@ -22,5 +22,11 @@ $(document).ready(function() {
   $('input[type="radio"]').removeAttr("checked");
 });
 
-$(document).ready(myFunction);
-$(document).on('turbolinks:load', myFunction);
+//*USER DASHBOARD
+//fcn to show/hide custom gender field when updating information via user dashboard
+$(document).ajaxComplete(function() {
+  myFunction2();
+});
+
+$(document).ready(myFunction2);
+$(document).on('turbolinks:load', myFunction2);

@@ -5,6 +5,7 @@ class StoriesController < ApplicationController
   before_action :set_tags, only: [:show, :index, :new, :edit]
   
   def index
+    @active_browse = "active"
     @anonymous_user = User.where(anonymous: true).first
     if params[:search]
       @results = (Story.includes(:user).search params[:search], operator: "or")
@@ -26,6 +27,7 @@ class StoriesController < ApplicationController
   end
   
   def new
+    @active_share = "active"
     @story = Story.new
     @story.pictures.build(:image => params[:image])   
   end
@@ -56,6 +58,7 @@ class StoriesController < ApplicationController
   end
   
   def show
+    @active_browse = "active"
     @comment = @story.comments.active.build
     @bookmark = @story.bookmarks.build
   end
