@@ -1,8 +1,14 @@
-<!--
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
+<%- if params[:controller].include? 'users/registrations' %>
+  Existing user?
+  <%= link_to "Log in", new_session_path(resource_name) %>.
+  <br />
 <% end -%>
--->
+
+<%- if params[:controller].include? 'users/sessions' %>
+  New user?
+  <%= link_to "Sign up", new_user_registration_path %>.
+  <br />
+<% end -%>
 
 <!--
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
