@@ -91,16 +91,18 @@ $(document).on('click', '#browse_navbar', function(event){
       $(".sticky-container").css("height", $(".sticky").height());
     };
   };
-  console.log("huh");
 });
-$("search_dropdown_mobile").on("on.zf.toggler", function(e) {
-  console.log("test");
+$(document).on("on.zf.toggler", function(e) {
+  $("#mobile_search").closest("button").addClass('active');
+  $("#mobile_search").closest("button").parent().addClass('active');
+  $(".sticky-container").css("height", $(".sticky").height());
 });
-$("[data-toggler]").on("on.zf.toggler", function(e) {
-  console.log("test2");
+$(document).on("off.zf.toggler", function(e) {
+  $("#mobile_search").closest("button").removeClass('active');
+  $("#mobile_search").closest("button").parent().removeClass('active');
+  $(".sticky-container").css("height", $(".sticky").height());
 });
 $("#mobile_search").click(function(e) {
-  console.log("yaass");
   if ($("#mobile_search").closest("button").hasClass("active")) {
     $("#mobile_search").closest("button").removeClass('active');
     $("#mobile_search").closest("button").parent().removeClass('active');
