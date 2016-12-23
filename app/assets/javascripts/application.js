@@ -20,11 +20,27 @@
 //= require_tree .
 
 //$(function(){  });
+
+
+//foundation first because myFunction for navbar depends on foundation running
 $(document).on('turbolinks:load', function() {
   $(document).foundation();
+  //fcn to reinitialize sticky or non-sticky navbar with turbolinks + window resizing
+  $(window).trigger('load.zf.sticky');
+  $(".sticky").css("max-width", "none");
 });
 
+
 function myFunction() {
+  //*NAVBAR*
+  //add or remove hidden class to navbar 
+  if ($(window).width() > 639) {
+    $("#tags-menu").addClass("is-hidden");
+    
+  } else {
+    $("#tags-menu").removeClass("is-hidden");
+  };
+  
   //fcn to populate text of "Back" button in responsive menu  
   if ($("#navbar-tier2").hasClass("drilldown")) {
     $(this).find(".occasion .js-drilldown-back").html('<a tabindex="0">Browse by Occasion</a>');
@@ -32,13 +48,71 @@ function myFunction() {
     $(this).find(".type .js-drilldown-back").html('<a tabindex="0">Browse by Type</a>');
     $(this).find(".interests .js-drilldown-back").html('<a tabindex="0">Browse by Interests</a>');
   }
+  //fcn to toggle navbar browse
+  if ($("#browse_navbar").hasClass('active')) {
+    $("#tags-menu").removeClass("is-hidden");
+    $(".data-sticky-container").css("height", $(".sticky").height());
+  };
+  if ($(window).width() < 640) {
+    if ($(".top-bar.center button").hasClass("active")) {
+      $(".top-bar.center button").removeClass("active");
+      $(".top-bar.center button").closest(".columns").removeClass("active");
+    };
+  };
   
+  //*STORY FORM*
   //fcns to append extra image upload fields
   $('#add_image_fields').click(function(){
     $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
   });
+  
 };
 
+//*NAVBAR
+$(document).on('click', '#browse_navbar', function(event){
+  if ($(window).width() > 639) {
+    if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      $(this).parent().removeClass('active');
+      $(".sticky-container").css("height", $(".sticky").height());
+    } else {
+      $(this).addClass('active');
+      $(this).parent().addClass('active');
+      $(".sticky-container").css("height", $(".sticky").height());
+    };
+  } else {
+    if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      $(this).closest(".columns").removeClass('active');
+      $(".sticky-container").css("height", $(".sticky").height());
+    } else {
+      $(this).addClass('active');
+      $(this).closest(".columns").addClass('active');
+      $(".sticky-container").css("height", $(".sticky").height());
+    };
+  };
+});
+$(document).on("on.zf.toggler", function(e) {
+  $("#mobile_search").closest("button").addClass('active');
+  $("#mobile_search").closest("button").parent().addClass('active');
+  $(".sticky-container").css("height", $(".sticky").height());
+});
+$(document).on("off.zf.toggler", function(e) {
+  $("#mobile_search").closest("button").removeClass('active');
+  $("#mobile_search").closest("button").parent().removeClass('active');
+  $(".sticky-container").css("height", $(".sticky").height());
+});
+$("#mobile_search").click(function(e) {
+  if ($("#mobile_search").closest("button").hasClass("active")) {
+    $("#mobile_search").closest("button").removeClass('active');
+    $("#mobile_search").closest("button").parent().removeClass('active');
+  } else {
+    $("#mobile_search").closest("button").addClass('active');
+    $("#mobile_search").closest("button").parent().addClass('active');
+  }
+});
+
+//*STORY FORM*
 //fcn to remove extra image upload fields, separate b/c dynamically-added element
 $(document).on('click', '.remove_image_field', function(event){
   $(this).closest(".upload_image").remove();
@@ -48,13 +122,6 @@ $(document).on('click', '.remove_image_field', function(event){
 document.addEventListener("trix-file-accept", function(event) {
   event.preventDefault()
 })
-
-//fcn to show/hide custom gender field when updating information via user dashboard
-$( document ).ajaxComplete(function( event,request, settings ) {
-  $("#custom_defined_gender").click(function(){
-    myFunction();
-  });
-});
 
 $(document).ready(myFunction);
 $(document).on('turbolinks:load', myFunction);

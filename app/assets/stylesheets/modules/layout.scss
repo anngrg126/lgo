@@ -1,0 +1,49 @@
+.full-width {
+  max-width: 1400px;
+}
+
+//style for text box when users choose "other" radio button
+#free_system_input {
+  display: none;
+}
+
+//style for rich text editor
+trix-toolbar .button_groups {
+  button.code {
+    display: none;
+  }
+  button.nesting-level.increase {
+    display: none;
+  }
+  button.nesting-level.decrease {
+    display: none;
+  }
+  button.quote {
+    display: none;
+  }
+  button.link {
+    display: none;
+  }
+}
+
+//general override Foundation
+.button {
+  margin: 0;
+}
+
+//general styles
+.inline-block {
+  display: inline-block !important;
+}
+.no_pad {
+  padding: 0 !important;
+}
+.center {
+  text-align: center;
+}
+.rightalgn {
+  text-align: right;
+}
+.visible {
+  display: block !important;
+}

@@ -9,8 +9,13 @@ HTML
   end
   
   def user_notifications_link
-    unless Notification.where(user_id: current_user.id, read: false).count == 0
-      link_to "Notifications: #{Notification.where(user_id: current_user.id, read: false).count}", notifications_dashboard_path(current_user)
+    unless current_user
+      link_to "My Notifications", new_user_session_path, class: "hide-for-small-only inactive-link"
+    else
+      unless Notification.where(user_id: current_user.id, read: false).count == 0
+        link_to "Notifications: #{Notification.where(user_id: current_user.id, read: false).count}", notifications_dashboard_path(current_user)
+      end
     end
   end
+  
 end
