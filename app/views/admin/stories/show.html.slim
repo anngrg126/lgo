@@ -62,21 +62,22 @@ p
   - unless @story.classifications.empty?
     | Story Tags:
     br
-    - @story.classifications.group_by(&:tag_id).each do |classif|
+    - @story.classifications.each do |classif|
       /= Tag.find(classif.tag_id).name
-      == @story.tags.group_by(&:id).select{|id| id == classif[0]}.first[1][0].name
-      - if classif[1].first.description?
-        span &nbsp;#{TagCategory.find(Tag.find(classif[1].first.tag_id).tag_category_id).category.downcase}: #{classif[1].first.description}
-      - if classif[1].first.primary?
+      - @t = @tags.select{|t| t.id == classif.tag_id}.first
+      == @t.name
+      - if classif.description?
+        span &nbsp;#{@t.tag_category.category.downcase}: #{classif.description}
+      - if classif.primary?
         span  &#40;primary&#41;
-      - unless classif[1].first.primary == true 
-        = link_to "Delete", admin_story_classification_path(@story, classif[1].first), method: :delete, class: "btn"
+      - unless classif.primary == true 
+        = link_to "Delete", admin_story_classification_path(@story, classif), method: :delete, class: "btn"
       br
 p
   | Admin: 
   - if @story.admin_id?
-    
-    = link_to "#{User.find(@story.admin_id).full_name}", dashboard_path(User.find(@story.admin_id))
+    -@u = User.find(@story.admin_id)
+    = link_to "#{@u.full_name}", dashboard_path(@u)
   - else
     | Unclaimed
   

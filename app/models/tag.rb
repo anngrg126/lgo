@@ -6,11 +6,13 @@ class Tag < ApplicationRecord
   has_many :classifications
   has_many :stories, through: :classifications
   
-  scope :relationship, -> { joins(:tag_category).where(tag_categories: { category: 'Relationship' }) }
-  scope :occasion, -> { joins(:tag_category).where(tag_categories: { category: 'Occasion' }) }
-  scope :type, -> { joins(:tag_category).where(tag_categories: { category: 'Type' }) }
-  scope :interests, -> { joins(:tag_category).where(tag_categories: { category: 'Interests' }) }
-  scope :recipient, -> { joins(:tag_category).where(tag_categories: { category: 'To_recipient' }) }
-  scope :gifton_reaction, -> { joins(:tag_category).where(tag_categories: { category: 'Gifton_reaction' }) }
-  scope :collection, -> { joins(:tag_category).where(tag_categories: { category: 'Collection' }) }
+  scope :alltags, -> {includes(:tag_category)}
+  
+  # scope :relationship, -> { alltags.select { |tag| tag.tag_category.category == "Relationship" }.sort_by {|t| t.name}}
+  # scope :occasion, -> { alltags.select { |tag| tag.tag_category.category == "Occasion" }.sort_by {|t| t.name}}
+  # scope :type, -> { alltags.select { |tag| tag.tag_category.category == "Type" }.sort_by {|t| t.name}}
+  # scope :interests, -> { alltags.select { |tag| tag.tag_category.category == "Interests" }.sort_by {|t| t.name}}
+  # scope :recipient, -> { alltags.select { |tag| tag.tag_category.category == "To_recipient" }.sort_by {|t| t.name}}
+  # scope :gifton_reaction, -> { alltags.select { |tag| tag.tag_category.category == "Gifton_reaction" }.sort_by {|t| t.name}}
+  # scope :collection, -> { alltags.select { |tag| tag.tag_category.category == "Collection" }.sort_by {|t| t.name}}
 end
