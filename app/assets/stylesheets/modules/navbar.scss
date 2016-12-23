@@ -237,7 +237,7 @@ nav .menu .active > a {
   .top-bar.center div .active {
     color: $primary-color;
   }
-  .top-bar.center div .active {
+  .top-bar.center div .active:hover {
     color: scale-color($primary-color, $lightness: -15%);
   }
 }

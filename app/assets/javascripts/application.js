@@ -28,7 +28,6 @@ $(document).on('turbolinks:load', function() {
   //fcn to reinitialize sticky or non-sticky navbar with turbolinks + window resizing
   $(window).trigger('load.zf.sticky');
   $(".sticky").css("max-width", "none");
-  console.log("running-zf");
 });
 
 
@@ -37,6 +36,7 @@ function myFunction() {
   //add or remove hidden class to navbar 
   if ($(window).width() > 639) {
     $("#tags-menu").addClass("is-hidden");
+    
   } else {
     $("#tags-menu").removeClass("is-hidden");
   };
@@ -54,9 +54,10 @@ function myFunction() {
     $(".data-sticky-container").css("height", $(".sticky").height());
   };
   if ($(window).width() < 640) {
-    console.log("yeahhh");
-    $("#browse_navbar").removeClass('active');
-    $("#browse_navbar").closest(".columns").removeClass('active');
+    if ($(".top-bar.center button").hasClass("active")) {
+      $(".top-bar.center button").removeClass("active");
+      $(".top-bar.center button").closest(".columns").removeClass("active");
+    };
   };
   
   //*STORY FORM*
@@ -67,9 +68,7 @@ function myFunction() {
   
 };
 
-//*STORY FORM*
-//fcn to remove extra image upload fields, separate b/c dynamically-added element
-
+//*NAVBAR
 $(document).on('click', '#browse_navbar', function(event){
   if ($(window).width() > 639) {
     if ($(this).hasClass('active')) {
@@ -92,9 +91,27 @@ $(document).on('click', '#browse_navbar', function(event){
       $(".sticky-container").css("height", $(".sticky").height());
     };
   };
+  console.log("huh");
+});
+$("search_dropdown_mobile").on("on.zf.toggler", function(e) {
+  console.log("test");
+});
+$("[data-toggler]").on("on.zf.toggler", function(e) {
+  console.log("test2");
+});
+$("#mobile_search").click(function(e) {
+  console.log("yaass");
+  if ($("#mobile_search").closest("button").hasClass("active")) {
+    $("#mobile_search").closest("button").removeClass('active');
+    $("#mobile_search").closest("button").parent().removeClass('active');
+  } else {
+    $("#mobile_search").closest("button").addClass('active');
+    $("#mobile_search").closest("button").parent().addClass('active');
+  }
 });
 
-//*NAVBAR
+//*STORY FORM*
+//fcn to remove extra image upload fields, separate b/c dynamically-added element
 $(document).on('click', '.remove_image_field', function(event){
   $(this).closest(".upload_image").remove();
 });
@@ -104,5 +121,5 @@ document.addEventListener("trix-file-accept", function(event) {
   event.preventDefault()
 })
 
-//$(document).ready(myFunction);
+$(document).ready(myFunction);
 $(document).on('turbolinks:load', myFunction);

@@ -36,13 +36,13 @@ div#stickhere
           .columns.small-4[class="#{@active_browse}"]
             div[data-responsive-toggle="tags-menu" data-hide-for="medium"]
               button#browse_navbar[type="button" data-toggle class="menu-text #{@active_browse}" style="padding: 0;"] 
-                h6 Browzzzee
+                h6 Browse
           .columns.small-4[class="#{@active_share}"]
             h6
               == link_to "Share", new_story_path, class: "menu-text #{@active_share}"
           .columns.small-4
-            button[type="button" data-toggle="search_dropdown_mobile"] 
-              i.fa.fa-search[aria-hidden="true"]
+            button[type="button" data-toggle="search_dropdown_mobile" style="line-height: 1.5"] 
+              i.fa.fa-search#mobile_search[aria-hidden="true"]
         #search_dropdown_mobile.row[data-toggler=".visible"]
           = form_tag root_path, method: :get do
             div.input-group
