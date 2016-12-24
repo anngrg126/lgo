@@ -55,6 +55,7 @@ class Story < ApplicationRecord
   validates :updated_body, presence: true, if: :validate_updated_fields?
   
   belongs_to :user
+  belongs_to :poster_user,:foreign_key => 'poster_id',:class_name=>'User'
   
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy

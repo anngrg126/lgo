@@ -6,7 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   
-  has_many :stories, dependent: :destroy  
+  has_many :stories, dependent: :destroy 
+  has_many :stories_posted, :class_name => 'Story', :source => 'poster_user', dependent: :destroy 
   has_many :bookmarks, dependent: :destroy
   has_many :followings, dependent: :destroy
   has_many :followers, through: :followings, class_name: "User", dependent: :destroy

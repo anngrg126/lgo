@@ -3,5 +3,6 @@ h2 List of All Followings
   div
     == link_to "#{followings_user.full_name}", dashboard_path(followings_user)
     == render partial: 'followings/form', locals: { user: followings_user, follower: current_user, followings: @followings }
+    
     /== link_to User.find(following.user_id).full_name, dashboard_path(following.user_id)
     /== render partial: 'followings/form', locals: { user: User.find(following.user_id), follower: current_user }

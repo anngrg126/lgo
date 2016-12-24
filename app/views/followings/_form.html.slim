@@ -1,5 +1,6 @@
-div id="follow_user_#{user.id}"
-  - if controller.action_name == "followings"
-    == link_to_follow(user, current_user, "button", @followings.group_by(&:user_id).select{|user_id| user_id == user.id}.first[1][0])
-  - else
-    == link_to_follow(user, current_user, "button")
+- if controller.action_name == "followings"
+    div id="follow_user_#{user.id}"
+       == link_to_follow(user, current_user, "button", @followings.select{|u| u.user_id == follower.id})
+- else
+    div id="follow_user_#{user.id}"
+       == link_to_follow(user, current_user, "button")

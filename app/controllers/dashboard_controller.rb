@@ -73,7 +73,6 @@ class DashboardController < ApplicationController
   private
   
   def set_user
-#    @user = User.friendly.find(params[:id])
     @user = User.includes(:stories).friendly.find(params[:id])
     if @user == current_user
       @user = User.includes(:stories, :followers, :followings, :notifications).friendly.find(params[:id])
@@ -84,76 +83,63 @@ class DashboardController < ApplicationController
   end
   
   def set_authored_stories
-#    @authored_stories = Story.active.where(author_id: @user)
-    @authored_stories = @user.stories.active
+    @authored_stories = @user.stories.select {|s| s.active?}
+    @authored_stories.uniq!
   end
   
   def set_posted_stories
-#    @posted_stories = Story.active.where(poster_id: @user)
-#    unless @user.id == 3 || @user.id == 1000
-    unless @user.id == @anonymous_user.id
-      @postings = @user.stories.active.published.group_by(&:poster_id)
-      unless @postings.select{|poster_id| poster_id == @user.id}.empty?
-        @posted_stories = @postings.select{|poster_id| poster_id == @user.id}.first[1]
-      else
-        @posted_stories = []
-      end
+    unless @user == current_user
+      @posted_stories = @user.stories_posted.select {|s| s.active? && s.published?}
     else
-      @posted_stories = Story.active.where(poster_id: @user)
+      @posted_stories = @user.stories.select {|s| s.active?  && s.published?}
     end
+    @posted_stories.uniq!
   end
   
   def set_notifications
-#    @notifications = Notification.where(user_id: @user.id)
-#    @read_notifications = @notifications.where(read: true)
-#    @unread_notifications = @notifications.where(read: false)
-    @notifications = @user.notifications.group_by(&:read)
+    @notifications = @user.notifications
     
-    unless @notifications.select{|read| read == false}.empty? 
-      @unread_notifications = @notifications.select{|read| read == false}.first[1]
+    unless @notifications.select{|n| n.read == false}.empty? 
+      @unread_notifications = @notifications.select{|n| n.read == false}
     else 
       @unread_notifications = []
     end
     
-    unless @notifications.select{|read| read == true}.empty? 
-      @read_notifications = @notifications.select{|read| read == true}.first[1]
+    unless @notifications.select{|n| n.read == true}.empty? 
+      @read_notifications = @notifications.select{|n| n.read == true}
     else 
       @read_notifications = []
     end 
   end
-  
+ 
   def set_reacted_stories
-    @reacted_stories = []
+    @reacted_stories = Set.new []
+    @user_reactions = @user.reactions.includes(:story).select {|r| r.story.active? }
     if @user == current_user
-      @user.reactions.includes(:story).each do |reaction|
-        if reaction.story.active?
-          unless reaction.story.author_id == @user.id
-            @reacted_stories.push(reaction.story)
-          end
+      @user_reactions.each do |reaction|
+        unless reaction.story.author_id == @user.id
+          @reacted_stories.add(reaction.story)
         end
       end
-#      @reacted_stories = Story.active.where.not(author_id: @user.id).joins(:reactions).where(:reactions => { :user_id => @user.id})
     else
-      @user.reactions.includes(:story).each do |reaction|
-        if reaction.story.active?
-          @reacted_stories.push(reaction.story)
-        end
+      @user_reactions.each do |reaction|
+          @reacted_stories.add(reaction.story)
       end
-#      @reacted_stories = Story.active.joins(:reactions).where(:reactions => { :user_id => @user.id})
     end
-    @reacted_stories.uniq!
+    # @reacted_stories.uniq!
   end
+  
   def set_reaction_posters
-    @r_posters = []
-    @reacted_stories.group_by(&:poster_id).each do |r|
-      @r_posters.push(r[0])
+    @r_posters = Set.new []
+    @reacted_stories.each do |r|
+      @r_posters.add(r.poster_user)
     end
-    @r_posters.uniq!
-    @r_users = User.where(id: @r_posters).group_by(&:id)
+    # @r_posters.uniq!
   end
   
   def set_bookmarked_stories
     @bookmarked_stories = []
+    # @bookmarked_stories = @user.bookmarks.includes(:story).select{|b| b.story.active?}
     @user.bookmarks.includes(:story).each do |bookmark|
       if bookmark.story.active?
         unless bookmark.story.author_id == @user.id
@@ -165,64 +151,55 @@ class DashboardController < ApplicationController
   end
   
   def set_bookmark_posters
-    @b_posters = []
-    @bookmarked_stories.group_by(&:poster_id).each do |b|
-      @b_posters.push(b[0])
+    @b_users = Set.new []
+    @bookmarked_stories.each do |b|
+      @b_users.add(b.poster_user)
     end
-    @b_posters.uniq!
-    @b_users = User.where(id: @b_posters).group_by(&:id)
-#    @bookmarked_stories = Story.active.where.not(author_id: @user.id).joins(:bookmarks).where(:bookmarks => { :user_id => @user.id})
+    # @b_users.uniq!
+    # @b_users = User.where(id: @b_posters).group_by(&:id)
   end
   
   def set_commented_stories
-    @commented_stories = []
+    @commented_stories = Set.new []
     @user.comments.includes(:story).each do |comment|
       if comment.story.active?
         unless comment.story.author_id == @user.id
-          @commented_stories.push(comment.story)
+          @commented_stories.add(comment.story)
         end
       end
     end
-    @commented_stories.uniq!
 #    @commented_stories = Story.active.joins(:comments).where(:comments => { :user_id => @user.id, :deleted_at => nil})
   end
   
   def set_commented_story_posters
-    @c_posters = []
-    @commented_stories.group_by(&:poster_id).each do |c|
-      @c_posters.push(c[0])
+    @c_users = Set.new []
+    @commented_stories.each do |c|
+      @c_users.add(c.poster_user)
     end
-    @c_posters.uniq!
-    @c_users = User.where(id: @c_posters).group_by(&:id)
+    # @c_posters.uniq!
+    # @c_users = User.where(id: @c_posters).group_by(&:id)
 #    @bookmarked_stories = Story.active.where.not(author_id: @user.id).joins(:bookmarks).where(:bookmarks => { :user_id => @user.id})
   end
   
   def set_followers
-    @followers = []
-    @user.followers.each do |follower|
-      if follower.not_deactive?
-        @followers.push(follower)
-      end
-    end
+    @followers = @user.followers.select {|f| f.not_deactive?}
     @followers.uniq!
-#    @followers = Following.follower_active.where(user_id: @user.id)
   end
   
   def set_followings
-    @followings = Following.following_active.where(follower_id: @user.id)
+    @followings = @user.followings.select{|f| f.user.deactivated_at==nil}
   end
+  
   def set_followings_users
-    @f_ids = []
     @followings_users = []
     @followings.each do |following|
-      @f_ids.push(following.user_id)
+      @followings_users.push(following.follower)
     end
-    @f_ids.uniq!
-    @followings_users = User.where(id: @f_ids)
+    @followings_users.uniq!
   end
   
   def set_tags
-    @tags = Tag.all.group_by(&:name)
+    @tags = Tag.alltags
   end
   
   def set_anonymous_user
