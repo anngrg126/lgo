@@ -17,14 +17,16 @@ div#stickhere
             - unless params[:controller].include? "users"
               - if user_signed_in?
                 - unless current_page? registration_step_path(:basic_details)
-                  div
-                    == link_to "My Dashboard", dashboard_path(current_user)
-                  div
-                    == link_to "Sign out", destroy_user_session_path, method: :delete
-                  div class="navbar-right"
-                    == signed_in_user
-                  div#user_notifications
-                    == user_notifications_link
+                  div.menu-right
+                    == render 'shared/userimages'
+                    /div
+                      == link_to "My Dashboard", dashboard_path(current_user)
+                    div
+                      == link_to "Sign out", destroy_user_session_path, method: :delete
+                    div class="navbar-right"
+                      == signed_in_user
+                    div#user_notifications
+                      == user_notifications_link
               - else
                 div.menu-right
                   == user_notifications_link
