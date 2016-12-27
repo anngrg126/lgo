@@ -139,6 +139,22 @@ nav .top-bar.row {
 .top-bar .menu-right > div {
   display: inline-block;
 }
+.top-bar .menu-right span {
+  line-height: 30px;
+  font-weight: 500;
+  border-right: 2px solid $middark-gray;
+  padding-right: 5px;
+}
+.top-bar .menu-right > a.logged-in {
+  font-size: 100%;
+  color: $dark-gray;
+}
+.top-bar .menu-right > a.logged-in:hover {
+  color: $topbar-link-color-hover;
+}
+.top-bar .menu-right > a.logged-in img:hover {
+  filter: brightness(85%);
+}
 .gifton_logo {
   padding-bottom: 5px;
 }

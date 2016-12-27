@@ -1,5 +1,9 @@
+.user_thumbnail {
+  display: inline-block;
+}
 .user_thumbnail img {
   border-radius: 5px;
+  margin-right: 5px;
 }
 
 .user_thumbnail.small_thumb img {
