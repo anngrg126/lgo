@@ -129,24 +129,34 @@ nav .top-bar.row {
   bottom: 8px; 
   right: 0;
 }
-.top-bar .menu-right > a{
+.top-bar .menu-right .logged-in span {
+  position: relative;
+  vertical-align: bottom;
+}
+.top-bar .menu-right #user_notifications {//My Notifications link
   vertical-align: bottom;
   padding-right: 0.5em; 
   position: relative; 
 //  top: 0.25em; 
-  font-size: 90%;
+  font-size: 0.9rem;
+}
+.top-bar .menu-right #user_notifications a {
+  color: $dark-gray;
+}
+.top-bar .menu-right #user_notifications a:hover {
+  color: $topbar-link-color-hover;
 }
 .top-bar .menu-right > div {
   display: inline-block;
 }
 .top-bar .menu-right span {
-  line-height: 30px;
+//  line-height: 30px;
   font-weight: 500;
   border-right: 2px solid $middark-gray;
   padding-right: 5px;
 }
 .top-bar .menu-right > a.logged-in {
-  font-size: 100%;
+  font-size: 1rem;
   color: $dark-gray;
 }
 .top-bar .menu-right > a.logged-in:hover {
