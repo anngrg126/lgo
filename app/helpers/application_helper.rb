@@ -16,7 +16,7 @@ module ApplicationHelper
 #        link_to "My Notifications (#{Notification.where(user_id: current_user.id, read: false).count})", notifications_dashboard_path(current_user)
         link_to notifications_dashboard_path(current_user) do
           concat "My Notifications ".html_safe
-          concat "<span class='notifications_count'>(#{@user.notifications.select{|n| n.read == false}.length})</span>".html_safe
+          concat "<span class='notifications_count'>(#{current_user.notifications.select{|n| n.read == false}.length})</span>".html_safe
         end
       end
     end
