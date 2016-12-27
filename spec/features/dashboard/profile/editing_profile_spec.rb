@@ -43,6 +43,7 @@ RSpec.feature "Editing Account Settings" do
     fill_in "Current password", with: @user.password
     click_button "Update"
     expect(page).to have_content("Profile has been updated")
+    click_link "Settings"
     expect(page).to have_content @new_email
   end
   

@@ -18,7 +18,7 @@
 }
 #navbar-tier2 h6, #navbar-tier2B h6 {
   text-transform: uppercase;
-  border-right: 2px solid $dark-gray;
+  border-right: 1px solid $dark-gray;
   display: inline-block;
   padding-right: 15px;
   margin-bottom: 0;
@@ -150,7 +150,7 @@ nav .top-bar.row {
   color: $red;
   font-weight: 600;
 }
-.top-bar .menu-right #user_notifications a .notifications_count:hover {
+.top-bar .menu-right #user_notifications a .notifications_count:hover, .top-bar .menu-right #user_notifications a:hover .notifications_count {
   color: lighten($red, 15%);
 }
 .top-bar .menu-right > div {
@@ -159,7 +159,7 @@ nav .top-bar.row {
 .top-bar .menu-right .logged-in span {
 //  line-height: 30px;
   font-weight: 500;
-  border-right: 2px solid $middark-gray;
+  border-right: 1px solid $middark-gray;
   padding-right: 5px;
 }
 .top-bar .menu-right > a.logged-in {
@@ -169,8 +169,8 @@ nav .top-bar.row {
 .top-bar .menu-right > a.logged-in:hover {
   color: $topbar-link-color-hover;
 }
-.top-bar .menu-right > a.logged-in img:hover {
-  filter: brightness(85%);
+.top-bar .menu-right > a.logged-in img:hover, .top-bar .menu-right > a.logged-in:hover img {
+  filter: brightness(115%);
 }
 .gifton_logo {
   padding-bottom: 5px;
