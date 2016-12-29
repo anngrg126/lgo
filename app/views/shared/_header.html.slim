@@ -15,23 +15,26 @@ div#stickhere
                 h5
                   == link_to "Share", new_story_path, class: "menu-text #{@active_share}"
             - unless params[:controller].include? "users"
-              - if user_signed_in?
-                - unless current_page? registration_step_path(:basic_details)
-                  div
-                    == link_to "My Dashboard", dashboard_path(current_user)
-                  div
-                    == link_to "Sign out", destroy_user_session_path, method: :delete
-                  div class="navbar-right"
-                    == signed_in_user
-                  div#user_notifications
-                    == user_notifications_link
-              - else
+              - unless current_page? registration_step_path(:basic_details)
                 div.menu-right
-                  == user_notifications_link
-                  div[style="padding-right: 0.5em;"]
-                    == link_to "Join", new_user_registration_path, class: "button"
-                  div.hide-for-small-only
-                    == link_to "Login", new_user_session_path, class: "button hollow"
+                  #user_notifications.hide-for-small-only
+                    == user_notifications_link
+                  - if user_signed_in?
+                    == link_to dashboard_path(current_user), class: "logged-in" do
+                      == render 'shared/userimages'
+                      span
+                        == current_user.display_name
+                    div.hide-for-small-only
+                      button.float-right#user_dropdown_button[type="button" data-toggle="user_dropdown" style="vertical-align: bottom; padding-bottom: 1px;"]
+                        i.fa.fa-chevron-down.fa-1[aria-hidden="true"]
+                    div.show-for-small-only[style="vertical-align: bottom;"]
+                      #user_notifications
+                        == user_notifications_link_small
+                  - else
+                    div[style="padding-right: 0.5em;"]
+                      == link_to "Join", new_user_registration_path, class: "button"
+                    div.hide-for-small-only
+                      == link_to "Login", new_user_session_path, class: "button hollow"
       div.top-bar.center.show-for-small-only
         .row
           .columns.small-4[class="#{@active_browse}"]
@@ -252,7 +255,7 @@ div#stickhere
         .columns
           button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
             | &nbsp;
-            i.fa.fa-search.bottom[aria-hidden="true"]
+            i.fa.fa-search[aria-hidden="true"]
       #search_dropdown.dropdown-pane.bottom[data-dropdown]
         = form_tag root_path, :method => :get do
           ul.menu.medium-horizontal
@@ -260,3 +263,14 @@ div#stickhere
               input[type="search" name="search" id="search"]
             li
               = submit_tag "Search", class: "button"
+      - if user_signed_in?
+        #user_dropdown.right.dropdown-pane.bottom[data-dropdown]
+          ul.menu.medium-vertical
+            li
+              == link_to "My Dashboard", dashboard_path(current_user)
+            li
+              == link_to "My Notifications", notifications_dashboard_path(current_user)
+            li
+              hr[style="margin: 0;"]
+            li
+              == link_to "Sign out", destroy_user_session_path, method: :delete
