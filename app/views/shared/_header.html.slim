@@ -24,8 +24,9 @@ div#stickhere
                       == render 'shared/userimages'
                       span
                         == current_user.display_name
-                    div
-                      == link_to "Sign out", destroy_user_session_path, method: :delete
+                    div.hide-for-small-only
+                      button.float-right#user_dropdown_button[type="button" data-toggle="user_dropdown" style="vertical-align: bottom; padding-bottom: 1px;"]
+                        i.fa.fa-chevron-down.fa-1[aria-hidden="true"]
                   - else
                     div[style="padding-right: 0.5em;"]
                       == link_to "Join", new_user_registration_path, class: "button"
@@ -251,7 +252,7 @@ div#stickhere
         .columns
           button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
             | &nbsp;
-            i.fa.fa-search.bottom[aria-hidden="true"]
+            i.fa.fa-search[aria-hidden="true"]
       #search_dropdown.dropdown-pane.bottom[data-dropdown]
         = form_tag root_path, :method => :get do
           ul.menu.medium-horizontal
@@ -259,3 +260,14 @@ div#stickhere
               input[type="search" name="search" id="search"]
             li
               = submit_tag "Search", class: "button"
+      - if user_signed_in?
+        #user_dropdown.right.dropdown-pane.bottom[data-dropdown]
+          ul.menu.medium-vertical
+            li
+              == link_to "My Dashboard", dashboard_path(current_user)
+            li
+              == link_to "My Notifications", notifications_dashboard_path(current_user)
+            li
+              hr[style="margin: 0;"]
+            li
+              == link_to "Sign out", destroy_user_session_path, method: :delete

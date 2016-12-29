@@ -111,7 +111,21 @@ $("#mobile_search").click(function(e) {
     $("#mobile_search").closest("button").parent().addClass('active');
   }
 });
-
+//fcn to handle user_dropdown
+$(document).on("show.zf.dropdown", function(e) {
+  if ($("#user_dropdown").hasClass("is-open")) {
+    var position_top = $("#user_dropdown").css("top");
+    position_top = parseInt(position_top.substr(0, position_top.length-2))+8;
+    position_top.toString;
+    position_top+="px";
+    $("#user_dropdown").css("top", position_top);
+  }  
+});
+$(document).on("hide.zf.dropdown", function(e) {
+  if ($("#user_dropdown").hasClass("right")) {
+    $("#user_dropdown").removeClass("right").addClass("bottom");
+  }
+});
 //*STORY FORM*
 //fcn to remove extra image upload fields, separate b/c dynamically-added element
 $(document).on('click', '.remove_image_field', function(event){

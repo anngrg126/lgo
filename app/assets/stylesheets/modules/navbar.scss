@@ -129,9 +129,19 @@ nav .top-bar.row {
   bottom: 8px; 
   right: 0;
 }
-.top-bar .menu-right .logged-in span {
+.top-bar .menu-right .logged-in span, .top-bar .menu-right .hide-for-small-only {
   position: relative;
   vertical-align: bottom;
+}
+.top-bar .menu-right .hide-for-small-only {
+  font-size: 0.75rem;
+  font-weight: 50;
+  padding-left: 5px;
+  color: $middark-gray;
+  line-height: 30px; //INCLUDE?!
+}
+.top-bar .menu-right .hide-for-small-only:hover {
+  color: lighten($middark-gray, 15%);
 }
 .top-bar .menu-right #user_notifications {//My Notifications link
   vertical-align: bottom;
@@ -157,7 +167,6 @@ nav .top-bar.row {
   display: inline-block;
 }
 .top-bar .menu-right .logged-in span {
-//  line-height: 30px;
   font-weight: 500;
   border-right: 1px solid $middark-gray;
   padding-right: 5px;
@@ -177,6 +186,9 @@ nav .top-bar.row {
 }
 nav .menu .active > a {
   background-color: transparent;
+}
+#user_dropdown {
+  width: 200px;
 }
 @media only screen and (max-width: 40.063em) {
   .top-bar .menu-text {
@@ -272,5 +284,8 @@ nav .menu .active > a {
   }
   .top-bar.center div .active:hover {
     color: scale-color($primary-color, $lightness: -15%);
+  }
+  .top-bar .menu-right .logged-in span {
+    border-right: none;
   }
 }
