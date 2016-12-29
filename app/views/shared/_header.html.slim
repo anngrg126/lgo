@@ -17,7 +17,7 @@ div#stickhere
             - unless params[:controller].include? "users"
               - unless current_page? registration_step_path(:basic_details)
                 div.menu-right
-                  #user_notifications
+                  #user_notifications.hide-for-small-only
                     == user_notifications_link
                   - if user_signed_in?
                     == link_to dashboard_path(current_user), class: "logged-in" do
@@ -27,6 +27,9 @@ div#stickhere
                     div.hide-for-small-only
                       button.float-right#user_dropdown_button[type="button" data-toggle="user_dropdown" style="vertical-align: bottom; padding-bottom: 1px;"]
                         i.fa.fa-chevron-down.fa-1[aria-hidden="true"]
+                    div.show-for-small-only[style="vertical-align: bottom;"]
+                      #user_notifications
+                        == user_notifications_link_small
                   - else
                     div[style="padding-right: 0.5em;"]
                       == link_to "Join", new_user_registration_path, class: "button"

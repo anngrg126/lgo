@@ -21,5 +21,12 @@ module ApplicationHelper
       end
     end
   end
+  def user_notifications_link_small
+    unless Notification.where(user_id: current_user.id, read: false).count == 0
+      link_to notifications_dashboard_path(current_user) do
+        concat "<span class='notifications_count'>(#{current_user.notifications.select{|n| n.read == false}.length})</span>".html_safe
+      end
+    end
+  end
   
 end

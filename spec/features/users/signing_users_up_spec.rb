@@ -23,7 +23,8 @@ RSpec.feature "Users signup" do
     
     expect(page.current_path).to eq(registration_step_path(:basic_details)) 
 #    expect(page).not_to have_content("Signed in as #{@email}")
-    expect(page).not_to have_link("Sign out")
+#    expect(page).not_to have_link("Sign out")
+    expect(page).not_to have_css("a.logged-in")
     
     fill_in "First Name", with: @first_name
     fill_in "Last Name", with: @last_name
@@ -34,7 +35,8 @@ RSpec.feature "Users signup" do
     
     expect(page).to have_content("You have signed up successfully.")
     expect(page).to have_content("#{@first_name} #{@last_name.first}")
-    expect(page).to have_link("Sign out")
+#    expect(page).to have_link("Sign out")
+    expect(page).to have_css("a.logged-in")
     expect(page.current_path).to eq(dashboard_path(User.find_by(email: @email).slug)) 
   end
   
