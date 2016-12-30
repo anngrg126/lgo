@@ -1,6 +1,6 @@
 - if @user == current_user
   h2 List of all Authored Stories
-  - @authored_stories.each do |story|
+  - @posted_stories.each do |story|
     div
       = story_main_image(story)
     div

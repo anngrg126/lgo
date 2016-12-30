@@ -2,7 +2,6 @@ class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_profile]
   before_action :set_anonymous_user
   
-  before_action :set_authored_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
   before_action :set_posted_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
   before_action :set_bookmarked_stories, only: [:show, :notifications, :bookmarked_stories]
   before_action :set_commented_stories, only: [:show, :commented_stories, :notifications, :bookmarked_stories]
@@ -83,16 +82,11 @@ class DashboardController < ApplicationController
     end
   end
   
-  def set_authored_stories
-    @authored_stories = @user.stories.select {|s| s.active?}
-    @authored_stories.uniq!
-  end
-  
   def set_posted_stories
     unless @user == current_user
       @posted_stories = @user.stories_posted.select {|s| s.active? && s.published?}
     else
-      @posted_stories = @user.stories.select {|s| s.active?  && s.published?}
+      @posted_stories = @user.stories.select {|s| s.active?}
     end
     @posted_stories.uniq!
   end
