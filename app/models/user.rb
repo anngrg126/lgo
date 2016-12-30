@@ -7,10 +7,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   
   has_many :stories, dependent: :destroy 
-  has_many :stories_posted, :class_name => 'Story', :source => 'poster_user', dependent: :destroy 
+  has_many :stories_posted, :class_name => 'Story', :foreign_key => 'poster_id', dependent: :destroy 
   has_many :bookmarks, dependent: :destroy
-  has_many :followings, dependent: :destroy
-  has_many :followers, through: :followings, class_name: "User", dependent: :destroy
+  has_many :followers, :class_name => "Following", :foreign_key => 'user_id', dependent: :destroy
+  has_many :followings, :class_name => "Following", :foreign_key => 'follower_id', dependent: :destroy
   has_many :reactions, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :comments, dependent: :destroy

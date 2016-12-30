@@ -14,6 +14,7 @@ class DashboardController < ApplicationController
   before_action :set_bookmark_posters, only: [:bookmarked_stories]
   before_action :set_reaction_posters, only: [:reacted_stories]
   before_action :set_followings_users, only:  [:followings]
+  before_action :set_followers_users, only:  [:followers]
   before_action :set_commented_story_posters, only:  [:commented_stories]
   
   def show
@@ -182,8 +183,15 @@ class DashboardController < ApplicationController
   end
   
   def set_followers
-    @followers = @user.followers.select {|f| f.not_deactive?}
-    @followers.uniq!
+    @followers = @user.followers.select {|f| f.user.not_deactive?}
+  end
+  
+  def set_followers_users
+    @followers_users = []
+    @followers.each do |follower|
+      @followers_users.push(follower.follower)
+    end
+    @followers_users.uniq!
   end
   
   def set_followings
@@ -193,7 +201,7 @@ class DashboardController < ApplicationController
   def set_followings_users
     @followings_users = []
     @followings.each do |following|
-      @followings_users.push(following.follower)
+      @followings_users.push(following.user)
     end
     @followings_users.uniq!
   end
