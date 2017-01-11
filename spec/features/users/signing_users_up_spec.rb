@@ -9,6 +9,8 @@ RSpec.feature "Users signup" do
     @password = Faker::Internet.password
     @password2 = Faker::Internet.password
     @birthday = Faker::Date.birthday(min_age = 18, max_age = 65)
+    @first_name = Faker::Name.first_name
+    @last_name = Faker::Name.last_name
   end
   
   scenario "with valid credentials" do
@@ -21,19 +23,21 @@ RSpec.feature "Users signup" do
     click_button "Sign up"
     
     expect(page.current_path).to eq(registration_step_path(:basic_details)) 
-    expect(page).not_to have_content("Signed in as #{@email}")
-    expect(page).not_to have_link("Sign out")
+#    expect(page).not_to have_content("Signed in as #{@email}")
+#    expect(page).not_to have_link("Sign out")
+    expect(page).not_to have_css("a.logged-in")
     
-    fill_in "First Name", with: Faker::Name.first_name
-    fill_in "Last Name", with: Faker::Name.last_name
+    fill_in "First Name", with: @first_name
+    fill_in "Last Name", with: @last_name
     select_date @birthday, :from => "user_birthday"
     choose('user_gender_female')
     
     click_button "Submit"
     
     expect(page).to have_content("You have signed up successfully.")
-    expect(page).to have_content("Signed in as #{@email}")
-    expect(page).to have_link("Sign out")
+    expect(page).to have_content("#{@first_name} #{@last_name.first}")
+#    expect(page).to have_link("Sign out")
+    expect(page).to have_css("a.logged-in")
     expect(page.current_path).to eq(dashboard_path(User.find_by(email: @email).slug)) 
   end
   

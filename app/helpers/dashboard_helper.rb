@@ -4,6 +4,8 @@ module DashboardHelper
       image_tag user.image.url(:medium)
     elsif user.fbimage?
       image_tag(user.largesquareimage)
+    else
+      image_tag('default_user_image.png')
     end
   end
   

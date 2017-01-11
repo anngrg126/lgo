@@ -139,6 +139,15 @@ ActiveRecord::Schema.define(version: 20161224065839) do
     t.index ["user_id"], name: "index_reactions_on_user_id", using: :btree
   end
 
+  create_table "search_query_logs", force: :cascade do |t|
+    t.string   "query_string"
+    t.integer  "result_count"
+    t.string   "search_param"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "stories", force: :cascade do |t|
     t.string   "raw_title"
     t.text     "raw_body"
@@ -192,6 +201,15 @@ ActiveRecord::Schema.define(version: 20161224065839) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["tag_category_id"], name: "index_tags_on_tag_category_id", using: :btree
+  end
+
+  create_table "user_session_logs", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "user_ip"
+    t.datetime "sign_in"
+    t.datetime "sign_out"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

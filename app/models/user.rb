@@ -51,6 +51,12 @@ class User < ApplicationRecord
     "#{f_name} #{l_name}"
   end
   
+  def display_name
+    f_name = self.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }
+    l_initial = self.last_name.titleize.first
+    "#{f_name} #{l_initial}."
+  end
+  
   def follows?(follow)
     Following.where(follower_id: self.id).where(user_id: follow.id).any?
   end
