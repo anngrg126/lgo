@@ -1,21 +1,18 @@
 class Admin::StoriesController < ApplicationController
 #  before_action :authenticate_user!, except: [:index, :show]
   before_action :require_admin
-  before_action :set_story, only: [:update, :destroy]
+  before_action :set_story, only: [:show, :edit]
   before_action :set_tags, only: [:show, :index, :new, :edit]
-  before_action :set_anonymous_user, only: [:update]
+  before_action :set_anonymous_user, only: [:update, :destroy, :show]
   
   def index
     @stories = Story.includes(:user).unpublished.active
   end
   
   def show
-    @story = Story.includes(:classifications).find(params[:id])
   end
   
   def edit
-    @story = Story.includes(:classifications).find(params[:id])
-    
     @relationship_tags = @tags.select { |tag| tag.tag_category.category == "Relationship" }.sort_by {|t| t.name}
     @occasion_tags = @tags.select { |tag| tag.tag_category.category == "Occasion" }.sort_by {|t| t.name}
     @type_tags = @tags.select { |tag| tag.tag_category.category == "Type" }.sort_by {|t| t.name}
@@ -26,6 +23,7 @@ class Admin::StoriesController < ApplicationController
   end
   
   def destroy
+    @story = Story.find(params[:id])
     if @story.destroy
       destroy_notification(@story)
       flash[:success] = "Story has been deleted"
@@ -34,6 +32,7 @@ class Admin::StoriesController < ApplicationController
   end
   
   def update
+    @story = Story.includes(:classifications).find(params[:id])
     @story.validate_final_fields = true
     @story.validate_main_image = true
     @published_changed = nil 
@@ -45,23 +44,19 @@ class Admin::StoriesController < ApplicationController
           parms[:tag_id].each { |tag|
             description= nil
             primary = false
-            if parms[:description][tag.to_s]
-              if parms[:description][tag.to_s] != ""
-                description = parms[:description][tag.to_s][0]
-              else
-                description = nil
-              end
+#            if parms[:description]
+            if parms[:description][tag.to_s] != nil
+              description = parms[:description][tag.to_s][0]
             end
-            if parms[:primary]
+#            end
+#            if parms[:primary]
               if parms[:primary][:recipient] || parms[:primary][:occasion]
                 if parms[:primary][:recipient].include?(tag) || parms[:primary][:occasion].include?(tag)
                   primary = true
-                else
-                  primary = false
                 end
               end
-            end
-            @classification = @story.classifications.create(tag_id: tag, primary: primary, description: description)
+#            end
+            @story.classifications.create(tag_id: tag, primary: primary, description: description)
           }
         }
       end
@@ -113,8 +108,7 @@ class Admin::StoriesController < ApplicationController
   end
   
   def set_story
-    @story = Story.includes(:user).find(params[:id])
-    @anonymous_user = User.where(anonymous: true).first
+    @story = Story.includes(:classifications, :user).find(params[:id])
   end
   
   def create_notification(story)
