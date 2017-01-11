@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :models
-  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       get 'notifications'
       get 'user_profile'
     end
-    devise_for :users, controllers: { registrations: 'registrations' }
+    devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   end
   
   resources :reactions, only: [:create, :destroy]

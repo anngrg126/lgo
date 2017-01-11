@@ -2,8 +2,10 @@ class StoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_story, only: [:show, :edit, :update, :destroy, :check_for_cancel]
   before_action :redirect_cancel, :only => [:update]
+  before_action :set_tags, only: [:show, :index, :new, :edit]
   
   def index
+    @active_browse = "active"
     if params[:search]
       @results = (Story.search params[:search], operator: "or")
       @stories = @results.results
@@ -20,12 +22,20 @@ class StoriesController < ApplicationController
         flash[:warning] = "No stories matched : "+ params[:search_tag]
         redirect_to root_path
       end
+    elsif params[:search_tag]
+      @results = (Story.search params[:search_tag], fields: [tags: :exact])
+      @stories = @results.results
+      if @results.count <=0
+        flash[:warning] = "No records matched : "+ params[:search_tag]
+        redirect_to root_path
+      end
     else
       @stories = Story.published.active
     end
   end
   
   def new
+    @active_share = "active"
     @story = Story.new
     @story.pictures.build(:image => params[:image])   
   end
@@ -56,6 +66,7 @@ class StoriesController < ApplicationController
   end
   
   def show
+    @active_browse = "active"
     @comment = @story.comments.active.build
     @bookmark = @story.bookmarks.build
   end
@@ -166,5 +177,8 @@ class StoriesController < ApplicationController
       user_id = nil
     end
     SearchQueryLog.create(query_string: query_string, result_count: result_count, search_param: search_param, user_id: user_id)
+    
+  def set_tags
+    @tags = Tag.all.group_by(&:name)
   end
 end

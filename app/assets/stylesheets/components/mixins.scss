@@ -1,0 +1,15 @@
+.small-button {
+  padding: 0.4em 0.5em;
+}
+
+.inactive-link {
+  color: $middark-gray;
+  border-bottom: 3px solid transparent;
+}
+.inactive-link:hover {
+  color: scale-color($middark-gray, $lightness: +15%);
+}
+
+//.hidden {
+//  display: none;
+//}
