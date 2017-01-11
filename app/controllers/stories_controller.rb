@@ -177,6 +177,7 @@ class StoriesController < ApplicationController
       user_id = nil
     end
     SearchQueryLog.create(query_string: query_string, result_count: result_count, search_param: search_param, user_id: user_id)
+  end
     
   def set_tags
     @tags = Tag.all.group_by(&:name)

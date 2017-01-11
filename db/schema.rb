@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161216220754) do
+ActiveRecord::Schema.define(version: 20161224065839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,15 +203,6 @@ ActiveRecord::Schema.define(version: 20161216220754) do
     t.index ["tag_category_id"], name: "index_tags_on_tag_category_id", using: :btree
   end
 
-  create_table "user_session_logs", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "user_ip"
-    t.datetime "sign_in"
-    t.datetime "sign_out"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -243,6 +234,7 @@ ActiveRecord::Schema.define(version: 20161216220754) do
     t.string   "fbimage"
     t.string   "slug"
     t.datetime "deactivated_at"
+    t.boolean  "anonymous"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["slug"], name: "index_users_on_slug", unique: true, using: :btree
@@ -255,6 +247,7 @@ ActiveRecord::Schema.define(version: 20161216220754) do
   add_foreign_key "comments", "stories"
   add_foreign_key "comments", "users"
   add_foreign_key "followings", "users"
+  add_foreign_key "followings", "users", column: "follower_id"
   add_foreign_key "notifications", "notification_categories"
   add_foreign_key "notifications", "users"
   add_foreign_key "pictures", "stories"
