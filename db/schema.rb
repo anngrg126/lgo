@@ -203,15 +203,6 @@ ActiveRecord::Schema.define(version: 20161224065839) do
     t.index ["tag_category_id"], name: "index_tags_on_tag_category_id", using: :btree
   end
 
-  create_table "user_session_logs", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "user_ip"
-    t.datetime "sign_in"
-    t.datetime "sign_out"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
