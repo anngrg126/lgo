@@ -17,7 +17,7 @@ RSpec.feature "Deleting Notifications" do
   end
   
   scenario "User deletes a notification", js: true do
-    visit "/"
+    visit dashboard_path(@foo)
     click_link "Notifications"
     
     expect(page).to have_content("#{@bar.full_name} followed you")
@@ -29,7 +29,7 @@ RSpec.feature "Deleting Notifications" do
   end
   
    scenario "User deletes all notifications", js: true do
-    visit "/"
+    visit dashboard_path(@foo)
     click_link "Notifications"
     
     expect(page).to have_link("Delete All Notifications")
