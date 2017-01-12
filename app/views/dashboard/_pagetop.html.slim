@@ -23,7 +23,7 @@ div#user_registration
     
 div
   - if @user == current_user
-    == link_to "Stories: #{@posted_stories.length}", authored_stories_dashboard_path(@user), remote: true
+    == link_to "Stories: #{@dashboard_stories.length}", authored_stories_dashboard_path(@user), remote: true
     |   
     == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
     |  
@@ -31,7 +31,7 @@ div
     |  
     == link_to "Comments: #{@commented_stories.length}", commented_stories_dashboard_path(@user), remote: true
   - else
-    == link_to "Stories: #{@posted_stories.length}", authored_stories_dashboard_path(@user), remote: true
+    == link_to "Stories: #{@dashboard_stories.length}", authored_stories_dashboard_path(@user), remote: true
     |   
     == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
   |  

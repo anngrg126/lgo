@@ -44,11 +44,11 @@ class Admin::StoriesController < ApplicationController
           parms[:tag_id].each { |tag|
             description= nil
             primary = false
-#            if parms[:description]
-            if parms[:description][tag.to_s] != nil
-              description = parms[:description][tag.to_s][0]
+            if parms[:description]
+              if parms[:description][tag.to_s] != nil
+                description = parms[:description][tag.to_s][0]
+              end
             end
-#            end
 #            if parms[:primary]
               if parms[:primary][:recipient] || parms[:primary][:occasion]
                 if parms[:primary][:recipient].include?(tag) || parms[:primary][:occasion].include?(tag)
