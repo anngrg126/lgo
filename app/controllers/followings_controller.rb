@@ -12,7 +12,7 @@ class FollowingsController < ApplicationController
         respond_to do |format|
           @user = @following.user
           flash.now[:success] = "You are now following #{@user.full_name}"
-          format.js {render 'followings/create', :locals => {followings: User.joins(:followings).where(:followings => { follower_id: current_user.id}).select{ |f| f.deactivated_at==nil }.count}}
+          format.js {render 'followings/create', :locals => {followings: User.joins(:followings).where(:followings => { follower_id: current_user.id}).select{ |f| f.deactivated_at==nil }.length}}
         end
 #        format.html {redirect_to root_path}
       else
@@ -29,7 +29,7 @@ class FollowingsController < ApplicationController
       respond_to do |format|
         @user = @following.user
         flash.now[:success] = "You unfollowed #{@user.full_name}"
-        format.js {render 'followings/destroy', :locals => {followings: User.joins(:followings).where(:followings => { follower_id: current_user.id}).select{ |f| f.deactivated_at==nil }.count}}
+        format.js {render 'followings/destroy', :locals => {followings: User.joins(:followings).where(:followings => { follower_id: current_user.id}).select{ |f| f.deactivated_at==nil }.length}}
       end
 #      redirect_to dashboard_path(@user)
     else

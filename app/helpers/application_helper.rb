@@ -12,8 +12,7 @@ module ApplicationHelper
     unless current_user
       link_to "My Notifications", new_user_session_path, class: "hide-for-small-only inactive-link"
     else
-      unless Notification.where(user_id: current_user.id, read: false).count == 0
-#        link_to "My Notifications (#{Notification.where(user_id: current_user.id, read: false).count})", notifications_dashboard_path(current_user)
+      unless current_user.notifications.empty?
         link_to notifications_dashboard_path(current_user) do
           concat "My Notifications ".html_safe
           concat "<span class='notifications_count'>(#{current_user.notifications.select{|n| n.read == false}.length})</span>".html_safe
@@ -22,9 +21,11 @@ module ApplicationHelper
     end
   end
   def user_notifications_link_small
-    unless Notification.where(user_id: current_user.id, read: false).count == 0
-      link_to notifications_dashboard_path(current_user) do
-        concat "<span class='notifications_count'>(#{current_user.notifications.select{|n| n.read == false}.length})</span>".html_safe
+    unless current_user
+      unless current_user.notifications.empty?
+        link_to notifications_dashboard_path(current_user) do
+          concat "<span class='notifications_count'>(#{current_user.notifications.select{|n| n.read == false}.length})</span>".html_safe
+        end
       end
     end
   end

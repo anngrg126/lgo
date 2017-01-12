@@ -13,7 +13,8 @@ class DashboardController < ApplicationController
   before_action :set_commented_story_posters, only:  [:commented_stories]
   before_action :set_followers, only: [:show, :followers, :notifications, :bookmarked_stories]
   before_action :set_followings, only: [:show, :followings, :notifications, :bookmarked_stories]
-  
+  before_action :set_current_user_followings, only: [:followings, :followers]
+    
   def show
   end
   
@@ -172,6 +173,12 @@ class DashboardController < ApplicationController
   def set_followings
     @followings = User.joins(:followings).where(:followings => { follower_id: @user.id}).select{ |f| f.deactivated_at==nil }
     #yields a collection of Users
+  end
+  
+  def set_current_user_followings
+    if current_user
+      @current_user_followers = current_user.following_users
+    end
   end
   
   def set_tags
