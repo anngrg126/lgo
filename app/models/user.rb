@@ -9,8 +9,9 @@ class User < ApplicationRecord
   has_many :stories, dependent: :destroy 
   has_many :stories_posted, :class_name => 'Story', :foreign_key => 'poster_id', dependent: :destroy 
   has_many :bookmarks, dependent: :destroy
-  has_many :followers, :class_name => "Following", :foreign_key => 'user_id', dependent: :destroy
-  has_many :followings, :class_name => "Following", :foreign_key => 'follower_id', dependent: :destroy
+  has_many :followings, dependent: :destroy
+  has_many :followers, through: :followings, class_name: "User", dependent: :destroy
+#  has_many :following_users, class_name: "Following", foreign_key: :follower_id, dependent: :destroy
   has_many :reactions, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -29,10 +30,6 @@ class User < ApplicationRecord
   validates_with AttachmentSizeValidator, attributes: :image, less_than: 8.megabytes
   
   scope :author_deactive, -> { where.not(deactivated_at: nil) }
-  
-  def not_deactive?
-    deactivated_at.nil?
-  end
   
   def active?
     #active is set by registration_steps 

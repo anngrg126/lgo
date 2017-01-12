@@ -1,6 +1,13 @@
-- if controller.action_name == "followings"
+/- if controller.action_name == "followings"
     div id="follow_user_#{follower.id}"
-       == link_to_follow(follower, current_user, "button", @followings.select{|u| u.user_id == follower.id})
-- else
-    div id="follow_user_#{user.id}"
        == link_to_follow(user, current_user, "button")
+/- else
+    div id="follow_user_#{user.id}"
+       == link_to_follow(user, current_user, "button")      
+div id="follow_user_#{user.id}"
+  - if controller.action_name == "followings"
+    /- binding.pry
+    /== link_to_follow(user, current_user, "button", @followings.select{|u| u.user_id == user.id})
+    == link_to_follow(user, current_user, "button")
+  - else
+    == link_to_follow(user, current_user, "button") 
