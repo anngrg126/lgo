@@ -9,7 +9,8 @@ h2 List of All Saved Stories:
   div
     small 
       | Posted by: 
-      == link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
+      == link_to "#{@b_posters.select{|u| u.id == story.poster_id}.first.full_name}", dashboard_path(@b_posters.select{|u| u.id == story.poster_id}.first)
+      /== link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
   div
     small
       | Posted on: 

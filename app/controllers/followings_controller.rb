@@ -10,9 +10,9 @@ class FollowingsController < ApplicationController
       if @following.save
         create_notification @following
         respond_to do |format|
-          @user = User.find(@following.user_id)
+          @user = @following.user
           flash.now[:success] = "You are now following #{@user.full_name}"
-          format.js {render 'followings/create', :locals => {followings: Following.where(follower_id: current_user.id).count}}
+          format.js {render 'followings/create', :locals => {followings: User.joins(:followings).where(:followings => { follower_id: current_user.id}).select{ |f| f.deactivated_at==nil }.length}}
         end
 #        format.html {redirect_to root_path}
       else
@@ -23,14 +23,13 @@ class FollowingsController < ApplicationController
   end
   
   def destroy
-    @user = current_user
     @following = Following.find(params[:id])
     if @following.destroy
       destroy_notification(@following)
       respond_to do |format|
-        @user = User.find(@following.user_id)
+        @user = @following.user
         flash.now[:success] = "You unfollowed #{@user.full_name}"
-        format.js {render 'followings/destroy', :locals => {followings: Following.where(follower_id: current_user.id).count}}
+        format.js {render 'followings/destroy', :locals => {followings: User.joins(:followings).where(:followings => { follower_id: current_user.id}).select{ |f| f.deactivated_at==nil }.length}}
       end
 #      redirect_to dashboard_path(@user)
     else

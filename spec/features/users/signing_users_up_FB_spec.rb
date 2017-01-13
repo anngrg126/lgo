@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.feature "New users sign up via Facebook" do
   
   before do
-    Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
+    Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # If using Devise
     Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
   end
   

@@ -1,31 +1,29 @@
 class Admin::StoriesController < ApplicationController
 #  before_action :authenticate_user!, except: [:index, :show]
   before_action :require_admin
-  before_action :set_story, only: [:update, :destroy]
+  before_action :set_story, only: [:show, :edit]
   before_action :set_tags, only: [:show, :index, :new, :edit]
-  before_action :set_tags, only: [:show, :index, :new, :edit]
+  before_action :set_anonymous_user, only: [:update, :destroy, :show]
   
   def index
-    @stories = Story.unpublished.active
+    @stories = Story.includes(:user).unpublished.active
   end
   
   def show
-    @story = Story.includes(:classifications).find(params[:id])
   end
   
   def edit
-    @story = Story.includes(:classifications).find(params[:id])
-    
-    @relationship_tags = Tag.relationship.order(name: :asc)
-    @occasion_tags = Tag.occasion.order(name: :asc)
-    @type_tags = Tag.type.order(name: :asc)
-    @interests_tags = Tag.interests.order(name: :asc)
-    @to_recipient_tags = Tag.recipient.order(name: :asc)
-    @gifton_reaction_tags = Tag.gifton_reaction.order(name: :asc)
-    @collection_tags = Tag.collection.order(name: :asc)
+    @relationship_tags = @tags.select { |tag| tag.tag_category.category == "Relationship" }.sort_by {|t| t.name}
+    @occasion_tags = @tags.select { |tag| tag.tag_category.category == "Occasion" }.sort_by {|t| t.name}
+    @type_tags = @tags.select { |tag| tag.tag_category.category == "Type" }.sort_by {|t| t.name}
+    @interests_tags = @tags.select { |tag| tag.tag_category.category == "Interests" }.sort_by {|t| t.name}
+    @to_recipient_tags = @tags.select { |tag| tag.tag_category.category == "To_recipient" }.sort_by {|t| t.name}
+    @gifton_reaction_tags = @tags.select { |tag| tag.tag_category.category == "Gifton_reaction" }.sort_by {|t| t.name}
+    @collection_tags = @tags.select { |tag| tag.tag_category.category == "Collection" }.sort_by {|t| t.name}
   end
   
   def destroy
+    @story = Story.find(params[:id])
     if @story.destroy
       destroy_notification(@story)
       flash[:success] = "Story has been deleted"
@@ -34,32 +32,31 @@ class Admin::StoriesController < ApplicationController
   end
   
   def update
+    @story = Story.includes(:classifications).find(params[:id])
     @story.validate_final_fields = true
     @story.validate_main_image = true
     @published_changed = nil 
     delete_old_tags(@story)
-    i = 0
+    
     if params[:story][:classifications_attributes]
       if params[:story][:classifications_attributes].to_unsafe_h.values[0].include?("tag_id")
         params[:story][:classifications_attributes].each {|index, parms| 
           parms[:tag_id].each { |tag|
-            if @story.classifications.where(tag_id: tag).empty?
-              @classification = @story.classifications.create(tag_id: tag)
-              if parms[:description]
-                parms[:description].delete_if{|i|i==""}
-                if Tag.find(tag).name == "other"
-                  @classification.update(description: parms[:description][i])
-                  i +=1
-                end
-              end
-              if parms[:primary]
-                if parms[:primary][:recipient] || parms[:primary][:occasion]
-                  if parms[:primary][:recipient].include?(tag) || parms[:primary][:occasion].include?(tag)
-                    @classification.update(primary: true)
-                  end
-                end
+            description= nil
+            primary = false
+            if parms[:description]
+              if parms[:description][tag.to_s] != nil
+                description = parms[:description][tag.to_s][0]
               end
             end
+#            if parms[:primary]
+              if parms[:primary][:recipient] || parms[:primary][:occasion]
+                if parms[:primary][:recipient].include?(tag) || parms[:primary][:occasion].include?(tag)
+                  primary = true
+                end
+              end
+#            end
+            @story.classifications.create(tag_id: tag, primary: primary, description: description)
           }
         }
       end
@@ -76,7 +73,7 @@ class Admin::StoriesController < ApplicationController
     unless @story.anonymous?
       @story.poster_id = @story.author_id
     else
-      @story.poster_id = 3
+      @story.poster_id = @anonymous_user.id
     end
     @story.last_user_to_update = "Admin"  
     respond_to do |format|
@@ -111,7 +108,7 @@ class Admin::StoriesController < ApplicationController
   end
   
   def set_story
-    @story = Story.find(params[:id])
+    @story = Story.includes(:classifications, :user).find(params[:id])
   end
   
   def create_notification(story)
@@ -142,12 +139,14 @@ class Admin::StoriesController < ApplicationController
   end
   
   def delete_old_tags(story)
-    unless Classification.where(story_id: story.id).empty?
-       Classification.where(story_id: story.id).each(&:destroy)   
-    end
+    story.classifications.delete_all
   end
   
   def set_tags
-    @tags = Tag.all.group_by(&:name)
+    @tags = Tag.alltags
+  end
+  
+  def set_anonymous_user
+    @anonymous_user = User.where(anonymous: true).first
   end
 end

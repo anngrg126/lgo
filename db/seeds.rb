@@ -6,6 +6,18 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.create({
+  email: 'hello@letsgifton.com', 
+  admin: false,
+  first_name: "Anonymous",
+  last_name: "Penguin",
+  about_me: "Hi! I post anonymous stories on behalf of the GiftOn community.",
+  gender: "female",
+  slug: "anonymous-penguin",
+  anonymous: true,
+  password: "you are a rockstar"
+  })
+
 ReactionCategory.create([
   { name: 'like' }, 
   { name: 'omg' },

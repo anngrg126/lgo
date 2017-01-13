@@ -27,23 +27,24 @@ class Story < ApplicationRecord
   validate :check_all_tags?, if: :validate_all_tags?
 
   def check_all_tags?
-    if self.classifications.count == 0
+    if self.classifications.length == 0
       self.errors.add(:classifications, "You need tags.")
     else
       primary_tags = []
-      recipient_category = TagCategory.find_by(category: 'To_recipient')
-      occasion_category = TagCategory.find_by(category: 'Occasion')
+      @tags = Tag.alltags
+      recipient_category = @tags.select{|t| t.tag_category.category == "To_recipient"}.first.tag_category
+      occasion_category = @tags.select{|t| t.tag_category.category == "Occasion"}.first.tag_category
       self.classifications.each do |c|
         if c.primary == true
-          tag = Tag.find(c.tag_id)
+          tag = @tags.select{|t| t.id == c.tag_id}.first
           primary_tags.push(tag.tag_category_id)
         end
       end
       unless primary_tags.include?(recipient_category.id)
-        self.errors.add(:classifications, "Story must have at least one primary Recipient tag")
+        self.errors.add(:classifications, "Story must have only one primary Recipient tag")
       end
       unless primary_tags.include?(occasion_category.id)
-        self.errors.add(:classifications, "Story must have at least one primary Occasion tag")
+        self.errors.add(:classifications, "Story must have only one primary Occasion tag")
       end
     end
   end
@@ -81,6 +82,10 @@ class Story < ApplicationRecord
   
   def should_index?
     deleted_at.nil? # only index active records
+  end
+  
+  def active?
+    deleted_at.nil?
   end
   
   def search_data

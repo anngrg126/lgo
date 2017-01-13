@@ -6,8 +6,9 @@ class StoriesController < ApplicationController
   
   def index
     @active_browse = "active"
+    @anonymous_user = User.where(anonymous: true).first
     if params[:search]
-      @results = (Story.search params[:search], operator: "or")
+      @results = (Story.includes(:user).search params[:search], operator: "or")
       @stories = @results.results
       log_search_query(params[:search], @results.count , "search")
       if @results.count <=0
@@ -23,14 +24,14 @@ class StoriesController < ApplicationController
         redirect_to root_path
       end
     elsif params[:search_tag]
-      @results = (Story.search params[:search_tag], fields: [tags: :exact])
+      @results = (Story.includes(:user).search params[:search_tag], fields: [tags: :exact])
       @stories = @results.results
       if @results.count <=0
         flash[:warning] = "No records matched : "+ params[:search_tag]
         redirect_to root_path
       end
     else
-      @stories = Story.published.active
+      @stories = Story.includes(:user).published.active
     end
   end
   
@@ -85,7 +86,8 @@ class StoriesController < ApplicationController
       notify_admin(@story)
       if @story.anonymous_changed?
         if @story.anonymous
-          @story.poster_id = 3
+#          @story.poster_id = User.where(anonymous: true).first.id
+          @story.poster_id = @anonymous_user.id
           destroy_notification(@story)
           create_notification(@story)
         else
@@ -133,9 +135,10 @@ class StoriesController < ApplicationController
   end
   
   def set_story
-    @story = Story.find(params[:id])
+    @story = Story.includes(:user).find(params[:id])
     #to make sure users can only get to their own stories
     #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
+    @anonymous_user = User.where(anonymous: true).first
   end
   
   def redirect_cancel

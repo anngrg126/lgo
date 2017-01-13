@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Listing Bookmarked Stories" do 
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
     @author = FactoryGirl.create(:user_with_published_stories, stories_count: 2)
     @user = FactoryGirl.create(:user_with_published_stories)
     @story1 = Story.where(author_id: @author.id).active.first

@@ -1,7 +1,7 @@
 h1 List of all Stories
 - if user_signed_in?
   == link_to "New Story", new_story_path, class: "btn", id: "new-story-btn"
-
+  
 - @stories.each do |story|
   div 
     == story_main_image_show(story)
@@ -13,4 +13,8 @@ h1 List of all Stories
     - if story.poster_id?
       small 
         | Posted by: 
-        == link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
+        - unless story.anonymous?
+          == link_to "#{story.user.full_name}", dashboard_path(story.user)
+        - else
+          == link_to "#{@anonymous_user.full_name}", dashboard_path(@anonymous_user)
+        /== link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
