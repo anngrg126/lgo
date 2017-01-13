@@ -70,6 +70,10 @@ module StoriesHelper
     @tag_array = story.classifications.select { |c| c.tag_id != nil  }   
     @primary_array = story.classifications.select { |c| c.primary == true }
     @other_array = story.classifications.select { |c| c.description != nil }
+    
+    if @story.fail?
+      @tag_array
+    end
    
     #method to add un/checked radio buttons to form
     def primary_tag(scope, tag)
@@ -94,6 +98,9 @@ module StoriesHelper
         checkbox_checked = "checked"
       else
         checkbox_checked = nil
+      end
+      if tag.name == "fail" && @story.fail?
+        checkbox_checked = "checked"
       end
       unless tag.name == "other"
         concat "<div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{tag.id}' value='#{tag.id}' name='story[classifications_attributes][0][tag_id][]' type='checkbox' #{checkbox_checked}><label for='story_classifications_attributes_0_family'>#{tag.name.humanize}</label>".html_safe
