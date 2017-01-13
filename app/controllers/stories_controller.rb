@@ -31,7 +31,7 @@ class StoriesController < ApplicationController
         redirect_to root_path
       end
     else
-      @stories = Story.includes(:user).published.active
+      @stories = Story.includes(:user, :classifications).published.active
     end
   end
   
@@ -183,6 +183,6 @@ class StoriesController < ApplicationController
   end
     
   def set_tags
-    @tags = Tag.all.group_by(&:name)
+    @tags = Tag.alltags
   end
 end

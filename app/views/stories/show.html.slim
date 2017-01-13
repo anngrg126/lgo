@@ -14,6 +14,11 @@ h2
   == story_title_show(@story)
 div
   == story_by_show(@story)
+div
+  - unless @story.classifications.empty?
+    == story_recipient_tag(@story)
+    == story_occasion_tag(@story)
+    == story_fail_tag(@story)
 p.small
   == @story.created_at.strftime("%b %d, %Y")
 p
@@ -33,6 +38,10 @@ div.story_pictures
 
 - if @story.published?
   <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
+  
+  div
+    //ALL TAGS GO HERE
+  
   == render 'comments/form'
   == render 'comments/show'
 

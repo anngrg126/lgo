@@ -158,4 +158,33 @@ module StoriesHelper
     end
   end
   
+  def get_display_tags(story, category)
+    story.classifications.select{|c| c.primary == true}.each do |c|
+      @t = @tags.select{|t| t.id  == c.tag_id}.first
+      if @t.tag_category.category== category
+        @display_tag = @t.name
+      end    
+    end
+    concat "<div>#{@display_tag}</div>".html_safe
+  end
+  
+  def story_recipient_tag(story)
+    get_display_tags(story, "To_recipient")
+  end
+  
+  def story_occasion_tag(story)
+    get_display_tags(story, "Occasion")
+  end
+  
+  def story_fail_tag(story)
+    @fail_tag = @tags.select{|t|t.name=="fail"}.first
+    if story.classifications.any?{|c| c[:tag_id] == @fail_tag.id}
+#      @display_tag = @fail_tag.name
+      @display_tag = "Story Fail"
+    else
+      @display_tag = ""
+    end
+    concat "<div>#{@display_tag}</div>".html_safe
+  end
+  
 end
