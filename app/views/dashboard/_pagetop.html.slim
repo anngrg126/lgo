@@ -22,18 +22,14 @@ div#user_registration
     == render partial: 'followings/form', locals: { user: @user, follower: current_user }
     
 div
+  == link_to "Stories: #{@dashboard_stories.length}", authored_stories_dashboard_path(@user), remote: true
+  |   
+  == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
   - if @user == current_user
-    == link_to "Stories: #{@dashboard_stories.length}", authored_stories_dashboard_path(@user), remote: true
-    |   
-    == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
     |  
     == link_to "Saves: #{@bookmarked_stories.length}", bookmarked_stories_dashboard_path(@user), remote: true
     |  
     == link_to "Comments: #{@commented_stories.length}", commented_stories_dashboard_path(@user), remote: true
-  - else
-    == link_to "Stories: #{@dashboard_stories.length}", authored_stories_dashboard_path(@user), remote: true
-    |   
-    == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
   |  
   == link_to "Followers: #{@followers.length}", followers_dashboard_path(@user), remote: true
   |  
