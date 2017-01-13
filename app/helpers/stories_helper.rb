@@ -66,14 +66,12 @@ module StoriesHelper
     #consolidate relevant info that belongs to a story
     #this does not hit the DB b/c of the includes query
     #in the admin/stories_controller.rb
-    @tag_array = []
-    @primary_array = []
-    @other_array = []
     
     @tag_array = story.classifications.select { |c| c.tag_id != nil  }   
     @primary_array = story.classifications.select { |c| c.primary == true }
     @other_array = story.classifications.select { |c| c.description != nil }
    
+    #method to add un/checked radio buttons to form
     def primary_tag(scope, tag)
       if scope == @to_recipient_tags || scope == @occasion_tags
         if scope == @to_recipient_tags
@@ -146,95 +144,6 @@ module StoriesHelper
       end
     end
   end
-  
-#   def admin_tag_story(story, tag_scope_array)
-#     #consolidate relevant info that belongs to a story
-#     #this does not hit the DB b/c of the includes query
-#     #in the admin/stories_controller.rb
-#     @tag_array = []
-#     @primary_array = []
-#     @other_array = []
-#     story.classifications.each do |c|
-#       unless c.tag_id == nil
-#         @tag_array.push(c.tag_id)
-#       end
-#       if c.primary == true
-#         @primary_array.push(c.tag_id)
-#       end
-#       if c.description != nil
-#         @other_array.push([c.tag_id, c.description])
-#       end
-#     end
-#     def primary_tag(scope, tag)
-#       if scope == @to_recipient_tags || scope == @occasion_tags
-#         if scope == @to_recipient_tags
-#           tag_name = "recipient"
-#         else
-#           tag_name = "occasion"
-#         end
-#         if @primary_array.include?(tag.id)
-#           checked = "checked"
-#         else
-#           checked = nil
-#         end
-#         concat "<input id='story_classifications_attributes_0_primary' value='#{tag.id}' name='story[classifications_attributes][0][primary][#{tag_name}][]' type='radio' #{checked} required>".html_safe
-#       end
-#     end
-    
-#     #method to add un/checked checkboxes to form
-#     def add_checkbox(scope, tag) 
-#       if @tag_array.include?(tag.id)
-#         checked = "checked"
-#       else
-#         checked = nil
-#       end
-#       unless tag.name == "other"
-#         concat "<div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{tag.id}' value='#{tag.id}' name='story[classifications_attributes][0][tag_id][]' type='checkbox' #{checked}><label for='story_classifications_attributes_0_family'>#{tag.name.humanize}</label>".html_safe
-#         @i += 1
-#         primary_tag(scope, tag)
-#       else
-#         @j = tag
-#         @j_checked = checked
-#         @other_array.each do |other|
-#           if other[0] == @j.id
-#             @j_other = "value= "+ other[1].to_s.gsub(/ /,"&#32;")
-#           end
-#         end
-#       end
-#       if @i == scope.length-1 && !@j.nil?
-#         concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{@j.id}' value='#{@j.id}' name='story[classifications_attributes][0][tag_id][]' #{@j_checked} type='checkbox'><label for='story_classifications_attributes_0_family'>#{@j.name.humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][]' type='text' #{@j_other}>".html_safe
-#         primary_tag(scope, @j)
-#       end
-#       concat "</div>".html_safe
-#     end
-    
-#     tag_scope_array.each do |scope|
-# #      print correct header
-#       case scope
-#       when @relationship_tags
-#         concat "<h4>Relationship</h4>".html_safe
-#       when @to_recipient_tags
-#         concat "<h4>Recipient</h4>".html_safe
-#         concat "<p>Must have one primary recipient.</p>".html_safe
-#       when @occasion_tags
-#         concat "<h4>Occasion</h4>".html_safe
-#         concat "<p>Must have one primary occasion.</p>".html_safe
-#       when @type_tags
-#         concat "<h4>Type of Gift</h4>".html_safe
-#       when @interests_tags
-#         concat "<h4>Interests</h4>".html_safe
-#       when @gifton_reaction_tags
-#         concat "<h4>GiftOn's Reaction</h4>".html_safe
-#       when @collection_tags
-#         concat "<h4>Collection</h4>".html_safe
-#       end
-#       @i = 0
-#       @j = nil
-#       scope.each do |tag|
-#         add_checkbox(scope, tag)
-#       end
-#     end
-#   end
   
   def tag_search(tag_name)
     unless @tags.select{|name| name == tag_name}.empty?
