@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Listing Commented Stories" do 
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
     @author = FactoryGirl.create(:user_with_published_stories, stories_count: 3)
     @user = FactoryGirl.create(:user_with_published_stories)
     @story1 = Story.where(author_id: @author.id).active.first
@@ -21,7 +22,7 @@ RSpec.feature "Listing Commented Stories" do
     visit(dashboard_path(@user))
     click_link "Comments"
     
-    expect(page).to have_content("Comments: 3")
+    expect(page).to have_content("Comments: 2")
 
     expect(page).to have_content(@story1.final_title)
     expect(page).to have_content(@story1.final_body.truncate(150))
@@ -37,10 +38,10 @@ RSpec.feature "Listing Commented Stories" do
     expect(page).not_to have_content(@story3.final_body.truncate(150))
     expect(page).not_to have_link(@story3.final_title)
     
-    expect(page).to have_content(@story4.final_title)
-    expect(page).to have_content(@story4.final_body.truncate(150))
-    expect(page).to have_link(@story4.final_title)
+    expect(page).not_to have_content(@story4.final_title)
+    expect(page).not_to have_content(@story4.final_body.truncate(150))
+    expect(page).not_to have_link(@story4.final_title)
     
-    expect(page).to have_css("img[src*='mainimage.png']", count: 3)
+    expect(page).to have_css("img[src*='mainimage.png']", count: 2)
    end
 end

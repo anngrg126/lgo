@@ -6,10 +6,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   
-  has_many :stories, dependent: :destroy  
+  has_many :stories, dependent: :destroy 
+  has_many :stories_posted, :class_name => 'Story', :foreign_key => 'poster_id', dependent: :destroy 
   has_many :bookmarks, dependent: :destroy
-  has_many :followings, dependent: :destroy
-  has_many :followers, through: :followings, class_name: "User", dependent: :destroy
+  has_many :followings, dependent: :destroy #@user.followings yields a collection of Following where user_id = @user.id
+  has_many :following_users, class_name: "Following", foreign_key: :follower_id, dependent: :destroy #@user.following_users yields a collection of Following where follower_id = @user.id
+  has_many :followers, through: :followings, class_name: "User", dependent: :destroy #@user.followers yields a collection of other Users who follow @user
   has_many :reactions, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -44,6 +46,12 @@ class User < ApplicationRecord
     f_name = self.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }
     l_name = self.last_name.titleize.gsub(/\b\w/) { |w| w.upcase }
     "#{f_name} #{l_name}"
+  end
+  
+  def display_name
+    f_name = self.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }
+    l_initial = self.last_name.titleize.first
+    "#{f_name} #{l_initial}."
   end
   
   def follows?(follow)

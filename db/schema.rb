@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207010712) do
+ActiveRecord::Schema.define(version: 20161219041844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,15 @@ ActiveRecord::Schema.define(version: 20161207010712) do
     t.index ["user_id"], name: "index_reactions_on_user_id", using: :btree
   end
 
+  create_table "search_query_logs", force: :cascade do |t|
+    t.string   "query_string"
+    t.integer  "result_count"
+    t.string   "search_param"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "stories", force: :cascade do |t|
     t.string   "raw_title"
     t.text     "raw_body"
@@ -225,6 +234,7 @@ ActiveRecord::Schema.define(version: 20161207010712) do
     t.string   "fbimage"
     t.string   "slug"
     t.datetime "deactivated_at"
+    t.boolean  "anonymous"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["slug"], name: "index_users_on_slug", unique: true, using: :btree

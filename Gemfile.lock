@@ -89,6 +89,14 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    elasticsearch (5.0.0)
+      elasticsearch-api (= 5.0.0)
+      elasticsearch-transport (= 5.0.0)
+    elasticsearch-api (5.0.0)
+      multi_json
+    elasticsearch-transport (5.0.0)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -264,6 +272,10 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    searchkick (1.4.1)
+      activemodel
+      elasticsearch (>= 1)
+      hashie
     shellany (0.0.1)
     slim (3.0.7)
       temple (~> 0.7.6)
@@ -353,6 +365,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  searchkick
   slim-rails
   spring
   spring-commands-rspec

@@ -1,0 +1,29 @@
+//colors
+
+$foundation-palette: (
+  primary: #00b4e2, //GiftOn Blue from logo
+  secondary: #777,
+  success: #3adb76,
+  warning: #ffae00,
+  alert: #ec5840,
+);
+
+$ultra-light-gray: #f7f7f7;
+$light-gray: #e6e6e6;
+$medium-gray: #cacaca;
+$middark-gray: #7b7b7b; //five tints lighter than GiftOn logo gray
+$dark-gray: #4a4a4a; //GiftOn Gray from logo & font color
+$black: #0a0a0a;
+$white: #fefefe;
+$body-background: $white;
+$body-font-color: $black;
+$red: red;
+
+
+//fonts
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+$header-font-family: 'Raleway', sans-serif;
+$header-font-weight: 600;
+//$header-font-style: semi-bold;

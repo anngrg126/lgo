@@ -2,12 +2,41 @@ class StoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_story, only: [:show, :edit, :update, :destroy, :check_for_cancel]
   before_action :redirect_cancel, :only => [:update]
+  before_action :set_tags, only: [:show, :index, :new, :edit]
   
   def index
-    @stories = Story.published.active
+    @active_browse = "active"
+    @anonymous_user = User.where(anonymous: true).first
+    if params[:search]
+      @results = (Story.includes(:user).search params[:search], operator: "or")
+      @stories = @results.results
+      log_search_query(params[:search], @results.count , "search")
+      if @results.count <=0
+        flash[:warning] = "No stories matched : "+ params[:search]
+        redirect_to root_path
+      end
+    elsif params[:search_tag]
+      @results = (Story.search params[:search_tag], fields: [{tags: :exact}])
+      @stories = @results.results
+      log_search_query(params[:search_tag], @results.count , "search_tag")
+      if @results.count <=0
+        flash[:warning] = "No stories matched : "+ params[:search_tag]
+        redirect_to root_path
+      end
+    elsif params[:search_tag]
+      @results = (Story.includes(:user).search params[:search_tag], fields: [tags: :exact])
+      @stories = @results.results
+      if @results.count <=0
+        flash[:warning] = "No records matched : "+ params[:search_tag]
+        redirect_to root_path
+      end
+    else
+      @stories = Story.includes(:user).published.active
+    end
   end
   
   def new
+    @active_share = "active"
     @story = Story.new
     @story.pictures.build(:image => params[:image])   
   end
@@ -38,6 +67,7 @@ class StoriesController < ApplicationController
   end
   
   def show
+    @active_browse = "active"
     @comment = @story.comments.active.build
     @bookmark = @story.bookmarks.build
   end
@@ -56,7 +86,8 @@ class StoriesController < ApplicationController
       notify_admin(@story)
       if @story.anonymous_changed?
         if @story.anonymous
-          @story.poster_id = 3
+#          @story.poster_id = User.where(anonymous: true).first.id
+          @story.poster_id = @anonymous_user.id
           destroy_notification(@story)
           create_notification(@story)
         else
@@ -104,9 +135,10 @@ class StoriesController < ApplicationController
   end
   
   def set_story
-    @story = Story.find(params[:id])
+    @story = Story.includes(:user).find(params[:id])
     #to make sure users can only get to their own stories
     #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
+    @anonymous_user = User.where(anonymous: true).first
   end
   
   def redirect_cancel
@@ -139,5 +171,18 @@ class StoriesController < ApplicationController
     unless Notification.where(story_id: story.id).empty?
       Notification.where(story_id: story.id).each(&:destroy)                
     end
+  end
+  
+  def log_search_query(query_string, result_count, search_param)
+    if current_user
+      user_id = current_user.id
+    else
+      user_id = nil
+    end
+    SearchQueryLog.create(query_string: query_string, result_count: result_count, search_param: search_param, user_id: user_id)
+  end
+    
+  def set_tags
+    @tags = Tag.all.group_by(&:name)
   end
 end

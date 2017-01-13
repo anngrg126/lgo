@@ -1,6 +1,7 @@
 class Story < ApplicationRecord
   extend FriendlyId
   friendly_id :generate_friendly_id, :use => [:slugged, :finders]
+  searchkick text_start: [:final_title]
   
   validates :raw_title, presence: true
   validates :raw_body, presence: true
@@ -26,23 +27,24 @@ class Story < ApplicationRecord
   validate :check_all_tags?, if: :validate_all_tags?
 
   def check_all_tags?
-    if self.classifications.count == 0
+    if self.classifications.length == 0
       self.errors.add(:classifications, "You need tags.")
     else
       primary_tags = []
-      recipient_category = TagCategory.find_by(category: 'To_recipient')
-      occasion_category = TagCategory.find_by(category: 'Occasion')
+      @tags = Tag.alltags
+      recipient_category = @tags.select{|t| t.tag_category.category == "To_recipient"}.first.tag_category
+      occasion_category = @tags.select{|t| t.tag_category.category == "Occasion"}.first.tag_category
       self.classifications.each do |c|
         if c.primary == true
-          tag = Tag.find(c.tag_id)
+          tag = @tags.select{|t| t.id == c.tag_id}.first
           primary_tags.push(tag.tag_category_id)
         end
       end
       unless primary_tags.include?(recipient_category.id)
-        self.errors.add(:classifications, "Story must have at least one primary Recipient tag")
+        self.errors.add(:classifications, "Story must have only one primary Recipient tag")
       end
       unless primary_tags.include?(occasion_category.id)
-        self.errors.add(:classifications, "Story must have at least one primary Occasion tag")
+        self.errors.add(:classifications, "Story must have only one primary Occasion tag")
       end
     end
   end
@@ -72,12 +74,37 @@ class Story < ApplicationRecord
     large: '1200x628>' 
   }
   
+  after_commit :reindex_story
+  
+  def reindex_story
+    Story.reindex # or reindex_async
+  end
+  
+  def should_index?
+    deleted_at.nil? # only index active records
+  end
+  
+  def active?
+    deleted_at.nil?
+  end
+  
+  def search_data
+   attrs = attributes.dup
+   relational = {
+     # tags: tags.map(&:name)
+     tags: tags.map { |t| t.name =='other' ? classifications.where(tag_id: t.id).first.description : t.name }
+   }
+   attrs.merge! relational
+  end
+  
   validates_attachment :main_image, :content_type => { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }, :size => { in: 0..1.megabytes }, :presence => true, if: :validate_main_image?
   
   default_scope { order(created_at: :desc)}
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
   scope :active, -> { where(deleted_at: nil) }
+  
+  
   
   def should_generate_new_friendly_id?
     final_title_changed? || updated_title_changed? || raw_title_changed? || super

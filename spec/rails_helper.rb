@@ -127,3 +127,8 @@ OmniAuth.config.add_mock(:facebook, {
     }
   }
 )
+
+Capybara::Webkit.configure do |config|
+  config.allow_url("https://s3.amazonaws.com/letsgifton/GiftOnLogo.png")
+  config.allow_url("fonts.googleapis.com")
+end

@@ -75,7 +75,7 @@ class CommentsController < ApplicationController
   end
   
   def set_story
-    @story = Story.find(params[:story_id])#if just :id, it's comment id
+    @story = Story.includes(:user).find(params[:story_id])#if just :id, it's comment id
   end
     
   def set_comment
@@ -90,7 +90,8 @@ class CommentsController < ApplicationController
     story = Story.find(comment.story_id)
     unless current_user.id == story.author_id
       #story author gets notification
-      Notification.create(user_id: User.find(story.author_id).id,
+#      Notification.create(user_id: User.find(story.author_id).id,
+      Notification.create(user_id: story.user.id,
                           notified_by_user_id: current_user.id,
                           notification_category_id: 2,
                           read: false,

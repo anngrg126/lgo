@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Showing Dashboard" do 
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
     @user = FactoryGirl.create(:user_with_published_stories)
     @user2 = FactoryGirl.create(:user)
     @user2.update(about_me: "")

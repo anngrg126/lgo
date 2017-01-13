@@ -1,6 +1,6 @@
 p
   | Original Author: 
-  == link_to "#{User.find(@story.author_id).full_name}", dashboard_path(User.find(@story.author_id))
+  == link_to "#{@story.user.full_name}", dashboard_path(@story.user)
 p 
   | Submitted At: 
   == @story.created_at.strftime("%b %d, %Y")
@@ -23,7 +23,11 @@ p
 - if @story.poster_id?
   div
     | Posted by: 
-    == link_to "#{User.find(@story.poster_id).full_name}", dashboard_path(User.find(@story.poster_id))
+    - unless @story.anonymous?
+      == link_to "#{@story.user.full_name}", dashboard_path(@story.user)
+    - else
+      == link_to "#{@anonymous_user.full_name}", dashboard_path(@anonymous_user)
+    /== link_to "#{User.find(@story.poster_id).full_name}", dashboard_path(User.find(@story.poster_id))
 h2
   | Raw Title: 
   == @story.raw_title
@@ -58,9 +62,11 @@ p
     | Story Tags:
     br
     - @story.classifications.each do |classif|
-      = Tag.find(classif.tag_id).name
+      /= Tag.find(classif.tag_id).name
+      - @t = @tags.select{|t| t.id == classif.tag_id}.first
+      == @t.name
       - if classif.description?
-        span _#{TagCategory.find(Tag.find(classif.tag_id).tag_category_id).category.downcase}: #{classif.description}
+        span &nbsp;#{@t.tag_category.category.downcase}: #{classif.description}
       - if classif.primary?
         span  &#40;primary&#41;
       - unless classif.primary == true 
@@ -69,7 +75,8 @@ p
 p
   | Admin: 
   - if @story.admin_id?
-    = link_to "#{User.find(@story.admin_id).full_name}", dashboard_path(User.find(@story.admin_id))
+    -@u = User.find(@story.admin_id)
+    = link_to "#{@u.full_name}", dashboard_path(@u)
   - else
     | Unclaimed
   

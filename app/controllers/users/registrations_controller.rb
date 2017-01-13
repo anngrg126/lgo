@@ -1,5 +1,6 @@
-class RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController
   before_action :redirect_cancel, :only => [:update]
+  before_action :set_tags
 
   def new 
     super
@@ -133,5 +134,8 @@ class RegistrationsController < Devise::RegistrationsController
     Comment.active.where(:user_id => user.id).update_all("author_deactive = true") 
   end
   
+  def set_tags
+    @tags = Tag.all.group_by(&:name)
+  end
   
 end

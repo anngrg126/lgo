@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Showing Profile" do 
   before do
+    @anonymous_user = FactoryGirl.create(:anonymous_user)
     @user = FactoryGirl.create(:user)
     @user2 = FactoryGirl.create(:user)
     @new_first_name = Faker::Name::first_name

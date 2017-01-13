@@ -4,6 +4,8 @@ module DashboardHelper
       image_tag user.image.url(:medium)
     elsif user.fbimage?
       image_tag(user.largesquareimage)
+    else
+      image_tag('default_user_image.png')
     end
   end
   
@@ -98,15 +100,21 @@ module DashboardHelper
   
   def story_by(story)
     if story.poster_id?
-      html = "<div>Posted by: #{User.find(story.poster_id).full_name}</div>".html_safe
+#      html = "<div>Posted by: #{User.find(story.poster_id).full_name}</div>".html_safe
+      unless story.anonymous
+        html = "<div>Posted by: #{story.user.full_name}</div>".html_safe
+      else
+        html = "<div>Posted by: #{@anonymous_user.full_name}</div>".html_safe
+      end
     else
-      html = "<div>Written by: #{User.find(story.author_id).full_name}</div>".html_safe
+      html = "<div>Written by: #{story.user.full_name}</div>".html_safe
     end
   end
   
   def user_reaction(story, user)
     output = [""]
-    Reaction.where(story_id: story.id, user_id: user.id).each do |reaction|
+#    Reaction.where(story_id: story.id, user_id: user.id).each do |reaction|
+    @user.reactions.group_by(&:story_id).select{|story_id| story_id == story.id}.first[1].each do |reaction|
       output.push(content_tag(:span) {
         case reaction.reaction_category_id
         when 1
