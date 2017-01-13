@@ -8,6 +8,7 @@ RSpec.feature "Editing Stories" do
     @user2 = FactoryGirl.create(:user_with_unpublished_updated_stories)
     @admin = FactoryGirl.create(:admin)
     @story = Story.where(author_id: @user.id).active.first
+    @story.update(fail: true)
     @story2 = Story.where(author_id: @user2.id).active.first
     @final_title1 = Faker::Hipster::sentence(4)
     @final_body1 = Faker::Hipster::paragraph
@@ -52,6 +53,7 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content(@story.raw_title)
     expect(page).to have_content(@story.raw_body)
     expect(page).to have_content("User requested a GiftOn editor to add a light touch? No")
+    expect(page).to have_content("Story Fail")
     
     attach_file('story_main_image', './spec/fixtures/mainimage.png')
     fill_in "Final Title", with: @final_title1
@@ -63,6 +65,7 @@ RSpec.feature "Editing Stories" do
     find("input[id*=primary][value='3']").set(true) #brother-primary
     find("input[type='checkbox'][id*='6']").set(true) #birthday
     find("input[id*=primary][value='6']").set(true) #birthday-primary
+    uncheck("story_fail")
     
     click_button "Update Story"
     
@@ -75,6 +78,7 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content("brother (primary)")
     expect(page).to have_content("family")
     expect(page).to have_content("birthday (primary)")
+    expect(page).not_to have_content("Story Fail")
     
     logout(:user)
     

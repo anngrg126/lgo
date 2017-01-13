@@ -5,7 +5,7 @@ RSpec.feature "Showing Stories" do
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_published_stories)
     @story =Story.where(author_id: @foo.id).active.first
-    
+    @story.update(fail: true)
   end
   
   scenario "A non-signed in user does not see edit or delete links" do
@@ -64,6 +64,7 @@ RSpec.feature "Showing Stories" do
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
     expect(page).to have_content("Posted by: #{@foo.full_name}")
+    expect(page).to have_content("Fail")
     expect(current_path).to eq(story_path(@story))
   end
 end

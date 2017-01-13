@@ -19,6 +19,7 @@ RSpec.feature "Creating Stories", :type => :feature do
     fill_in_trix_editor('story_raw_body_trix_input_story', Faker::Hipster::paragraph)
     check "story_anonymous"
     choose "story_review_true"
+    check "story_fail"
     
     click_button "Contribute Story"    
 

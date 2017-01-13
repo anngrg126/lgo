@@ -7,6 +7,7 @@ RSpec.feature "Editing Stories" do
     @user = FactoryGirl.create(:user_with_published_stories)
     @user2 = FactoryGirl.create(:user_with_unpublished_stories)
     @story = Story.where(author_id: @user.id).active.first
+    @story.update(fail: true)
     @story2 = Story.where(author_id: @user2.id).active.first
     @updated_title = Faker::Hipster::sentence
     @updated_title2 = Faker::Hipster::sentence
@@ -31,11 +32,13 @@ RSpec.feature "Editing Stories" do
     fill_in "Title", with: @updated_title
 #    fill_in "Body", with: @updated_body
     fill_in_trix_editor('story_updated_body_trix_input_story_'+@story.id.to_s, @updated_body)
+    uncheck("story_fail")
     click_button "Update Story"
     
     expect(page).to have_content(@updated_title)
     expect(page).to have_content(@updated_body)
     expect(page).to have_content("Story has been updated")
+    expect(page).not_to have_content("Story Fail")
     expect(page.current_path).to eq(story_path(Story.find(@story.id).slug))   
   end
   
@@ -49,11 +52,13 @@ RSpec.feature "Editing Stories" do
     fill_in "Title", with: @updated_title2
 #    fill_in "Body", with: @updated_body
     fill_in_trix_editor('story_raw_body_trix_input_story_'+@story2.id.to_s, @updated_body2)
+    check("story_fail")
     click_button "Contribute Story"
     
     expect(page).to have_content("Story has been updated")
     expect(page).to have_content(@updated_title2)
     expect(page).to have_content(@updated_body2)
+    expect(page).to have_content("Story Fail")
     expect(page.current_path).to eq(story_path(Story.find(@story2.id).slug))   
   end
   
