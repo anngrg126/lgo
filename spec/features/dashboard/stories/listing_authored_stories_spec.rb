@@ -42,8 +42,9 @@ RSpec.feature "Listing Stories" do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
     click_link "Saves"
-    click_link "Stories"
+    expect(page).to have_content("List of All Saved Stories:")
     
+    click_link "Stories"
     expect(page).to have_content("List of all Authored Stories")
     expect(page).to have_content(@story1.raw_title)
     expect(page).to have_content(@story1.raw_body.truncate(150))

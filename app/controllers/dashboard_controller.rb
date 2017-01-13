@@ -121,12 +121,12 @@ class DashboardController < ApplicationController
   end
   
   def set_reaction_posters
-    @r_posters = []
-
+    @r_posters_query = []
     @reacted_stories.each do |r|
-      @r_posters.push(r.poster_user)
+      @r_posters_query.push(r.poster_id)
     end
-    @r_posters.uniq!
+    @r_posters_query.uniq!  
+    @r_posters = User.find(@r_posters_query)
   end
   
   def set_bookmarked_stories
@@ -140,11 +140,12 @@ class DashboardController < ApplicationController
   end
   
   def set_bookmark_posters
-    @b_users = []
+    @b_posters_query = []
     @bookmarked_stories.each do |b|
-      @b_users.push(b.poster_user)
+      @b_posters_query.push(b.poster_id)
     end
-    @b_users.uniq!
+    @b_posters_query.uniq!  
+    @b_posters = User.find(@b_posters_query)
   end
   
   def set_commented_stories
@@ -158,11 +159,12 @@ class DashboardController < ApplicationController
   end
   
   def set_commented_story_posters
-    @c_users = []
+    @c_posters_query = []
     @commented_stories.each do |c|
-      @c_users.push(c.poster_user)
+      @c_posters_query.push(c.poster_id)
     end
-    @c_users.uniq!
+    @c_posters_query.uniq!  
+    @c_posters = User.find(@c_posters_query)
   end
   
   def set_followers
