@@ -159,13 +159,14 @@ module StoriesHelper
   end
   
   def get_display_tags(story, category)
+    @display_tag = ""
     story.classifications.select{|c| c.primary == true}.each do |c|
       @t = @tags.select{|t| t.id  == c.tag_id}.first
       if @t.tag_category.category== category
         @display_tag = @t.name
       end    
     end
-    concat "<div>#{@display_tag}</div>".html_safe
+    @display_tag
   end
   
   def story_recipient_tag(story)
@@ -179,12 +180,11 @@ module StoriesHelper
   def story_fail_tag(story)
     @fail_tag = @tags.select{|t|t.name=="fail"}.first
     if story.classifications.any?{|c| c[:tag_id] == @fail_tag.id}
-#      @display_tag = @fail_tag.name
-      @display_tag = "Story Fail"
+      @display_tag = @fail_tag.name
     else
       @display_tag = ""
     end
-    concat "<div>#{@display_tag}</div>".html_safe
+    @display_tag
   end
   
 end

@@ -10,6 +10,11 @@ p
     | Anonymous
   - else
     | Not Anonymous
+p
+  - if @story.fail?
+    | Story Fail
+  - else
+    | Not a Fail
 p 
   | User requested a GiftOn editor to add a light touch? 
   - if @story.review?
@@ -54,6 +59,9 @@ p
     = f.label :final_body, "Final Body"
     == f.trix_editor :final_body 
     span class="form-error"
+  div
+    = f.label :fail, "Fail?"
+    = f.check_box :fail, type: "checkbox"
   div
     p Tags 
     span[id="classification_tags" class="form-error"]

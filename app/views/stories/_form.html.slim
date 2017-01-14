@@ -20,6 +20,9 @@
     div
       = f.label :anonymous
       = f.check_box :anonymous, type: "checkbox"
+    div 
+      = f.label :fail
+      = f.check_box :fail, type: "checkbox"
     div
       = f.radio_button :review, false
       = f.label :review, "No, thanks"
@@ -41,6 +44,9 @@
     div
       = f.label :anonymous
       = f.check_box :anonymous, type: "checkbox"
+    div 
+      = f.label :fail
+      = f.check_box :fail, type: "checkbox"
     div
       - unless @story.final_title?
         = f.radio_button :review, false

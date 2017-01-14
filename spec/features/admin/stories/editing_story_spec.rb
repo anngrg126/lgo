@@ -36,7 +36,8 @@ RSpec.feature "Editing Stories" do
       {  id: 3, tag_category_id: 5 , name: 'brother' },
       {  id: 4, tag_category_id: 5 , name: 'mother' },
       {  id: 5, tag_category_id: 2 , name: 'anniversary' },
-      {  id: 6, tag_category_id: 2 , name: 'birthday' }
+      {  id: 6, tag_category_id: 2 , name: 'birthday' },
+      {  id: 7, tag_category_id: 6 , name: 'fail' }
       ])
   end
   
@@ -117,6 +118,7 @@ RSpec.feature "Editing Stories" do
   end
   
   scenario "An admin fails to edit a story", js: true do
+    @story.update(fail: false)
     login_as(@admin, :scope => :user)
     visit "/admin"
     

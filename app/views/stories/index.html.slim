@@ -9,6 +9,15 @@ h1 List of all Stories
     == link_to story_title(story), story_path(story)
   div
     == story_body(story)
+  - unless story.classifications.empty?
+    div
+      | Tags:
+    div
+      == story_recipient_tag(story)
+    div
+      == story_occasion_tag(story)
+    div
+      == story_fail_tag(story)
   div
     - if story.poster_id?
       small 
