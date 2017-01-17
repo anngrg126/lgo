@@ -253,7 +253,7 @@ div#stickhere
             li
               a.btn-link.btn-right.inline-block.fail[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
         .columns
-          button.float-right.hide-for-small-only.search_button[type="button" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
+          button.float-right.hide-for-small-only.search_button[type="button" id="btnSearch" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
             | &nbsp;
             i.fa.fa-search[aria-hidden="true"]
       #search_dropdown.dropdown-pane.bottom[data-dropdown]
