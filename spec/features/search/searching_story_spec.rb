@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'support/macros'
 
-RSpec.feature "Searching through a story", :type => :feature do 
+RSpec.feature "Searching for a story", :type => :feature do 
   
   before do
     @user = FactoryGirl.create(:user)
@@ -36,8 +36,8 @@ RSpec.feature "Searching through a story", :type => :feature do
     click_button "btnSearch"
     
     within("#search_dropdown") do
-        fill_in "search", with: @search_word
-        click_button "Search"
+      fill_in "search", with: @search_word
+      click_button "Search"
     end
        
     expect(page).to have_content(@story_foo.final_title)
@@ -47,58 +47,7 @@ RSpec.feature "Searching through a story", :type => :feature do
     expect(page).to have_css("img[src*='mainimage.png']", count: 1)
     
     expect(SearchQueryLog.last.user_id).to eq (@user.id)
-
-  end
-  
-  scenario "A non-logged in user searches for a query in title" do
-    
-    @search_word = @story_foo.final_title.split.first
-    
-    visit "/"
-  
-    click_button "btnSearch"
-    
-    within("#search_dropdown") do
-        fill_in "search", with: @search_word
-        click_button "Search"
-    end
-       
-    expect(page).to have_content(@story_foo.final_title)
-    expect(page).to have_content(@story_foo.final_body.truncate(150))
-    expect(page).to have_link(@story_foo.final_title)
-    expect(page).to have_content("Posted by: #{@foo.full_name}")
-    expect(page).to have_css("img[src*='mainimage.png']", count: 1)
-    
-    expect(SearchQueryLog.last.user_id).to eq nil
-
-  end
-  
-  scenario "A logged in user searches for a query in body" do
-    
-    if @story_foo.updated_body.nil?
-      @search_word = @story_foo.final_body.split.first.remove("<div>")
-    else
-      @search_word = @story_foo.updated_body.split.first.remove("<div>")
-    end
-      
-    login_as(@user, :scope => :user)
-    
-    visit "/"
-  
-    click_button "btnSearch"
-    
-    within("#search_dropdown") do
-        fill_in "search", with: @search_word
-        click_button "Search"
-    end
-       
-    expect(page).to have_content(@story_foo.final_title)
-    expect(page).to have_content(@story_foo.final_body.truncate(150))
-    expect(page).to have_link(@story_foo.final_title)
-    expect(page).to have_content("Posted by: #{@foo.full_name}")
-    expect(page).to have_css("img[src*='mainimage.png']", count: 1)
-    
-    expect(SearchQueryLog.last.user_id).to eq (@user.id)
+    expect(SearchQueryLog.last.query_string).to eq (@search_word)
 
   end
   
@@ -126,6 +75,7 @@ RSpec.feature "Searching through a story", :type => :feature do
     expect(page).to have_css("img[src*='mainimage.png']", count: 1)
     
     expect(SearchQueryLog.last.user_id).to eq nil
+    expect(SearchQueryLog.last.query_string).to eq (@search_word)
 
   end
   
@@ -143,8 +93,8 @@ RSpec.feature "Searching through a story", :type => :feature do
     click_button "btnSearch"
     
     within("#search_dropdown") do
-        fill_in "search", with: @search_word
-        click_button "Search"
+      fill_in "search", with: @search_word
+      click_button "Search"
     end
        
     expect(page).to have_content(@story_foo.final_title)
@@ -154,33 +104,7 @@ RSpec.feature "Searching through a story", :type => :feature do
     expect(page).to have_css("img[src*='mainimage.png']", count: 1)
     
     expect(SearchQueryLog.last.user_id).to eq (@user.id)
-
-  end
-  
-  scenario "A non-logged in user searches for a query in tags" do
-    
-    FactoryGirl.create(:classification, story_id: @story_foo.id)
-    Story.reindex
-    
-    @search_word = @story_foo.tags.first.name
-    
-    visit "/"
-  
-    click_button "btnSearch"
-    
-    within("#search_dropdown") do
-        fill_in "search", with: @search_word
-        click_button "Search"
-    end
-       
-    expect(page).to have_content(@story_foo.final_title)
-    expect(page).to have_content(@story_foo.final_body.truncate(150))
-    expect(page).to have_link(@story_foo.final_title)
-    expect(page).to have_content("Posted by: #{@foo.full_name}")
-    expect(page).to have_css("img[src*='mainimage.png']", count: 1)
-    
-    expect(SearchQueryLog.last.user_id).to eq nil
+    expect(SearchQueryLog.last.query_string).to eq (@search_word)
 
   end
 end
-
