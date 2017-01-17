@@ -25,7 +25,6 @@ RSpec.feature "Searching for a story", :type => :feature do
       {  id: 6, tag_category_id: 2 , name: 'birthday' },
       {  id: 7, tag_category_id: 2 , name: 'fail' }
       ])
-    @fail_tag = Tag.where(name: "fail").first
   end
   
   scenario "A logged in user searches for a query in title" do
@@ -93,7 +92,6 @@ RSpec.feature "Searching for a story", :type => :feature do
   scenario "A logged in user searches for a query in tags" do
     
     FactoryGirl.create(:classification, story_id: @story_foo.id)
-    FactoryGirl.create(:classification, story_id: @story_foo.id, tag_id: @fail_tag.id)
     Story.reindex
     
     @search_word = @story_foo.tags.first.name
