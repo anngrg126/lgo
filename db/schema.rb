@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(version: 20170117202822) do
   add_foreign_key "comments", "stories"
   add_foreign_key "comments", "users"
   add_foreign_key "followings", "users"
+  add_foreign_key "followings", "users", column: "follower_id"
   add_foreign_key "notifications", "notification_categories"
   add_foreign_key "notifications", "users"
   add_foreign_key "pictures", "stories"

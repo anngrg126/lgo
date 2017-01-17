@@ -135,7 +135,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
   
   def set_tags
-    @tags = Tag.all.group_by(&:name)
+    @tags = Tag.alltags
   end
   
 end

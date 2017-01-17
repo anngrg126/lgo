@@ -274,17 +274,19 @@ module NotificationsHelper
         end
 #        @noti = Notification.find(@max_index)
         @noti = @user.notifications.group_by(&:id).select{|id| id == @max_index}.first[1][0]
-        concat "<div id='#{id_array[index]}'>".html_safe
-        concat "<div>".html_safe
-        safe_concat messages[index]
-        concat "</div>".html_safe
-        concat "<div>#{time_ago_in_words(@noti.created_at)} ago</div>".html_safe
-        if read_boolean == "false"
-          concat "<div class='unread'>UNREAD</div>".html_safe
-          concat "<div class='mark_as_read'>#{link_to("Mark as read", mark_as_read_array_path(notification: id_array[index]), remote: true)}</div>".html_safe
+        unless index > messages.length-1
+          concat "<div id='#{id_array[index]}'>".html_safe
+          concat "<div>".html_safe
+          safe_concat messages[index]
+          concat "</div>".html_safe
+          concat "<div>#{time_ago_in_words(@noti.created_at)} ago</div>".html_safe
+          if read_boolean == "false"
+            concat "<div class='unread'>UNREAD</div>".html_safe
+            concat "<div class='mark_as_read'>#{link_to("Mark as read", mark_as_read_array_path(notification: id_array[index]), remote: true)}</div>".html_safe
+          end
+          concat link_to("Delete", notification_path(notification: id_array[index]), method: :delete, remote: true)
+          concat "</div>".html_safe
         end
-        concat link_to("Delete", notification_path(notification: id_array[index]), method: :delete, remote: true)
-        concat "</div>".html_safe
       })
     end
     return output.join(" ")

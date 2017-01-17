@@ -153,8 +153,8 @@ module StoriesHelper
   end
   
   def tag_search(tag_name)
-    unless @tags.select{|name| name == tag_name}.empty?
-      @tags.select{|name| name == tag_name}.first[1][0].name
+    unless @tags.select{|t| t.name == tag_name}.empty?
+      @tags.select{|t| t.name == tag_name}.first.name
     end
   end
   

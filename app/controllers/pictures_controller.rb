@@ -54,7 +54,7 @@ class PicturesController < ApplicationController
   end
   
   def set_tags
-    @tags = Tag.all.group_by(&:name)
+    @tags = Tag.alltags
   end
   
 end
