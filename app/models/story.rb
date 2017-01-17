@@ -30,6 +30,7 @@ class Story < ApplicationRecord
     if self.classifications.length == 0
       self.errors.add(:classifications, "You need tags.")
     else
+      #validate that primary recipient & occasion tags exist
       primary_tags = []
       @tags = Tag.alltags
       recipient_category = @tags.select{|t| t.tag_category.category == "To_recipient"}.first.tag_category
@@ -45,6 +46,17 @@ class Story < ApplicationRecord
       end
       unless primary_tags.include?(occasion_category.id)
         self.errors.add(:classifications, "Story must have only one primary Occasion tag")
+      end
+      #validate that fail tags are aligned with fail boolean
+      @fail_tag = @tags.select{|t| t.name == "fail"}.first
+      unless self.classifications.select{|c| c.tag_id == @fail_tag.id}.empty?
+        unless self.fail?
+          self.errors.add(:classifications, "You have added a fail tag to a story that is not specified as a fail. To continue, specify above that this story is a fail.")
+        end
+      else
+        if self.fail?
+          self.errors.add(:classifications, "You have not added a fail tag to a story that is specified as a fail. To continue, specify above that this story is not a fail.")
+        end
       end
     end
   end

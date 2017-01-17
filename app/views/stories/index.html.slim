@@ -10,13 +10,9 @@ h1 List of all Stories
   div
     == story_body(story)
   - unless story.classifications.empty?
-    div
-      | Tags:
-    div
+    div.story_tags
       == story_recipient_tag(story)
-    div
       == story_occasion_tag(story)
-    div
       == story_fail_tag(story)
   div
     - if story.poster_id?
