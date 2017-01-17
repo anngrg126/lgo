@@ -31,13 +31,13 @@ RSpec.feature "Editing Stories" do
       {id: 7, category: "Collection"}
       ])
     Tag.create([
-      {  id: 1, tag_category_id: 1 , name: 'family' },
-      {  id: 2, tag_category_id: 1 , name: 'parents' },
-      {  id: 3, tag_category_id: 5 , name: 'brother' },
-      {  id: 4, tag_category_id: 5 , name: 'mother' },
-      {  id: 5, tag_category_id: 2 , name: 'anniversary' },
-      {  id: 6, tag_category_id: 2 , name: 'birthday' },
-      {  id: 7, tag_category_id: 6 , name: 'fail' }
+      {  tag_category_id: 1 , name: 'family' },
+      {  tag_category_id: 1 , name: 'parents' },
+      {  tag_category_id: 5 , name: 'brother' },
+      {  tag_category_id: 5 , name: 'mother' },
+      {  tag_category_id: 2 , name: 'anniversary' },
+      {  tag_category_id: 2 , name: 'birthday' },
+      {  tag_category_id: 6 , name: 'fail' }
       ])
   end
   
@@ -61,12 +61,18 @@ RSpec.feature "Editing Stories" do
 #    fill_in "Final Body", with: @final_body1
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, @final_body1)
 #    check 'Published'
-    find("input[type='checkbox'][id*='1']").set(true) #family
-    find("input[type='checkbox'][id*='3']").set(true) #brother
-    find("input[id*=primary][value='3']").set(true) #brother-primary
-    find("input[type='checkbox'][id*='6']").set(true) #birthday
-    find("input[id*=primary][value='6']").set(true) #birthday-primary
     uncheck("story_fail")
+    @family_tag = Tag.where(name: "family").first
+    @brother_tag = Tag.where(name: "brother").first
+    @birthday_tag = Tag.where(name: "birthday").first
+    @family_tag = Tag.where(name: "family").first
+    @fail_tag = Tag.where(name: "fail").first
+    find("input[type='checkbox'][id*='#{@family_tag.id}']").set(true) #family
+    find("input[type='checkbox'][id*='#{@brother_tag.id}']").set(true) #brother
+    find("input[id*=primary][value='#{@brother_tag.id}']").set(true) #brother-primary
+    find("input[type='checkbox'][id*='#{@birthday_tag.id}']").set(true) #birthday
+    find("input[id*=primary][value='#{@birthday_tag.id}']").set(true) #birthday-primary
+    find("input[type='checkbox'][id*='#{@fail_tag.id}']").set(false) #not a fail
     
     click_button "Update Story"
     

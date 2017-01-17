@@ -15,10 +15,13 @@ h2
 div
   == story_by_show(@story)
 div
+  | WQEGRAHUFJSNHOFIJLNSHOFJELNS
   - unless @story.classifications.empty?
-    == story_recipient_tag(@story)
-    == story_occasion_tag(@story)
-    == story_fail_tag(@story)
+    div.story_tags
+      | HESOHFJLHOSUGJNGOHSJD
+      == story_recipient_tag(@story)
+      == story_occasion_tag(@story)
+      == story_fail_tag(@story)
 p.small
   == @story.created_at.strftime("%b %d, %Y")
 p

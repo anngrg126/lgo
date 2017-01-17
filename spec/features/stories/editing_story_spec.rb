@@ -38,7 +38,9 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content(@updated_title)
     expect(page).to have_content(@updated_body)
     expect(page).to have_content("Story has been updated")
-    expect(page).not_to have_content("Story Fail")
+    within(".story_tags") do
+      expect(page).not_to have_content("fail")
+    end
     expect(page.current_path).to eq(story_path(Story.find(@story.id).slug))   
   end
   
