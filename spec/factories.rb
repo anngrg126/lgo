@@ -6,6 +6,12 @@ FactoryGirl.define do
 #    image_file_size { 1024 }
   end
   
+  factory :classification do
+      tag_id 1
+      primary false
+      story_id 0
+  end
+  
   factory :story do
     raw_title { Faker::Hipster.sentence }
     raw_body { Faker::Hipster.paragraph }
