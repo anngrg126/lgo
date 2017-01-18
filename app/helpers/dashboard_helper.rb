@@ -65,7 +65,7 @@ module DashboardHelper
         body = story.updated_title
       end
     else
-      unless story.raw_title = ""
+      unless story.raw_title == ""
         body = story.raw_title
       else
         body = "My Story"

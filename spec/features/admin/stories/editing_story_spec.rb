@@ -82,7 +82,7 @@ RSpec.feature "Editing Stories" do
     expect(page.current_path).to eq(admin_story_path(Story.find(@story.id).slug))  
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
-    expect(page).to have_content(@story.final_gift_description])
+    expect(page).to have_content(@story.final_gift_description)
     expect(page).to have_content("Admin: #{@admin.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']")
     expect(page).to have_content("brother (primary)")
