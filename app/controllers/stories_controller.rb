@@ -78,17 +78,17 @@ class StoriesController < ApplicationController
     if @story.published?
       @story.validate_updated_fields = true
       @story.assign_attributes(story_params)
-      notify_admin(@story)
+      @notify_followers = false
       if @story.anonymous_changed?
         if @story.anonymous
 #          @story.poster_id = User.where(anonymous: true).first.id
           @story.poster_id = @anonymous_user.id
           destroy_notification(@story)
-          create_notification(@story)
+          @notify_followers = true
         else
           @story.poster_id = @story.author_id
           destroy_notification(@story)
-          create_notification(@story)
+          @notify_followers = true
         end
       end
       if @story.fail_changed?
@@ -117,6 +117,10 @@ class StoriesController < ApplicationController
         if @story.update(story_params)
           flash[:success] = "Story has been updated"
           format.html {redirect_to story_path(@story)}
+          if @notify_followers == true
+            create_notification(@story)
+          end
+          notify_admin(@story)
         else
           flash.now[:alert] = "Story has not been updated"
           format.html {render :edit} #renders edit tmplt again
