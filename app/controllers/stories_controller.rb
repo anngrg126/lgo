@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_story, only: [:show, :edit, :update, :destroy, :check_for_cancel]
+  before_action :set_story, only: [:edit, :update, :destroy, :check_for_cancel]
   before_action :redirect_cancel, :only => [:update]
   before_action :set_tags, only: [:show, :index, :new, :edit]
   
@@ -8,7 +8,7 @@ class StoriesController < ApplicationController
     @active_browse = "active"
     @anonymous_user = User.where(anonymous: true).first
     if params[:search]
-      @results = (Story.includes(:user).search params[:search], operator: "or")
+      @results = (Story.includes(:user, :classifications).search params[:search], operator: "or")
       @stories = @results.results
       log_search_query(params[:search], @results.count)
       if @results.count <=0
@@ -16,7 +16,7 @@ class StoriesController < ApplicationController
         redirect_to root_path
       end
     elsif params[:search_tag]
-      @results = (Story.includes(:user).search params[:search_tag], fields: [tags: :exact])
+      @results = (Story.includes(:user, :classifications).search params[:search_tag], fields: [tags: :exact])
       @stories = @results.results
       if @results.count <=0
         flash[:warning] = "No records matched : "+ params[:search_tag]
@@ -59,6 +59,9 @@ class StoriesController < ApplicationController
   end
   
   def show
+    @anonymous_user = User.where(anonymous: true).first
+    @story = Story.includes(:user, :classifications, :bookmarks, :reactions, :pictures).find(params[:id])
+    @story_comments = @story.comments.includes(:user).select{|c| c.deleted_at == nil && c.author_deactive == false}
     @active_browse = "active"
     @comment = @story.comments.active.build
     @bookmark = @story.bookmarks.build
