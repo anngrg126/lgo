@@ -16,12 +16,13 @@ RSpec.feature "Listing Stories" do
   scenario "List all stories" do
     visit "/"
     
-    expect(page).to have_content(@story1.final_title)
-    expect(page).to have_content(@story1.final_body.truncate(150))
-    expect(page).to have_content(@story2.final_title)
-    expect(page).to have_content(@story2.final_body.truncate(150))
     expect(page).to have_link(@story1.final_title)
+    expect(page).to have_content(@story1.final_body.truncate(150))
+    expect(page).to have_content(@story1.final_gift_description)
     expect(page).to have_link(@story2.final_title)
+    expect(page).to have_content(@story2.final_body.truncate(150))
+    expect(page).to have_content(@story2.final_gift_description)
+    
     expect(page).not_to have_link("New Story")
     expect(page).to have_content("Posted by: #{@user.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']", count: 4)

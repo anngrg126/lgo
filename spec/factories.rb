@@ -36,8 +36,9 @@ FactoryGirl.define do
         updated_body { Faker::Hipster.paragraph }
         updated_gift_description { Faker::Hipster.sentence }
 #        updated_at {Faker::Time.forward(1, :afternoon)}
+        last_user_to_update { "Author" }
         factory :published_updated_story do
-          
+          published true
         end
       end
       
@@ -114,7 +115,7 @@ FactoryGirl.define do
       end
     
       after(:create) do |user, evaluator|
-        create_list(:unpublished_updated_story, evaluator.stories_count, author_id: user.id, last_user_to_update: "Author")
+        create_list(:unpublished_updated_story, evaluator.stories_count, author_id: user.id)
       end
     end
     
@@ -124,7 +125,7 @@ FactoryGirl.define do
       end
     
       after(:create) do |user, evaluator|
-        create_list(:published_updated_story, evaluator.stories_count, author_id: user.id, last_user_to_update: "Author")
+        create_list(:published_updated_story, evaluator.stories_count, user: user, author_id: user.id, poster_id: user.id)
       end
     end
     

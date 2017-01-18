@@ -4,7 +4,10 @@ h3 List of all Unpublished Stories
 
 - @stories.each do |story|
   div
-    == link_to story.raw_title, admin_story_path(story)
+    - unless story.raw_title == ""
+      == link_to story.raw_title, admin_story_path(story)
+    - else
+      == link_to "Untitled Story", admin_story_path(story)
   div
     == story_body(story)
     div
