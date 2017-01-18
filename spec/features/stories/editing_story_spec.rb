@@ -51,13 +51,13 @@ RSpec.feature "Editing Stories" do
     
     click_link @story.final_title
     within(".story_tags") do
-      expect(page).not_to have_content("fail")
+      expect(page).to have_content("fail")
     end
     click_link "Edit Story"
     
     fill_in "Title", with: @updated_title
     fill_in_trix_editor('story_updated_body_trix_input_story_'+@story.id.to_s, @updated_body)
-    fill_in "gift_description", with: @updated_description
+    fill_in "Gift Description", with: @updated_description
     uncheck("story_fail")
     click_button "Update Story"
     
@@ -80,7 +80,7 @@ RSpec.feature "Editing Stories" do
     
     fill_in "Title", with: @updated_title2
     fill_in_trix_editor('story_raw_body_trix_input_story_'+@story2.id.to_s, @updated_body2)
-    fill_in "gift_description", with: @updated_description
+    fill_in "Gift Description", with: @updated_description
     click_button "Contribute Story"
     
     expect(page).to have_content("Story has been updated")
@@ -100,7 +100,7 @@ RSpec.feature "Editing Stories" do
     
     fill_in "Title", with: ""
     fill_in_trix_editor('story_updated_body_trix_input_story_'+@story.id.to_s, "")
-    fill_in "gift_description", with: ""
+    fill_in "Gift Description", with: ""
     click_button "Update Story"
     
     expect(page).to have_content("Story has not been updated")
