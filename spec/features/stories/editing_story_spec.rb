@@ -88,7 +88,6 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content(@updated_body2)
     expect(page).to have_content(@updated_description)
     expect(page.current_path).to eq(story_path(Story.find(@story2.id).slug))   
-    expect(Story.find(@story2.id).fail).to eq true
   end
   
   scenario "A user fails to edit a published story", js: true do

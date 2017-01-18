@@ -8,6 +8,8 @@ h1 List of all Stories
   div
     == link_to story_title(story), story_path(story)
   div
+    == story_gift_description_show(story)
+  div
     == story_body(story)
   - unless story.classifications.empty?
     div.story_tags

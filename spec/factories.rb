@@ -118,6 +118,16 @@ FactoryGirl.define do
       end
     end
     
+    factory :user_with_published_updated_stories do
+      transient do
+        stories_count 1
+      end
+    
+      after(:create) do |user, evaluator|
+        create_list(:published_updated_story, evaluator.stories_count, author_id: user.id, last_user_to_update: "Author")
+      end
+    end
+    
   end
   
 end
