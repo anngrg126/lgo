@@ -163,7 +163,13 @@ module StoriesHelper
     story.classifications.select{|c| c.primary == true}.each do |c|
       @t = @tags.select{|t| t.id  == c.tag_id}.first
       if @t.tag_category.category== category
-        @display_tag = @t.name
+        unless @t.name == "other"
+#          @display_tag = @t.name
+          @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'">'+@t.name+'</a>'
+        else
+#          @display_tag = c.description
+          @display_tag = '<a href="'+stories_path+'?search='+c.description+'">'+c.description+'</a>'
+        end
       end    
     end
     @display_tag
@@ -180,7 +186,8 @@ module StoriesHelper
   def story_fail_tag(story)
     @fail_tag = @tags.select{|t|t.name=="fail"}.first
     if story.classifications.any?{|c| c[:tag_id] == @fail_tag.id}
-      @display_tag = @fail_tag.name
+#      @display_tag = @fail_tag.name
+      @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'">'+@fail_tag.name+'</a>'
     else
       @display_tag = ""
     end

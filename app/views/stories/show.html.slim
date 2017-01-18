@@ -42,9 +42,11 @@ div.story_pictures
   div.all_story_tags
     - @story.classifications.each do |classif|
       - @t = @tags.select{|t| t.id == classif.tag_id}.first
-      == @t.name
-      - if classif.description?
-        span &nbsp;#{@t.tag_category.category.downcase}: #{classif.description}
+      - unless @t.name == "other"
+        a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}"] #{@t.name}
+      - else
+        - if classif.description?
+          a[href="#{stories_path}?search=#{classif.description}"] #{classif.description}
   <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
   
   div
