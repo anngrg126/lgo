@@ -16,7 +16,7 @@ RSpec.feature "Creating Stories", :type => :feature do
     
     fill_in "Title", with: Faker::Hipster::sentence
     fill_in_trix_editor('story_raw_body_trix_input_story', Faker::Hipster::paragraph)
-    fill_in "gift_description", with: Faker::Hipster::sentence
+    fill_in "Gift Description", with: Faker::Hipster::sentence
     check "story_anonymous"
     choose "story_review_true"
     check "story_fail"
@@ -35,7 +35,7 @@ RSpec.feature "Creating Stories", :type => :feature do
     
     fill_in "Title", with: ""
     fill_in_trix_editor('story_raw_body_trix_input_story', "")
-    fill_in "gift_description", with: ""
+    fill_in "Gift Description", with: ""
     click_button "Contribute Story"
     assert_text("Body can't be blank")
     
