@@ -17,6 +17,18 @@ module StoriesHelper
     end
   end
   
+  def story_gift_description_show(story)
+    if story.published?
+      if story.last_user_to_update == "Admin"
+        body = story.final_gift_description
+      else
+        body = story.updated_gift_description
+      end
+    else
+      body = story.raw_gift_description
+    end
+  end
+  
   def story_body_show(story)
     if story.published?
       if story.last_user_to_update == "Admin"
