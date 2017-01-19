@@ -111,8 +111,9 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content(@story2.updated_gift_description)
     
     fill_in "Final Title", with: @final_title2
+    fill_in "Final Gift Description", with: @final_gift_description
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story2.id.to_s, @final_body2)
-    fill_in "Final Title", with: @final_gift_description
+    
     find("input[type='checkbox'][id*='1']").set(true) #family
     find("input[type='checkbox'][id*='3']").set(true) #brother
     find("input[id*=primary][value='3']").set(true) #brother-primary

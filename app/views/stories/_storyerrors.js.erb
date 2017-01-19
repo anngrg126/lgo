@@ -29,7 +29,12 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
   <% if array_index == 0 %>
     <% for i in 0..@story.errors.full_messages.length-1 %>
       <% field_array.each do |field| %>
-        <% if @story.errors.full_messages[i].downcase.include? field %>
+        <% if field.include? "_" %>
+          <% field_compare = field.gsub(/_/, " ") %>
+        <% else %>
+          <% field_compare = field %>
+        <% end %>
+        <% if @story.errors.full_messages[i].downcase.include? field_compare %>
           $('label[for="story_<%= j "raw_"+field%>"]').addClass("is-invalid-label");
           $('#story_<%= j "raw_"+field%>').addClass("is-invalid-input");
           <% if field == "body" %>

@@ -35,7 +35,10 @@ p
     /== link_to "#{User.find(@story.poster_id).full_name}", dashboard_path(User.find(@story.poster_id))
 h2
   | Raw Title: 
-  == @story.raw_title
+  == @story.raw_title? ? @story.raw_title : "Untitled Story"
+p
+  | Raw Gift Description: 
+  == @story.raw_gift_description? ? @story.raw_gift_description : "none"
 p
   | Raw Body: 
   == @story.raw_body
@@ -47,6 +50,11 @@ div
   h2
     | Updated Title: 
     == @story.updated_title
+- if @story.updated_gift_description?
+  p
+    | Updated Gift Description:
+    == @story.updated_gift_description
+- if @story.updated_body?
   p
     | Updated Body: 
     == @story.updated_body
@@ -54,6 +62,11 @@ div
   h2 
     | Final Title: 
     == @story.final_title
+- if @story.final_gift_description?
+  p
+    | Final Gift Description:
+    == @story.final_gift_description
+- if @story.final_body?
   p 
     | Final Body: 
     == @story.final_body
