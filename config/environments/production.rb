@@ -78,6 +78,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
+  # To track devise usage - :all, :login, :none (default) 
+  config.devise_usage_log_level = :login
+  
   config.paperclip_defaults = {
     storage: :s3,
     bucket: ENV['S3_BUCKET_NAME'],

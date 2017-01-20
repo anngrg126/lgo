@@ -36,6 +36,9 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
+  
+  # To track devise usage - :all, :login, :none (default) 
+  config.devise_usage_log_level = :login
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
