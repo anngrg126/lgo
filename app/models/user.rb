@@ -2,9 +2,9 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :generate_friendly_id, :use => [:slugged, :finders]
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable and :omniauthable,:rememberable,
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   
   has_many :stories, dependent: :destroy 
   has_many :stories_posted, :class_name => 'Story', :foreign_key => 'poster_id', dependent: :destroy 
