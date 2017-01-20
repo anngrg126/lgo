@@ -107,6 +107,18 @@ class User < ApplicationRecord
   
   validates_attachment :image, :content_type => { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }, :size => { in: 0..8.megabytes }
   
+  def self.valid_user?(resource)
+    resource && resource.kind_of?(User) && resource.valid?
+  end
+
+  def log_devise_action(new_action)
+    if new_action == "sign_in"
+      UserSessionLog.create!(user_id: id, user_ip: current_sign_in_ip, sign_in:  DateTime.now)
+    elsif new_action == "sign_out"
+      UserSessionLog.where(user_id: id, user_ip: current_sign_in_ip).last.update(sign_out: DateTime.now)
+    end
+  end
+  
   private
   
   def self.process_uri(uri)
