@@ -1,6 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
   
-  before_action :set_tags, only: [:show, :index, :new, :edit]
+  # before_action :set_tags, only: [:show, :index, :new, :edit]
 # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -24,8 +24,8 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  private
-  def set_tags
-    @tags = Tag.all.group_by(&:name)
-  end
+  # private
+  # def set_tags
+  #   @tags = Tag.all.group_by(&:name)
+  # end
 end
