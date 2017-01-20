@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
       activate_stories(@user)
       activate_comments(@user)
     end
+    log_user_sign_in(@user)
     super resource   
   end
   
@@ -22,5 +23,9 @@ class ApplicationController < ActionController::Base
   
   def activate_comments(user)
     Comment.active.where(:user_id => user.id).update_all("author_deactive = false")
+  end
+  
+  def log_user_sign_in(resource)
+    UserSessionLog.log(resource, "sign_in")
   end
 end
