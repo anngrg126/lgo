@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113203138) do
+ActiveRecord::Schema.define(version: 20170120004912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,7 +142,6 @@ ActiveRecord::Schema.define(version: 20170113203138) do
   create_table "search_query_logs", force: :cascade do |t|
     t.string   "query_string"
     t.integer  "result_count"
-    t.string   "search_param"
     t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -202,6 +201,13 @@ ActiveRecord::Schema.define(version: 20170113203138) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["tag_category_id"], name: "index_tags_on_tag_category_id", using: :btree
+  end
+
+  create_table "user_session_logs", force: :cascade do |t|
+    t.integer  "user_id",  null: false
+    t.string   "user_ip"
+    t.datetime "sign_in"
+    t.datetime "sign_out"
   end
 
   create_table "users", force: :cascade do |t|

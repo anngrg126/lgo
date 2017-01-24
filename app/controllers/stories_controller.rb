@@ -10,17 +10,9 @@ class StoriesController < ApplicationController
     if params[:search]
       @results = (Story.includes(:user).search params[:search], operator: "or")
       @stories = @results.results
-      log_search_query(params[:search], @results.count , "search")
+      log_search_query(params[:search], @results.count)
       if @results.count <=0
         flash[:warning] = "No stories matched : "+ params[:search]
-        redirect_to root_path
-      end
-    elsif params[:search_tag]
-      @results = (Story.search params[:search_tag], fields: [{tags: :exact}])
-      @stories = @results.results
-      log_search_query(params[:search_tag], @results.count , "search_tag")
-      if @results.count <=0
-        flash[:warning] = "No stories matched : "+ params[:search_tag]
         redirect_to root_path
       end
     elsif params[:search_tag]
@@ -185,13 +177,13 @@ class StoriesController < ApplicationController
     end
   end
   
-  def log_search_query(query_string, result_count, search_param)
+  def log_search_query(query_string, result_count)
     if current_user
       user_id = current_user.id
     else
       user_id = nil
     end
-    SearchQueryLog.create(query_string: query_string, result_count: result_count, search_param: search_param, user_id: user_id)
+    SearchQueryLog.create(query_string: query_string, result_count: result_count, user_id: user_id)
   end
     
   def set_tags
