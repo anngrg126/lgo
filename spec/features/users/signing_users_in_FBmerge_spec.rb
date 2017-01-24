@@ -17,5 +17,9 @@ RSpec.feature "Existing users sign in via Facebook" do
     expect(page).to have_content("Successfully signed in from Facebook.")
 #    expect(page).to have_content("Signed in as example@test.com.")
     expect(page).to have_content(@user.display_name)
+    
+    @user_log = UserSessionLog.where(user_id: @user.id).last.sign_in
+    expect(@user_log).not_to eq nil
+    
   end
 end

@@ -19,5 +19,7 @@ RSpec.feature "Signing out signed-in users" do
     
     click_link "Sign out"
     expect(page).to have_content("Signed out successfully.")
+    @user_log = UserSessionLog.where(user_id: @foo.id).last.sign_out
+    expect(@user_log).not_to eq nil
   end
 end

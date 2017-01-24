@@ -19,5 +19,8 @@ RSpec.feature "New users sign up via Facebook" do
     expect(page).to have_content("John D.")
     expect(page.current_path).to eq(dashboard_path(User.find_by(email: "example@test.com").slug)) 
     expect(page).to have_css('div#user_registration img')
+    
+    @user_log = UserSessionLog.where(user_id: User.find_by(email: "example@test.com").id).last.sign_in
+    expect(@user_log).not_to eq nil
   end
 end
