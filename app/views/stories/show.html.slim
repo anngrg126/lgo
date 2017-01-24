@@ -47,9 +47,6 @@ div.story_pictures
         span &nbsp;#{@t.tag_category.category.downcase}: #{classif.description}
   <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
   
-  div
-    //ALL TAGS GO HERE
-  
   == render 'comments/form'
   == render 'comments/show'
 
