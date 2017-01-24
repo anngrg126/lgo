@@ -93,11 +93,11 @@ class Admin::StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image, classifications_attributes: [:id, :story_id, :primary, :description => [], :tag_id => []])
+    params.require(:story).permit(:final_title, :final_body, :published, :fail, :admin_published_at, :main_image, classifications_attributes: [:id, :story_id, :primary, :description => [], :tag_id => []])
   end
   
   def story_params_standalone
-    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image)
+    params.require(:story).permit(:final_title, :final_body, :published, :fail, :admin_published_at, :main_image)
   end
   
   def require_admin

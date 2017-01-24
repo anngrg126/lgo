@@ -70,6 +70,10 @@ module StoriesHelper
     @tag_array = story.classifications.select { |c| c.tag_id != nil  }   
     @primary_array = story.classifications.select { |c| c.primary == true }
     @other_array = story.classifications.select { |c| c.description != nil }
+    
+    if @story.fail?
+      @tag_array
+    end
    
     #method to add un/checked radio buttons to form
     def primary_tag(scope, tag)
@@ -94,6 +98,9 @@ module StoriesHelper
         checkbox_checked = "checked"
       else
         checkbox_checked = nil
+      end
+      if tag.name == "fail" && @story.fail?
+        checkbox_checked = "checked"
       end
       unless tag.name == "other"
         concat "<div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{tag.id}' value='#{tag.id}' name='story[classifications_attributes][0][tag_id][]' type='checkbox' #{checkbox_checked}><label for='story_classifications_attributes_0_family'>#{tag.name.humanize}</label>".html_safe
@@ -149,6 +156,35 @@ module StoriesHelper
     unless @tags.select{|name| name == tag_name}.empty?
       @tags.select{|name| name == tag_name}.first[1][0].name
     end
+  end
+  
+  def get_display_tags(story, category)
+    @display_tag = ""
+    story.classifications.select{|c| c.primary == true}.each do |c|
+      @t = @tags.select{|t| t.id  == c.tag_id}.first
+      if @t.tag_category.category== category
+        @display_tag = @t.name
+      end    
+    end
+    @display_tag
+  end
+  
+  def story_recipient_tag(story)
+    get_display_tags(story, "To_recipient")
+  end
+  
+  def story_occasion_tag(story)
+    get_display_tags(story, "Occasion")
+  end
+  
+  def story_fail_tag(story)
+    @fail_tag = @tags.select{|t|t.name=="fail"}.first
+    if story.classifications.any?{|c| c[:tag_id] == @fail_tag.id}
+      @display_tag = @fail_tag.name
+    else
+      @display_tag = ""
+    end
+    @display_tag
   end
   
 end

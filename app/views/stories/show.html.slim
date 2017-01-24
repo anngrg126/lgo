@@ -14,6 +14,12 @@ h2
   == story_title_show(@story)
 div
   == story_by_show(@story)
+div
+  - unless @story.classifications.empty?
+    div.story_tags
+      == story_recipient_tag(@story)
+      == story_occasion_tag(@story)
+      == story_fail_tag(@story)
 p.small
   == @story.created_at.strftime("%b %d, %Y")
 p
@@ -32,7 +38,15 @@ div.story_pictures
       = link_to "Upload More Pictures", new_story_picture_path(@story), class: "btn"
 
 - if @story.published?
+  - unless @story.classifications.empty?
+  div.all_story_tags
+    - @story.classifications.each do |classif|
+      - @t = @tags.select{|t| t.id == classif.tag_id}.first
+      == @t.name
+      - if classif.description?
+        span &nbsp;#{@t.tag_category.category.downcase}: #{classif.description}
   <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
+  
   == render 'comments/form'
   == render 'comments/show'
 

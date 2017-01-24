@@ -8,6 +8,7 @@ RSpec.feature "Editing Stories" do
     @user2 = FactoryGirl.create(:user_with_unpublished_updated_stories)
     @admin = FactoryGirl.create(:admin)
     @story = Story.where(author_id: @user.id).active.first
+    @story.update(fail: true)
     @story2 = Story.where(author_id: @user2.id).active.first
     @final_title1 = Faker::Hipster::sentence(4)
     @final_body1 = Faker::Hipster::paragraph
@@ -30,12 +31,13 @@ RSpec.feature "Editing Stories" do
       {id: 7, category: "Collection"}
       ])
     Tag.create([
-      {  id: 1, tag_category_id: 1 , name: 'family' },
-      {  id: 2, tag_category_id: 1 , name: 'parents' },
-      {  id: 3, tag_category_id: 5 , name: 'brother' },
-      {  id: 4, tag_category_id: 5 , name: 'mother' },
-      {  id: 5, tag_category_id: 2 , name: 'anniversary' },
-      {  id: 6, tag_category_id: 2 , name: 'birthday' }
+      {  tag_category_id: 1 , name: 'family' },
+      {  tag_category_id: 1 , name: 'parents' },
+      {  tag_category_id: 5 , name: 'brother' },
+      {  tag_category_id: 5 , name: 'mother' },
+      {  tag_category_id: 2 , name: 'anniversary' },
+      {  tag_category_id: 2 , name: 'birthday' },
+      {  tag_category_id: 6 , name: 'fail' }
       ])
   end
   
@@ -52,17 +54,25 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content(@story.raw_title)
     expect(page).to have_content(@story.raw_body)
     expect(page).to have_content("User requested a GiftOn editor to add a light touch? No")
+    expect(page).to have_content("Story Fail")
     
     attach_file('story_main_image', './spec/fixtures/mainimage.png')
     fill_in "Final Title", with: @final_title1
 #    fill_in "Final Body", with: @final_body1
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, @final_body1)
 #    check 'Published'
-    find("input[type='checkbox'][id*='1']").set(true) #family
-    find("input[type='checkbox'][id*='3']").set(true) #brother
-    find("input[id*=primary][value='3']").set(true) #brother-primary
-    find("input[type='checkbox'][id*='6']").set(true) #birthday
-    find("input[id*=primary][value='6']").set(true) #birthday-primary
+    uncheck("story_fail")
+    @family_tag = Tag.where(name: "family").first
+    @brother_tag = Tag.where(name: "brother").first
+    @birthday_tag = Tag.where(name: "birthday").first
+    @family_tag = Tag.where(name: "family").first
+    @fail_tag = Tag.where(name: "fail").first
+    find("input[type='checkbox'][id*='#{@family_tag.id}']").set(true) #family
+    find("input[type='checkbox'][id*='#{@brother_tag.id}']").set(true) #brother
+    find("input[id*=primary][value='#{@brother_tag.id}']").set(true) #brother-primary
+    find("input[type='checkbox'][id*='#{@birthday_tag.id}']").set(true) #birthday
+    find("input[id*=primary][value='#{@birthday_tag.id}']").set(true) #birthday-primary
+    find("input[type='checkbox'][id*='#{@fail_tag.id}']").set(false) #not a fail
     
     click_button "Update Story"
     
@@ -75,6 +85,7 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content("brother (primary)")
     expect(page).to have_content("family")
     expect(page).to have_content("birthday (primary)")
+    expect(page).not_to have_content("Story Fail")
     
     logout(:user)
     
@@ -113,6 +124,7 @@ RSpec.feature "Editing Stories" do
   end
   
   scenario "An admin fails to edit a story", js: true do
+    @story.update(fail: false)
     login_as(@admin, :scope => :user)
     visit "/admin"
     

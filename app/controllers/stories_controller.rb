@@ -23,7 +23,7 @@ class StoriesController < ApplicationController
         redirect_to root_path
       end
     else
-      @stories = Story.includes(:user).published.active
+      @stories = Story.includes(:user, :classifications).published.active
     end
   end
   
@@ -88,6 +88,18 @@ class StoriesController < ApplicationController
           create_notification(@story)
         end
       end
+      if @story.fail_changed?
+        @fail_tag = Tag.where(name: "fail").first
+        if @story.fail?
+          if @story.classifications.select{|c| c.tag_id == @fail_tag.id}.empty?
+            @story.classifications.create(tag_id: @fail_tag.id, primary: false)
+          end
+        else
+          unless @story.classifications.select{|c| c.tag_id == @fail_tag.id}.empty?
+            @story.classifications.select{|c| c.tag_id == @fail_tag.id}.each(&:destroy)
+          end
+        end
+      end
     else
       if @story.anonymous?
         @story.poster_id = nil
@@ -123,11 +135,11 @@ class StoriesController < ApplicationController
   private
   
   def story_params
-    params.require(:story).permit(:raw_title, :raw_body, :updated_title, :updated_body, :anonymous, :review, pictures_attributes: [:id, :story_id, :_destroy, :image])
+    params.require(:story).permit(:raw_title, :raw_body, :updated_title, :updated_body, :anonymous, :fail, :review, pictures_attributes: [:id, :story_id, :_destroy, :image])
   end
   
   def set_story
-    @story = Story.includes(:user).find(params[:id])
+    @story = Story.includes(:user, :classifications).find(params[:id])
     #to make sure users can only get to their own stories
     #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
     @anonymous_user = User.where(anonymous: true).first
@@ -175,6 +187,6 @@ class StoriesController < ApplicationController
   end
     
   def set_tags
-    @tags = Tag.all.group_by(&:name)
+    @tags = Tag.alltags
   end
 end

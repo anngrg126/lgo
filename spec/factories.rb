@@ -7,9 +7,9 @@ FactoryGirl.define do
   end
   
   factory :classification do
-      tag_id 1
-      primary false
-      story_id 0
+    tag_id 1
+    primary false
+    story_id 0
   end
   
   factory :story do

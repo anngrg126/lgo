@@ -20,6 +20,11 @@ p
     | Anonymous
   - else
     | Not Anonymous
+p
+  - if @story.fail?
+    | Story Fail
+  - else
+    | Not a Fail
 - if @story.poster_id?
   div
     | Posted by: 
