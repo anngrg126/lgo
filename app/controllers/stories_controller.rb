@@ -3,10 +3,10 @@ class StoriesController < ApplicationController
   before_action :set_story, only: [:edit, :update, :destroy, :check_for_cancel]
   before_action :redirect_cancel, :only => [:update]
   before_action :set_tags, only: [:show, :index, :new, :edit]
+  before_action :set_anonymous_user
   
   def index
     @active_browse = "active"
-    @anonymous_user = User.where(anonymous: true).first
     if params[:search]
       @results = (Story.includes(:user, :classifications).search params[:search], operator: "or")
       @stories = @results.results
@@ -59,7 +59,6 @@ class StoriesController < ApplicationController
   end
   
   def show
-    @anonymous_user = User.where(anonymous: true).first
     @story = Story.includes(:user, :classifications, :bookmarks, :reactions, :pictures).find(params[:id])
     @story_comments = @story.comments.includes(:user).select{|c| c.deleted_at == nil && c.author_deactive == false}
     @active_browse = "active"
@@ -81,7 +80,6 @@ class StoriesController < ApplicationController
       notify_admin(@story)
       if @story.anonymous_changed?
         if @story.anonymous
-#          @story.poster_id = User.where(anonymous: true).first.id
           @story.poster_id = @anonymous_user.id
           destroy_notification(@story)
           create_notification(@story)
@@ -145,7 +143,6 @@ class StoriesController < ApplicationController
     @story = Story.includes(:user, :classifications).find(params[:id])
     #to make sure users can only get to their own stories
     #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
-    @anonymous_user = User.where(anonymous: true).first
   end
   
   def redirect_cancel
@@ -191,5 +188,9 @@ class StoriesController < ApplicationController
     
   def set_tags
     @tags = Tag.alltags
+  end
+  
+  def set_anonymous_user
+    @anonymous_user = User.where(anonymous: true).first
   end
 end
