@@ -133,33 +133,28 @@ nav .top-bar.row {
   position: relative;
   vertical-align: bottom;
 }
-.top-bar .menu-right .hide-for-small-only {
-  font-weight: 50;
-  padding-left: 5px;
-  color: $middark-gray;
-}
-.top-bar .menu-right .hide-for-small-only:hover {
-  color: lighten($middark-gray, 15%);
-}
-.top-bar .menu-right #user_notifications {//My Notifications link
+#user_notifications {//My Notifications link
   vertical-align: bottom;
   padding-right: 0.5em; 
   position: relative; 
 //  top: 0.25em; 
   font-size: 0.9rem;
 }
-.top-bar .menu-right #user_notifications a {
+#user_notifications a {
   color: $dark-gray;
 }
-.top-bar .menu-right #user_notifications a:hover {
+#user_notifications a:hover {
   color: $topbar-link-color-hover;
 }
-.top-bar .menu-right #user_notifications a .notifications_count {
+#user_notifications a .notifications_count {
   color: $red;
   font-weight: 600;
 }
-.top-bar .menu-right #user_notifications a .notifications_count:hover, .top-bar .menu-right #user_notifications a:hover .notifications_count {
+#user_notifications a .notifications_count:hover, #user_notifications a:hover .notifications_count {
   color: lighten($red, 15%);
+}
+#user_notifications a.inactive-link{
+  @extend %inactive-link;
 }
 .top-bar .menu-right > div {
   display: inline-block;

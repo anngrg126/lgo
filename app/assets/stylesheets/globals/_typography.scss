@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+//headers
+
+$header-font-family: 'Raleway', sans-serif;
+$header-font-weight: 600;
+
+//links
+
+%inactive-link {
+  color: $middark-gray;
+  &:hover {
+    color: scale-color($middark-gray, $lightness: +15%);  
+  }
+}
