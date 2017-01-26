@@ -252,13 +252,9 @@ nav .menu .active > a {
     font-size: 100%;
     padding: 0 5px;
   }
-  #navbar-tier2 a.btn-link, #navbar-tier2B a.btn-link {
-    border-bottom: none;
-  }
-  #navbar-tier2 a.btn-link:hover, #navbar-tier2B a.btn-link:hover, #navbar-tier2 a.btn-link:focus, #navbar-tier2B a.btn-link:focus {
-    color: $topbar-link-color-hover;
-    border-bottom: none;
-  }
+  
+  
+  
   .top-bar.center .columns {
     line-height: normal;
   }
@@ -310,8 +306,18 @@ nav .menu .active > a {
     border-right: none;
   }
   
+  //tag category links
+  #tags-menu ul a {
+    border-bottom: none;
+    &:hover, &:focus {
+      border-bottom: none;
+    }
+    &.no_dropdown:hover {
+      border-bottom: none;
+    }
+  }
   
-  
+  //tag links
   #tags-menu ul a {
     &:hover {
      border-bottom: none;
