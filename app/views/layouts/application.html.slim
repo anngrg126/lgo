@@ -8,6 +8,8 @@ html lang="en"
       == content_for?(:title) ? yield(:title) : "Lets GiftOn"
 
     == stylesheet_link_tag "application"
+    - if Rails.application.assets.resolve(params[:controller]).present?
+      == stylesheet_link_tag params[:controller]
     == javascript_include_tag "application", 'data-turbolinks-track' => true
     == csrf_meta_tags
     meta name="description"             content="Real-life gift stories and ideas."

@@ -10,7 +10,7 @@ module ApplicationHelper
 #  
   def user_notifications_link
     unless current_user
-      link_to "My Notifications", new_user_session_path, class: "hide-for-small-only inactive-link"
+      link_to "My Notifications", new_user_session_path, class: "inactive-link"
     else
       @current_user_notifications_header = current_user.notifications.select{ |n| n.read == false}.length
       unless @current_user_notifications_header == 0
