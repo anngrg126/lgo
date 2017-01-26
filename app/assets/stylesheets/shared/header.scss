@@ -1,7 +1,7 @@
 .sticky {
   width: 100%;
 }
-.sticky button:focus {
+.sticky button:focus, a.btn-link { //not sure about a.btn-link being included. might want to remove this class altogether. it's a bad name.
   outline:0;
 }
 #tags-menu {
@@ -135,28 +135,26 @@ nav .top-bar.row {
   position: relative;
   vertical-align: bottom;
 }
-#user_notifications {//My Notifications link
+
+//Notifications Link
+#user_notifications {
   vertical-align: bottom;
   padding-right: 0.5em; 
   position: relative; 
-//  top: 0.25em; 
   font-size: 0.9rem;
 }
 #user_notifications a {
-  color: $dark-gray;
-}
-#user_notifications a:hover {
-  color: $topbar-link-color-hover;
-}
-#user_notifications a .notifications_count {
-  color: $red;
-  font-weight: 600;
-}
-#user_notifications a .notifications_count:hover, #user_notifications a:hover .notifications_count {
-  color: lighten($red, 15%);
-}
-#user_notifications a.inactive-link{
-  @extend %inactive-link;
+  @extend %primary-link;
+  &.inactive-link {
+    @extend .inactive-link;
+  }
+  &:hover .notifications_count {
+    color: lighten($red, 15%);
+  }
+  .notifications_count {
+    color: $red;
+    font-weight: 600;
+  }
 }
 .top-bar .menu-right > div {
   display: inline-block;

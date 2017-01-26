@@ -7,9 +7,22 @@ $header-font-weight: 600;
 
 //links
 
+<<<<<<< 20468833f3c261d62c3820b5921df23bcc76c2aa
 %inactive-link {
   color: $middark-gray;
   &:hover {
     color: scale-color($middark-gray, $lightness: +15%);  
+=======
+.inactive-link {
+  color: $middark-gray;
+  &:hover {
+    color: lighten($middark-gray, +15%);  
+  }
+}
+%primary-link {
+  color: $dark-gray; //same as $topbar-link-color
+  &:hover {
+    color: lighten($dark-gray, +25%); //same as $topbar-link-color-hover
+>>>>>>> refactor My Notifications link css
   }
 }
