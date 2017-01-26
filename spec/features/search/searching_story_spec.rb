@@ -119,6 +119,37 @@ RSpec.feature "Searching for a story", :type => :feature do
 
   end
   
+   scenario "A logged in user searches for a query in gift description" do
+    
+    if @story_foo.updated_gift_description.nil?
+      @search_word = @story_foo.final_gift_description.split.first
+    else
+      @search_word = @story_foo.updated_gift_description.split.first
+    end
+    
+    login_as(@user, :scope => :user)
+    
+    visit "/"
+  
+    click_button "btnSearch"
+    
+    within("#search_dropdown") do
+      fill_in "search", with: @search_word
+      click_button "Search"
+    end
+       
+    expect(page).to have_content(@story_foo.final_title)
+    expect(page).to have_content(@story_foo.final_body.truncate(150))
+    expect(page).to have_link(@story_foo.final_title)
+    expect(page).to have_content("Posted by: #{@foo.full_name}")
+    expect(page).to have_css("img[src*='mainimage.png']", count: 1)
+    expect(page).not_to have_content("No stories matched : "+ @search_word)
+    
+    expect(SearchQueryLog.last.user_id).to eq (@user.id)
+    expect(SearchQueryLog.last.query_string).to eq (@search_word)
+
+  end
+  
   scenario "A non-logged in user searches for a query in title" do
     
     if @story_foo.updated_title.nil?
