@@ -75,6 +75,13 @@ module NotificationsHelper
     call_functions = []
     @followers_id_array = []
     
+    @notification_categories = NotificationCategory.all
+    @notification_category_story = @notification_categories.select{|c| c.name =="Story"}.first
+    @notification_category_comment = @notification_categories.select{|c| c.name =="Comment"}.first
+    @notification_category_reaction = @notification_categories.select{|c| c.name =="Reaction"}.first
+    @notification_category_bookmark = @notification_categories.select{|c| c.name =="Bookmark"}.first
+    @notification_category_following = @notification_categories.select{|c| c.name =="Following"}.first
+    
     #consolidate all stories to avoid N+1 db queries
     notifications_array.each do |n|
       n_stories.push(n.story_id) unless n.story_id == nil
@@ -92,21 +99,18 @@ module NotificationsHelper
     #begin consolidating notifications
     notifications_array.each do |n|
       case n.notification_category_id
-      when 1
+      when @notification_category_story.id
 #        story = Story.find(n.story_id)
         story = @n_stories.select{|s| s.id == n.story_id}.first
         link = link_to story_title(story), story_path(story)
         ids = []
         if n.options == "admin"
           # Story admin notification
-#          author = User.find(story.author_id)
           author = @n_users.select{|u| u.id == story.author_id}.first
           link_author = link_to author.full_name, dashboard_path(author)
           messages.push(link_author+" updated a story where you are an admin. See it here: "+link)
           ids.push(n.id)
         elsif n.options == "followers"
-#          poster = User.find(story.poster_id)
-          # poster = @n_users.select{|id| id == story.poster_id}.first[1][0]
           poster = @n_users.select{|u| u.id ==story.poster_id}.first
           link_poster = link_to poster.full_name, dashboard_path(poster)
           # Story poster's followers notification
@@ -118,19 +122,17 @@ module NotificationsHelper
           ids.push(n.id)
         end
         id_array.push(ids)
-      when 2
-#        stories_comments.push(Story.find(Comment.find(n.origin_id).story_id))
+      when @notification_category_comment.id
         stories_comments.push(@n_stories.select{|s| s.id == n.story_id}.first)
         call_functions.push("comments_condense")
-      when 3
+      when @notification_category_reaction.id
         stories_reactions.push(@n_stories.select{|s| s.id == n.story_id}.first)
         call_functions.push("reactions_condense")
-      when 4
+      when @notification_category_bookmark.id
         stories_bookmarks.push(@n_stories.select{|s| s.id == n.story_id}.first)
         call_functions.push("bookmarks_consense")
       else
         followers.push(n.id)
-#        followers.push(User.find(n.notified_by_user_id))
         followers.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
         call_functions.push("followings_condense")
       end
@@ -143,12 +145,9 @@ module NotificationsHelper
         optionsarray.each do |o|
           ids = []
           commenters = []
-          unless notifications_array.group_by(&:notification_category_id).select{|n| n == 2}.first[1].group_by(&:options).select{|opt| opt == o}.empty?
-#          unless notifications_array.where(notification_category_id: 2, options: o).empty?
-            notifications_array.group_by(&:notification_category_id).select{|n| n == 2}.first[1].group_by(&:options).select{|opt| opt == o}.first[1].each do |n|
-#            notifications_array.where(notification_category_id: 2, options: o).each do |n|
+          unless notifications_array.select{|n| n.notification_category_id==@notification_category_comment.id && n.options==o}.empty?
+            notifications_array.select{|n| n.notification_category_id==@notification_category_comment.id && n.options==o}.each do |n|
               if Comment.find(n.origin_id).story_id == s.id
-#                commenters.push(User.find(n.notified_by_user_id))
                 commenters.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
                 ids.push(n.id)
               end
@@ -179,12 +178,9 @@ module NotificationsHelper
           reactors = []
           ids = []
           reactor_links = []
-#          unless notifications_array.where(notification_category_id: 3, options: o).empty?
-          unless notifications_array.group_by(&:notification_category_id).select{|n| n == 3}.first[1].group_by(&:options).select{|opt| opt == o}.empty?
-#            notifications_array.where(notification_category_id: 3, options: o).each do |n|
-            notifications_array.group_by(&:notification_category_id).select{|n| n == 3}.first[1].group_by(&:options).select{|opt| opt == o}.first[1].each do |n|
+          unless notifications_array.select{|n| n.notification_category_id==@notification_category_reaction.id && n.options==o}.empty?
+            notifications_array.select{|n| n.notification_category_id==@notification_category_reaction.id && n.options==o}.each do |n|
               if Reaction.find(n.origin_id).story_id == s.id
-#                reactors.push(User.find(n.notified_by_user_id))
                 reactors.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
                 ids.push(n.id)
               end
@@ -221,8 +217,7 @@ module NotificationsHelper
       stories_bookmarks.uniq.each do |s|
         bookmarkers = []
         ids = []
-#        notifications_array.where(notification_category_id: 4).each do |n|
-        notifications_array.group_by(&:notification_category_id).select{|n| n == 4}.first[1].each do |n|
+        notifications_array.select{|n| n.notification_category_id==@notification_category_bookmark.id}.each do |n|
           if Bookmark.find(n.origin_id).story_id == s.id
 #            bookmarkers.push(User.find(n.notified_by_user_id))
             bookmarkers.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
@@ -274,8 +269,7 @@ module NotificationsHelper
         else
           @max_index = id_array[index].max
         end
-#        @noti = Notification.find(@max_index)
-        @noti = @user.notifications.group_by(&:id).select{|id| id == @max_index}.first[1][0]
+        @noti = notifications_array.select{|n| n.id == @max_index}.first
         unless index > messages.length-1
           concat "<div id='#{id_array[index]}'>".html_safe
           concat "<div>".html_safe
