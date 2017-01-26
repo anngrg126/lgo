@@ -92,6 +92,11 @@ $(document).on('click', '#browse_navbar', function(event){
     };
   };
 });
+$(document).on('click', '.dropdown_category', function(event){
+  if ($(window).width() > 639) {
+    event.preventDefault();
+  };
+});
 $(document).on("on.zf.toggler", function(e) {
   $("#mobile_search").closest("button").addClass('active');
   $("#mobile_search").closest("button").parent().addClass('active');
