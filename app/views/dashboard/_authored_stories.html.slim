@@ -1,37 +1,12 @@
 - if @user == current_user
   h2 List of all Authored Stories
-  - @dashboard_stories.each do |story|
-    div
-      = story_main_image(story)
-    div
-      = link_to story_title(story), story_path(story)
-    div
-      = story_body(story)
-    div
-      = story_pending(story)
-    div
-      = story_anonymous(story)
-    div
-      | Posted on: 
-      == story.created_at.strftime("%b %d, %Y")
-    div
-      = story_by(story)  
+  div [class="row"]
+    - @dashboard_stories.each do |s|
+      div [class="large-6 columns"]
+        == render 'shared/story_card', story: s
 - else
   h2 List of all Posted Stories
-  - @dashboard_stories.each do |story|
-    div
-      = story_main_image(story)
-    div
-      == link_to story_title(story), story_path(story)
-    div
-      = story_body(story)
-    div
-      | Posted on: 
-      == story.created_at.strftime("%b %d, %Y")
-    p
-      | Posted by: 
-      /== "#{User.find(story.poster_id).full_name}"
-      - unless story.anonymous
-        == "#{story.user.full_name}"
-      - else
-        == "#{@anonymous_user.full_name}"
+  div [class="row"]
+    - @dashboard_stories.each do |s|
+      div [class="large-6 columns"]
+        == render 'shared/story_card', story: s

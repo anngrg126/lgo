@@ -2,24 +2,8 @@ h1 List of all Stories
 - if user_signed_in?
   == link_to "New Story", new_story_path, class: "btn", id: "new-story-btn"
   
-- @stories.each do |story|
-  div 
-    == story_main_image_show(story)
-  div
-    == link_to story_title(story), story_path(story)
-  div
-    == story_body(story)
-  - unless story.classifications.empty?
-    div.story_tags
-      == story_recipient_tag(story)
-      == story_occasion_tag(story)
-      == story_fail_tag(story)
-  div
-    - if story.poster_id?
-      small 
-        | Posted by: 
-        - unless story.anonymous?
-          == link_to "#{story.user.full_name}", dashboard_path(story.user)
-        - else
-          == link_to "#{@anonymous_user.full_name}", dashboard_path(@anonymous_user)
-        /== link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
+
+div [class="row"]
+  - @stories.each do |s|
+    div [class="large-6 columns"]
+      == render 'shared/story_card', story: s

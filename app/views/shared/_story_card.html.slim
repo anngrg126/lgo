@@ -1,0 +1,23 @@
+div 
+    == story_main_image_show(story)
+div
+    == link_to story_title(story), story_path(story)
+div
+    == story_body(story)
+    - unless story.classifications.empty?
+    div.story_tags
+      == story_recipient_tag(story)
+      == story_occasion_tag(story)
+      == story_fail_tag(story)
+    div
+        - if story.poster_id?
+          small 
+            | Posted by: 
+            - unless story.anonymous?
+              == link_to "#{story.user.full_name}", dashboard_path(story.user)
+            - else
+              == link_to "#{@anonymous_user.full_name}", dashboard_path(@anonymous_user)
+            /== link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
+        -else
+            div
+                = story_by(story) 
