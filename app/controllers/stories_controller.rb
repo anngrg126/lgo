@@ -161,7 +161,7 @@ class StoriesController < ApplicationController
     followings = Following.where(user_id: story.poster_id)
     followings.each do |follower|
       Notification.create(user_id: follower.follower_id,
-                        notified_by_user_id: current_user.id,
+                        notified_by_user_id: story.poster_id,
                         notification_category_id: 1,
                         read: false,
 #                        origin_id: story.id,
