@@ -22,7 +22,8 @@ RSpec.feature "Searching for a story", :type => :feature do
       {  id: 3, tag_category_id: 5 , name: 'brother' },
       {  id: 4, tag_category_id: 5 , name: 'mother' },
       {  id: 5, tag_category_id: 2 , name: 'anniversary' },
-      {  id: 6, tag_category_id: 2 , name: 'birthday' }
+      {  id: 6, tag_category_id: 2 , name: 'birthday' },
+      {  id: 7, tag_category_id: 2 , name: 'fail' }
       ])
   end
   

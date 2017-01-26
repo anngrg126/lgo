@@ -24,16 +24,16 @@ p.small
   == @story.created_at.strftime("%b %d, %Y")
 p
   == story_body_show(@story)
-- if user_signed_in? && current_user == User.find(@story.author_id)
+- if user_signed_in? && @story.author_id == current_user.id
   == link_to "Edit Story", edit_story_path(@story), class: "btn"
   == link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn"
 div.story_pictures
   - unless @story.pictures.empty?
     - @story.pictures.each do |picture|
       = image_tag picture.image.url
-      - if user_signed_in? && current_user == User.find(@story.author_id)
+      - if user_signed_in? && @story.author_id == current_user.id
         = link_to "Delete Picture", story_picture_path(@story, picture), data: {confirm: "Are you sure?"}, method: :delete
-  - if user_signed_in? && current_user == User.find(@story.author_id)
+  - if user_signed_in? && @story.author_id == current_user.id
     div
       = link_to "Upload More Pictures", new_story_picture_path(@story), class: "btn"
 
@@ -42,9 +42,11 @@ div.story_pictures
   div.all_story_tags
     - @story.classifications.each do |classif|
       - @t = @tags.select{|t| t.id == classif.tag_id}.first
-      == @t.name
-      - if classif.description?
-        span &nbsp;#{@t.tag_category.category.downcase}: #{classif.description}
+      - unless @t.name == "other"
+        a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}"] #{@t.name}
+      - else
+        - if classif.description?
+          a[href="#{stories_path}?search=#{classif.description}"] #{classif.description}
   <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
   
   == render 'comments/form'

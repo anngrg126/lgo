@@ -38,7 +38,7 @@ class RegistrationStepsController < ApplicationController
   end
   
   def set_tags
-    @tags = Tag.all.group_by(&:name)
+    @tags = Tag.alltags
   end
   
   def log_user_sign_in(resource)
