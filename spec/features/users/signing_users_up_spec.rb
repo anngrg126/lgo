@@ -6,6 +6,7 @@ RSpec.feature "Users signup" do
   before do
     @anonymous_user = FactoryGirl.create(:anonymous_user)
     @email = Faker::Internet.email
+    @email2 = Faker::Internet.email
     @password = Faker::Internet.password
     @password2 = Faker::Internet.password
     @birthday = Faker::Date.birthday(min_age = 18, max_age = 65)
@@ -39,6 +40,9 @@ RSpec.feature "Users signup" do
 #    expect(page).to have_link("Sign out")
     expect(page).to have_css("a.logged-in")
     expect(page.current_path).to eq(dashboard_path(User.find_by(email: @email).slug)) 
+    
+    @user_log = UserSessionLog.where(user_id: User.find_by(email: @email).id).last.sign_in
+    expect(@user_log).not_to eq nil
   end
   
   scenario "with invalid credentials - step 1" do
@@ -75,7 +79,7 @@ RSpec.feature "Users signup" do
     visit "/"
     
     click_link "Join"
-    fill_in "Email", with: Faker::Internet.email
+    fill_in "Email", with: @email2
     fill_in "Password", with: @password2
     
     click_button "Sign up"
@@ -93,5 +97,8 @@ RSpec.feature "Users signup" do
     click_button "Submit"
     
     expect(page).to have_content("You have signed up successfully.")
+    
+    @user_log = UserSessionLog.where(user_id: User.find_by(email: @email2).id).last.sign_in
+    expect(@user_log).not_to eq nil
   end
 end
