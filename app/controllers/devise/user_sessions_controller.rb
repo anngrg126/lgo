@@ -22,7 +22,7 @@ class Devise::UserSessionsController < Devise::SessionsController
     
     private
     def set_tags
-        @tags = Tag.all.group_by(&:name)
+      @tags = Tag.alltags
     end
 
 end
