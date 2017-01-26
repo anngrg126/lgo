@@ -61,10 +61,11 @@ class StoriesController < ApplicationController
   def show
     @anonymous_user = User.where(anonymous: true).first
     @story = Story.includes(:user, :classifications, :bookmarks, :reactions, :pictures).find(params[:id])
-    @story_comments = @story.comments.includes(:user).select{|c| c.deleted_at == nil && c.author_deactive != true}
     @active_browse = "active"
     @comment = @story.comments.active.build
     @bookmark = @story.bookmarks.build
+    @story_comments = @story.comments.includes(:user).select{|c| c.deleted_at == nil && c.author_deactive != true && c.id != nil}
+    @story_bookmarks = @story.bookmarks.select{|b| b.id != nil}
   end
   
   def edit
