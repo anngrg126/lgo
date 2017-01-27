@@ -61,6 +61,7 @@ module NotificationsHelper
 #    end
 #  end
 #  
+#  helper to consolidate all notifications
   def consolidate_notifications(notifications_array, read_boolean)
     n_stories = []
     n_users = []
@@ -73,34 +74,26 @@ module NotificationsHelper
     messages = []
     id_array = []
     call_functions = []
-    @followers_id_array = []
-    
-    @notification_categories = NotificationCategory.all
-    @notification_category_story = @notification_categories.select{|c| c.name =="Story"}.first
-    @notification_category_comment = @notification_categories.select{|c| c.name =="Comment"}.first
-    @notification_category_reaction = @notification_categories.select{|c| c.name =="Reaction"}.first
-    @notification_category_bookmark = @notification_categories.select{|c| c.name =="Bookmark"}.first
-    @notification_category_following = @notification_categories.select{|c| c.name =="Following"}.first
+    @followers_id_array = []  
     
     #consolidate all stories to avoid N+1 db queries
     notifications_array.each do |n|
       n_stories.push(n.story_id) unless n.story_id == nil
     end
-    # @n_stories = Story.where(id: n_stories.uniq).group_by(&:id)
-    @n_stories = Story.select{|s|  n_stories.uniq.include?s.id}
+    n_stories.uniq!
+    @n_stories = Story.where(id: n_stories)
     
-    #consolidate all users to avoid N+1 db queries
+    #consolidate all story posters to avoid N+1 db queries
     notifications_array.each do |n|
       n_users.push(n.notified_by_user_id)
     end
-    @n_users = User.select{|u|  n_users.uniq.include?u.id}
-    
+    n_users.uniq!
+    @n_users = User.where(id: n_users)
     
     #begin consolidating notifications
     notifications_array.each do |n|
-      case n.notification_category_id
-      when @notification_category_story.id
-#        story = Story.find(n.story_id)
+      case n.notification_category.name
+      when "Story"
         story = @n_stories.select{|s| s.id == n.story_id}.first
         link = link_to story_title(story), story_path(story)
         ids = []
@@ -111,9 +104,13 @@ module NotificationsHelper
           messages.push(link_author+" updated a story where you are an admin. See it here: "+link)
           ids.push(n.id)
         elsif n.options == "followers"
-          poster = @n_users.select{|u| u.id ==story.poster_id}.first
-          link_poster = link_to poster.full_name, dashboard_path(poster)
           # Story poster's followers notification
+#          unless story.anonymous?
+            poster = @n_users.select{|u| u.id == story.poster_id}.first
+#          else
+#            poster = @anonyous_user
+#          end
+          link_poster = link_to poster.full_name, dashboard_path(poster)
           messages.push(link_poster+" published a new story! See it here: "+link)
           ids.push(n.id)
         else
@@ -122,68 +119,59 @@ module NotificationsHelper
           ids.push(n.id)
         end
         id_array.push(ids)
-      when @notification_category_comment.id
+      when "Comment"
         stories_comments.push(@n_stories.select{|s| s.id == n.story_id}.first)
-        call_functions.push("comments_condense")
-      when @notification_category_reaction.id
+      when "Reaction"
         stories_reactions.push(@n_stories.select{|s| s.id == n.story_id}.first)
-        call_functions.push("reactions_condense")
-      when @notification_category_bookmark.id
+      when "Bookmark"
         stories_bookmarks.push(@n_stories.select{|s| s.id == n.story_id}.first)
-        call_functions.push("bookmarks_consense")
       else
         followers.push(n.id)
         followers.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
-        call_functions.push("followings_condense")
       end
     end
-    call_functions.uniq
     
-    if call_functions.include?("comments_condense")
+    unless notifications_array.select{|n| n.notification_category.name == "Comment"}.empty?
       optionsarray = [nil, "commenters"]
       stories_comments.uniq.each do |s|
         optionsarray.each do |o|
-          ids = []
           commenters = []
-          unless notifications_array.select{|n| n.notification_category_id==@notification_category_comment.id && n.options==o}.empty?
-            notifications_array.select{|n| n.notification_category_id==@notification_category_comment.id && n.options==o}.each do |n|
-              if Comment.find(n.origin_id).story_id == s.id
-                commenters.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
-                ids.push(n.id)
-              end
+          ids = []
+          commenter_links = []
+          unless notifications_array.select{|n| n.notification_category.name == "Comment" && n.options == o && n.story_id == s.id}.empty?
+            notifications_array.select{|n| n.notification_category.name == "Comment" && n.options == o && n.story_id == s.id}.each do |n|
+              commenters.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
+              ids.push(n.id)
             end
-            commenter_links = []
-            commenters.uniq.each do |c|
-              commenter_links.push(link_to c.full_name, dashboard_path(c))
-            end 
-            link = link_to story_title(s), story_path(s)
-            unless commenter_links.empty?
-              if o == nil
-                messages.push("#{commenter_links.to_sentence} commented on your story #{link}")
-                id_array.push(ids)
-              else
-                messages.push("#{commenter_links.to_sentence} also commented on #{link}")
-                id_array.push(ids)
-              end
+          end
+          commenters.uniq.each do |c|
+            commenter_links.push(link_to c.full_name, dashboard_path(c))
+          end 
+          link = link_to story_title(s), story_path(s)
+          unless commenter_links.empty?
+            if o == nil
+              messages.push("#{commenter_links.to_sentence} commented on your story #{link}")
+              id_array.push(ids)
+            else
+              messages.push("#{commenter_links.to_sentence} also commented on #{link}")
+              id_array.push(ids)
             end
           end
         end
       end
     end
     
-    if call_functions.include?("reactions_condense")
+    unless notifications_array.select{|n| n.notification_category.name == "Reaction"}.empty?
       optionsarray = ["1", "2", "3", "4", "5"]
       stories_reactions.uniq.each do |s|
         optionsarray.each do |o|
           reactors = []
           ids = []
           reactor_links = []
-          unless notifications_array.select{|n| n.notification_category_id==@notification_category_reaction.id && n.options==o}.empty?
-            notifications_array.select{|n| n.notification_category_id==@notification_category_reaction.id && n.options==o}.each do |n|
-              if Reaction.find(n.origin_id).story_id == s.id
-                reactors.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
-                ids.push(n.id)
-              end
+          unless notifications_array.select{|n| n.notification_category.name == "Reaction" && n.options==o && n.story_id == s.id}.empty?
+            notifications_array.select{|n| n.notification_category.name == "Reaction" && n.options==o && n.story_id == s.id}.each do |n|
+              reactors.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
+              ids.push(n.id)
             end
             reactors.uniq.each do |c|
               reactor_links.push(link_to c.full_name, dashboard_path(c))
@@ -212,19 +200,16 @@ module NotificationsHelper
       end
     end
     
-    if call_functions.include?("bookmarks_consense")
-      #Case 4: Aggregate commenters on stories where user commented into one sentence
+    unless notifications_array.select{|n| n.notification_category.name == "Bookmark"}.empty?
       stories_bookmarks.uniq.each do |s|
         bookmarkers = []
         ids = []
-        notifications_array.select{|n| n.notification_category_id==@notification_category_bookmark.id}.each do |n|
-          if Bookmark.find(n.origin_id).story_id == s.id
-#            bookmarkers.push(User.find(n.notified_by_user_id))
+        unless notifications_array.select{|n| n.notification_category.name == "Bookmark" && n.story_id == s.id}.empty?
+          notifications_array.select{|n| n.notification_category.name == "Bookmark" && n.story_id == s.id}.each do |n|
             bookmarkers.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
             ids.push(n.id)
           end
-        end        
-        bookmarker_links = []
+        end
         bookmarkers = bookmarkers.uniq.count
         
         link = link_to story_title(s), story_path(s)
@@ -239,8 +224,7 @@ module NotificationsHelper
       end      
     end
 
-    if call_functions.include?("followings_condense")
-      #Case 5: Aggregate followers into one sentence
+    unless notifications_array.select{|n| n.notification_category.name == "Following"}.empty?
       follower_links = []
       ids = []
       followers.uniq
