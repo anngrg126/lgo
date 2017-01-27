@@ -3,7 +3,7 @@ h1 List of all Stories
   == link_to "New Story", new_story_path, class: "btn", id: "new-story-btn"
   
 
-div [class="row"]
+div.row
   - @stories.each do |s|
-    div [class="large-6 columns"]
+    div.large-6.small-12.columns
       == render 'shared/story_card', story: s

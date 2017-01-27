@@ -1,12 +1,9 @@
 - if @user == current_user
   h2 List of all Authored Stories
-  div [class="row"]
-    - @dashboard_stories.each do |s|
-      div [class="large-6 columns"]
-        == render 'shared/story_card', story: s
 - else
   h2 List of all Posted Stories
-  div [class="row"]
-    - @dashboard_stories.each do |s|
-      div [class="large-6 columns"]
-        == render 'shared/story_card', story: s
+  
+div.row
+  - @dashboard_stories.each do |s|
+    div.large-6.small-12.columns
+      == render 'shared/story_card', story: s

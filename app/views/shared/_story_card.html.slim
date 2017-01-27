@@ -1,15 +1,5 @@
-div 
-    == story_main_image_show(story)
-div
-    == link_to story_title(story), story_path(story)
-div
-    == story_body(story)
-    - unless story.classifications.empty?
-    div.story_tags
-      == story_recipient_tag(story)
-      == story_occasion_tag(story)
-      == story_fail_tag(story)
-    div
+div.card
+    div.card-divider
         - if story.poster_id?
           small 
             | Posted by: 
@@ -21,3 +11,17 @@ div
         -else
             div
                 = story_by(story) 
+    div.card-section
+        == link_to story_title(story), story_path(story)
+    div.card-section
+        == story_gift_description_show(story)
+    div.card-section
+        - unless story.classifications.empty?
+        div.story_tags
+          == story_recipient_tag(story)
+          == story_occasion_tag(story)
+          == story_fail_tag(story)
+    div.card-section
+       == story_main_image_show(story)
+    div.card-section
+       == story_body(story)

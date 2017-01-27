@@ -30,6 +30,19 @@ module StoriesHelper
     html = "<div>#{body}</div>".html_safe
   end
   
+  def story_gift_description_show(story)
+    if story.published?
+      if story.last_user_to_update == "Admin"
+        body = story.final_gift_description
+      else
+        body = story.updated_gift_description
+      end
+    else
+      body = story.raw_gift_description
+    end
+    html = "<div>#{body}</div>".html_safe
+  end
+  
   def story_by_show(story)
     if story.published?
 #      link = link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
