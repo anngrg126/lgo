@@ -1,40 +1,39 @@
 div#stickhere[data-sticky-container]
-  div.sticky[data-sticky data-margin-top= "0" style="width: 100%;" anchor="stickhere"]
-    nav
-      div.top-bar.row
-        div[style="line-height: 0.8;"]
-          ul.menu
-            li.gifton_logo
-              == link_to root_path, class: "no_pad" do
-                img[src="https://s3.amazonaws.com/letsgifton/GiftOnLogo.png" alt="GiftOn: Real-life gift stories and Ideas"]
-            li.menu-text.hide-for-small-only[class="#{@active_browse}"]
-              button.menu-text#browse_navbar[class="#{@active_browse}" data-toggle="tags-menu"] 
-                h5 Browse
-            li.menu-text.hide-for-small-only[class="#{@active_share}"]
-              h5
-                == link_to "Share", new_story_path, class: "menu-text #{@active_share}"
-          - unless params[:controller].include? "users"
-            - unless current_page? registration_step_path(:basic_details)
-              div.menu-right
-                #user_notifications.hide-for-small-only
-                  == user_notifications_link
-                - if user_signed_in?
-                  == link_to dashboard_path(current_user), class: "logged-in" do
-                    == render 'shared/userimages'
-                    span
-                      == current_user.display_name
-                  div.hide-for-small-only
-                    button.float-right#user_dropdown_button[type="button" data-toggle="user_dropdown" style="vertical-align: bottom; padding-bottom: 1px;"]
-                      i.fa.fa-chevron-down.fa-1[aria-hidden="true"]
-                  div.show-for-small-only[style="vertical-align: bottom;"]
-                    #user_notifications
-                      == user_notifications_link_small
-                - else
-                  div[style="padding-right: 0.5em;"]
-                    == link_to "Join", new_user_registration_path, class: "button"
-                  div.hide-for-small-only
-                    == link_to "Login", new_user_session_path, class: "button hollow"
-    div.top-bar.center.show-for-small-only
+  nav.sticky[data-sticky data-margin-top= "0" style="width: 100%;" anchor="stickhere"]
+    .top-bar.row.nav-toptier
+      div[style="line-height: 0.8;"]
+        ul.menu
+          li.gifton_logo
+            == link_to root_path, class: "no_pad" do
+              img[src="https://s3.amazonaws.com/letsgifton/GiftOnLogo.png" alt="GiftOn: Real-life gift stories and Ideas"]
+          li.menu-text.hide-for-small-only[class="#{@active_browse}"]
+            button.menu-text#browse_navbar[class="#{@active_browse}" data-toggle="tags-menu"] 
+              h5 Browse
+          li.menu-text.hide-for-small-only[class="#{@active_share}"]
+            h5
+              == link_to "Share", new_story_path, class: "menu-text #{@active_share}"
+        - unless params[:controller].include? "users"
+          - unless current_page? registration_step_path(:basic_details)
+            div.menu-right
+              #user_notifications.hide-for-small-only
+                == user_notifications_link
+              - if user_signed_in?
+                == link_to dashboard_path(current_user), class: "logged-in" do
+                  == render 'shared/userimages'
+                  span
+                    == current_user.display_name
+                div.hide-for-small-only
+                  button.float-right#user_dropdown_button[type="button" data-toggle="user_dropdown" style="vertical-align: bottom; padding-bottom: 1px;"]
+                    i.fa.fa-chevron-down.fa-1[aria-hidden="true"]
+                div.show-for-small-only[style="vertical-align: bottom;"]
+                  #user_notifications
+                    == user_notifications_link_small
+              - else
+                div[style="padding-right: 0.5em;"]
+                  == link_to "Join", new_user_registration_path, class: "button"
+                div.hide-for-small-only
+                  == link_to "Login", new_user_session_path, class: "button hollow"
+    .top-bar.center.show-for-small-only.nav-midtier
       .row
         .columns.small-4[class="#{@active_browse}"]
           div[data-responsive-toggle="tags-menu" data-hide-for="medium"]
@@ -53,19 +52,9 @@ div#stickhere[data-sticky-container]
             div.input-group-button
               = submit_tag "Search", class: "button"
         /.menu-icon.dark[type="button" data-toggle]  
-    .row#tags-menu[style="line-height: 0.8;" data-toggler="is-hidden"]
+    .row.nav-bottomtier#tags-menu[style="line-height: 0.8;" data-toggler="is-hidden"]
       .columns.show-for-small-only
-        ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
-          li
-            h6 For Fun
-          li
-            a.no_dropdown.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
-          li
-            a.no_dropdown.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
-          li
-            a.no_dropdown.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
-          li
-            a.no_dropdown.inline-block.navbar_fail[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
+        == render partial: 'shared/standalone_header_links'
       .columns
         ul#navbar-tier2.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
           li
@@ -240,17 +229,7 @@ div#stickhere[data-sticky-container]
                   li
                     a[href="#{stories_path}?search_tag=#{tag_search("sports")}"] Sports
       .columns.hide-for-small-only
-        ul#navbar-tier2B.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
-          li
-            h6 For Fun
-          li
-            a.no_dropdown.inline-block[href="#{stories_path}?search_tag=#{tag_search("aww")}"] Aww
-          li
-            a.no_dropdown.inline-block[href="#{stories_path}?search_tag=#{tag_search("lol")}"] LOL
-          li
-            a.no_dropdown.inline-block[href="#{stories_path}?search_tag=#{tag_search("win")}"] Win!
-          li
-            a.no_dropdown.inline-block.navbar_fail[href="#{stories_path}?search_tag=#{tag_search("fail")}"] Fail
+        == render partial: 'shared/standalone_header_links'
       .columns
         button.float-right.hide-for-small-only.search_button[type="button" id="btnSearch" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
           | &nbsp;
