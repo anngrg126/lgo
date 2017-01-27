@@ -1,0 +1,324 @@
+//misc
+.sticky {
+  width: 100%;
+}
+.sticky button:focus {
+  outline:0;
+}
+
+//navbar top tier
+.nav-toptier {
+  padding-bottom: 0;
+  max-width: none;
+  border-bottom: 1px solid $medium-gray;
+  border-bottom-style: inset;
+  border-width: 1px;
+  line-height: 0.8;
+  img {
+    max-height: 40px; 
+  }
+  li {
+    vertical-align: bottom;
+    border-bottom: 3px solid transparent;
+  }
+  li.active {
+    border-bottom: 3px solid $primary-color;
+  }
+  li a {
+    padding: 0;
+  }
+  h5 {
+    margin-bottom: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+  >div {
+    position: relative;
+  }
+  ul {
+    display: inline-block;
+  }
+  .menu .active > a {//overrides foundation style
+    background-color: transparent;
+  }
+}
+.top-bar ul {
+  background: transparent; //overrides foundation style
+}
+
+//BROWSE & SHARE link colors
+.nav-toptier h5, .nav-midtier h6 {
+  text-transform: uppercase;
+  color: $dark-gray;
+  &:hover {
+    color: $primary-color;
+  }
+  &.active {
+    color: $primary-color;
+  }
+  &.active:hover {
+    color: darken($primary-color, 15%);
+  }
+}
+
+//user notifications
+#user_notifications {
+  vertical-align: bottom;
+  margin-right: 10px; 
+  position: relative; 
+  font-size: 0.9rem;
+}
+#user_notifications a {
+  @extend %primary-link;
+  &.inactive-link {
+    @extend .inactive-link;
+  }
+  &:hover .notifications_count {
+    color: lighten($red, 15%);
+  }
+  .notifications_count {
+    color: $red;
+    font-weight: 500;
+  }
+}
+
+//user info section
+.nav-toptier .user-info {
+  position: absolute; 
+  bottom: 8px; 
+  right: 0;
+  >div {
+    display: inline-block;
+  }
+  span, div:nth-child(3) {
+    position: relative;
+    vertical-align: bottom;
+  }
+  a.logged-in {
+    font-size: 110%;
+    color: $dark-gray;
+    &:hover {
+      color: $topbar-link-color-hover;
+      img {
+        filter: brightness(115%);
+      }
+    }
+    span {
+      font-weight: 500;
+      border-right: 1px solid $middark-gray;
+      padding-right: 5px;
+      margin-right: 5px;
+    }
+  }
+}
+#user_dropdown {
+  width: 200px;
+}
+#user_dropdown_button:hover {
+  color: $topbar-link-color-hover;
+}
+
+//navbar bottom tier
+.nav-bottomtier {
+  padding: 0.3rem 0 0;
+  border-bottom: 1px solid $medium-gray;
+  border-bottom-style: inset;
+  border-width: 1px;
+  background-color: $ultra-light-gray;
+  -webkit-box-shadow: inset 0px 5px 10px -7px $dark-gray;
+  -moz-box-shadow: inset 0px 5px 10px -7px $dark-gray;
+  box-shadow: inset 0px 5px 10px -7px $dark-gray;
+  max-width: none;
+  h6 {
+    text-transform: uppercase;
+    border-right: 1px solid $dark-gray;
+    display: inline-block;
+    padding-right: 15px;
+    margin-bottom: 0;
+    margin-left: 15px;
+  }
+  .columns>ul {
+    display: inline-block;
+    &:first-child {
+      margin-right: 30px;
+    }
+  }
+  &>.columns {
+    width: auto;
+  }
+  ul .columns {
+    font-size: 90%;
+    padding: 0 5px;
+  }
+  ul .row {
+    margin: 0;
+  }
+  .list-header {
+    text-transform: uppercase;
+  }
+  .is-dropdown-submenu {
+    padding: 15px 10px;
+  }
+  .occasion {
+    min-width: 500px;
+  }
+  .relationship, .interests {
+    min-width: 300px;
+  }
+  .type {
+    min-width: 400px;
+  }
+}
+
+//tag category links
+#tags-menu ul a {
+  @extend %primary-link;
+  padding-right: 0;
+  border-bottom: 2px solid transparent;
+  &:focus {
+    outline:0;
+  }
+  &:hover {
+    border-bottom: 2px solid $topbar-link-color-hover;
+  }
+  &:hover i {
+    color: darken($primary-color, 14%);
+  }
+  i {
+    color: $primary-color;
+    vertical-align: baseline;
+  }
+  &.no_dropdown:hover {
+    border-bottom: 2px solid transparent;
+  }
+  &.navbar_fail {
+    @extend .secondary-link;
+    font-weight: 500;
+  }
+}
+
+//tag links
+#tags-menu ul ul a {
+  @extend .secondary-link;
+  &:hover {
+    border-bottom: none;
+  }
+}
+
+@media only screen and (max-width: 40.063em) {
+  //navbar top tier
+  .nav-toptier {
+    padding-top: 4px;
+    img {
+      max-height: 30px; 
+    }
+  }
+  
+  //user info section
+  .nav-toptier .user-info {
+    bottom: 4px; 
+    a.logged-in {
+      line-height: 0.8;
+      font-size: 100%;
+      span {
+        border-right: none;
+      }
+    }
+  }
+   
+  //navbar mid tier
+  .nav-midtier {
+    background-color: $ultra-light-gray;
+    padding: 0;
+    .row:first-child {
+      border-bottom: 1px solid $medium-gray;
+      border-bottom-style: inset; 
+    }
+    .columns {
+      padding-top: 3px;
+      border-bottom: 3px solid transparent;
+    }
+    h6 {
+      font-weight: 800;
+      margin-bottom: 0;
+      line-height: inherit;
+    }
+    input {
+      max-width: none;
+    }
+    .input-group {
+      margin-top: 1rem;
+    }
+    .input-group-field {
+      margin-left: 1rem;
+    }
+    div.active {
+      border-bottom: 3px solid $primary-color;
+      .active {
+        color: $primary-color;
+        &:hover {
+          color: darken($primary-color, 15%);
+        }
+      }
+    }
+  }
+  
+  //navbar bottom tier
+  .nav-bottomtier {
+    position: relative;
+    z-index: 100;
+    h6 {
+      border-right: none;
+    }
+    .columns>ul {
+      display: block;
+      &:first-child {
+      }
+    }
+    &>.columns {
+      width: 100%;
+      &:nth-child(2) .is-drilldown {
+        height: 550px;
+      }
+    }
+    ul .columns {
+      font-size: 100%;
+    }
+    .occasion, .relationship, .interests, .type {
+      min-width: auto;
+    }
+    .is-drilldown li.hide-for-small-only {
+      display: none !important;
+    }
+  }
+
+  //tag category links
+  #tags-menu ul a {
+    border-bottom: none;
+    &:hover, &:focus {
+      border-bottom: none;
+    }
+    &.no_dropdown:hover {
+      border-bottom: none;
+    }
+  }
+  
+  //tag links
+  #tags-menu ul a {
+    &:hover {
+     border-bottom: none;
+    }
+  }
+  
+  //other
+  #search_dropdown_mobile {
+    display: none;
+    background-color: $ultra-light-gray;
+    border-bottom: 1px solid $medium-gray;
+    border-bottom-style: inset;
+  }
+  #user_notifications {
+    margin-right: 0; 
+    font-size: 1rem;
+  }
+}
