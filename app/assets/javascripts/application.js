@@ -49,14 +49,15 @@ function myFunction() {
     $(this).find(".interests .js-drilldown-back").html('<a tabindex="0">Browse by Interests</a>');
   }
   //fcn to toggle navbar browse
-  if ($("#browse_navbar").hasClass('active')) {
+  if ($("#browse_navbar").children().hasClass('active')) {
     $("#tags-menu").removeClass("is-hidden");
     $(".data-sticky-container").css("height", $(".sticky").height());
   };
   if ($(window).width() < 640) {
-    if ($(".top-bar.center button").hasClass("active")) {
-      $(".top-bar.center button").removeClass("active");
-      $(".top-bar.center button").closest(".columns").removeClass("active");
+    if ($(".nav-midtier button h6").hasClass("active")) {
+      console.log("yoohoo");
+      $(".nav-midtier button h6").removeClass("active");
+      $(".nav-midtier button h6").closest(".columns").removeClass("active");
     };
   };
   
@@ -71,22 +72,22 @@ function myFunction() {
 //*NAVBAR
 $(document).on('click', '#browse_navbar', function(event){
   if ($(window).width() > 639) {
-    if ($(this).hasClass('active')) {
-      $(this).removeClass('active');
+    if ($(this).children().hasClass('active')) {
+      $(this).children().removeClass('active');
       $(this).parent().removeClass('active');
       $(".sticky-container").css("height", $(".sticky").height());
     } else {
-      $(this).addClass('active');
+      $(this).children().addClass('active');
       $(this).parent().addClass('active');
       $(".sticky-container").css("height", $(".sticky").height());
     };
   } else {
-    if ($(this).hasClass('active')) {
-      $(this).removeClass('active');
+    if ($(this).children().hasClass('active')) {
+      $(this).children().removeClass('active');
       $(this).closest(".columns").removeClass('active');
       $(".sticky-container").css("height", $(".sticky").height());
     } else {
-      $(this).addClass('active');
+      $(this).children().addClass('active');
       $(this).closest(".columns").addClass('active');
       $(".sticky-container").css("height", $(".sticky").height());
     };

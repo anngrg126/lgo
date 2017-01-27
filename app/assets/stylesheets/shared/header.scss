@@ -5,7 +5,7 @@
   outline:0;
 }
 
-//infrastructure for bottom tier of navbar
+//bottom navbar tier
 .nav-bottomtier {
   padding: 0.3rem 0 0;
   border-bottom: 1px solid $medium-gray;
@@ -43,16 +43,19 @@
   .list-header {
     text-transform: uppercase;
   }
+  .is-dropdown-submenu {
+    padding: 15px 10px;
+  }
+  .occasion {
+    min-width: 500px;
+  }
+  .relationship, .interests {
+    min-width: 300px;
+  }
+  .type {
+    min-width: 400px;
+  }
 }
-
-
-#user_notifications {
-  vertical-align: bottom;
-  padding-right: 0.5em; 
-  position: relative; 
-  font-size: 0.9rem;
-}
-
 
 //tag category links
 #tags-menu ul a {
@@ -89,85 +92,7 @@
   }
 }
 
-
-
-
-
-#tags-menu .is-dropdown-submenu {
-  padding: 15px 10px;;
-}
-#tags-menu .occasion {
-  min-width: 500px;
-}
-#tags-menu .relationship, #tags-menu .interests {
-  min-width: 300px;
-}
-#tags-menu .type {
-  min-width: 400px;
-}
-
-.nav-toptier {
-  padding-bottom: 0;
-  max-width: none;
-  border-bottom: 1px solid $medium-gray;
-  border-bottom-style: inset;
-  border-width: 1px;
-}
-.top-bar img {
-  max-height: 40px;
-}
-.top-bar .menu-text {
-  text-transform: uppercase;
-  vertical-align: bottom;
-  padding-bottom: 0;
-  line-height: 1;
-}
-.top-bar .menu-text h5 {
-  margin-bottom: 0;
-  line-height: 1;
-}
-
-.top-bar .menu-text:hover {
-  color: $primary-color;
-}
-.top-bar ul>.menu-text {
-  border-bottom: 3px solid transparent;
-  padding: 0 0 5px 0;
-}
-.top-bar ul>.menu-text.active {
-  border-bottom: 3px solid $primary-color;
-}
-.top-bar .menu-text .menu-text.active {
-  color: $primary-color;
-}
-.top-bar .menu-text .menu-text.active:hover {
-  color: scale-color($primary-color, $lightness: -15%);
-}
-
-
-
-.top-bar a.button {
-  @extend .small-button;
-}
-.top-bar.row > div {
-  position: relative;
-}
-.top-bar.row > div ul {
-  display: inline-block;
-}
-.top-bar .menu-right {
-  position: absolute; 
-  bottom: 8px; 
-  right: 0;
-}
-.top-bar .menu-right .logged-in span, .top-bar .menu-right .hide-for-small-only {
-  position: relative;
-  vertical-align: bottom;
-}
-
-
-
-//Notifications Link
+//user notifications
 #user_notifications {
   vertical-align: bottom;
   padding-right: 0.5em; 
@@ -188,8 +113,69 @@
   }
 }
 
+//top navbar tier
+.nav-toptier {
+  padding-bottom: 0;
+  max-width: none;
+  border-bottom: 1px solid $medium-gray;
+  border-bottom-style: inset;
+  border-width: 1px;
+  line-height: 0.8;
+  img {
+    max-height: 40px; 
+  }
+  li {
+    vertical-align: bottom;
+    border-bottom: 3px solid transparent;
+  }
+  li.active {
+    border-bottom: 3px solid $primary-color;
+  }
+  li a {
+    padding: 0;
+  }
+  h5 {
+    margin-bottom: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+.top-bar ul {
+  background: transparent; //overrides foundation style
+}
+
+//BROWSE & SHARE link colors
+.nav-toptier h5, .nav-midtier h6 {
+  text-transform: uppercase;
+  color: $dark-gray;
+  &:hover {
+    color: $primary-color;
+  }
+  &.active {
+    color: $primary-color;
+  }
+  &.active:hover {
+    color: darken($primary-color, 15%);
+  }
+}
 
 
+//continue refining start here.....
+.top-bar.row > div {
+  position: relative;
+}
+.top-bar.row > div ul {
+  display: inline-block;
+}
+.top-bar .menu-right {
+  position: absolute; 
+  bottom: 8px; 
+  right: 0;
+}
+.top-bar .menu-right .logged-in span, .top-bar .menu-right .hide-for-small-only {
+  position: relative;
+  vertical-align: bottom;
+}
 .top-bar .menu-right > div {
   display: inline-block;
 }
@@ -208,9 +194,6 @@
 .top-bar .menu-right > a.logged-in img:hover, .top-bar .menu-right > a.logged-in:hover img {
   filter: brightness(115%);
 }
-.gifton_logo {
-  padding-bottom: 5px;
-}
 .nav-toptier .menu .active > a {
   background-color: transparent;
 }
@@ -218,14 +201,6 @@
   width: 200px;
 }
 @media only screen and (max-width: 40.063em) {
-  .top-bar .menu-text {
-    vertical-align: baseline;
-    line-height: inherit;
-  }
-  .nav-toptier {
-    border-bottom: none;
-  }
-  
   //infrastructure for bottom tier of navbar
   .nav-bottomtier {
     position: relative;
@@ -240,35 +215,64 @@
     }
     &>.columns {
       width: 100%;
+      &:nth-child(2) .is-drilldown {
+        height: 550px;
+      }
     }
     ul .columns {
       font-size: 100%;
     }
+    .occasion, .relationship, .interests, .type {
+      min-width: auto;
+    }
+    .is-drilldown li.hide-for-small-only {
+      display: none !important;
+    }
+  }
+
+  //tag category links
+  #tags-menu ul a {
+    border-bottom: none;
+    &:hover, &:focus {
+      border-bottom: none;
+    }
+    &.no_dropdown:hover {
+      border-bottom: none;
+    }
+  }
+  
+  //tag links
+  #tags-menu ul a {
+    &:hover {
+     border-bottom: none;
+    }
+  }
+  
+  //navbar top tier
+  .nav-toptier {
+    background-color: $ultra-light-gray;
+    border-bottom: none;
+    img {
+      max-height: 30px; 
+    }
+  }
+   
+  //navbar mid tier
+  .nav-midtier {
+    .columns {
+      padding-top: 3px;
+      border-bottom: 3px solid transparent;
+    }
+    h6 {
+      font-weight: 800;
+    }
   }
 
   
   
-
+  //continue refining begin heres
   #search_dropdown_mobile {
     display: none;
-  }
-  #tags-menu .occasion, #tags-menu .relationship, #tags-menu .type, #tags-menu .interests {
-    min-width: auto;
-  }
-  #tags-menu .is-drilldown li.hide-for-small-only {
-    display: none !important;
-  }
-  #tags-menu > .columns:nth-child(2) .is-drilldown {
-    height: 550px;
-  }
-  .top-bar img {
-    max-height: 30px;
-  }
-  
-  
-  
-  .top-bar.center .columns {
-    line-height: normal;
   }
   .top-bar.center h6 {
     margin-bottom: 0;
@@ -300,11 +304,6 @@
     border-bottom-style: inset;
     border-width: 1px;
   }
-  .top-bar.center .columns {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px solid transparent;
-  }
   .top-bar.center div.active {
     border-bottom: 3px solid $primary-color;
   }
@@ -317,23 +316,4 @@
   .top-bar .menu-right .logged-in span {
     border-right: none;
   }
-  
-  //tag category links
-  #tags-menu ul a {
-    border-bottom: none;
-    &:hover, &:focus {
-      border-bottom: none;
-    }
-    &.no_dropdown:hover {
-      border-bottom: none;
-    }
-  }
-  
-  //tag links
-  #tags-menu ul a {
-    &:hover {
-     border-bottom: none;
-    }
-  }
-  
 }
