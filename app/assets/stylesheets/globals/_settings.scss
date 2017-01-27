@@ -411,7 +411,10 @@ $label-background: $primary-color;
 $label-color: $white;
 // $label-color: foreground($label-background);
 $label-color-alt: $black;
-$label-palette: $foundation-palette;
+// $label-palette: $foundation-palette;
+$label-palette: map-merge($foundation-palette, (
+    ultra-light-gray: $ultra-light-gray
+)) !default;
 $label-font-size: 0.8rem;
 $label-padding: 0.33333rem 0.5rem;
 $label-radius: $global-radius;

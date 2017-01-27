@@ -1,21 +1,9 @@
 div.card
-    div.card-divider
-        - if story.poster_id?
-          small 
-            | Posted by: 
-            - unless story.anonymous?
-              == link_to "#{story.user.full_name}", dashboard_path(story.user)
-            - else
-              == link_to "#{@anonymous_user.full_name}", dashboard_path(@anonymous_user)
-            /== link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
-        -else
-            div
-                = story_by(story) 
+    div.card-section.row
+        == render 'shared/poster_user', story: story
     div.card-section
         == link_to story_title(story), story_path(story)
-    div.card-section
         == story_gift_description_show(story)
-    div.card-section
         - unless story.classifications.empty?
         div.story_tags
           == story_recipient_tag(story)

@@ -1,9 +1,17 @@
-h1 List of all Stories
-- if user_signed_in?
-  == link_to "New Story", new_story_path, class: "btn", id: "new-story-btn"
-  
-
 div.row
-  - @stories.each do |s|
-    div.large-6.small-12.columns
-      == render 'shared/story_card', story: s
+  div.columns.large-3.small-12
+  
+  
+  div.columns.large-9.small-12
+    div.row
+      div.columns.large-6.small-6
+        h4 REAL LIFE GIFT STORIES & IDEAS
+      div.columns.large-offset-3.large-3.small-6
+        - if user_signed_in?
+          == link_to "<span> </span> &nbsp;Share a Story".html_safe, new_story_path, class: "button split left-icon edit", id: "new-story-btn"
+      
+    
+    div.row
+      - @stories.each do |s|
+        div.large-6.small-12.columns
+          == render 'shared/story_card', story: s

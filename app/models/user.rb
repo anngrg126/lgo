@@ -99,6 +99,11 @@ class User < ApplicationRecord
     "https://graph.facebook.com/#{self.uid}/picture?type=square&width=200&height=200"
   end
   
+  def smallsquareimage
+#    "http://graph.facebook.com/#{self.uid}/picture?type=square&type=large"
+    "https://graph.facebook.com/#{self.uid}/picture?type=square&width=80&height=80"
+  end
+  
   has_attached_file :image, styles: {
     thumb: '100x100>',
     square: '200x200#',
