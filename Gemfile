@@ -23,11 +23,11 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'zurb-foundation', '~> 4.3', '>= 4.3.2'
+gem 'zurb-foundation'
 
 gem 'devise', '~> 4.1', '>= 4.1.1'
 
-gem 'foundation-rails'
+gem 'foundation-rails', '>= 6.3.0'
 
 gem 'foundation-icons-sass-rails'
 
