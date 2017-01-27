@@ -1,3 +1,4 @@
+//misc
 .sticky {
   width: 100%;
 }
@@ -5,7 +6,115 @@
   outline:0;
 }
 
-//bottom navbar tier
+//navbar top tier
+.nav-toptier {
+  padding-bottom: 0;
+  max-width: none;
+  border-bottom: 1px solid $medium-gray;
+  border-bottom-style: inset;
+  border-width: 1px;
+  line-height: 0.8;
+  img {
+    max-height: 40px; 
+  }
+  li {
+    vertical-align: bottom;
+    border-bottom: 3px solid transparent;
+  }
+  li.active {
+    border-bottom: 3px solid $primary-color;
+  }
+  li a {
+    padding: 0;
+  }
+  h5 {
+    margin-bottom: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+  >div {
+    position: relative;
+  }
+  ul {
+    display: inline-block;
+  }
+  .menu .active > a {//overrides foundation style
+    background-color: transparent;
+  }
+}
+.top-bar ul {
+  background: transparent; //overrides foundation style
+}
+
+//BROWSE & SHARE link colors
+.nav-toptier h5, .nav-midtier h6 {
+  text-transform: uppercase;
+  color: $dark-gray;
+  &:hover {
+    color: $primary-color;
+  }
+  &.active {
+    color: $primary-color;
+  }
+  &.active:hover {
+    color: darken($primary-color, 15%);
+  }
+}
+
+//user notifications
+#user_notifications {
+  vertical-align: bottom;
+  padding-right: 0.5em; 
+  position: relative; 
+  font-size: 0.9rem;
+}
+#user_notifications a {
+  @extend %primary-link;
+  &.inactive-link {
+    @extend .inactive-link;
+  }
+  &:hover .notifications_count {
+    color: lighten($red, 15%);
+  }
+  .notifications_count {
+    color: $red;
+    font-weight: 600;
+  }
+}
+
+//continue refining start here.....
+.top-bar .menu-right {
+  position: absolute; 
+  bottom: 8px; 
+  right: 0;
+}
+.top-bar .menu-right .logged-in span, .top-bar .menu-right .hide-for-small-only {
+  position: relative;
+  vertical-align: bottom;
+}
+.top-bar .menu-right > div {
+  display: inline-block;
+}
+.top-bar .menu-right .logged-in span {
+  font-weight: 500;
+  border-right: 1px solid $middark-gray;
+  padding-right: 5px;
+}
+.top-bar .menu-right > a.logged-in {
+  font-size: 1rem;
+  color: $dark-gray;
+}
+.top-bar .menu-right > a.logged-in:hover {
+  color: $topbar-link-color-hover;
+}
+.top-bar .menu-right > a.logged-in img:hover, .top-bar .menu-right > a.logged-in:hover img {
+  filter: brightness(115%);
+}
+#user_dropdown {
+  width: 200px;
+}
+
+//navbar bottom tier
 .nav-bottomtier {
   padding: 0.3rem 0 0;
   border-bottom: 1px solid $medium-gray;
@@ -92,116 +201,52 @@
   }
 }
 
-//user notifications
-#user_notifications {
-  vertical-align: bottom;
-  padding-right: 0.5em; 
-  position: relative; 
-  font-size: 0.9rem;
-}
-#user_notifications a {
-  @extend %primary-link;
-  &.inactive-link {
-    @extend .inactive-link;
-  }
-  &:hover .notifications_count {
-    color: lighten($red, 15%);
-  }
-  .notifications_count {
-    color: $red;
-    font-weight: 600;
-  }
-}
-
-//top navbar tier
-.nav-toptier {
-  padding-bottom: 0;
-  max-width: none;
-  border-bottom: 1px solid $medium-gray;
-  border-bottom-style: inset;
-  border-width: 1px;
-  line-height: 0.8;
-  img {
-    max-height: 40px; 
-  }
-  li {
-    vertical-align: bottom;
-    border-bottom: 3px solid transparent;
-  }
-  li.active {
-    border-bottom: 3px solid $primary-color;
-  }
-  li a {
-    padding: 0;
-  }
-  h5 {
-    margin-bottom: 0;
-    padding-right: 1rem;
-    padding-left: 1rem;
-  }
-}
-.top-bar ul {
-  background: transparent; //overrides foundation style
-}
-
-//BROWSE & SHARE link colors
-.nav-toptier h5, .nav-midtier h6 {
-  text-transform: uppercase;
-  color: $dark-gray;
-  &:hover {
-    color: $primary-color;
-  }
-  &.active {
-    color: $primary-color;
-  }
-  &.active:hover {
-    color: darken($primary-color, 15%);
-  }
-}
-
-
-//continue refining start here.....
-.top-bar.row > div {
-  position: relative;
-}
-.top-bar.row > div ul {
-  display: inline-block;
-}
-.top-bar .menu-right {
-  position: absolute; 
-  bottom: 8px; 
-  right: 0;
-}
-.top-bar .menu-right .logged-in span, .top-bar .menu-right .hide-for-small-only {
-  position: relative;
-  vertical-align: bottom;
-}
-.top-bar .menu-right > div {
-  display: inline-block;
-}
-.top-bar .menu-right .logged-in span {
-  font-weight: 500;
-  border-right: 1px solid $middark-gray;
-  padding-right: 5px;
-}
-.top-bar .menu-right > a.logged-in {
-  font-size: 1rem;
-  color: $dark-gray;
-}
-.top-bar .menu-right > a.logged-in:hover {
-  color: $topbar-link-color-hover;
-}
-.top-bar .menu-right > a.logged-in img:hover, .top-bar .menu-right > a.logged-in:hover img {
-  filter: brightness(115%);
-}
-.nav-toptier .menu .active > a {
-  background-color: transparent;
-}
-#user_dropdown {
-  width: 200px;
-}
 @media only screen and (max-width: 40.063em) {
-  //infrastructure for bottom tier of navbar
+  //navbar top tier
+  .nav-toptier {
+    img {
+      max-height: 30px; 
+    }
+  }
+   
+  //navbar mid tier
+  .nav-midtier {
+    background-color: $ultra-light-gray;
+    padding: 0;
+    .row:first-child {
+      border-bottom: 1px solid $medium-gray;
+      border-bottom-style: inset; 
+    }
+    .columns {
+      padding-top: 3px;
+      border-bottom: 3px solid transparent;
+    }
+    h6 {
+      font-weight: 800;
+      margin-bottom: 0;
+      line-height: inherit;
+    }
+    input {
+      max-width: none;
+    }
+    .input-group {
+      margin-top: 1rem;
+    }
+    .input-group-field {
+      margin-left: 1rem;
+    }
+    div.active {
+      border-bottom: 3px solid $primary-color;
+      .active {
+        color: $primary-color;
+        &:hover {
+          color: darken($primary-color, 15%);
+        }
+      }
+    }
+  }
+  
+  //navbar bottom tier
   .nav-bottomtier {
     position: relative;
     z-index: 100;
@@ -248,70 +293,12 @@
     }
   }
   
-  //navbar top tier
-  .nav-toptier {
-    background-color: $ultra-light-gray;
-    border-bottom: none;
-    img {
-      max-height: 30px; 
-    }
-  }
-   
-  //navbar mid tier
-  .nav-midtier {
-    .columns {
-      padding-top: 3px;
-      border-bottom: 3px solid transparent;
-    }
-    h6 {
-      font-weight: 800;
-    }
-  }
-
-  
-  
-  //continue refining begin heres
+  //other
   #search_dropdown_mobile {
     display: none;
-  }
-  .top-bar.center h6 {
-    margin-bottom: 0;
-    line-height: 1.5;
-  }
-  .top-bar.center input {
-    max-width: none;
-  }
-  .top-bar.center .input-group-field {
-    margin-left: 1rem;
-  }
-  .top-bar.center .input-group {
-    margin-top: 1rem;
-  }
-  .top-bar.center > div:first-child {
-    border-bottom: 1px solid $medium-gray;
-    border-bottom-style: inset;
-    border-width: 1px;
-  }
-  .top-bar.center {
-    padding: 0;
-  }
-  .top-bar.center h6 a {
-    line-height: normal;
-  }
-  .top-bar.center .row.visible {
     background-color: $ultra-light-gray;
     border-bottom: 1px solid $medium-gray;
     border-bottom-style: inset;
-    border-width: 1px;
-  }
-  .top-bar.center div.active {
-    border-bottom: 3px solid $primary-color;
-  }
-  .top-bar.center div .active {
-    color: $primary-color;
-  }
-  .top-bar.center div .active:hover {
-    color: scale-color($primary-color, $lightness: -15%);
   }
   .top-bar .menu-right .logged-in span {
     border-right: none;

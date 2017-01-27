@@ -1,5 +1,5 @@
 div#stickhere[data-sticky-container]
-  nav.sticky[data-sticky data-margin-top= "0" style="width: 100%;" anchor="stickhere"]
+  nav.sticky[data-sticky data-margin-top= "0" anchor="stickhere"]
     .top-bar.row.nav-toptier
       div
         ul.menu
@@ -37,13 +37,13 @@ div#stickhere[data-sticky-container]
       .row
         .columns.small-4[class="#{@active_browse}"]
           div[data-responsive-toggle="tags-menu" data-hide-for="medium"]
-            button#browse_navbar[type="button" data-toggle style="padding: 0;"] 
+            button#browse_navbar[type="button" data-toggle] 
               h6[class="#{@active_browse}"] Browse
         .columns.small-4[class="#{@active_share}"]
-          == link_to new_story_path, style: "line-height: 1.5" do
+          == link_to new_story_path do
             h6[class="#{@active_share}"] Share
         .columns.small-4
-          button[type="button" data-toggle="search_dropdown_mobile" style="line-height: 1.5"] 
+          button[type="button" data-toggle="search_dropdown_mobile"] 
             i.fa.fa-search#mobile_search[aria-hidden="true"]
       #search_dropdown_mobile.row[data-toggler=".visible"]
         = form_tag root_path, method: :get do
