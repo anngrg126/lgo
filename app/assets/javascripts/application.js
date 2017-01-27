@@ -40,7 +40,6 @@ function myFunction() {
   } else {
     $("#tags-menu").removeClass("is-hidden");
   };
-  
   //fcn to populate text of "Back" button in responsive menu  
   if ($(".nav-bottomtier ul.horizontal").hasClass("drilldown")) {
     $(this).find(".occasion .js-drilldown-back").html('<a tabindex="0">Browse by Occasion</a>');
@@ -51,16 +50,19 @@ function myFunction() {
   //fcn to toggle navbar browse
   if ($("#browse_navbar").children().hasClass('active')) {
     $("#tags-menu").removeClass("is-hidden");
-    $(".data-sticky-container").css("height", $(".sticky").height());
   };
   if ($(window).width() < 640) {
     if ($(".nav-midtier button h6").hasClass("active")) {
-      console.log("yoohoo");
       $(".nav-midtier button h6").removeClass("active");
       $(".nav-midtier button h6").closest(".columns").removeClass("active");
     };
   };
-  
+  //set correct height of navbar
+  if (!($(".sticky").height() < 52)) {
+    $(".sticky-container").css("height", $(".sticky").height());
+  } else {
+    $(".sticky-container").css("height", 52);
+  };
   //*STORY FORM*
   //fcns to append extra image upload fields
   $('#add_image_fields').click(function(){
