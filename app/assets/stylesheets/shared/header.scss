@@ -64,7 +64,7 @@
 //user notifications
 #user_notifications {
   vertical-align: bottom;
-  padding-right: 0.5em; 
+  margin-right: 10px; 
   position: relative; 
   font-size: 0.9rem;
 }
@@ -78,40 +78,44 @@
   }
   .notifications_count {
     color: $red;
-    font-weight: 600;
+    font-weight: 500;
   }
 }
 
-//continue refining start here.....
-.top-bar .menu-right {
+//user info section
+.nav-toptier .user-info {
   position: absolute; 
   bottom: 8px; 
   right: 0;
-}
-.top-bar .menu-right .logged-in span, .top-bar .menu-right .hide-for-small-only {
-  position: relative;
-  vertical-align: bottom;
-}
-.top-bar .menu-right > div {
-  display: inline-block;
-}
-.top-bar .menu-right .logged-in span {
-  font-weight: 500;
-  border-right: 1px solid $middark-gray;
-  padding-right: 5px;
-}
-.top-bar .menu-right > a.logged-in {
-  font-size: 1rem;
-  color: $dark-gray;
-}
-.top-bar .menu-right > a.logged-in:hover {
-  color: $topbar-link-color-hover;
-}
-.top-bar .menu-right > a.logged-in img:hover, .top-bar .menu-right > a.logged-in:hover img {
-  filter: brightness(115%);
+  >div {
+    display: inline-block;
+  }
+  span, div:nth-child(3) {
+    position: relative;
+    vertical-align: bottom;
+  }
+  a.logged-in {
+    font-size: 110%;
+    color: $dark-gray;
+    &:hover {
+      color: $topbar-link-color-hover;
+      img {
+        filter: brightness(115%);
+      }
+    }
+    span {
+      font-weight: 500;
+      border-right: 1px solid $middark-gray;
+      padding-right: 5px;
+      margin-right: 5px;
+    }
+  }
 }
 #user_dropdown {
   width: 200px;
+}
+#user_dropdown_button:hover {
+  color: $topbar-link-color-hover;
 }
 
 //navbar bottom tier
@@ -204,8 +208,21 @@
 @media only screen and (max-width: 40.063em) {
   //navbar top tier
   .nav-toptier {
+    padding-top: 4px;
     img {
       max-height: 30px; 
+    }
+  }
+  
+  //user info section
+  .nav-toptier .user-info {
+    bottom: 4px; 
+    a.logged-in {
+      line-height: 0.8;
+      font-size: 100%;
+      span {
+        border-right: none;
+      }
     }
   }
    
@@ -300,7 +317,8 @@
     border-bottom: 1px solid $medium-gray;
     border-bottom-style: inset;
   }
-  .top-bar .menu-right .logged-in span {
-    border-right: none;
+  #user_notifications {
+    margin-right: 0; 
+    font-size: 1rem;
   }
 }
