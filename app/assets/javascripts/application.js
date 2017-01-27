@@ -42,7 +42,7 @@ function myFunction() {
   };
   
   //fcn to populate text of "Back" button in responsive menu  
-  if ($("#navbar-tier2").hasClass("drilldown")) {
+  if ($(".nav-bottomtier ul.horizontal").hasClass("drilldown")) {
     $(this).find(".occasion .js-drilldown-back").html('<a tabindex="0">Browse by Occasion</a>');
     $(this).find(".relationship .js-drilldown-back").html('<a tabindex="0">Browse by Relationship</a>');
     $(this).find(".type .js-drilldown-back").html('<a tabindex="0">Browse by Type</a>');

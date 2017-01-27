@@ -30,6 +30,19 @@
       margin-right: 30px;
     }
   }
+  &>.columns {
+    width: auto;
+  }
+  ul .columns {
+    font-size: 90%;
+    padding: 0 5px;
+  }
+  ul .row {
+    margin: 0;
+  }
+  .list-header {
+    text-transform: uppercase;
+  }
 }
 
 
@@ -78,9 +91,8 @@
 
 
 
-#tags-menu > .columns {
-  width: auto;
-}
+
+
 #tags-menu .is-dropdown-submenu {
   padding: 15px 10px;;
 }
@@ -93,16 +105,7 @@
 #tags-menu .type {
   min-width: 400px;
 }
-#navbar-tier2 ul .columns {
-  font-size: 90%;
-  padding: 0 5px;
-}
-#navbar-tier2 .list-header {
-  text-transform: uppercase;
-}
-#navbar-tier2 ul .row {
-  margin: 0;
-}
+
 .nav-toptier {
   padding-bottom: 0;
   max-width: none;
@@ -222,22 +225,32 @@
   .nav-toptier {
     border-bottom: none;
   }
-  #navbar-tier2, #navbar-tier2B {
-    display: block;
-  }
-  #navbar-tier2 h6, #navbar-tier2B h6 {
-    border-right: none;
-    margin-left: 15px;
-  }
-  #search_dropdown_mobile {
-    display: none;
-  }
-  #tags-menu {
+  
+  //infrastructure for bottom tier of navbar
+  .nav-bottomtier {
     position: relative;
     z-index: 100;
+    h6 {
+      border-right: none;
+    }
+    .columns>ul {
+      display: block;
+      &:first-child {
+      }
+    }
+    &>.columns {
+      width: 100%;
+    }
+    ul .columns {
+      font-size: 100%;
+    }
   }
-  #tags-menu > .columns {
-    width: 100%;
+
+  
+  
+
+  #search_dropdown_mobile {
+    display: none;
   }
   #tags-menu .occasion, #tags-menu .relationship, #tags-menu .type, #tags-menu .interests {
     min-width: auto;
@@ -250,10 +263,6 @@
   }
   .top-bar img {
     max-height: 30px;
-  }
-  #navbar-tier2 ul .columns {
-    font-size: 100%;
-    padding: 0 5px;
   }
   
   
