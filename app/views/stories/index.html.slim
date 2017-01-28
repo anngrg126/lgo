@@ -5,11 +5,12 @@ div.row
   div.columns.large-9.small-12
     div.row
       div.columns.large-6.small-6
-        h4 REAL LIFE GIFT STORIES & IDEAS
+        h4 REAL LIFE GIFT STORIES &amp; IDEAS
       div.columns.large-offset-3.large-3.small-6
-        - if user_signed_in?
-          == link_to "<span> </span> &nbsp;Share a Story".html_safe, new_story_path, class: "button split left-icon edit", id: "new-story-btn"
-      
+        == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon pencil" do
+          div
+            span
+          div Share a Story  
     
     div.row
       - @stories.each do |s|

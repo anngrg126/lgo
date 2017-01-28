@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
+$body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 
 //headers
-
 $header-font-family: 'Raleway', sans-serif;
 $header-font-weight: 600;
+//$header-font-style: normal;
 
 //links
-
 .inactive-link {
   color: $middark-gray;
   &:hover {
@@ -20,8 +20,13 @@ $header-font-weight: 600;
   }
 }
 .secondary-link {
-  color: $primary-color; //same as $anchor-color
+  color: $primary-color; //same as $body-font-family$anchor-color
   &:hover {
     color: darken($primary-color, 14%); //same as $anchor-color-hover 
   }
+}
+
+//labels
+.label {
+  background: $ultra-light-gray !important;//overrides foundation setting
 }

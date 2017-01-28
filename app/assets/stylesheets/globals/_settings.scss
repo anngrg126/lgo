@@ -49,36 +49,8 @@
 $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
-// $foundation-palette: (
-//   primary: #1779ba,
-//   secondary: #767676,
-//   success: #3adb76,
-//   warning: #ffae00,
-//   alert: #cc4b37,
-// );
-// $light-gray: #e6e6e6;
-// $medium-gray: #cacaca;
-// $dark-gray: #8a8a8a;
-// $black: #0a0a0a;
-// $white: #fefefe;
-$foundation-palette: (
-  primary: #00b4e2, //GiftOn Blue from logo
-  secondary: #777,
-  success: #3adb76,
-  warning: #ffae00,
-  alert: #ec5840,
-);
-$ultra-light-gray: #f7f7f7;
-$light-gray: #e6e6e6;
-$medium-gray: #cacaca;
-$middark-gray: #7b7b7b; //five tints lighter than GiftOn logo gray
-$dark-gray: #4a4a4a; //GiftOn Gray from logo & font color
-$black: #0a0a0a;
-$white: #fefefe;
-$red: red;
+$body-font-color: $dark-gray;
 $body-background: $white;
-$body-font-color: $black;
-$body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -88,7 +60,6 @@ $global-radius: 0;
 $global-text-direction: ltr;
 $global-flexbox: false;
 $print-transparent-backgrounds: true;
-
 @include add-foundation-colors;
 
 // 2. Breakpoints
@@ -119,9 +90,6 @@ $block-grid-max: 8;
 // 4. Base Typography
 // ------------------
 
-$header-font-family: $body-font-family;
-$header-font-weight: $global-weight-normal;
-$header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
 $header-color: inherit;
 $header-lineheight: 1.4;
@@ -408,13 +376,13 @@ $form-button-radius: $global-radius;
 // ---------
 
 $label-background: $primary-color;
-$label-color: $white;
-// $label-color: foreground($label-background);
+//$label-color: $white;
+$label-color: color-pick-contrast($label-background);
 $label-color-alt: $black;
-// $label-palette: $foundation-palette;
-$label-palette: map-merge($foundation-palette, (
-    ultra-light-gray: $ultra-light-gray
-)) !default;
+$label-palette: $foundation-palette;
+//$label-palette: map-merge($foundation-palette, (
+//     ultra-light-gray: $ultra-light-gray
+//)) !default;
 $label-font-size: 0.8rem;
 $label-padding: 0.33333rem 0.5rem;
 $label-radius: $global-radius;
