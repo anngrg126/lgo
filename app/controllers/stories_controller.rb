@@ -60,10 +60,11 @@ class StoriesController < ApplicationController
   
   def show
     @story = Story.includes(:user, :classifications, :bookmarks, :reactions, :pictures).find(params[:id])
-    @story_comments = @story.comments.includes(:user).select{|c| c.deleted_at == nil && c.author_deactive == false}
     @active_browse = "active"
     @comment = @story.comments.active.build
     @bookmark = @story.bookmarks.build
+    @story_comments = @story.comments.includes(:user).select{|c| c.deleted_at == nil && c.author_deactive != true && c.id != nil}
+    @story_bookmarks = @story.bookmarks.select{|b| b.id != nil}
   end
   
   def edit
@@ -77,16 +78,16 @@ class StoriesController < ApplicationController
     if @story.published?
       @story.validate_updated_fields = true
       @story.assign_attributes(story_params)
-      notify_admin(@story)
+      @notify_followers = false
       if @story.anonymous_changed?
         if @story.anonymous
           @story.poster_id = @anonymous_user.id
           destroy_notification(@story)
-          create_notification(@story)
+          @notify_followers = true
         else
           @story.poster_id = @story.author_id
           destroy_notification(@story)
-          create_notification(@story)
+          @notify_followers = true
         end
       end
       if @story.fail_changed?
@@ -115,6 +116,10 @@ class StoriesController < ApplicationController
         if @story.update(story_params)
           flash[:success] = "Story has been updated"
           format.html {redirect_to story_path(@story)}
+          if @notify_followers == true
+            create_notification(@story)
+          end
+          notify_admin(@story)
         else
           flash.now[:alert] = "Story has not been updated"
           format.html {render :edit} #renders edit tmplt again
@@ -136,7 +141,7 @@ class StoriesController < ApplicationController
   private
   
   def story_params
-    params.require(:story).permit(:raw_title, :raw_body, :updated_title, :updated_body, :anonymous, :fail, :review, pictures_attributes: [:id, :story_id, :_destroy, :image])
+    params.require(:story).permit(:raw_title, :raw_body, :raw_gift_description, :updated_title, :updated_body, :updated_gift_description, :anonymous, :fail, :review, pictures_attributes: [:id, :story_id, :_destroy, :image])
   end
   
   def set_story
@@ -154,7 +159,7 @@ class StoriesController < ApplicationController
     followings = Following.where(user_id: story.poster_id)
     followings.each do |follower|
       Notification.create(user_id: follower.follower_id,
-                        notified_by_user_id: current_user.id,
+                        notified_by_user_id: story.poster_id,
                         notification_category_id: 1,
                         read: false,
 #                        origin_id: story.id,

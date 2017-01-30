@@ -12,6 +12,7 @@ RSpec.feature "Editing Stories" do
     @story2 = Story.where(author_id: @user2.id).active.first
     @final_title1 = Faker::Hipster::sentence(4)
     @final_body1 = Faker::Hipster::paragraph
+    @final_gift_description = Faker::Hipster::sentence(3)
     @final_title2 = Faker::Hipster::sentence(4)
     @final_body2 = Faker::Hipster::paragraph
     NotificationCategory.create([
@@ -53,14 +54,15 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content("Not Anonymous")
     expect(page).to have_content(@story.raw_title)
     expect(page).to have_content(@story.raw_body)
+    expect(page).to have_content(@story.raw_gift_description)
     expect(page).to have_content("User requested a GiftOn editor to add a light touch? No")
     expect(page).to have_content("Story Fail")
     
     attach_file('story_main_image', './spec/fixtures/mainimage.png')
     fill_in "Final Title", with: @final_title1
-#    fill_in "Final Body", with: @final_body1
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, @final_body1)
-#    check 'Published'
+    fill_in "Final Gift Description", with: @final_gift_description
+    
     uncheck("story_fail")
     @family_tag = Tag.where(name: "family").first
     @brother_tag = Tag.where(name: "brother").first
@@ -80,6 +82,7 @@ RSpec.feature "Editing Stories" do
     expect(page.current_path).to eq(admin_story_path(Story.find(@story.id).slug))  
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
+    expect(page).to have_content(@story.final_gift_description)
     expect(page).to have_content("Admin: #{@admin.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']")
     expect(page).to have_content("brother (primary)")
@@ -105,10 +108,12 @@ RSpec.feature "Editing Stories" do
     
     expect(page).to have_content(@story2.updated_title)
     expect(page).to have_content(@story2.updated_body)
+    expect(page).to have_content(@story2.updated_gift_description)
     
     fill_in "Final Title", with: @final_title2
-#    fill_in "Final Body", with: @final_body2
+    fill_in "Final Gift Description", with: @final_gift_description
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story2.id.to_s, @final_body2)
+    
     find("input[type='checkbox'][id*='1']").set(true) #family
     find("input[type='checkbox'][id*='3']").set(true) #brother
     find("input[id*=primary][value='3']").set(true) #brother-primary
@@ -120,6 +125,7 @@ RSpec.feature "Editing Stories" do
     expect(page.current_path).to eq(admin_story_path(Story.find(@story2.id).slug))  
     expect(page).to have_content(@final_title2)
     expect(page).to have_content(@final_body2)
+    expect(page).to have_content(@final_gift_description)
     expect(page).to have_content("Published")
   end
   
@@ -133,6 +139,7 @@ RSpec.feature "Editing Stories" do
     
     fill_in "Final Title", with: ""
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, "")
+    fill_in "Final Gift Description", with: ""
     find("input[id*=primary][value='3']").set(true)
     find("input[id*=primary][value='6']").set(true)
     
@@ -142,6 +149,7 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content("Main image can't be blank")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Body can't be blank")
+    expect(page).to have_content("Gift description can't be blank")
     expect(page).to have_content("You need tags.")
   end
 end

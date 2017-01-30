@@ -28,12 +28,20 @@ h4
   | Raw Title: 
   == @story.raw_title
 p
+  | Raw Gift Description: 
+  == @story.raw_gift_description? ? @story.raw_gift_description : "none"
+p
   | Raw Body: 
   == @story.raw_body
 - if @story.updated_title?
   h4 
     | Updated Title: 
     == @story.updated_title
+- if @story.updated_gift_description?
+  p
+    | Updated Gift Description:
+    == @story.updated_gift_description
+- if @story.updated_body?
   p
     | Updated Body: 
     == @story.updated_body
@@ -41,6 +49,11 @@ p
   h4 
     | Final Title: 
     == @story.final_title
+- if @story.final_gift_description?
+  p
+    | Final Gift Description:
+    == @story.final_gift_description
+- if @story.final_body?
   p
     | Final Body: 
     == @story.final_body
@@ -52,9 +65,13 @@ p
     span class="form-error" 
   div
     = f.label :final_title, "Final Title" 
-    = f.text_field :final_title, autofocus: true, value: (@story.updated_title ? @story.updated_title : @story.raw_title)
+    = f.text_field :final_title, autofocus: true, value: (@story.updated_title? ? @story.updated_title : @story.raw_title)
     p class="help-text" Max. 90 characters (prefer &lt;70 characters)
     span class="form-error" 
+  div
+    = f.label :final_gift_description, "Final Gift Description" 
+    = f.text_field :final_gift_description, autofocus: true, value: (@story.updated_gift_description? ? @story.updated_gift_description : @story.raw_gift_description)
+    span class="form-error"
   div
     = f.label :final_body, "Final Body"
     == f.trix_editor :final_body 

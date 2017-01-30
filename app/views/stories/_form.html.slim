@@ -18,6 +18,10 @@
       = f.trix_editor :raw_body
       span class="form-error"
     div
+      = f.label :raw_gift_description, "Gift Description"
+      = f.text_field :raw_gift_description, autofocus: true, value: @story.raw_gift_description
+      span class="form-error"
+    div
       = f.label :anonymous
       = f.check_box :anonymous, type: "checkbox"
     div 
@@ -40,6 +44,10 @@
     div
       = f.label :updated_body, "Body"
       == f.trix_editor :updated_body
+      span class="form-error"
+    div
+      = f.label :updated_gift_description, "Gift Description"
+      = f.text_field :updated_gift_description, autofocus: true, value: @story.updated_gift_description
       span class="form-error"
     div
       = f.label :anonymous

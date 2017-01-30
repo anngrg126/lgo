@@ -25,11 +25,16 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
 <% if @story.errors.any? %>
   $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:alert] %></p></div>');
 
-  <% field_array = ["title", "body"] %> 
+  <% field_array = ["title", "body", "gift_description"] %> 
   <% if array_index == 0 %>
     <% for i in 0..@story.errors.full_messages.length-1 %>
       <% field_array.each do |field| %>
-        <% if @story.errors.full_messages[i].downcase.include? field %>
+        <% if field.include? "_" %>
+          <% field_compare = field.gsub(/_/, " ") %>
+        <% else %>
+          <% field_compare = field %>
+        <% end %>
+        <% if @story.errors.full_messages[i].downcase.include? field_compare %>
           $('label[for="story_<%= j "raw_"+field%>"]').addClass("is-invalid-label");
           $('#story_<%= j "raw_"+field%>').addClass("is-invalid-input");
           <% if field == "body" %>
@@ -44,7 +49,12 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
   <% else %>
     <% for i in 0..@story.errors.full_messages.length-1 %>
       <% field_array.each do |field| %>
-        <% if @story.errors.full_messages[i].downcase.include? field %>
+        <% if field.include? "_" %>
+          <% field_compare = field.gsub(/_/, " ") %>
+        <% else %>
+          <% field_compare = field %>
+        <% end %>
+        <% if @story.errors.full_messages[i].downcase.include? field_compare %>
           $('label[for="story_<%= j "updated_"+field%>"]').addClass("is-invalid-label");
           $('#story_<%= j "updated_"+field%>').addClass("is-invalid-input");
           <% if field == "body" %>

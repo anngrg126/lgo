@@ -8,7 +8,7 @@ RSpec.feature "Showing Stories" do
     @story = Story.where(author_id: @user.id).active.first
     @story2 = Story.where(author_id: @user2.id).active.first
     login_as(@admin, :scope => :user)
-    @story.update(fail: true)
+    @story.update(fail: true, raw_gift_description: Faker::Hipster.sentence(3))
   end
   
   scenario "Logged-in admin can see individual story" do
@@ -22,6 +22,7 @@ RSpec.feature "Showing Stories" do
     expect(page).to have_content("Story Fail")
     expect(page).to have_content(@story.raw_title)
     expect(page).to have_content(@story.raw_body)
+    expect(page).to have_content(@story.raw_gift_description)
     expect(page).to have_css("img[src*='image.png']")
     expect(current_path).to eq(admin_story_path(@story))
     expect(page).to have_link("Edit Story")

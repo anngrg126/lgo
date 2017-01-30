@@ -95,7 +95,7 @@ class DashboardController < ApplicationController
   end
   
   def set_notifications
-    @notifications = @user.notifications
+    @notifications = @user.notifications.includes(:notification_category)
     
     unless @notifications.select{|n| n.read == false}.empty? 
       @unread_notifications = @notifications.select{|n| n.read == false}

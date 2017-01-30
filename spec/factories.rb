@@ -15,6 +15,7 @@ FactoryGirl.define do
   factory :story do
     raw_title { Faker::Hipster.sentence }
     raw_body { Faker::Hipster.paragraph }
+    raw_gift_description { Faker::Hipster.sentence }
     published false
     after(:create) do |story|
       create(:picture, story: story, story_id: story.id )
@@ -25,6 +26,7 @@ FactoryGirl.define do
       published true
       final_title { Faker::Hipster.sentence }
       final_body { Faker::Hipster.paragraph }
+      final_gift_description { Faker::Hipster.sentence }
       admin_published_at { Faker::Time.backward(1, :morning) }
       last_user_to_update { "Admin" }
       main_image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') }
@@ -33,7 +35,12 @@ FactoryGirl.define do
         published false
         updated_title { Faker::Hipster.sentence }
         updated_body { Faker::Hipster.paragraph }
+        updated_gift_description { Faker::Hipster.sentence }
 #        updated_at {Faker::Time.forward(1, :afternoon)}
+        last_user_to_update { "Author" }
+        factory :published_updated_story do
+          published true
+        end
       end
       
       factory :published_anonymous_story do
@@ -109,7 +116,17 @@ FactoryGirl.define do
       end
     
       after(:create) do |user, evaluator|
-        create_list(:unpublished_updated_story, evaluator.stories_count, author_id: user.id, last_user_to_update: "Author")
+        create_list(:unpublished_updated_story, evaluator.stories_count, author_id: user.id)
+      end
+    end
+    
+    factory :user_with_published_updated_stories do
+      transient do
+        stories_count 1
+      end
+    
+      after(:create) do |user, evaluator|
+        create_list(:published_updated_story, evaluator.stories_count, user: user, author_id: user.id, poster_id: user.id)
       end
     end
     

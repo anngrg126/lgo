@@ -3,7 +3,7 @@ class Story < ApplicationRecord
   friendly_id :generate_friendly_id, :use => [:slugged, :finders]
   searchkick text_start: [:final_title]
   
-  validates :raw_title, presence: true
+#  validates :raw_title, presence: true
   validates :raw_body, presence: true
   
   attr_accessor :validate_final_fields
@@ -63,8 +63,10 @@ class Story < ApplicationRecord
     
   validates :final_title, presence: true, length: {maximum: 90}, if: :validate_final_fields?
   validates :final_body, presence: true, if: :validate_final_fields?
+  validates :final_gift_description, presence: true, if: :validate_final_fields?
   validates :updated_title, presence: true, if: :validate_updated_fields?
   validates :updated_body, presence: true, if: :validate_updated_fields?
+  validates :updated_gift_description, presence: true, if: :validate_updated_fields?
   
   belongs_to :user
   
