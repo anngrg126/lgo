@@ -1,29 +1,48 @@
 div.row
-    div.columns.large-6
-        h4 Screenshot
-    div.columns.large-6
-        h4 With HTML/CSS/SCSS
+  div.columns.large-6
+    h4 Screenshot
+  div.columns.large-6
+    h4 With Current HTML/CSS/SCSS
 div.row
-    ul.accordion [data-accordion data-multi-expand="true"]
-        li.accordion-item.is-active
-            h4.accordion-title Buttons
-            div.accordion-content [data-tab-content]
-                div.row
-                    div.columns.large-6
-                        == image_tag("pattern_screenshots/share_story_button.png")
-                    div.columns.large-6
-                        == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do
-                          span.fi-clipboard-pencil
-                          span Share a Story  
-                          
-        li.accordion-item.is-active
-            h4.accordion-title Titles
-            div.accordion-content [data-tab-content]
-                div.row
-                    div.columns.large-6
-                        == image_tag("pattern_screenshots/share_story_button.png")
-                    div.columns.large-6
-                        == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do
-                          span.fi-clipboard-pencil
-                          span Share a Story 
-          
+  ul.accordion [data-accordion data-multi-expand="true"]
+    li.accordion-item.is-active
+      h3.accordion-title Buttons
+      div.accordion-content [data-tab-content]
+        h4 Button with Icon
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/facebook_btn.png")
+          div.columns.large-6
+            == link_to root_path, class: "button button-w-icon facebook" do
+              span.fi-social-facebook
+              span Share a Story  
+        div.row.columns
+          code
+            div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "button button-w-icon facebook" do 
+            div &nbsp;&nbsp;span.fi-social-facebook
+            div &nbsp;&nbsp;span Sign in with &#35;{OmniAuth::Utils.camelize(provider)}
+      div.accordion-content [data-tab-content]
+        h4 Uppercase Button with Icon
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/share_story_button.png")
+          div.columns.large-6
+            == link_to root_path, class: "button uppercase-button-w-icon" do
+              span.fi-clipboard-pencil
+              span Share a Story  
+        div.row.columns
+          code
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do 
+            div &nbsp;&nbsp;span.fi-clipboard-pencil
+            div &nbsp;&nbsp;span Share a Story
+
+    li.accordion-item.is-active
+      h3.accordion-title Titles
+      div.accordion-content [data-tab-content]
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/share_story_button.png")
+          div.columns.large-6
+            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do
+              span.fi-clipboard-pencil
+              span Share a Story 
