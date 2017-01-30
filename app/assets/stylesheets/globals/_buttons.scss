@@ -1,12 +1,19 @@
 %button-w-icon {
   &.button {
-    padding: 0.425em 0.5em; //overrides foundation padding
+//    padding: 0.425em 0.5em; //overrides foundation padding
+    padding: 6px 7px; //overrides foundation padding
+    line-height: 1.15; //overrides foundation setting of 1
   };
   font-weight: 600;
   span {
-    margin: 0.425em 0.5em;
+//    margin: 0.425em 0.5em;
+    margin: 6px 7px;
     display: inline-block;
   }
+  span:first-child {
+    font-size: 1.5em;
+    margin: 6px 7px 0 7px;
+  };
   &.facebook {
     background: $facebook-color;
     &:hover {
@@ -25,6 +32,9 @@
       background: darken( $google-color, 10% );
     }
   }
+}
+.button-w-icon {
+  @extend %button-w-icon;
 }
 .uppercase-button-w-icon {
   @extend %button-w-icon;
