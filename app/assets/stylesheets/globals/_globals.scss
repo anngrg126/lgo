@@ -1,0 +1,8 @@
+@import 'colors';
+@import 'settings';   //foundation settings
+
+//globals that override foundation settings
+@import 'buttons';
+@import 'images';
+@import 'typography';
+@import 'components/*';
