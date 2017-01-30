@@ -65,15 +65,12 @@ module NotificationsHelper
   def consolidate_notifications(notifications_array, read_boolean)
     n_stories = []
     n_users = []
-    stories_comments_author = []
-    stories_comments_commenters = []
     stories_comments = []
     stories_bookmarks = []
     stories_reactions = []
     followers = []
     messages = []
     id_array = []
-    call_functions = []
     @followers_id_array = []  
     
     #consolidate all stories to avoid N+1 db queries
@@ -105,11 +102,7 @@ module NotificationsHelper
           ids.push(n.id)
         elsif n.options == "followers"
           # Story poster's followers notification
-#          unless story.anonymous?
             poster = @n_users.select{|u| u.id == story.poster_id}.first
-#          else
-#            poster = @anonyous_user
-#          end
           link_poster = link_to poster.full_name, dashboard_path(poster)
           messages.push(link_poster+" published a new story! See it here: "+link)
           ids.push(n.id)
@@ -162,14 +155,19 @@ module NotificationsHelper
     end
     
     unless notifications_array.select{|n| n.notification_category.name == "Reaction"}.empty?
-      optionsarray = ["1", "2", "3", "4", "5"]
+      @reaction_categories = ReactionCategory.all
+      @love_reaction = @reaction_categories.select{|r| r.name=="love"}.first
+      @like_reaction = @reaction_categories.select{|r| r.name=="like"}.first 
+      @omg_reaction = @reaction_categories.select{|r| r.name=="omg"}.first
+      @lol_reaction = @reaction_categories.select{|r| r.name=="lol"}.first
+      @cool_reaction = @reaction_categories.select{|r| r.name=="cool"}.first
       stories_reactions.uniq.each do |s|
-        optionsarray.each do |o|
+        @reaction_categories.each do |o|
           reactors = []
           ids = []
           reactor_links = []
-          unless notifications_array.select{|n| n.notification_category.name == "Reaction" && n.options==o && n.story_id == s.id}.empty?
-            notifications_array.select{|n| n.notification_category.name == "Reaction" && n.options==o && n.story_id == s.id}.each do |n|
+          unless notifications_array.select{|n| n.notification_category.name == "Reaction" && n.options==o.id.to_s && n.story_id == s.id}.empty?
+            notifications_array.select{|n| n.notification_category.name == "Reaction" && n.options==o.id.to_s && n.story_id == s.id}.each do |n|
               reactors.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
               ids.push(n.id)
             end
@@ -178,19 +176,19 @@ module NotificationsHelper
             end 
             link = link_to story_title(s), story_path(s)
             unless reactor_links.empty?
-              if o == "1"#like
+              if o == @like_reaction
                 messages.push("#{reactor_links.to_sentence} liked your story #{link}")
                 id_array.push(ids)
-              elsif o == "2"#OMG
+              elsif o == @omg_reaction
                 messages.push("#{reactor_links.to_sentence} OMG'd your story #{link}")
                 id_array.push(ids)
-              elsif o == "3"#LOL
+              elsif o == @lol_reaction
                 messages.push("#{reactor_links.to_sentence} LOL'd your story #{link}")
                 id_array.push(ids)
-              elsif o == "4"#Cool
+              elsif o == @cool_reaction
                 messages.push("#{reactor_links.to_sentence} Cool'd your story #{link}")
                 id_array.push(ids)
-              elsif o == "5"#Love
+              elsif o == @love_reaction
                 messages.push("#{reactor_links.to_sentence} Loved your story #{link}") 
                 id_array.push(ids)
               end
