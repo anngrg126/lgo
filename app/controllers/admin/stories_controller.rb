@@ -2,7 +2,7 @@ class Admin::StoriesController < ApplicationController
 #  before_action :authenticate_user!, except: [:index, :show]
   before_action :require_admin
   before_action :set_story, only: [:show, :edit]
-  before_action :set_tags, only: [:show, :index, :new, :edit]
+  before_action :set_tags, only: [:show, :index, :new, :edit, :pattern]
   before_action :set_anonymous_user, only: [:update, :destroy, :show]
   
   def index
@@ -148,5 +148,12 @@ class Admin::StoriesController < ApplicationController
   
   def set_anonymous_user
     @anonymous_user = User.where(anonymous: true).first
+  end
+  
+  def pattern
+    respond_to do |format|
+      format.js {render :partial => 'stories/pattern'}
+      format.html
+    end
   end
 end
