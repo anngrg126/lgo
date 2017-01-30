@@ -1,56 +1,32 @@
-.small-button {
-  padding: 0.4em 0.5em;
-}
-
 %uppercase-button-w-icon {
+  &.button {
+    padding: 0.425em 0.5em; //overrides foundation padding
+  };
   text-transform: uppercase;
   font-weight: 600;
-  div {
+  span {
+    margin: 0.425em 0.5em;
     display: inline-block;
   }
-  span:after {
-    border: none;
-    font-family: "foundation-icons";
-    font-size: 1rem;
-    padding-right: 1rem;
-  } 
 }
-
 .uppercase-button-w-icon {
   @extend %uppercase-button-w-icon;
   &.facebook {
     background: $facebook-color;
-    span {
-      background: darken( $facebook-color, 10% );
-      &:after { 
-        content: "\f1c4";
-      }
+    &:hover {
+      background: darken($facebook-color, 10%);
     }
   }
   &.twitter {
     background: $twitter-color;
-    span {
+    &:hover {
       background: darken( $twitter-color, 10% );
-      &:after { 
-        content: "\f1e4";
-      }
     }
   }
   &.google {
     background: $google-color;
-    span {
+    &:hover {
       background: darken( $google-color, 10% );
-      &:after { 
-        content: "\f1ca";
-      }
-    }
-  }
-  &.pencil {
-    background: $primary-color;
-    span {
-      &:after { 
-        content: "\f129";
-      }
     }
   }
 }

@@ -43,11 +43,7 @@ module DashboardHelper
   
   def user_about_me_title(user)
     unless user.about_me.blank?
-      body = "<div'>About Me</div>".html_safe
-    else
-      if user == current_user
-        body = "<div>About Me</div>".html_safe
-      end
+      "<div>About Me</div>".html_safe
     end
   end
   

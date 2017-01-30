@@ -6,10 +6,9 @@
       h2
         == "#{@user.full_name}'s Stories"
   .columns.large-offset-3.large-3.small-6
-    == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon pencil" do
-      div
-        span
-      div Share a Story  
+    == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do
+      span.fi-clipboard-pencil
+      span Share a Story
 .row
   - @dashboard_stories.each do |s|
     div.large-6.small-12.columns
