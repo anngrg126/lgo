@@ -13,7 +13,7 @@ div
 h2
   == story_title_show(@story)
 div
-  == story_by_show(@story)
+  == render 'shared/poster_user', story: @story
 div
   - unless @story.classifications.empty?
     div.story_tags
