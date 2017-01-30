@@ -4,8 +4,8 @@
   | .
   br
 
-- if params[:controller].include? 'users/sessions'
-  | New user?
+- if params[:controller].include? 'devise/user_sessions'
+  | New user? 
   = link_to "Sign up", new_user_registration_path
   | .
   br
@@ -28,5 +28,6 @@
 
 - if devise_mapping.omniauthable?
   - resource_class.omniauth_providers.each do |provider|
-    == link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider)
-    br
+    == link_to omniauth_authorize_path(resource_name, provider), class: "button button-w-icon facebook" do
+      span.fi-social-facebook
+      span Sign in with #{OmniAuth::Utils.camelize(provider)}
