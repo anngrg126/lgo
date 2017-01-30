@@ -49,3 +49,7 @@
 //
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
+
+.is-drilldown li, .is-drilldown .menu > li {
+  display: block;
+}
