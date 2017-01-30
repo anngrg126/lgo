@@ -8,7 +8,7 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
     @user = FactoryGirl.create(:user)
     login_as(@user, :scope => :user)
     visit "/"
-    click_link "New Story"
+    click_link "Share a Story"
     @title = Faker::Hipster::sentence
     fill_in "Title", with: @title
     fill_in_trix_editor('story_raw_body_trix_input_story', Faker::Hipster::paragraph)

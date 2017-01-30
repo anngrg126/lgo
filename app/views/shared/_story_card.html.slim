@@ -1,4 +1,6 @@
 .card
+  .card-section
+    == story_pending(story)
   .card-section.row
     == render 'shared/poster_user', story: story
   .card-section
@@ -12,3 +14,6 @@
   == story_main_image_show(story)
   .card-section
     == story_body(story)
+  - if current_user && story.anonymous? && story.author_id == current_user.id && params[:controller] == "dashboard"
+    .card-section
+      == story_anonymous(story)
