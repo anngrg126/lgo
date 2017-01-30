@@ -33,9 +33,15 @@ class RegistrationStepsController < ApplicationController
   
   def finish_wizard_path
     flash[:primary] = "You have signed up successfully."
+    log_user_sign_in(current_user)
     dashboard_path(current_user)
   end
+  
   def set_tags
     @tags = Tag.alltags
+  end
+  
+  def log_user_sign_in(resource)
+    UserSessionLog.log(resource, "sign_in")
   end
 end

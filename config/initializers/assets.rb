@@ -10,3 +10,9 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( registration_steps.js )
+Rails.application.config.assets.precompile += %w( stories.scss )
+Rails.application.config.assets.precompile += %w( admin/stories.scss )
+Rails.application.config.assets.precompile += %w( dashboard.scss )
+Rails.application.config.assets.precompile += %w( users/registrations.scss )
+Rails.application.config.assets.precompile += %w( registration_steps.scss )
+Rails.application.config.assets.precompile += %w( pictures.scss )

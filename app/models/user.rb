@@ -2,9 +2,9 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :generate_friendly_id, :use => [:slugged, :finders]
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable and :omniauthable,:rememberable,
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   
   has_many :stories, dependent: :destroy 
   has_many :stories_posted, :class_name => 'Story', :foreign_key => 'poster_id', dependent: :destroy 
@@ -106,6 +106,18 @@ class User < ApplicationRecord
     }
   
   validates_attachment :image, :content_type => { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }, :size => { in: 0..8.megabytes }
+  
+  def self.valid_user?(resource)
+    resource && resource.kind_of?(User) && resource.valid?
+  end
+
+  def log_devise_action(new_action)
+    if new_action == "sign_in"
+      UserSessionLog.create!(user_id: id, user_ip: current_sign_in_ip, sign_in:  DateTime.now)
+    elsif new_action == "sign_out"
+      UserSessionLog.where(user_id: id, user_ip: current_sign_in_ip).last.update(sign_out: DateTime.now)
+    end
+  end
   
   private
   

@@ -1,5 +1,3 @@
-//colors
-
 $foundation-palette: (
   primary: #00b4e2, //GiftOn Blue from logo
   secondary: #777,
@@ -18,12 +16,3 @@ $white: #fefefe;
 $body-background: $white;
 $body-font-color: $black;
 $red: red;
-
-
-//fonts
-
-@import url('https://fonts.googleapis.com/css?family=Raleway');
-
-$header-font-family: 'Raleway', sans-serif;
-$header-font-weight: 600;
-//$header-font-style: semi-bold;
