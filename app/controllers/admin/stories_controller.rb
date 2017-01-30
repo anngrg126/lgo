@@ -151,9 +151,5 @@ class Admin::StoriesController < ApplicationController
   end
   
   def pattern
-    respond_to do |format|
-      format.js {render :partial => 'stories/pattern'}
-      format.html
-    end
   end
 end
