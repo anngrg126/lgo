@@ -249,6 +249,8 @@ div#stickhere[data-sticky-container]
           li
             == link_to "My Notifications", notifications_dashboard_path(current_user)
           li
+            == link_to "My Bookmarks", bookmarked_stories_dashboard_path(current_user)
+          li
             hr[style="margin: 0;"]
           li
             == link_to "Sign out", destroy_user_session_path, method: :delete

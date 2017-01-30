@@ -49,7 +49,7 @@ RSpec.feature "Searching for a story", :type => :feature do
     expect(page).to have_content(@story_foo.final_title)
     expect(page).to have_content(@story_foo.final_body.truncate(150))
     expect(page).to have_link(@story_foo.final_title)
-    expect(page).to have_content("Posted by: #{@foo.full_name}")
+    expect(page).to have_link("#{@foo.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']", count: 1)
     expect(page).not_to have_content("No stories matched : "+ @search_word)
     
@@ -80,7 +80,7 @@ RSpec.feature "Searching for a story", :type => :feature do
     expect(page).to have_content(@story_foo.final_title)
     expect(page).to have_content(@story_foo.final_body.truncate(150))
     expect(page).to have_link(@story_foo.final_title)
-    expect(page).to have_content("Posted by: #{@foo.full_name}")
+    expect(page).to have_link("#{@foo.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']", count: 1)
     expect(page).not_to have_content("No stories matched : "+ @search_word)
     
@@ -110,7 +110,7 @@ RSpec.feature "Searching for a story", :type => :feature do
     expect(page).to have_content(@story_foo.final_title)
     expect(page).to have_content(@story_foo.final_body.truncate(150))
     expect(page).to have_link(@story_foo.final_title)
-    expect(page).to have_content("Posted by: #{@foo.full_name}")
+    expect(page).to have_link("#{@foo.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']", count: 1)
     expect(page).not_to have_content("No stories matched : "+ @search_word)
     
@@ -139,7 +139,7 @@ RSpec.feature "Searching for a story", :type => :feature do
     expect(page).to have_content(@story_foo.final_title)
     expect(page).to have_content(@story_foo.final_body.truncate(150))
     expect(page).to have_link(@story_foo.final_title)
-    expect(page).to have_content("Posted by: #{@foo.full_name}")
+    expect(page).to have_link("#{@foo.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']", count: 1)
     expect(page).not_to have_content("No stories matched : "+ @search_word)
     

@@ -19,11 +19,11 @@
 @include foundation-breadcrumbs;
 @include foundation-button-group;
 @include foundation-callout;
+@include foundation-card;
 @include foundation-close-button;
 @include foundation-drilldown-menu;
 @include foundation-dropdown;
 @include foundation-dropdown-menu;
-@include foundation-flex-video;
 @include foundation-label;
 @include foundation-media-object;
 @include foundation-menu;
@@ -32,6 +32,7 @@
 @include foundation-orbit;
 @include foundation-pagination;
 @include foundation-progress-bar;
+@include foundation-responsive-embed;
 @include foundation-slider;
 @include foundation-sticky;
 @include foundation-reveal;
@@ -43,7 +44,13 @@
 @include foundation-tooltip;
 @include foundation-top-bar;
 
+
 // If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
 //
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
+
+//overrides
+.is-drilldown li, .is-drilldown .menu > li {
+  display: block;
+}

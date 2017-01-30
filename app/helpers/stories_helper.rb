@@ -5,6 +5,16 @@ module StoriesHelper
     end
   end
   
+  def poster_photo(user)
+    if user.image_file_name?
+      image_tag user.image.url(:medium)
+    elsif user.fbimage?
+      image_tag(user.smallsquareimage)
+    else
+      image_tag('default_user_image.png')
+    end
+  end
+  
   def story_title_show(story)
     if story.published?
       if story.last_user_to_update == "Admin"
@@ -30,29 +40,42 @@ module StoriesHelper
     html = "<div>#{body}</div>".html_safe
   end
   
-  def story_by_show(story)
+  def story_gift_description_show(story)
     if story.published?
-#      link = link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
-      unless story.anonymous?
-        @s_user = story.user
-#        link = link_to "#{story.user.full_name}", dashboard_path(story.user))
+      if story.last_user_to_update == "Admin"
+        body = story.final_gift_description
       else
-        @s_user = @anonymous_user
-#        link = link_to "#{User.find(story.poster_id).full_namy}", dashboard_path(User.find(story.poster_id))
+        body = story.updated_gift_description
       end
-      link = link_to "#{@s_user.full_name}", dashboard_path(@s_user)
-      partial =  render partial: 'followings/form', locals: { user: @s_user, follower: current_user }
-      html = "<div>Posted by: #{link}</div><div>#{partial}</div>".html_safe
-     
     else
-      if story.anonymous?
-        html = "<div>Posted by: Anonymous</div>"
-      else
-        link = link_to "#{story.user.full_name}", dashboard_path(story.user)
-        html = "<div>Posted by: #{link}".html_safe
-      end
+      body = story.raw_gift_description
     end
+    html = "<div>#{body}</div>".html_safe
   end
+  
+#   def story_by_show(story)
+#     if story.published?
+# #      link = link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
+#       unless story.anonymous?
+#         @s_user = story.user
+# #        link = link_to "#{story.user.full_name}", dashboard_path(story.user))
+#       else
+#         @s_user = @anonymous_user
+# #        link = link_to "#{User.find(story.poster_id).full_namy}", dashboard_path(User.find(story.poster_id))
+#       end
+#       link = link_to "#{@s_user.full_name}", dashboard_path(@s_user)
+#       partial =  render partial: 'followings/form', locals: { user: @s_user, follower: current_user }
+#       html = "<div>Posted by: #{link}</div><div>#{partial}</div>".html_safe
+     
+#     else
+#       if story.anonymous?
+#         html = "<div>Posted by: Anonymous</div>"
+#       else
+#         link = link_to "#{story.user.full_name}", dashboard_path(story.user)
+#         html = "<div>Posted by: #{link}".html_safe
+#       end
+#     end
+#   end
   
   def truncate_body_list(body)
     body.gsub!('<br>', ' ')
@@ -165,10 +188,13 @@ module StoriesHelper
       if @t.tag_category.category== category
         unless @t.name == "other"
 #          @display_tag = @t.name
-          @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'">'+@t.name+'</a>'
+
+          # @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'">'+@t.name+'</a>'
+          @display_tag = '<span class="label ultra-light-gray"><a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'">'+@t.name+'</a></span>&nbsp;'
         else
 #          @display_tag = c.description
-          @display_tag = '<a href="'+stories_path+'?search='+c.description+'">'+c.description+'</a>'
+          # @display_tag = '<a href="'+stories_path+'?search='+c.description+'">'+c.description+'</a>'
+          @display_tag = '<span class="label ultra-light-gray"><a href="'+stories_path+'?search='+c.description+'">'+c.description+'</a></span>&nbsp;'
         end
       end    
     end
@@ -187,7 +213,7 @@ module StoriesHelper
     @fail_tag = @tags.select{|t|t.name=="fail"}.first
     if story.classifications.any?{|c| c[:tag_id] == @fail_tag.id}
 #      @display_tag = @fail_tag.name
-      @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'">'+@fail_tag.name+'</a>'
+      @display_tag = '<span class="label ultra-light-gray"><a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'">'+@fail_tag.name+'</a></span>&nbsp;'
     else
       @display_tag = ""
     end

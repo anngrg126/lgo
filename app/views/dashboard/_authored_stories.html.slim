@@ -1,37 +1,15 @@
-- if @user == current_user
-  h2 List of all Authored Stories
-  - @dashboard_stories.each do |story|
-    div
-      = story_main_image(story)
-    div
-      = link_to story_title(story), story_path(story)
-    div
-      = story_body(story)
-    div
-      = story_pending(story)
-    div
-      = story_anonymous(story)
-    div
-      | Posted on: 
-      == story.created_at.strftime("%b %d, %Y")
-    div
-      = story_by(story)  
-- else
-  h2 List of all Posted Stories
-  - @dashboard_stories.each do |story|
-    div
-      = story_main_image(story)
-    div
-      == link_to story_title(story), story_path(story)
-    div
-      = story_body(story)
-    div
-      | Posted on: 
-      == story.created_at.strftime("%b %d, %Y")
-    p
-      | Posted by: 
-      /== "#{User.find(story.poster_id).full_name}"
-      - unless story.anonymous
-        == "#{story.user.full_name}"
-      - else
-        == "#{@anonymous_user.full_name}"
+.row
+  .columns.small-6
+    - if @user == current_user
+      h2 Your Stories
+    - else
+      h2
+        == "#{@user.full_name}'s Stories"
+  .columns.large-offset-3.large-3.small-6
+    == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do
+      span.fi-clipboard-pencil
+      span Share a Story
+.row
+  - @dashboard_stories.each do |s|
+    div.large-6.small-12.columns
+      == render 'shared/story_card', story: s

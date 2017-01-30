@@ -45,7 +45,7 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_content("List of All Saved Stories:")
     
     click_link "Stories"
-    expect(page).to have_content("List of all Authored Stories")
+    expect(page).to have_content("Your Stories")
     expect(page).to have_content(@story1.raw_title)
     expect(page).to have_content(@story1.raw_body.truncate(150))
     expect(page).to have_link(@story1.raw_title)

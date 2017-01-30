@@ -12,7 +12,7 @@ RSpec.feature "Creating Stories", :type => :feature do
   scenario "A user creates a new story" do
     visit "/"
   
-    click_link "New Story"
+    click_link "Share a Story"
     
     fill_in "Title", with: Faker::Hipster::sentence
 #    fill_in "Body", with: Faker::Hipster::paragraph
@@ -31,7 +31,7 @@ RSpec.feature "Creating Stories", :type => :feature do
   scenario "A user fails to create a new story", :js => true do
     visit "/"
     
-    click_link "New Story"
+    click_link "Share a Story"
     
     fill_in "Title", with: ""
 #    fill_in "Body", with: ""

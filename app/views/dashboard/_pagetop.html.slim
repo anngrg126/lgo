@@ -1,41 +1,26 @@
-h1 Welcome to the Dashboard!
-
-div#user_registration
-  div#user_name
-    h4 
-      | Name: 
-      == @user.full_name
-    == edit_user_name(@user)
-  div#user_photo
-    div
-      == user_photo(@user)
-    == edit_user_photo(@user)
-  div
-    div
-      == user_about_me_title(@user)
-    div#user_about_me
-      == user_about_me(@user)
-      == edit_user_about_me(@user)
-  - if @user == current_user
-    == link_to "Settings", user_profile_dashboard_path(@user), remote: true
-  - else
-    == render partial: 'followings/form', locals: { user: @user, follower: current_user }
-    
-div
-  == link_to "Stories: #{@dashboard_stories.length}", authored_stories_dashboard_path(@user), remote: true
-  |   
-  == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
-  - if @user == current_user
-    |  
-    == link_to "Saves: #{@bookmarked_stories.length}", bookmarked_stories_dashboard_path(@user), remote: true
-    |  
-    == link_to "Comments: #{@commented_stories.length}", commented_stories_dashboard_path(@user), remote: true
-  |  
-  == link_to "Followers: #{@followers.length}", followers_dashboard_path(@user), remote: true
-  |  
-  span[id= "dashboard_followings_counter_#{@user.id.to_s}"]
-    == link_to "Following: #{@followings.length}", followings_dashboard_path(@user), remote: true
-  |  
-  - if @user == current_user
-    span#dashboard_notifications_counter
-      == link_to "Notifications: #{@unread_notifications.length}", notifications_dashboard_path(@user), remote: true
+.card
+  .card-section
+    #user_registration
+      #user_photo
+        .image-wrapper.overlay-fade-in
+          div
+            == user_photo(@user)
+          div.image-overlay-content
+            == edit_user_photo(@user)
+      #user_name
+        h3 
+          == @user.full_name
+        == edit_user_name(@user)
+      div
+        h5
+          == user_about_me_title(@user)
+        #user_about_me
+          == user_about_me(@user)
+          == edit_user_about_me(@user)
+        - if @user == current_user
+          == link_to "Settings", user_profile_dashboard_path(@user), remote: true
+        - else
+          == render partial: 'followings/form', locals: { user: @user, follower: current_user }
+      == link_to "Followers: #{@followers.length}", followers_dashboard_path(@user), remote: true 
+      div[id= "dashboard_followings_counter_#{@user.id.to_s}"]
+        == link_to "Following: #{@followings.length}", followings_dashboard_path(@user), remote: true

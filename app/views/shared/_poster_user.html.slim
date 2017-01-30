@@ -1,0 +1,17 @@
+- if story.published?
+    -if story.anonymous?
+        - user = @anonymous_user
+    -else
+        - user = story.user
+- else
+    - user = story.user
+
+div.large-2.small-3.columns
+        == poster_photo(user)
+div.large-10.small-9.columns
+    div
+        == link_to "#{user.full_name}", dashboard_path(user)
+        
+    div
+        small
+            == story.created_at.strftime("%b %d, %Y")

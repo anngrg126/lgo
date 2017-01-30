@@ -1,3 +1,32 @@
-.small-button {
-  padding: 0.4em 0.5em;
+%uppercase-button-w-icon {
+  &.button {
+    padding: 0.425em 0.5em; //overrides foundation padding
+  };
+  text-transform: uppercase;
+  font-weight: 600;
+  span {
+    margin: 0.425em 0.5em;
+    display: inline-block;
+  }
+}
+.uppercase-button-w-icon {
+  @extend %uppercase-button-w-icon;
+  &.facebook {
+    background: $facebook-color;
+    &:hover {
+      background: darken($facebook-color, 10%);
+    }
+  }
+  &.twitter {
+    background: $twitter-color;
+    &:hover {
+      background: darken( $twitter-color, 10% );
+    }
+  }
+  &.google {
+    background: $google-color;
+    &:hover {
+      background: darken( $google-color, 10% );
+    }
+  }
 }

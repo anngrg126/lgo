@@ -21,7 +21,7 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_link(@story1.final_title)
     expect(page).to have_link(@story2.final_title)
     expect(page).not_to have_link("New Story")
-    expect(page).to have_content("Posted by: #{@user.full_name}")
+    expect(page).to have_link("#{@user.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']", count: 3)
   end
   
@@ -30,7 +30,7 @@ RSpec.feature "Listing Stories" do
     
     expect(page).to have_content(@story3.final_title)
     expect(page).to have_content(@story3.final_body.truncate(150))
-    expect(page).to have_content("Posted by: #{@anonymous_user.first_name} #{@anonymous_user.last_name}")
-    expect(page).not_to have_content("Posted by: #{@user1.full_name}")
+    expect(page).to have_link("#{@anonymous_user.first_name} #{@anonymous_user.last_name}")
+    expect(page).not_to have_content("#{@user1.full_name}")
   end
 end
