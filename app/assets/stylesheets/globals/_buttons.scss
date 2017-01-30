@@ -1,16 +1,12 @@
-%uppercase-button-w-icon {
+%button-w-icon {
   &.button {
     padding: 0.425em 0.5em; //overrides foundation padding
   };
-  text-transform: uppercase;
   font-weight: 600;
   span {
     margin: 0.425em 0.5em;
     display: inline-block;
   }
-}
-.uppercase-button-w-icon {
-  @extend %uppercase-button-w-icon;
   &.facebook {
     background: $facebook-color;
     &:hover {
@@ -29,4 +25,8 @@
       background: darken( $google-color, 10% );
     }
   }
+}
+.uppercase-button-w-icon {
+  @extend %button-w-icon;
+  text-transform: uppercase;
 }
