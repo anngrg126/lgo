@@ -84,12 +84,12 @@ class DashboardController < ApplicationController
   def set_dashboard_stories
     unless @user == current_user
       unless @user == @anonymous_user
-        @dashboard_stories = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}
+        @dashboard_stories = @user.stories.includes(:classifications).select {|s| s.poster_id == @user.id && s.active? && s.published?}
       else
-        @dashboard_stories = @user.stories_posted.select {|s| s.active? && s.published?}
+        @dashboard_stories = @user.stories_posted.includes(:classifications).select {|s| s.active? && s.published?}
       end
     else
-      @dashboard_stories = @user.stories.select {|s| s.active?}
+      @dashboard_stories = @user.stories.includes(:classifications).select {|s| s.active?}
     end
     @dashboard_stories.uniq!
   end
