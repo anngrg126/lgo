@@ -1,0 +1,146 @@
+%icon-button {
+  &.icon {
+    padding: 7px; //overrides foundation padding
+    line-height: 1.5; //overrides foundation setting of 1
+    font-size: 30px;
+    font-family: $icon-font-family;
+  };
+  
+  &.bookmark {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f097";
+      }
+    }
+  }
+  &.bookmark_filled {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f02e";
+      }
+    }
+  }
+  &.comment {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f0e5";
+      }
+    }
+  }
+  &.comment_filled {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f075";
+      }
+    }
+  }
+  &.like {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f087";
+      }
+    }
+  }
+  &.like_filled {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f164";
+      }
+    }
+  }
+  &.love {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f08a";
+      }
+    }
+  }
+  &.love_filled {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f004";
+      }
+    }
+  }
+  &.lol {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f097";
+      }
+    }
+  }
+  &.lol_filled {
+    span:first-child {
+      &:after { 
+        font-family: "FontAwesome";
+        content: "\f02e";
+      }
+    }
+  }
+}
+.icon-button {
+  @extend %icon-button;
+}
+
+.text-stack {
+  position: relative;
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  vertical-align: middle;
+}
+
+.circle-text {
+  font-size: 15px;
+  font-weight: 900;
+  width: 100%;
+  border-radius: 50%;
+  line-height: 1.5rem;
+  padding: 0px;
+  
+  &.open{
+    color: $blue;
+    border: 1px solid $blue;
+    background: $white;
+    
+    &:hover {
+      background: $ultra-light-gray;
+      color: darken($blue, 10%);
+    }
+  }
+  &.filled{
+    color: $white;
+    border: 1px solid $white;
+    background: $blue;
+    
+    &:hover {
+      background: $ultra-light-gray;
+      border: 1px solid darken($blue, 10%);
+      color: darken($blue, 10%);
+    }
+  }
+}
+
+.rotate-45 {
+  /* Safari */
+  -webkit-transform: rotate(-45deg);
+  /* Firefox */
+  -moz-transform: rotate(-45deg);
+  /* IE */
+  -ms-transform: rotate(-45deg);
+  /* Opera */
+  -o-transform: rotate(-45deg);
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1.5);
+  
+}

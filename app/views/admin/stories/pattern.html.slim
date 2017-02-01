@@ -4,11 +4,237 @@ div.row
   div.columns.large-6
     h4 With Current HTML/CSS/SCSS
 div.row
-  ul.accordion [data-accordion data-multi-expand="true"]
-    li.accordion-item.is-active
-      h3.accordion-title Buttons
+  ul.accordion [data-accordion data-multi-expand="true" data-allow-all-closed="true"]
+    li.accordion-item.is-active[data-accordion-item]
+        a.accordion-title[href="#"] Icons
+        div.accordion-content [data-tab-content]
+            h4 Bookmark Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/bookmark_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button bookmark" do
+                  span
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button bookmark" do 
+                div &nbsp;&nbsp;span
+            
+        div.accordion-content [data-tab-content]
+            h4 Bookmark filled Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/bookmark_selected.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button bookmark_filled" do
+                  span
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button bookmark_filled" do 
+                div &nbsp;&nbsp;span
+                
+        div.accordion-content [data-tab-content]
+            h4 Bookmark Icon with badge
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/bookmark_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button bookmark" do
+                    span [aria-describedby="bookmark_count"]
+                    span#bookmark_count.badge 33k
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button bookmark" do 
+                div &nbsp;&nbsp;span[aria-describedby="bookmark_count"]
+                div &nbsp;&nbsp;span#bookmark_count.badge 33k
+                
+        div.accordion-content [data-tab-content]
+            h4 Bookmark filled Icon with Badge
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/bookmark_selected.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button bookmark_filled" do
+                    span [aria-describedby="bookmark_count"]
+                    span#bookmark_count.badge 33k
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button bookmark_filled" do 
+                div &nbsp;&nbsp;span[aria-describedby="bookmark_count"]
+                div &nbsp;&nbsp;span#bookmark_count.badge 33k
+                
+        div.accordion-content [data-tab-content]
+            h4 Comment Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/comment_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button comment" do
+                  span
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button comment" do 
+                div &nbsp;&nbsp;span
+                
+        div.accordion-content [data-tab-content]
+            h4 Comment filled Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/comment_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button comment_filled" do
+                  span
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button comment_filled" do 
+                div &nbsp;&nbsp;span
+                
+        div.accordion-content [data-tab-content]
+            h4 Like Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/like_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button like" do
+                  span
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button like" do 
+                div &nbsp;&nbsp;span
+                
+        div.accordion-content [data-tab-content]
+            h4 Like filled Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/like_selected.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button like_filled" do
+                  span
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button like_filled" do 
+                div &nbsp;&nbsp;span
+                
+        div.accordion-content [data-tab-content]
+            h4 Like Icon with badge
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/like_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button like" do
+                    span [aria-describedby="bookmark_count"]
+                    span#bookmark_count.badge 33k
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button like" do 
+                div &nbsp;&nbsp;span[aria-describedby="like_count"]
+                div &nbsp;&nbsp;span#like_count.badge 33k
+                
+        div.accordion-content [data-tab-content]
+            h4 Like filled Icon with Badge
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/like_selected.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button like_filled" do
+                    span [aria-describedby="bookmark_count"]
+                    span#bookmark_count.badge 33k
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button like_filled" do 
+                div &nbsp;&nbsp;span[aria-describedby="like_count"]
+                div &nbsp;&nbsp;span#like_count.badge 33k
+                
+        div.accordion-content [data-tab-content]
+            h4 Love Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/love_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button love" do
+                  span
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button love" do 
+                div &nbsp;&nbsp;span
+                
+        div.accordion-content [data-tab-content]
+            h4 Love filled Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/love_selected.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button love_filled" do
+                  span
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button love_filled" do 
+                div &nbsp;&nbsp;span
+                
+        div.accordion-content [data-tab-content]
+            h4 OMG Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/omg_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon icon-button" do
+                  span.text-stack
+                    strong.fa-stack-1x.circle-text.open.rotate-45 OMG
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
+                div &nbsp;&nbsp;span.text-stack
+                div &nbsp;&nbsp;&nbsp;strong.fa-stack-1x.circle-text.open.rotate-45 OMG
+
+        div.accordion-content [data-tab-content]
+            h4 OMG filled Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/omg_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon-button icon" do
+                  span.text-stack
+                    strong.fa-stack-1x.circle-text.filled.rotate-45 OMG
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
+                div &nbsp;&nbsp;span.text-stack
+                div &nbsp;&nbsp;&nbsp;strong.fa-stack-1x.circle-text.filled.rotate-45 OMG
+                
+        div.accordion-content [data-tab-content]
+            h4 LOL Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/omg_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon-button icon" do
+                  span.text-stack
+                    strong.fa-stack-1x.circle-text.open.rotate-45 LOL
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
+                div &nbsp;&nbsp;span.text-stack
+                div &nbsp;&nbsp;&nbsp;strong.fa-stack-1x.circle-text.open.rotate-45 LOL
+                
+        div.accordion-content [data-tab-content]
+            h4 LOL filled Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/omg_active.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon-button icon" do
+                  span.text-stack
+                    strong.fa-stack-1x.circle-text.filled.rotate-45 LOL
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
+                div &nbsp;&nbsp;span.text-stack
+                div &nbsp;&nbsp;&nbsp;strong.fa-stack-1x.circle-text.filled.rotate-45 LOL
+  
+    li.accordion-item.is-active[data-accordion-item]
+      a.accordion-title[href="#"] Buttons
       div.accordion-content [data-tab-content]
-        h4 Button with Icon
+        h4 Icons
         div.row
           div.columns.large-6
             == image_tag("pattern_screenshots/facebook_btn.png")
@@ -21,6 +247,7 @@ div.row
             div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "button button-w-icon facebook" do 
             div &nbsp;&nbsp;span.fi-social-facebook
             div &nbsp;&nbsp;span Sign in with &#35;{OmniAuth::Utils.camelize(provider)}
+            
       div.accordion-content [data-tab-content]
         h4 Uppercase Button with Icon
         div.row
@@ -36,8 +263,8 @@ div.row
             div &nbsp;&nbsp;span.fi-clipboard-pencil
             div &nbsp;&nbsp;span Share a Story
 
-    li.accordion-item.is-active
-      h3.accordion-title Titles
+    li.accordion-item.is-active[data-accordion-item]
+      a.accordion-title[href="#"] Titles
       div.accordion-content [data-tab-content]
         div.row
           div.columns.large-6
