@@ -230,6 +230,73 @@ div.row
                 div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
                 div &nbsp;&nbsp;span.text-stack
                 div &nbsp;&nbsp;&nbsp;strong.fa-stack-1x.circle-text.filled.rotate-45 LOL
+                
+        div.accordion-content [data-tab-content]
+            h4 Pencil/Edit Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/pencil.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon-button icon" do
+                  span.fa.fa-pencil
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
+                div &nbsp;&nbsp;span.fa.fa-pencil
+                
+        div.accordion-content [data-tab-content]
+            h4 Camera Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/camera.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon-button icon" do
+                  span.fa.fa-camera
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
+                div &nbsp;&nbsp;span.fa.fa-camera
+                
+        div.accordion-content [data-tab-content]
+            h4 Search Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/search.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon-button icon" do
+                  span.fa.fa-search
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
+                div &nbsp;&nbsp;span.fa.fa-search
+                
+        div.accordion-content [data-tab-content]
+            h4 Settings Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/settings.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon-button icon" do
+                  span.fa.fa-cog
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
+                div &nbsp;&nbsp;span.fa.fa-cog
+                
+        div.accordion-content [data-tab-content]
+            h4 Bulb Icon
+            div.row
+              div.columns.large-6
+                == image_tag("pattern_screenshots/icons/bulb.png")
+              div.columns.large-6
+                == link_to root_path, class: "icon-button icon" do
+                  span.fa.fa-lightbulb-o
+                  span.fa.fa-lightbulb-o.fa-2x
+            div.row.columns
+              code
+                div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "icon icon-button" do 
+                div &nbsp;&nbsp;span.fa.fa-lightbulb-o
+                div &nbsp;&nbsp;span.fa.fa-lightbulb-o.fa-2x
   
     li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Buttons
