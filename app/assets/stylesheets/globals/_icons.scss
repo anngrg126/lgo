@@ -2,6 +2,7 @@ $primary-icon-color: $blue;
 $secondary-icon-color: $middark-gray;
 $background-icon-color: $white;
 $background-icon-color-hover: $ultra-light-gray;
+$footer-icon-color: $black;
 
 %icon {
   padding: 7px; //overrides foundation padding
@@ -9,6 +10,7 @@ $background-icon-color-hover: $ultra-light-gray;
   font-size: 24px; //overrides standard font size of 14px
   vertical-align: -15%;
   font-family: $icon-font-family;
+  display: inline-block;
   &.primary-icon {
     color: $primary-icon-color;
   }
@@ -28,12 +30,35 @@ $background-icon-color-hover: $ultra-light-gray;
     color: darken($primary-icon-color, 14%);
     }
   };
+  .circle-text.open:hover {
+    background: $background-icon-color-hover;
+    color: darken($primary-icon-color, 14%);
+    border: 2px solid darken($primary-icon-color, 14%);
+  };
+  .circle-text.filled:hover {
+    background: darken($primary-icon-color, 14%);
+    border: 2px solid darken($primary-icon-color, 14%);
+  }
+}
+.icon {
+  @extend %icon;
+}
+.small-icon {
+  @extend %icon;
+  font-size: 18px;
+  .circle-text {
+  &.fa-stack-1x {
+    line-height: 1.5rem;
+  }
+  font-size: 10px;
+  }
 }
 .icon-button {
   @extend %icon-button;
 }
-.icon {
-  @extend %icon;
+.small-icon-button {
+  @extend %icon-button;
+  font-size: 18px;
 }
 .icon-counter{
   padding: 0em;
@@ -70,20 +95,11 @@ $background-icon-color-hover: $ultra-light-gray;
     color: $primary-icon-color;
     border: 2px solid $primary-icon-color;
     background: $background-icon-color;
-    &:hover {
-      background: $background-icon-color-hover;
-      color: darken($primary-icon-color, 14%);
-      border: 2px solid darken($primary-icon-color, 14%);
-    }
   }
   &.filled{
     color: $background-icon-color;
     border: 2px solid $primary-icon-color;
     background: $primary-icon-color;
-    &:hover {
-      background: darken($primary-icon-color, 14%);
-      border: 2px solid darken($primary-icon-color, 14%);
-    }
   }
 }
 .rotate-45 {
@@ -99,50 +115,47 @@ $background-icon-color-hover: $ultra-light-gray;
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1.5);
 }
 %social-icon {
-  &.icon {
-    padding: 0px; //overrides foundation padding
-    line-height: 1.5; //overrides foundation setting of 1
-  };
+  font-size: 24px;
   &.facebook {
     color: $facebook-color;
     background: $background-icon-color;
     &:hover {
-      color: darken($facebook-color, 10%);
+      color: darken($facebook-color, 14%);
     }
   }
   &.twitter {
     color: $twitter-color;
     background: $background-icon-color;
     &:hover {
-      color: darken( $twitter-color, 10% );
+      color: darken( $twitter-color, 14% );
     }
   }
   &.google {
     color: $google-color;
     background: $background-icon-color;
     &:hover {
-      color: darken( $google-color, 10% );
+      color: darken( $google-color, 14% );
     }
   }
   &.pinterest {
     color: $pinterest-color;
     background: $background-icon-color;
     &:hover {
-      color: darken( $pinterest-color, 10% );
+      color: darken( $pinterest-color, 14% );
     }
   }
   &.instagram {
     color: $instagram-color;
     background: $background-icon-color;
     &:hover {
-      color: darken( $instagram-color, 10% );
+      color: darken( $instagram-color, 14% );
     }
   }
-  &.gray {
-    color: $middark-gray;
+  &.footer-icon {
+    color: $footer-icon-color;
     background: $background-icon-color;
     &:hover {
-      color: darken( $middark-gray, 10% );
+      color: darken($primary-icon-color, 14%);
     }
   }
 }

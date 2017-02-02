@@ -9,11 +9,9 @@ div.row
         a.accordion-title[href="#"] Icons
         /primary icons
         div.accordion-content [data-tab-content]
-          h4 All Primary Icons with badges (w/ link)
+          h4 All Primary Icons with badges (clickable)
           div.row
-            div.columns.large-6
-              == image_tag("pattern_screenshots/icons/like_active.png")
-            div.columns.large-6
+            div.columns.small-12
               == link_to root_path, class: "icon-button primary-icon" do
                 span.fa.fa-comment.fa-lg.fa-lg [aria-describedby="comment_count"]
                 span#comment_count.icon-counter 3
@@ -51,24 +49,54 @@ div.row
               div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.open.rotate-45 LOL
               div &nbsp;&nbsp;span#lol_count.icon-counter 41k  
         div.accordion-content [data-tab-content]
-          h4 All Primary Icons (w/o link)
+          h4 All Primary Small Icons (not clickable, for notifications page)
           div.row
             div.columns.small-12
-              .icon.primary-icon
-                span.fa.fa-comment.fa-lg.fa-lg
-              .icon.primary-icon
+              .small-icon.primary-icon
+                span.fa.fa-comment.fa-lg
+              .small-icon.primary-icon
                 span.fa.fa-thumbs-up.fa-lg
-              .icon.primary-icon
+              .small-icon.primary-icon
                 span.fa.fa-heart.fa-lg
-              .icon.primary-icon
+              .small-icon.primary-icon
                 span.text-stack
                   .fa-stack-1x.circle-text.filled.rotate-45 OMG
-              .icon.primary-icon
+              .small-icon.primary-icon
                 span.text-stack
                   .fa-stack-1x.circle-text.filled.rotate-45 LOL
+              .small-icon.primary-icon
+                span.fa.fa-bookmark.fa-lg
+              .small-icon.primary-icon
+                span.fa.fa-check.fa-lg
+              .small-icon.primary-icon
+                span.fa.fa-group.fa-lg
           div.row.columns
             code
-              div TBU
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-comment.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-thumbs-up.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-heart.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.text-stack
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.filled.rotate-45 OMG
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.text-stack
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.filled.rotate-45 LOL
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-bookmark.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-check.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-group.fa-lg
         div.accordion-content [data-tab-content]
           h4 Bookmark Icon
           div.row
@@ -285,7 +313,7 @@ div.row
           h4 LOL Icon
           div.row
             div.columns.large-6
-              == image_tag("pattern_screenshots/icons/omg_active.png")
+              == image_tag("pattern_screenshots/icons/lol_active.png")
             div.columns.large-6
               == link_to root_path, class: "icon-button primary-icon" do
                 span.text-stack
@@ -299,7 +327,7 @@ div.row
           h4 LOL filled Icon
           div.row
             div.columns.large-6
-              == image_tag("pattern_screenshots/icons/omg_active.png")
+              == image_tag("pattern_screenshots/icons/lol_active.png")
             div.columns.large-6
               == link_to root_path, class: "icon-button primary-icon" do
                 span.text-stack
@@ -309,306 +337,299 @@ div.row
               div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
               div &nbsp;&nbsp;span.text-stack
               div &nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.filled.rotate-45 LOL
-        /secondary icons        
-        div.accordion-content [data-tab-content]
-          h4 Pencil/Edit Icon
-          div.row
-            div.columns.large-6
-              == image_tag("pattern_screenshots/icons/pencil.png")
-            div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
-                span.fa.fa-pencil.fa-lg
-          div.row.columns
-            code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
-              div &nbsp;&nbsp;span.fa.fa-pencil.fa-lg
-                
         div.accordion-content [data-tab-content]
           h4 Camera Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/camera.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon primary-icon" do
+              == link_to root_path, class: "icon-button primary-icon" do
                 span.fa.fa-camera.fa-lg
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button primary-icon" do 
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-camera.fa-lg
-                
+        div.accordion-content [data-tab-content]
+          h4 Follow Plus Icon
+          div.row
+            div.columns.large-6
+              == image_tag("pattern_screenshots/icons/follow_plus.png")
+            div.columns.large-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-plus-circle.fa-lg
+          div.row.columns
+            code
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-plus-circle.fa-lg
+        /primary icons not-clickable
+        div.accordion-content [data-tab-content]
+          h4 Followers Icon (Small, Not clickable)
+          div.row
+            div.columns.large-6
+              == image_tag("pattern_screenshots/icons/follow.png")
+            div.columns.large-6
+              .small-icon.primary-icon
+                span.fa.fa-group.fa-lg
+          div.row.columns
+            code
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-group.fa-lg  
+        div.accordion-content [data-tab-content]
+          h4 Check Icon (Small, Not clickable)
+          div.row
+            div.columns.large-6
+              == image_tag("pattern_screenshots/icons/check.png")
+            div.columns.large-6
+              .small-icon.primary-icon
+                span.fa.fa-check.fa-lg
+          div.row.columns
+            code
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-check.fa-lg
+        /secondary icons  
+        div.accordion-content [data-tab-content]
+          h4 Bulb Icon (Big Secondary Icon, Not Clickable)
+          div.row
+            div.columns.large-6
+              == image_tag("pattern_screenshots/icons/bulb.png")
+            div.columns.large-6
+              .icon.secondary-icon
+                span.fa.fa-lightbulb-o.fa-lg
+          div.row.columns
+            code
+              div .icon.secondary-icon
+              div &nbsp;&nbsp;span.fa.fa-lightbulb-o.fa-lg
+        div.accordion-content [data-tab-content]
+          h4 Pencil/Edit Icon (Small Secondary Icon, Clickable)
+          div.row
+            div.columns.large-6
+              == image_tag("pattern_screenshots/icons/pencil.png")
+            div.columns.large-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-pencil.fa-lg
+          div.row.columns
+            code
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-pencil.fa-lg
         div.accordion-content [data-tab-content]
           h4 Search Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/search.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-search.fa-lg
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-search.fa-lg
-                
         div.accordion-content [data-tab-content]
           h4 Settings Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/settings.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-cog.fa-lg
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-cog.fa-lg
-                
         div.accordion-content [data-tab-content]
-          h4 Bulb Icon
-          div.row
-            div.columns.large-6
-              == image_tag("pattern_screenshots/icons/bulb.png")
-            div.columns.large-6
-              == link_to root_path, class: "icon-button icon primary-icon" do
-                span.fa.fa-lightbulb-o.fa-lg
-          div.row.columns
-            code
-              div &#61;&#61; link_to root_path, class: "icon icon-button primary-icon" do 
-              div &nbsp;&nbsp;span.fa.fa-lightbulb-o.fa-lg
-                
-        div.accordion-content [data-tab-content]
-          h4 Delete Icon
+          h4 Delete Icon (Extra-small)
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/delete.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
-                span.fa.fa-trash-o.fa-lg
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-trash-o
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
-              div &nbsp;&nbsp;span.fa.fa-trash-o.fa-lg
-                
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-trash-o
         div.accordion-content [data-tab-content]
-          h4 Follow Icon
-          div.row
-            div.columns.large-6
-              == image_tag("pattern_screenshots/icons/follow.png")
-            div.columns.large-6
-              == link_to root_path, class: "icon-button icon primary-icon" do
-                span.fa.fa-users.fa-lg
-          div.row.columns
-            code
-              div &#61;&#61; link_to root_path, class: "icon icon-button primary-icon" do 
-              div &nbsp;&nbsp;span.fa.fa-users.fa-lg
-                
-        div.accordion-content [data-tab-content]
-          h4 Follow Plus Icon
-          div.row
-            div.columns.large-6
-              == image_tag("pattern_screenshots/icons/follow.png")
-            div.columns.large-6
-              == link_to root_path, class: "icon-button icon primary-icon" do
-                span.fa.fa-plus-circle.fa-lg
-          div.row.columns
-            code
-              div &#61;&#61; link_to root_path, class: "icon icon-button primary-icon" do 
-              div &nbsp;&nbsp;span.fa.fa-plus-circle.fa-lg
-                
-        div.accordion-content [data-tab-content]
-          h4 Check Icon
+          h4 Check Icon (Extra-Small)
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/check.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
-                span.fa.fa-check.fa-lg
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-check
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
-              div &nbsp;&nbsp;span.fa.fa-check.fa-lg
-                
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-check
         div.accordion-content [data-tab-content]
           h4 Bold Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/bold.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-bold
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-bold
-                
         div.accordion-content [data-tab-content]
           h4 Italic Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/italic.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-italic
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-italic
-                
         div.accordion-content [data-tab-content]
           h4 Strikethrough Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/strikethrough.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-strikethrough
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-strikethrough
-                
         div.accordion-content [data-tab-content]
           h4 Text Size Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/text_size.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-font
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-font
-
         div.accordion-content [data-tab-content]
           h4 Bullet Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/bullet.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-list
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "smallicon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-list
-                
         div.accordion-content [data-tab-content]
           h4 Ordered Bullet Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/ordered_bullet.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-list-ol
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-list-ol
-                
         div.accordion-content [data-tab-content]
           h4 Undo Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/undo.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-undo
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-undo
-                
         div.accordion-content [data-tab-content]
           h4 Redo Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/redo.png")
             div.columns.large-6
-              == link_to root_path, class: "icon-button icon secondary-icon" do
+              == link_to root_path, class: "small-icon-button secondary-icon" do
                 span.fa.fa-repeat
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "icon icon-button secondary-icon" do 
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-repeat
-                
-        div.accordion-content [data-tab-content]
-          h4 Facebook Icon Gray
-          div.row
-            div.columns.large-6
-              == image_tag("pattern_screenshots/icons/facebook.png", width: '36')
-            div.columns.large-6
-              == link_to root_path, class: "social-icon icon gray" do
-                span.fa.fa-facebook-official.fa-3x
-          div.row.columns
-            code
-              div &#61;&#61; link_to root_path, class: "social-icon icon gray" do 
-              div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-3x
-                
+        //social media icons                
         div.accordion-content [data-tab-content]
           h4 Facebook Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/facebook.png", width: '36')
             div.columns.large-6
-              == link_to root_path, class: "social-icon icon facebook" do
-                span.fa.fa-facebook-official.fa-3x
+              == link_to root_path, class: "social-icon facebook" do
+                span.fa.fa-facebook-official.fa-lg
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "social-icon icon facebook" do 
-              div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-3x
-                
+              div &#61;&#61; link_to root_path, class: "social-icon facebook" do 
+              div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-lg
         div.accordion-content [data-tab-content]
           h4 Google Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/google_plus.png", width: '36')
             div.columns.large-6
-              == link_to root_path, class: "social-icon icon google" do
-                span.fa.fa-google-plus-official.fa-3x
+              == link_to root_path, class: "social-icon google" do
+                span.fa.fa-google-plus-square.fa-lg
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "social-icon icon google" do 
-              div &nbsp;&nbsp;span.fa.fa-google-plus-official.fa-3x
-                
+              div &#61;&#61; link_to root_path, class: "social-icon google" do 
+              div &nbsp;&nbsp;span.fa.fa-google-plus-square.fa-lg
         div.accordion-content [data-tab-content]
           h4 Twitter Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/twitter.png", width: '36')
             div.columns.large-6
-              == link_to root_path, class: "social-icon icon twitter" do
-                span.fa.fa-twitter-square.fa-3x
+              == link_to root_path, class: "social-icon twitter" do
+                span.fa.fa-twitter-square.fa-lg
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "social-icon icon twitter" do 
-              div &nbsp;&nbsp;span.fa.fa-twitter-square.fa-3x
-                
+              div &#61;&#61; link_to root_path, class: "social-icon twitter" do 
+              div &nbsp;&nbsp;span.fa.fa-twitter-square.fa-lg
         div.accordion-content [data-tab-content]
           h4 Pinterest Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/pinterest.png", width: '36')
             div.columns.large-6
-              == link_to root_path, class: "social-icon icon pinterest" do
-                span.fa.fa-pinterest-square.fa-3x
+              == link_to root_path, class: "social-icon pinterest" do
+                span.fa.fa-pinterest-square.fa-lg
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "social-icon icon pinterest" do 
-              div &nbsp;&nbsp;span.fa.fa-pinterest-square.fa-3x
-                
+              div &#61;&#61; link_to root_path, class: "social-icon pinterest" do 
+              div &nbsp;&nbsp;span.fa.fa-pinterest-square.fa-lg
         div.accordion-content [data-tab-content]
           h4 Instagram Icon
           div.row
             div.columns.large-6
               == image_tag("pattern_screenshots/icons/instagram.png", width: '36')
             div.columns.large-6
-              == link_to root_path, class: "social-icon icon instagram" do
-                span.fa.fa-instagram.fa-3x
+              == link_to root_path, class: "social-icon instagram" do
+                span.fa.fa-instagram.fa-lg
           div.row.columns
             code
-              div &#61;&#61; link_to root_path, class: "social-icon icon instagram" do 
-              div &nbsp;&nbsp;span.fa.fa-instagram.fa-3x
-  
+              div &#61;&#61; link_to root_path, class: "social-icon instagram" do 
+              div &nbsp;&nbsp;span.fa.fa-instagram.fa-lg
+        //footer icons
+        div.accordion-content [data-tab-content]
+          h4 Footer Social Icons
+          div.row
+            div.columns.large-6
+              == image_tag("pattern_screenshots/icons/facebook.png", width: '36')
+            div.columns.large-6
+              == link_to root_path, class: "social-icon footer-icon" do
+                span.fa.fa-facebook-official.fa-lg
+          div.row.columns
+            code
+              div &#61;&#61; link_to root_path, class: "social-icon footer-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-lg
+              
     li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Buttons
       div.accordion-content [data-tab-content]
@@ -625,7 +646,6 @@ div.row
             div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "button button-w-icon facebook" do 
             div &nbsp;&nbsp;span.fi-social-facebook
             div &nbsp;&nbsp;span Sign in with &#35;{OmniAuth::Utils.camelize(provider)}
-            
       div.accordion-content [data-tab-content]
         h4 Uppercase Button with Icon
         div.row
