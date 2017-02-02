@@ -69,7 +69,7 @@
   font-size: 0.9rem;
 }
 #user_notifications a {
-  @extend %primary-link;
+  @extend %header-gray-link;
   &.inactive-link {
     @extend .inactive-link;
   }
@@ -172,7 +172,7 @@
 
 //tag category links
 #tags-menu ul a {
-  @extend %primary-link;
+  @extend %header-gray-link;
   padding-right: 0;
   border-bottom: 2px solid transparent;
   &:focus {
@@ -192,14 +192,14 @@
     border-bottom: 2px solid transparent;
   }
   &.navbar_fail {
-    @extend .secondary-link;
+    @extend .header-blue-link;
     font-weight: 500;
   }
 }
 
 //tag links
 #tags-menu ul ul a {
-  @extend .secondary-link;
+  @extend .header-blue-link;
   &:hover {
     border-bottom: none;
   }

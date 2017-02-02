@@ -635,15 +635,17 @@ div.row
             div &nbsp;&nbsp;span Share a Story
 
     li.accordion-item.is-active[data-accordion-item]
-      a.accordion-title[href="#"] Titles
+      a.accordion-title[href="#"] Links
       div.accordion-content [data-tab-content]
+        h4 Primary Link
         div.row
-          div.columns.large-6
-            == image_tag("pattern_screenshots/share_story_button.png")
-          div.columns.large-6
-            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do
-              span.fi-clipboard-pencil
-              span Share a Story 
+          div.columns.small-12
+            == link_to "This is a Primary Link", root_path, class: "primary-link"
+      div.accordion-content [data-tab-content]
+        h4 Secondary Link
+        div.row
+          div.columns.small-12
+            == link_to "This is a Secondary Link", root_path, class: "secondary-link"
               
     li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Images

@@ -1,24 +1,55 @@
-//links
+//labels
+.label {
+  background: $ultra-light-gray !important;//overrides foundation setting
+}
+
+//body font
+html {
+  font-size: 62.5%; //equivalent to 10px
+}
+$global-font-size: 62.5%; //for foundation, roughly 16px
+
+a, p, span, button, li, div {
+  font-size: 1.6rem;
+}
+@media only screen and (max-width: 40.063em) {
+  a, p, span, button, li, div {
+    font-size: 1.4rem;
+  }
+}
+
+//header links
 .inactive-link {
   color: $middark-gray;
   &:hover {
     color: lighten($middark-gray, 15%);  
   }
 }
-%primary-link {
+%header-gray-link {
   color: $dark-gray; //same as $topbar-link-color
   &:hover {
-    color: lighten($dark-gray, 25%); //same as $topbar-link-color-hover
+    color: darken($primary-color, 14%); //same as $topbar-link-color-hover
   }
 }
-.secondary-link {
+.header-blue-link {
   color: $primary-color; //same as $body-font-family$anchor-color
   &:hover {
     color: darken($primary-color, 14%); //same as $anchor-color-hover 
   }
 }
 
-//labels
-.label {
-  background: $ultra-light-gray !important;//overrides foundation setting
+//body links
+.primary-link {
+  color: $primary-color;
+  font-weight: 500;
+  &:hover {
+    color: darken($primary-color, 14%);
+  }
+}
+.secondary-link {
+  color: $dark-gray;
+  font-weight: 500;
+  &:hover {
+    color: $primary-color, 14%;
+  }
 }
