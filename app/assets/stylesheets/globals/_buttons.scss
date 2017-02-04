@@ -40,3 +40,7 @@
   @extend %button-w-icon;
   text-transform: uppercase;
 }
+
+.input-group-button input {
+  font-weight: bold;
+}

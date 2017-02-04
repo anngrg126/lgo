@@ -9,13 +9,8 @@ html {
 }
 $global-font-size: 62.5%; //for foundation, roughly 16px
 
-a, p, span, button, li, div {
+a, p, span, button, li, div, .input-group-button input {
   font-size: 1.6rem;
-}
-@media only screen and (max-width: 40.063em) {
-  a, p, span, button, li, div {
-    font-size: 1.4rem;
-  }
 }
 
 //header links
@@ -28,7 +23,8 @@ a, p, span, button, li, div {
 %header-gray-link {
   color: $dark-gray; //same as $topbar-link-color
   &:hover {
-    color: darken($primary-color, 14%); //same as $topbar-link-color-hover
+    //color: darken($primary-color, 14%); //same as $topbar-link-color-hover
+    color: $primary-color; //same as $topbar-link-color-hover
   }
 }
 .header-blue-link {
@@ -51,5 +47,28 @@ a, p, span, button, li, div {
   font-weight: 500;
   &:hover {
     color: $primary-color, 14%;
+  }
+}
+
+//subtext
+.subtext {
+  font-size: 1.5rem;
+}
+
+//headers
+h1 {
+  font-size: 4.5rem;
+  font-weight: 700;
+}
+h2 {
+  font-size: 1.8rem;
+}
+
+@media only screen and (max-width: 40.063em) {
+  a, p, span, button, li, div, .input-group-button input {
+    font-size: 1.4rem;
+  }
+  .subtext {
+    font-size: 1.3rem;
   }
 }

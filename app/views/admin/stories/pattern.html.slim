@@ -635,7 +635,7 @@ div.row
             div &nbsp;&nbsp;span Share a Story
 
     li.accordion-item.is-active[data-accordion-item]
-      a.accordion-title[href="#"] Links
+      a.accordion-title[href="#"] Typography
       div.accordion-content [data-tab-content]
         h4 Primary Link
         div.row
@@ -646,6 +646,29 @@ div.row
         div.row
           div.columns.small-12
             == link_to "This is a Secondary Link", root_path, class: "secondary-link"
+      div.accordion-content [data-tab-content]
+        h4 Subtext
+        div.row
+          div.columns.small-12
+            p.subtext This is subtext information
+      div.accordion-content [data-tab-content]
+        h4 Tags
+        div.row
+          div.columns.small-12
+            span.label
+              a.subtext.primary-link[href="#{stories_path}?search_tag=#{tag_search("This is a Tag")}"] This is a Tag
+      div.accordion-content [data-tab-content]
+        h4 Header 1 (story show view, page titles)
+        div.row
+          div.columns.small-12
+            h1 This is an h1 header
+      div.accordion-content [data-tab-content]
+        h4 Header 2 (story cards, uer name on story show page)
+        div.row
+          div.columns.small-12
+            h2 This is an h2 header
+      
+        
               
     li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Images

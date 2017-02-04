@@ -14,6 +14,7 @@
   border-bottom-style: inset;
   border-width: 1px;
   line-height: 0.8;
+  background-color: $white;
   img {
     max-height: 40px; 
   }
@@ -48,10 +49,13 @@
 
 //BROWSE & SHARE link colors
 .nav-toptier h5, .nav-midtier h6 {
-  text-transform: uppercase;
+//  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 700;
   color: $dark-gray;
   &:hover {
     color: $primary-color;
+    cursor: pointer;
   }
   &.active {
     color: $primary-color;
@@ -65,11 +69,11 @@
 #user_notifications {
   vertical-align: bottom;
   margin-right: 10px; 
-  position: relative; 
-  font-size: 0.9rem;
+  position: relative;
 }
 #user_notifications a {
   @extend %header-gray-link;
+  font-size: 1.4rem;
   &.inactive-link {
     @extend .inactive-link;
   }
@@ -79,6 +83,7 @@
   .notifications_count {
     color: $red;
     font-weight: 500;
+    font-size: 1.4rem;
   }
 }
 
@@ -98,13 +103,14 @@
     font-size: 110%;
     color: $dark-gray;
     &:hover {
-      color: $topbar-link-color-hover;
+      //color: $topbar-link-color-hover;
+      color: $primary-color;
       img {
         filter: brightness(115%);
       }
     }
     span {
-      font-weight: 500;
+      font-weight: 600;
       border-right: 1px solid $middark-gray;
       padding-right: 5px;
       margin-right: 5px;
@@ -115,7 +121,9 @@
   width: 200px;
 }
 #user_dropdown_button:hover {
-  color: $topbar-link-color-hover;
+  //color: $topbar-link-color-hover;
+  color: $primary-color;
+  cursor: pointer;
 }
 
 //navbar bottom tier
@@ -130,12 +138,14 @@
   box-shadow: inset 0px 5px 10px -7px $dark-gray;
   max-width: none;
   h6 {
-    text-transform: uppercase;
+//    text-transform: uppercase;
     border-right: 1px solid $dark-gray;
     display: inline-block;
     padding-right: 15px;
     margin-bottom: 0;
-    margin-left: 15px;
+    margin-left: 10px;
+    font-size: 1.6rem;
+    font-weight: 700;
   }
   .columns>ul {
     display: inline-block;
@@ -154,7 +164,9 @@
     margin: 0;
   }
   .list-header {
-    text-transform: uppercase;
+//    text-transform: uppercase;
+    font-weight: 700;
+    color: $topbar-link-color;
   }
   .is-dropdown-submenu {
     padding: 15px 10px;
@@ -168,6 +180,9 @@
   .type {
     min-width: 400px;
   }
+//  .fa {
+//    font-size: 1.6rem;
+//  }
 }
 
 //tag category links
@@ -239,9 +254,9 @@
       border-bottom: 3px solid transparent;
     }
     h6 {
-      font-weight: 800;
+      font-weight: 700;
       margin-bottom: 0;
-      line-height: inherit;
+//      line-height: inherit;
     }
     input {
       max-width: none;
@@ -254,11 +269,20 @@
     }
     div.active {
       border-bottom: 3px solid $primary-color;
-      .active {
+      .fa, .active {
         color: $primary-color;
         &:hover {
           color: darken($primary-color, 15%);
         }
+      }
+    }
+    .fa {
+      font-size: 2rem;
+      line-height: 1.4;
+      color: $topbar-link-color;
+      &:hover {
+        color: $primary-color;
+        cursor: pointer;
       }
     }
   }
@@ -290,6 +314,9 @@
     .is-drilldown li.hide-for-small-only {
       display: none !important;
     }
+    ul, .menu > li > a {
+      line-height: 1.8;
+    }
   }
 
   //tag category links
@@ -313,7 +340,7 @@
   //other
   #search_dropdown_mobile {
     display: none;
-    background-color: $ultra-light-gray;
+//    background-color: $ultra-light-gray;
     border-bottom: 1px solid $medium-gray;
     border-bottom-style: inset;
   }
