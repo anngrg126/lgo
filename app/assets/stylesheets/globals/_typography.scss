@@ -7,10 +7,35 @@
 html {
   font-size: 62.5%; //equivalent to 10px
 }
-$global-font-size: 62.5%; //for foundation, roughly 16px
+$global-font-size: 62.5%; //for foundation
 
+$global-body-sizes: (
+  0: 1.4rem,
+  640px: 1.6rem
+);
+$subtext-sizes: (
+  0: 1.3rem,
+  640px: 1.5rem
+);
+@mixin font-size($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @media screen and (min-width: $fs-breakpoint) {
+      font-size: $fs-font-size;
+    }
+  }
+}
 a, p, span, button, li, div, .input-group-button input {
-  font-size: 1.6rem;
+  @include font-size($global-body-sizes);
+}
+.subtext {
+  @include font-size($subtext-sizes);
+}
+h1 {
+  font-size: 4.5rem;
+  font-weight: 700;
+}
+h2 {
+  font-size: 1.8rem;
 }
 
 //header links
@@ -50,25 +75,5 @@ a, p, span, button, li, div, .input-group-button input {
   }
 }
 
-//subtext
-.subtext {
-  font-size: 1.5rem;
-}
-
-//headers
-h1 {
-  font-size: 4.5rem;
-  font-weight: 700;
-}
-h2 {
-  font-size: 1.8rem;
-}
-
 @media only screen and (max-width: 40.063em) {
-  a, p, span, button, li, div, .input-group-button input {
-    font-size: 1.4rem;
-  }
-  .subtext {
-    font-size: 1.3rem;
-  }
 }
