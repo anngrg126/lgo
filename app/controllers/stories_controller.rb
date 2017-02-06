@@ -9,7 +9,7 @@ class StoriesController < ApplicationController
     @active_browse = "active"
     if params[:search]
       @results = (Story.includes(:user, :classifications).search params[:search], operator: "or")
-      @stories = @results.results
+      @stories = @results.results.select{|s| s.active? && s.published}
       log_search_query(params[:search], @results.count)
       if @results.count <=0
         flash[:warning] = "No stories matched : "+ params[:search]
@@ -17,7 +17,7 @@ class StoriesController < ApplicationController
       end
     elsif params[:search_tag]
       @results = (Story.includes(:user, :classifications).search params[:search_tag], fields: [tags: :exact])
-      @stories = @results.results
+      @stories = @results.results.select{|s| s.active? && s.published}
       if @results.count <=0
         flash[:warning] = "No records matched : "+ params[:search_tag]
         redirect_to root_path
