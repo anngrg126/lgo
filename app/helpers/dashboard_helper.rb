@@ -86,11 +86,11 @@ module DashboardHelper
     end
   end
   
-  def story_pending(story)
-    unless story.published?
-      html = "<div>Pending</div>".html_safe
-    end
-  end
+#  def story_pending(story)
+#    unless story.published?
+#      html = "Pending".html_safe
+#    end
+#  end
   
   def story_anonymous(story)
     if story.anonymous?
