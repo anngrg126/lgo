@@ -1,3 +1,9 @@
+.button {
+  @include font-size($global-body-sizes);
+  padding: 0.85rem 1rem;//overrides foundation
+  font-weight: 500;
+  line-height: 1.15;//overrides foundation
+}
 %button-w-icon {
   &.button {
 //    padding: 0.425em 0.5em; //overrides foundation padding
@@ -11,7 +17,7 @@
     display: inline-block;
   }
   span:first-child {
-    font-size: 1.5em;
+    font-size: 2.0rem;
     margin: 6px 7px 0 7px;
   };
   &.facebook {
@@ -39,8 +45,4 @@
 .uppercase-button-w-icon {
   @extend %button-w-icon;
   text-transform: uppercase;
-}
-
-.input-group-button input {
-  font-weight: bold;
 }

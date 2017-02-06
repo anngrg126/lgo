@@ -24,7 +24,7 @@ div#stickhere[data-sticky-container]
                     == current_user.display_name
                 div.hide-for-small-only
                   button.float-right#user_dropdown_button[type="button" data-toggle="user_dropdown" style="vertical-align: bottom; padding-bottom: 1px;"]
-                    i.fa.fa-chevron-down.fa-1[aria-hidden="true"]
+                    /i.fa.fa-chevron-down.fa-1[aria-hidden="true"]
                 div.show-for-small-only[style="vertical-align: bottom;"]
                   #user_notifications
                     == user_notifications_link_small
@@ -61,8 +61,8 @@ div#stickhere[data-sticky-container]
             h6 For Ideas
           li
             a.dropdown_category[href="#"] 
-              | Occasion&nbsp;
-              i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+              | Occasion&nbsp;&nbsp;
+              /i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
             ul.vertical.menu.occasion
               .row
                 .columns.medium-3.small-12
@@ -125,8 +125,8 @@ div#stickhere[data-sticky-container]
 
           li
             a.dropdown_category[href="#"]
-              | Relationship&nbsp;
-              i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+              | Relationship&nbsp;&nbsp;
+              /i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
             ul.vertical.menu.relationship
               .row
                 .columns.medium-6
@@ -159,8 +159,8 @@ div#stickhere[data-sticky-container]
                     a[href="#{stories_path}?search_tag=#{tag_search("significant other's family")}"] Significant other's family
           li
             a.dropdown_category[href="#"] 
-              | Type of Gift&nbsp;
-              i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+              | Type of Gift&nbsp;&nbsp;
+              /i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
             ul.vertical.menu.type
               .row
                 .columns.medium-4
@@ -202,8 +202,8 @@ div#stickhere[data-sticky-container]
 
           li
             a.dropdown_category[href="#"] 
-              | Interests&nbsp;
-              i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
+              | Interests&nbsp;&nbsp;
+              /i.fa.fa-chevron-circle-down.hide-for-small-only[aria-hidden="true"]
             ul.vertical.menu.interests
               .row
                 .columns.medium-6
@@ -231,7 +231,7 @@ div#stickhere[data-sticky-container]
       .columns.hide-for-small-only
         == render partial: 'shared/standalone_header_links'
       .columns
-        button.float-right.hide-for-small-only.search_button[type="button" id="btnSearch" data-toggle="search_dropdown" style="padding: 0.7rem 1rem;"] 
+        button.float-right.hide-for-small-only[type="button" id="btnSearch" data-toggle="search_dropdown"] 
           | &nbsp;
           i.fa.fa-search[aria-hidden="true"]
     #search_dropdown.dropdown-pane.bottom[data-dropdown]
@@ -251,6 +251,6 @@ div#stickhere[data-sticky-container]
           li
             == link_to "My Bookmarks", bookmarked_stories_dashboard_path(current_user)
           li
-            hr[style="margin: 0;"]
+            hr
           li
             == link_to "Sign out", destroy_user_session_path, method: :delete

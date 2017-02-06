@@ -24,7 +24,7 @@ $subtext-sizes: (
     }
   }
 }
-a, p, span, button, li, div, .input-group-button input {
+a, p, span, button, li, div {
   @include font-size($global-body-sizes);
 }
 .subtext {
@@ -48,7 +48,6 @@ h2 {
 %header-gray-link {
   color: $dark-gray; //same as $topbar-link-color
   &:hover {
-    //color: darken($primary-color, 14%); //same as $topbar-link-color-hover
     color: $primary-color; //same as $topbar-link-color-hover
   }
 }
@@ -73,7 +72,4 @@ h2 {
   &:hover {
     color: $primary-color, 14%;
   }
-}
-
-@media only screen and (max-width: 40.063em) {
 }
