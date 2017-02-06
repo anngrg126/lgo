@@ -5,6 +5,11 @@
 .sticky button:focus {
   outline:0;
 }
+nav .dropdown-pane {
+  hr {
+    margin: .5rem auto;
+  }
+}
 
 //navbar top tier
 .nav-toptier {
@@ -14,6 +19,7 @@
   border-bottom-style: inset;
   border-width: 1px;
   line-height: 0.8;
+  background-color: $white;
   img {
     max-height: 40px; 
   }
@@ -48,10 +54,13 @@
 
 //BROWSE & SHARE link colors
 .nav-toptier h5, .nav-midtier h6 {
-  text-transform: uppercase;
+//  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 700;
   color: $dark-gray;
   &:hover {
     color: $primary-color;
+    cursor: pointer;
   }
   &.active {
     color: $primary-color;
@@ -65,11 +74,11 @@
 #user_notifications {
   vertical-align: bottom;
   margin-right: 10px; 
-  position: relative; 
-  font-size: 0.9rem;
+  position: relative;
 }
 #user_notifications a {
-  @extend %primary-link;
+  @extend %header-gray-link;
+  font-size: 1.4rem;
   &.inactive-link {
     @extend .inactive-link;
   }
@@ -79,6 +88,7 @@
   .notifications_count {
     color: $red;
     font-weight: 500;
+    font-size: 1.4rem;
   }
 }
 
@@ -98,15 +108,16 @@
     font-size: 110%;
     color: $dark-gray;
     &:hover {
-      color: $topbar-link-color-hover;
+      //color: $topbar-link-color-hover;
+      color: $primary-color;
       img {
         filter: brightness(115%);
       }
     }
     span {
-      font-weight: 500;
-      border-right: 1px solid $middark-gray;
-      padding-right: 5px;
+      font-weight: 600;
+//      border-right: 1px solid $middark-gray;
+//      padding-right: 5px;
       margin-right: 5px;
     }
   }
@@ -114,13 +125,29 @@
 #user_dropdown {
   width: 200px;
 }
-#user_dropdown_button:hover {
-  color: $topbar-link-color-hover;
+#user_dropdown_button {
+  &:after {
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border: inset 6px;
+    content: '';
+    border-top-style: solid;
+    border-color: $dark-gray transparent transparent;
+    margin-bottom: -3px;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+  &:hover {
+    &:after {
+      border-color: $primary-color transparent transparent;
+    }
+  }
 }
 
 //navbar bottom tier
 .nav-bottomtier {
-  padding: 0.3rem 0 0;
+//  padding: 0.3rem 0 0;
   border-bottom: 1px solid $medium-gray;
   border-bottom-style: inset;
   border-width: 1px;
@@ -129,13 +156,17 @@
   -moz-box-shadow: inset 0px 5px 10px -7px $dark-gray;
   box-shadow: inset 0px 5px 10px -7px $dark-gray;
   max-width: none;
+//  line-height: 1.3;
   h6 {
-    text-transform: uppercase;
+//    text-transform: uppercase;
     border-right: 1px solid $dark-gray;
     display: inline-block;
     padding-right: 15px;
     margin-bottom: 0;
-    margin-left: 15px;
+    margin-left: 10px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $dark-gray;
   }
   .columns>ul {
     display: inline-block;
@@ -145,16 +176,23 @@
   }
   &>.columns {
     width: auto;
+//    margin-top: 5px;
+    line-height: 0.9;
+//    font-weight: 800;
   }
   ul .columns {
-    font-size: 90%;
     padding: 0 5px;
+  }
+  ul .columns a {
+    @include font-size($subtext-sizes);
   }
   ul .row {
     margin: 0;
   }
   .list-header {
-    text-transform: uppercase;
+//    text-transform: uppercase;
+    font-weight: 700;
+    color: $topbar-link-color;
   }
   .is-dropdown-submenu {
     padding: 15px 10px;
@@ -168,18 +206,42 @@
   .type {
     min-width: 400px;
   }
+  .float-right {
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    line-height: 2.15;
+  }
+  .fa {
+    font-size: 1.6rem;
+  }
+  .fa-search {
+    color: $dark-gray;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  .menu > li > a {
+    line-height: 1.3;
+  }
+  .dropdown.menu>li.is-dropdown-submenu-parent > a::after { //overrides foundation
+    border-color: $dark-gray transparent transparent;
+  }
 }
 
 //tag category links
 #tags-menu ul a {
-  @extend %primary-link;
-  padding-right: 0;
+  @extend %header-gray-link;
+//  padding-right: 0;
+  border-top: 2px solid transparent;
   border-bottom: 2px solid transparent;
   &:focus {
     outline:0;
   }
   &:hover {
     border-bottom: 2px solid $topbar-link-color-hover;
+    &:after {
+      border-color: $primary-color transparent transparent;
+    }
   }
   &:hover i {
     color: darken($primary-color, 14%);
@@ -192,14 +254,14 @@
     border-bottom: 2px solid transparent;
   }
   &.navbar_fail {
-    @extend .secondary-link;
+    @extend .header-blue-link;
     font-weight: 500;
   }
 }
 
 //tag links
 #tags-menu ul ul a {
-  @extend .secondary-link;
+  @extend .header-blue-link;
   &:hover {
     border-bottom: none;
   }
@@ -239,9 +301,9 @@
       border-bottom: 3px solid transparent;
     }
     h6 {
-      font-weight: 800;
+      font-weight: 700;
       margin-bottom: 0;
-      line-height: inherit;
+//      line-height: inherit;
     }
     input {
       max-width: none;
@@ -254,11 +316,20 @@
     }
     div.active {
       border-bottom: 3px solid $primary-color;
-      .active {
+      .fa, .active {
         color: $primary-color;
         &:hover {
           color: darken($primary-color, 15%);
         }
+      }
+    }
+    .fa {
+      font-size: 2rem;
+      line-height: 1.4;
+      color: $topbar-link-color;
+      &:hover {
+        color: $primary-color;
+        cursor: pointer;
       }
     }
   }
@@ -269,6 +340,7 @@
     z-index: 100;
     h6 {
       border-right: none;
+      line-height: 2.5;
     }
     .columns>ul {
       display: block;
@@ -277,6 +349,7 @@
     }
     &>.columns {
       width: 100%;
+      line-height: 1.3;
       &:nth-child(2) .is-drilldown {
         height: 550px;
       }
@@ -289,6 +362,9 @@
     }
     .is-drilldown li.hide-for-small-only {
       display: none !important;
+    }
+    ul, .menu > li > a {
+      line-height: 1.8;
     }
   }
 
@@ -313,12 +389,22 @@
   //other
   #search_dropdown_mobile {
     display: none;
-    background-color: $ultra-light-gray;
     border-bottom: 1px solid $medium-gray;
     border-bottom-style: inset;
+    .input-group-field {
+      width: 98%;
+    }
+    
   }
   #user_notifications {
     margin-right: 0; 
     font-size: 1rem;
+  }
+  .dropdown-pane.bottom {
+    position: static;
+    height: 0px;
+    width: 0px;
+    padding: 0;
+    border: 0;
   }
 }

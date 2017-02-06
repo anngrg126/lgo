@@ -1,24 +1,85 @@
-//links
+//body font
+html {
+  font-size: 62.5%; //equivalent to 10px
+}
+$global-font-size: 62.5%; //for foundation
+
+$global-body-sizes: (
+  0: 1.4rem,
+  640px: 1.6rem
+);
+$subtext-sizes: (
+  0: 1.3rem,
+  640px: 1.5rem
+);
+@mixin font-size($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @media screen and (min-width: $fs-breakpoint) {
+      font-size: $fs-font-size;
+    }
+  }
+}
+a, p, span, button, li, div {
+  @include font-size($global-body-sizes);
+}
+.subtext {
+  @include font-size($subtext-sizes);
+}
+h1 {
+  font-size: 4.25rem;
+  font-weight: 700;
+}
+h2, h2 a{
+  font-size: 3rem;
+  font-weight: 600;
+  color: $black;
+  line-height: 1.15;
+  margin-bottom: 0;
+}
+h2 a {
+  &:hover {
+    color: $primary-color;
+  }
+}
+.italic {
+  font-style: italic;
+}
+//labels
+.label {
+  background: $ultra-light-gray !important;//overrides foundation setting
+  margin: 0.5rem 0;
+}
+//header links -- used only for header
 .inactive-link {
   color: $middark-gray;
   &:hover {
     color: lighten($middark-gray, 15%);  
   }
 }
-%primary-link {
+%header-gray-link {
   color: $dark-gray; //same as $topbar-link-color
   &:hover {
-    color: lighten($dark-gray, 25%); //same as $topbar-link-color-hover
+    color: $primary-color; //same as $topbar-link-color-hover
   }
 }
-.secondary-link {
+.header-blue-link {
   color: $primary-color; //same as $body-font-family$anchor-color
   &:hover {
     color: darken($primary-color, 14%); //same as $anchor-color-hover 
   }
 }
-
-//labels
-.label {
-  background: $ultra-light-gray !important;//overrides foundation setting
+//body links
+.primary-link {
+  color: $primary-color;
+  font-weight: 500;
+  &:hover {
+    color: darken($primary-color, 14%);
+  }
+}
+.secondary-link {
+  color: $dark-gray;
+  font-weight: 500;
+  &:hover {
+    color: $primary-color, 14%;
+  }
 }

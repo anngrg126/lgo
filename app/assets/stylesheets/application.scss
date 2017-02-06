@@ -14,7 +14,8 @@
 
 
 //Globals
-@import 'globals/globals';
+@import 'globals/colors';
+@import 'globals/fonts';
 
 //Vendor
 @import 'foundation';
@@ -22,6 +23,7 @@
 @import 'vendor/*';
 @import 'font-awesome';
 @import 'trix';
+@import 'globals/globals';
 
 //Views
 @import 'shared/*';

@@ -1,0 +1,21 @@
+[type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea {
+  @include font-size($global-body-sizes);
+  padding: 0.85rem 0.5rem;
+//  line-height: 1.15;
+  height: auto;
+}
+.input-group-button input {
+  @include font-size($global-body-sizes);
+  font-weight: bold;
+  padding: 0.85rem 1rem;
+  height: auto;
+}
+
+.dropdown-pane {
+  width: 250px;//overrides foundation
+}
+@media only screen and (max-width: 40.063em) {
+//  .dropdown-pane {
+//    width: 300px;
+//  }
+}

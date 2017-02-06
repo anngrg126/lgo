@@ -1,10 +1,13 @@
-@import 'colors';
-@import 'fonts';
 @import 'settings';   //foundation settings
-
 //globals that override foundation settings
-@import 'buttons';
-@import 'icons';
-@import 'images';
 @import 'typography';
+@import 'icons';
+@import 'buttons';
+@import 'images';
+@import 'forms';
+@import 'accordion';
 @import 'components/*';
+
+.row {
+  max-width: 125rem;//overrides foundation
+}

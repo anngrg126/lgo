@@ -62,7 +62,7 @@ module StoriesHelper
     else
       body = story.raw_gift_description
     end
-    html = "<div>#{body}</div>".html_safe
+    html = "#{body}".html_safe
   end
   
 #   def story_by_show(story)
@@ -202,11 +202,11 @@ module StoriesHelper
 #          @display_tag = @t.name
 
           # @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'">'+@t.name+'</a>'
-          @display_tag = '<span class="label ultra-light-gray"><a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'">'+@t.name+'</a></span>&nbsp;'
+          @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'" class="subtext primary-link">'+@t.name+'</a>'
         else
 #          @display_tag = c.description
           # @display_tag = '<a href="'+stories_path+'?search='+c.description+'">'+c.description+'</a>'
-          @display_tag = '<span class="label ultra-light-gray"><a href="'+stories_path+'?search='+c.description+'">'+c.description+'</a></span>&nbsp;'
+          @display_tag = '<a href="'+stories_path+'?search='+c.description+'" class="subtext primary-link">'+c.description+'</a>'
         end
       end    
     end
@@ -225,7 +225,7 @@ module StoriesHelper
     @fail_tag = @tags.select{|t|t.name=="fail"}.first
     if story.classifications.any?{|c| c[:tag_id] == @fail_tag.id}
 #      @display_tag = @fail_tag.name
-      @display_tag = '<span class="label ultra-light-gray"><a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'">'+@fail_tag.name+'</a></span>&nbsp;'
+      @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'" class="subtext primary-link">'+@fail_tag.name+'</a>'
     else
       @display_tag = ""
     end

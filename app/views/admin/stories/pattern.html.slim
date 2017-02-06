@@ -640,37 +640,75 @@ div.row
           div.columns.large-6
             == link_to root_path, class: "button button-w-icon facebook" do
               span.fi-social-facebook
-              span Share a Story  
+              span Sign in with Facebook 
         div.row.columns
           code
             div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "button button-w-icon facebook" do 
             div &nbsp;&nbsp;span.fi-social-facebook
             div &nbsp;&nbsp;span Sign in with &#35;{OmniAuth::Utils.camelize(provider)}
       div.accordion-content [data-tab-content]
-        h4 Uppercase Button with Icon
+        h4 Button with Icon
         div.row
           div.columns.large-6
             == image_tag("pattern_screenshots/share_story_button.png")
           div.columns.large-6
-            == link_to root_path, class: "button uppercase-button-w-icon" do
+            == link_to root_path, class: "button button-w-icon" do
               span.fi-clipboard-pencil
               span Share a Story  
         div.row.columns
           code
-            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do 
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do 
             div &nbsp;&nbsp;span.fi-clipboard-pencil
             div &nbsp;&nbsp;span Share a Story
 
     li.accordion-item.is-active[data-accordion-item]
-      a.accordion-title[href="#"] Titles
+      a.accordion-title[href="#"] Typography
       div.accordion-content [data-tab-content]
+        h4 Body Text
         div.row
-          div.columns.large-6
-            == image_tag("pattern_screenshots/share_story_button.png")
-          div.columns.large-6
-            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do
-              span.fi-clipboard-pencil
-              span Share a Story 
+          div.columns.small-12
+            p This is body text.
+            | Body text can also be used outside paragraphs. 
+      div.accordion-content [data-tab-content]
+        h4 Emphasized Body Text
+        div.row
+          div.columns.small-12
+            strong This is emphasized body text.
+      div.accordion-content [data-tab-content]
+        h4 Links
+        div.row
+          div.columns.small-12
+            == link_to "This is a Primary Link", root_path, class: "primary-link"
+        div.row
+          div.columns.small-12
+            == link_to "This is a Secondary Link", root_path, class: "secondary-link"
+      div.accordion-content [data-tab-content]
+        h4 Subtext
+        div.row
+          div.columns.small-12
+            .subtext This is subtext information
+      div.accordion-content [data-tab-content]
+        h4 Tags
+        div.row
+          div.columns.small-12
+            span.label
+              a.subtext.primary-link[href="#{stories_path}?search_tag=#{tag_search("This is a Tag")}"] This is a Tag
+      div.accordion-content [data-tab-content]
+        h4 Header 1 (ex: story show view story title, dashboard page titles)
+        div.row
+          div.columns.small-12
+            h1 This is an h1 header
+      div.accordion-content [data-tab-content]
+        h4 Header 2 (ex: user name on story show page, form labels)
+        div.row
+          div.columns.small-12
+            h2 This is an h2 header
+      div.accordion-content [data-tab-content]
+        h4 Header 2 (ex: story card titles)
+        div.row
+          div.columns.small-12
+            h2 
+              == link_to "This is an h2 header link", root_path 
               
     li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Images
