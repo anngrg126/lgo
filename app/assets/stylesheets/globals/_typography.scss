@@ -49,6 +49,14 @@ h2 a {
   background: $ultra-light-gray !important;//overrides foundation setting
   margin: 0.5rem 0;
 }
+.customcode {
+  div {
+    @include font-size($subtext-sizes);
+  }
+  font-family: $code-font-family;
+  background-color: $ultra-light-gray;
+  margin-top: 15px;
+}
 //header links -- used only for header
 .inactive-link {
   color: $middark-gray;

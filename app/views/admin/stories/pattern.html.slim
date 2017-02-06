@@ -664,51 +664,91 @@ div.row
     li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Typography
       div.accordion-content [data-tab-content]
-        h4 Body Text
+        strong Body Text
         div.row
-          div.columns.small-12
+          div.columns.medium-6
+            == image_tag("pattern_screenshots/typography/body.jpg")
+          div.columns.medium-6
             p This is body text.
             | Body text can also be used outside paragraphs. 
+        div.row.columns
+          .customcode
+            div p This is body text
       div.accordion-content [data-tab-content]
-        h4 Emphasized Body Text
+        strong Emphasized Body Text
         div.row
-          div.columns.small-12
+          div.columns.medium-6
+            == image_tag("pattern_screenshots/typography/body_strong.jpg")
+          div.columns.medium-6
             strong This is emphasized body text.
+        div.row.columns
+          .customcode
+            div strong This is emphasized body text
       div.accordion-content [data-tab-content]
-        h4 Links
+        strong Links
         div.row
-          div.columns.small-12
+          div.columns.medium-6
+            == image_tag("pattern_screenshots/typography/links.jpg")
+          div.columns.medium-6
             == link_to "This is a Primary Link", root_path, class: "primary-link"
-        div.row
-          div.columns.small-12
+            br
             == link_to "This is a Secondary Link", root_path, class: "secondary-link"
+        div.row.columns
+          .customcode
+            div &#61;&#61; link_to "This is a Primary Link", root_path, class: "primary-link"
+            div &#61;&#61; link_to "This is a Secondary Link", root_path, class: "secondary-link"
       div.accordion-content [data-tab-content]
-        h4 Subtext
+        strong Subtext
         div.row
-          div.columns.small-12
+          div.columns.medium-6
+            == image_tag("pattern_screenshots/typography/subtext.jpg")
+          div.columns.medium-6
             .subtext This is subtext information
+        div.row.columns
+          .customcode
+            div .subtext This is subtext information
       div.accordion-content [data-tab-content]
-        h4 Tags
+        strong Tags
         div.row
-          div.columns.small-12
+          div.columns.medium-6
+            == image_tag("pattern_screenshots/typography/tag.jpg")
+          div.columns.medium-6
             span.label
               a.subtext.primary-link[href="#{stories_path}?search_tag=#{tag_search("This is a Tag")}"] This is a Tag
+        div.row.columns
+          .customcode
+            div span.label
+            div &nbsp;&nbsp;a.subtext.primary-link[href="#stories_path}?search_tag=#{tag_search("This is a Tag")}"] This is a Tag
       div.accordion-content [data-tab-content]
-        h4 Header 1 (ex: story show view story title, dashboard page titles)
+        strong Header 1 (ex: story show view story title, dashboard page titles)
         div.row
-          div.columns.small-12
+          div.columns.medium-6
+            == image_tag("pattern_screenshots/typography/h1.jpg")
+          div.columns.medium-6
             h1 This is an h1 header
+        div.row.columns
+          .customcode
+            div h1 This is an h1 header
       div.accordion-content [data-tab-content]
-        h4 Header 2 (ex: user name on story show page, form labels)
+        strong Header 2 (ex: user name on story show page, form labels)
         div.row
-          div.columns.small-12
+          div.columns.medium-6
+            == image_tag("pattern_screenshots/typography/h2.jpg")
+          div.columns.medium-6
             h2 This is an h2 header
+        div.row.columns
+          .customcode
+            div h2 This is an h2 header
       div.accordion-content [data-tab-content]
-        h4 Header 2 (ex: story card titles)
+        strong Header 2 (ex: story card titles)
         div.row
-          div.columns.small-12
+          div.columns
             h2 
               == link_to "This is an h2 header link", root_path 
+        div.row.columns
+          .customcode
+            div h2
+            div &nbsp;&nbsp;&#61;&#61; link_to "This is an h2 header link", root_path
               
     li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Images
