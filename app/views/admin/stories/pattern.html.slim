@@ -5,7 +5,7 @@ div.row
     h4 With Current HTML/CSS/SCSS
 div.row
   ul.accordion [data-accordion data-multi-expand="true" data-allow-all-closed="true"]
-    li.accordion-item.is-active[data-accordion-item]
+    /li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Typography
       div.accordion-content [data-tab-content]
         strong Body Text
@@ -116,7 +116,7 @@ div.row
           .customcode
             div h2
             div &nbsp;&nbsp;&#61;&#61; link_to "This is an h2 header link", root_path
-    li.accordion-item[data-accordion-item]
+    /li.accordion-item[data-accordion-item]
         a.accordion-title[href="#"] Icons
         /primary icons
         div.accordion-content [data-tab-content]
@@ -359,7 +359,7 @@ div.row
             code
               div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
               div &nbsp;&nbsp;span.fa.fa-heart.fa-lg [aria-describedby="love_count"]
-              div &nbsp;&nbsp;span#love_count.icon-counter 33k.fa.fa-heart-o.fa-lg
+              div &nbsp;&nbsp;span#love_count.icon-counter 33k.fa.fa-heart.fa-lg
         div.accordion-content [data-tab-content]
           h4 OMG Icon
           div.row
@@ -740,7 +740,7 @@ div.row
             code
               div &#61;&#61; link_to root_path, class: "social-icon footer-icon" do 
               div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-lg       
-    li.accordion-item[data-accordion-item]
+    /li.accordion-item[data-accordion-item]
       a.accordion-title[href="#"] Buttons
       div.accordion-content [data-tab-content]
         strong Button
@@ -800,8 +800,6 @@ div.row
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon hollow" do 
             div &nbsp;&nbsp;span.fi-pencil
             div &nbsp;&nbsp;span Share a Story
-    li.accordion-item [data-accordion-item]
-      a.accordion-title[href="#"] Titles
       div.accordion-content [data-tab-content]
         strong Social Button with Icon (Fat)
         div.row
@@ -818,7 +816,6 @@ div.row
             div &nbsp;&nbsp;span Sign in with &#35;{OmniAuth::Utils.camelize(provider)}          
     li.accordion-item[data-accordion-item]
       a.accordion-title[href="#"] Images
-      
       div.accordion-content [data-tab-content]
         h4 User Small Thumbnail
         div.row
@@ -830,8 +827,7 @@ div.row
         div.row.columns
           code
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-thumbnail" do 
-            div &nbsp;&#61;&#61; image_tag("default_user_image.png", class: "small-thumb")
-              
+            div &nbsp;&#61;&#61; image_tag("default_user_image.png", class: "small-thumb")      
       div.accordion-content [data-tab-content]
         h4 User Medium Thumbnail
         div.row
@@ -844,7 +840,6 @@ div.row
           code
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-thumbnail" do 
             div &nbsp;&#61;&#61; image_tag("default_user_image.png", class: "medium-thumb")    
-              
       div.accordion-content [data-tab-content]
         h4 User Profile Image 
         div.row
@@ -857,7 +852,6 @@ div.row
           code
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-profile" do 
             div &nbsp;&#61;&#61; image_tag("default_user_image.png")
-              
       div.accordion-content [data-tab-content]
         h4 User Profile Image for edit
         div.row
@@ -876,7 +870,6 @@ div.row
             div &nbsp;&nbsp;&#61;&#61; image_tag("default_user_image.png")
             div &nbsp;&#61;&#61; link_to root_path, class: "icon-button icon primary-icon image-overlay-content" do 
             div &nbsp;&nbsp; span.fa.fa-camera
-            
       div.accordion-content [data-tab-content]
         h4 Media Image 
         div.row
@@ -889,7 +882,6 @@ div.row
           code
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "media-image" do 
             div &nbsp;&#61;&#61; image_tag("pattern_screenshots/images/ChicagoTribune.png")
-            
       div.accordion-content [data-tab-content]
         h4 Story Card Image 
         div.row
@@ -902,7 +894,6 @@ div.row
           code
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-image" do 
             div &nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
-            
       div.accordion-content [data-tab-content]
         h4 Story Card Image Tiles
         div.row

@@ -4,7 +4,7 @@
       #user_photo
         .image-wrapper.overlay-fade-in
           div
-            == user_photo(@user)
+            == user_photo(@user, "")
           div.image-overlay-content
             == edit_user_photo(@user)
       #user_name

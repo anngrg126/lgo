@@ -19,7 +19,8 @@ div#stickhere[data-sticky-container]
                 == user_notifications_link
               - if user_signed_in?
                 == link_to dashboard_path(current_user), class: "logged-in" do
-                  == render 'shared/userimages'
+                  div.user-thumbnail
+                    == user_photo(current_user, "small-thumb")
                   span
                     == current_user.display_name
                 div.hide-for-small-only
