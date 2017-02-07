@@ -15,8 +15,11 @@ $global-radius: 4px;
       max-height: 30px;  
     }
     &.medium-thumb {
-      max-height: 50px;
-    };
+      max-height: 40px;
+    }
+    &.large-thumb {
+      max-height: 60px;
+    }
     &:hover {
       filter: brightness(115%);
     }
