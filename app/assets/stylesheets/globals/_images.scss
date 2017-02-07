@@ -11,15 +11,12 @@ $global-radius: 4px;
   img {
     border-radius: 5px;
     margin-right: 5px;
-    
     &.small-thumb {
-      max-height: 30px;
-    };
-    
+      max-height: 30px;  
+    }
     &.medium-thumb {
       max-height: 50px;
     };
-    
     &:hover {
       filter: brightness(115%);
     }
@@ -28,7 +25,6 @@ $global-radius: 4px;
 .user-thumbnail {
   @extend %user-thumbnail;
 }
-
 %user-profile {
   display: inline-block;
   img {
@@ -47,7 +43,6 @@ $global-radius: 4px;
 .user-profile {
   @extend %user-profile;
 }
-
 .media-image {
   img {
     max-width: 150px;
@@ -60,7 +55,6 @@ $global-radius: 4px;
     }
   }
 }
-
 .story-card-image {
   img {
     display: inline-block;
@@ -74,7 +68,6 @@ $global-radius: 4px;
     }
   }
 }
-
 .story-card-tile-image {
   img {
     display: inline-block;
@@ -86,12 +79,10 @@ $global-radius: 4px;
     }
   }
 }
-
 .column-no-margin {
   padding: 0px;
   margin: 0px;
 }
-
 .image-wrapper {
   width: 100%;
   height: 100%;
@@ -100,7 +91,6 @@ $global-radius: 4px;
   position: relative;
   text-align: center;
 }
-
 .image-overlay-content {
   width: 100%;
   height: 100%;
@@ -110,7 +100,6 @@ $global-radius: 4px;
   left: 70px;
   padding: 5px;
 }
-
 // modifier classes
 .overlay-fade-in {
   p {
