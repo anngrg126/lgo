@@ -76,10 +76,16 @@ div.row
           div.columns.medium-6
             span.label
               a.subtext.primary-link[href="#{stories_path}?search_tag=#{tag_search("This is a Tag")}"] This is a Tag
+            | &nbsp;&nbsp;
+            span.label
+              a.subtext.fail-link[href="#{stories_path}?search_tag=#{tag_search("Fail Tag")}"] Fail Tag
         div.row.columns
           .customcode
             div span.label
             div &nbsp;&nbsp;a.subtext.primary-link[href="#stories_path}?search_tag=#{tag_search("This is a Tag")}"] This is a Tag
+            div | &nbsp;&nbsp;
+            div span.label
+            div &nbsp;&nbsp;a.subtext.fail-link[href="#stories_path}?search_tag=#{tag_search("Fail Tag Tag")}"] Fail Tag
       div.accordion-content [data-tab-content]
         strong Header 1 (ex: story show view story title, dashboard page titles)
         div.row

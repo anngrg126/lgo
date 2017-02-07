@@ -225,7 +225,7 @@ module StoriesHelper
     @fail_tag = @tags.select{|t|t.name=="fail"}.first
     if story.classifications.any?{|c| c[:tag_id] == @fail_tag.id}
 #      @display_tag = @fail_tag.name
-      @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'" class="subtext primary-link">'+@fail_tag.name+'</a>'
+      @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'" class="subtext fail-link">'+@fail_tag.name+'</a>'
     else
       @display_tag = ""
     end

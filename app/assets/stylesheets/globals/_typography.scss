@@ -105,3 +105,10 @@ h2 a {
     font-size: 18px;
   }
 }
+.fail-link {
+  color: red;
+  font-weight: 500;
+  &:hover {
+    color: darken(red, 14%);
+  }
+}
