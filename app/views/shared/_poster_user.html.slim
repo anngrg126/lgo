@@ -1,8 +1,5 @@
-- if story.published?
-  -if story.anonymous?
-    - user = @anonymous_user
-  -else
-    - user = story.user
+-if story.anonymous?
+  - user = @anonymous_user
 - else
   - user = story.user
 .user-thumbnail.columns
