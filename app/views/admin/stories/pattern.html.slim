@@ -739,8 +739,7 @@ div.row
           div.row.columns
             code
               div &#61;&#61; link_to root_path, class: "social-icon footer-icon" do 
-              div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-lg
-              
+              div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-lg       
     li.accordion-item[data-accordion-item]
       a.accordion-title[href="#"] Buttons
       div.accordion-content [data-tab-content]
@@ -801,6 +800,8 @@ div.row
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon hollow" do 
             div &nbsp;&nbsp;span.fi-pencil
             div &nbsp;&nbsp;span Share a Story
+    li.accordion-item [data-accordion-item]
+      a.accordion-title[href="#"] Titles
       div.accordion-content [data-tab-content]
         strong Social Button with Icon (Fat)
         div.row
@@ -817,10 +818,128 @@ div.row
             div &nbsp;&nbsp;span Sign in with &#35;{OmniAuth::Utils.camelize(provider)}          
     li.accordion-item[data-accordion-item]
       a.accordion-title[href="#"] Images
+      
       div.accordion-content [data-tab-content]
+        h4 User Small Thumbnail
         div.row
-          div.columns.medium-6
-            == image_tag("pattern_screenshots/share_story_button.png")
-          div.columns.medium-6
-            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do
-              == image_tag("pattern_screenshots/share_story_button.png")
+          div.columns.large-6
+            == image_tag("pattern_screenshots/images/user_thumbnail_small.png")
+          div.columns.large-6
+            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-thumbnail" do
+              == image_tag("default_user_image.png", class: "small-thumb")
+        div.row.columns
+          code
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-thumbnail" do 
+            div &nbsp;&#61;&#61; image_tag("default_user_image.png", class: "small-thumb")
+              
+      div.accordion-content [data-tab-content]
+        h4 User Medium Thumbnail
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/images/user_thumbnail_small.png")
+          div.columns.large-6
+            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-thumbnail" do
+              == image_tag("default_user_image.png", class: "medium-thumb")
+        div.row.columns
+          code
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-thumbnail" do 
+            div &nbsp;&#61;&#61; image_tag("default_user_image.png", class: "medium-thumb")    
+              
+      div.accordion-content [data-tab-content]
+        h4 User Profile Image 
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/images/user_profile.png")
+          div.columns.large-6
+            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-profile" do
+              == image_tag("default_user_image.png")
+        div.row.columns
+          code
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-profile" do 
+            div &nbsp;&#61;&#61; image_tag("default_user_image.png")
+              
+      div.accordion-content [data-tab-content]
+        h4 User Profile Image for edit
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/images/user_profile.png")
+          div.columns.large-6
+            div.image-wrapper
+              == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-profile" do
+                == image_tag("default_user_image.png")
+              == link_to root_path, class: "icon-button icon primary-icon image-overlay-content" do
+                span.fa.fa-camera
+        div.row.columns
+          code
+            div div.image-wrapper
+            div &nbsp;&#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-profile" do 
+            div &nbsp;&nbsp;&#61;&#61; image_tag("default_user_image.png")
+            div &nbsp;&#61;&#61; link_to root_path, class: "icon-button icon primary-icon image-overlay-content" do 
+            div &nbsp;&nbsp; span.fa.fa-camera
+            
+      div.accordion-content [data-tab-content]
+        h4 Media Image 
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/images/media_image.png")
+          div.columns.large-6
+            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "media-image" do
+              == image_tag("pattern_screenshots/images/ChicagoTribune.png")
+        div.row.columns
+          code
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "media-image" do 
+            div &nbsp;&#61;&#61; image_tag("pattern_screenshots/images/ChicagoTribune.png")
+            
+      div.accordion-content [data-tab-content]
+        h4 Story Card Image 
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/images/story_card_image.png")
+          div.columns.large-6
+            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-image" do
+              == image_tag("pattern_screenshots/images/story_card_image.png")
+        div.row.columns
+          code
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-image" do 
+            div &nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
+            
+      div.accordion-content [data-tab-content]
+        h4 Story Card Image Tiles
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/images/story_card_image.png")
+          div.columns.large-6
+            div.row.small-up-2.medium-up-3.large-up-4
+              div.column.column-no-margin.column-block
+                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
+                  == image_tag("pattern_screenshots/images/story_card_image.png")
+              div.column.column-no-margin.column-block
+                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
+                  == image_tag("pattern_screenshots/images/story_card_image.png")
+              div.column.column-no-margin.column-block
+                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
+                  == image_tag("pattern_screenshots/images/story_card_image.png")
+              div.column.column-no-margin.column-block
+                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
+                  == image_tag("pattern_screenshots/images/story_card_image.png")
+              div.column.column-no-margin.column-block
+                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
+                  == image_tag("pattern_screenshots/images/story_card_image.png")
+              div.column.column-no-margin.column-block
+                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
+                  == image_tag("pattern_screenshots/images/story_card_image.png")
+        div.row.columns
+          code 
+            div div.row.small-up-2.medium-up-3.large-up-4
+            div &nbsp;div.column.column-no-margin.column-block
+            div &nbsp;&nbsp;&#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do 
+            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
+            div &nbsp;div.column.column-no-margin.column-block
+            div &nbsp;&nbsp;&#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do 
+            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
+            div &nbsp;div.column.column-no-margin.column-block
+            div &nbsp;&nbsp;&#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do 
+            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
+            div &nbsp;div.column.column-no-margin.column-block
+            div &nbsp;&nbsp;&#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do 
+            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")

@@ -1,21 +1,114 @@
 $global-radius: 4px;
 
+// user thumbnail - rounded square
+// user profile - larger size rounded square
+// story card image - full width
+// media image - dark gray with blue on hover
+// image tiles for additional story images
+
+%user-thumbnail {
+  display: inline-block;
+  img {
+    border-radius: 5px;
+    margin-right: 5px;
+    
+    &.small-thumb {
+      max-height: 30px;
+    };
+    
+    &.medium-thumb {
+      max-height: 50px;
+    };
+    
+    &:hover {
+      filter: brightness(115%);
+    }
+  }
+}
+.user-thumbnail {
+  @extend %user-thumbnail;
+}
+
+%user-profile {
+  display: inline-block;
+  img {
+    border-radius: 5px;
+    max-height: 300px;
+    max-width: 300px;
+    position: relative;
+    top: 0;
+    left: 0;
+  
+    &:hover {
+      filter: brightness(115%);
+    }
+  }
+}
+.user-profile {
+  @extend %user-profile;
+}
+
+.media-image {
+  img {
+    max-width: 150px;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    transition: all .2s ease-in-out;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.story-card-image {
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+    transition: all .2s ease-in-out;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.story-card-tile-image {
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    transition: all .2s ease-in-out;
+    
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.column-no-margin {
+  padding: 0px;
+  margin: 0px;
+}
+
 .image-wrapper {
   width: 100%;
   height: 100%;
-  border: 1px solid rgba(0,0,0,0.04);
+  border: 0;
   overflow: hidden;
   position: relative;
   text-align: center;
-  border-radius: $global-radius;
 }
+
 .image-overlay-content {
   width: 100%;
   height: 100%;
   position: absolute;
   overflow: hidden;
-  top: 0;
-  left: 0
+  top: -5px;
+  left: 70px;
+  padding: 5px;
 }
 
 // modifier classes
