@@ -30,9 +30,9 @@ div#stickhere[data-sticky-container]
                     == user_notifications_link_small
               - else
                 div[style="padding-right: 0.5em;"]
-                  == link_to "Join", new_user_registration_path, class: "button"
+                  == link_to "Join", new_user_registration_path, class: "button skinny-button"
                 div.hide-for-small-only
-                  == link_to "Login", new_user_session_path, class: "button hollow"
+                  == link_to "Login", new_user_session_path, class: "button hollow skinny-button"
     .top-bar.center.show-for-small-only.nav-midtier
       .row
         .columns.small-4[class="#{@active_browse}"]
@@ -245,12 +245,12 @@ div#stickhere[data-sticky-container]
       #user_dropdown.right.dropdown-pane.bottom[data-dropdown]
         ul.menu.medium-vertical
           li
-            == link_to "My Dashboard", dashboard_path(current_user)
+            == link_to "My Dashboard", dashboard_path(current_user), class: "primary-link"
           li
-            == link_to "My Notifications", notifications_dashboard_path(current_user)
+            == link_to "My Notifications",  notifications_dashboard_path(current_user), class: "primary-link"
           li
-            == link_to "My Bookmarks", bookmarked_stories_dashboard_path(current_user)
+            == link_to "My Bookmarks",  bookmarked_stories_dashboard_path(current_user), class: "primary-link"
           li
             hr
           li
-            == link_to "Sign out", destroy_user_session_path, method: :delete
+            == link_to "Sign out", destroy_user_session_path, class: "secondary-link", method: :delete

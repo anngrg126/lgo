@@ -633,34 +633,77 @@ div.row
     li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Buttons
       div.accordion-content [data-tab-content]
-        h4 Lowercase Button with Icon
+        strong Button
         div.row
           div.columns.large-6
-            == image_tag("pattern_screenshots/facebook_btn.png")
+            == image_tag("pattern_screenshots/buttons/button.jpg")
           div.columns.large-6
-            == link_to root_path, class: "button button-w-icon facebook" do
+            == link_to "Post Story", root_path, class: "button"
+        div.row.columns
+          .customcode
+            div &#61;&#61; f.submit "Post Story", class: "button"
+      div.accordion-content [data-tab-content]
+        strong Inverted Button
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/buttons/hollow_btn.jpg")
+          div.columns.large-6
+            == link_to "Post Story", root_path, class: "button hollow"
+        div.row.columns
+          .customcode
+            div &#61;&#61; f.submit "Post Story", class: "hollow button"
+      div.accordion-content [data-tab-content]
+        strong Skinny Button (header only)
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/buttons/skinny_btn.jpg")
+          div.columns.large-6
+            == link_to "Sign up", root_path, class: "button skinny-button"
+        div.row.columnu
+          .customcode
+            div &#61;&#61; link_to "Join", new_user_registration_path, class: "button skinny-button" 
+      div.accordion-content [data-tab-content]
+        strong Button with Icon
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/buttons/share_story_button.jpg")
+          div.columns.large-6
+            == link_to root_path, class: "button button-w-icon" do
+              span.fi-pencil
+              span Share a Story  
+        div.row.columns
+          .customcode
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do 
+            div &nbsp;&nbsp;span.fi-pencil
+            div &nbsp;&nbsp;span Share a Story
+      div.accordion-content [data-tab-content]
+        strong Inverted Button with Icon
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/buttons/hollow_btn_icon.jpg")
+          div.columns.large-6
+            == link_to root_path, class: "button button-w-icon hollow" do
+              span.fi-pencil
+              span Share a Story  
+        div.row.columns
+          .customcode
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon hollow" do 
+            div &nbsp;&nbsp;span.fi-pencil
+            div &nbsp;&nbsp;span Share a Story
+      div.accordion-content [data-tab-content]
+        strong Social Button with Icon (Fat)
+        div.row
+          div.columns.large-6
+            == image_tag("pattern_screenshots/buttons/facebook_btn.jpg")
+          div.columns.large-6
+            == link_to root_path, class: "button fat-button-w-icon facebook" do
               span.fi-social-facebook
               span Sign in with Facebook 
         div.row.columns
-          code
-            div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "button button-w-icon facebook" do 
+          .customcode
+            div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "button fat-button-w-icon facebook" do 
             div &nbsp;&nbsp;span.fi-social-facebook
             div &nbsp;&nbsp;span Sign in with &#35;{OmniAuth::Utils.camelize(provider)}
-      div.accordion-content [data-tab-content]
-        h4 Button with Icon
-        div.row
-          div.columns.large-6
-            == image_tag("pattern_screenshots/share_story_button.png")
-          div.columns.large-6
-            == link_to root_path, class: "button button-w-icon" do
-              span.fi-clipboard-pencil
-              span Share a Story  
-        div.row.columns
-          code
-            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do 
-            div &nbsp;&nbsp;span.fi-clipboard-pencil
-            div &nbsp;&nbsp;span Share a Story
-
     li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Typography
       div.accordion-content [data-tab-content]
