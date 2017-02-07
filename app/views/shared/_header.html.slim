@@ -228,7 +228,7 @@ div#stickhere[data-sticky-container]
                     a[href="#{stories_path}?search_tag=#{tag_search("travel and adventure")}"] Travel &amp; adventure
                   li
                     a[href="#{stories_path}?search_tag=#{tag_search("sports")}"] Sports
-      .columns.hide-for-small-only
+      .columns.hide-for-small-only[style="padding-right: 0;"]
         == render partial: 'shared/standalone_header_links'
       .columns
         button.float-right.hide-for-small-only[type="button" id="btnSearch" data-toggle="search_dropdown"] 

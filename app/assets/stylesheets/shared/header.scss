@@ -170,9 +170,9 @@ nav .dropdown-pane {
   }
   .columns>ul {
     display: inline-block;
-    &:first-child {
-      margin-right: 30px;
-    }
+  }
+  &>.columns:nth-child(2) {
+    margin-right: 30px;
   }
   &>.columns {
     width: auto;
