@@ -630,7 +630,7 @@ div.row
               div &#61;&#61; link_to root_path, class: "social-icon footer-icon" do 
               div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-lg
               
-    li.accordion-item.is-active[data-accordion-item]
+    /li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Buttons
       div.accordion-content [data-tab-content]
         strong Button
@@ -740,6 +740,23 @@ div.row
           .customcode
             div &#61;&#61; link_to "This is a Primary Link", root_path, class: "primary-link"
             div &#61;&#61; link_to "This is a Secondary Link", root_path, class: "secondary-link"
+      div.accordion-content [data-tab-content]
+        strong Minor Links
+        div.row
+          div.columns.medium-6
+            == image_tag("pattern_screenshots/typography/minor_links.jpg")
+          div.columns.medium-6
+            == link_to "Minor Link", root_path, class: "minor-link"
+            br
+            == link_to root_path, class: "minor-link" do 
+              span.fa.fa-trash-o
+              span &nbsp;Minor Link w/ Icon
+        div.row.columns
+          .customcode
+            div &#61;&#61; link_to "Minor Link", root_path, class: "minor-link"
+            div &#61;&#61; link_to root_path, class: "minor-link" do
+            div &nbsp;&nbsp; span.fa.fa-trash-o
+            div &nbsp;&nbsp; span &amp;nbsp;Minor Link w/ Icon
       div.accordion-content [data-tab-content]
         strong Subtext
         div.row
