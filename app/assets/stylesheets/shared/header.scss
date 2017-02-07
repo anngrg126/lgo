@@ -125,6 +125,13 @@ nav .dropdown-pane {
 #user_dropdown {
   width: 200px;
 }
+#search_dropdown {
+  ul {
+    li:first-child {
+      width: 100%;
+    }
+  }
+}
 #user_dropdown_button {
   &:after {
     cursor: pointer;

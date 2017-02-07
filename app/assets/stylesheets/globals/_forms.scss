@@ -10,7 +10,7 @@
   height: auto;
 }
 .dropdown-pane {
-  width: 250px;//overrides foundation
+  width: 350px;//overrides foundation
 }
 select, .form-error {
  @include font-size($subtext-sizes); 
