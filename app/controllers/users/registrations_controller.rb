@@ -11,9 +11,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.save
     if resource.errors.messages.include?(:email)
       resource.errors.messages[:email].each do |e|
-        if e.include?('has already been taken')
-          e.replace(" has already been taken. Returning users, please #{view_context.link_to("login", new_user_session_path)}." )
-        end
       end
     end
     

@@ -23,7 +23,16 @@ module DeviseHelper
     unless errormessage.nil?
       content_tag(:label, "Email", for: "user_email", class: "is-invalid-label") +
       tag(:input, id:'user_email', name:'user[email]', type:'email', class:'is-invalid-input') +
-      content_tag(:span, "#{messages_array[errormessage]}", class:'form-error is-visible')
+#      content_tag(:span, "#{messages_array[errormessage]}", class:'form-error is-visible')
+      if messages_array[errormessage].include?('has already been taken')
+        content_tag(:span, "#{messages_array[errormessage]}", class:'form-error is-visible') do
+          content_tag(:span, "Returning users, please ", class: "subtext") +
+          link_to("login", new_user_session_path, class: "subtext") +
+          content_tag(:span, ".", class: "subtext")
+        end
+      else
+        content_tag(:span, "#{messages_array[errormessage]}", class:'form-error is-visible')
+      end
     else
       content_tag(:label, "Email", for: "user_email") +
       tag(:input, id: "user_email", name: "user[email]", type: "email")

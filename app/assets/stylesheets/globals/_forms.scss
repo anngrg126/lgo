@@ -9,9 +9,12 @@
   padding: 0.85rem 1rem;
   height: auto;
 }
-
 .dropdown-pane {
   width: 250px;//overrides foundation
 }
+select, .form-error {
+ @include font-size($subtext-sizes); 
+}
+
 @media only screen and (max-width: 40.063em) {
 }

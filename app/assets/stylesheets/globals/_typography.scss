@@ -19,7 +19,7 @@ $subtext-sizes: (
     }
   }
 }
-a, p, span, button, li, div {
+a, p, span, button, li, div, label {
   @include font-size($global-body-sizes);
 }
 .subtext {
