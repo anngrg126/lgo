@@ -18,9 +18,9 @@ module DashboardHelper
   def edit_user_photo(user)
     if user == current_user
       unless user.image_file_name? || user.fbimage?
-        link_to "Upload Photo", edit_user_dashboard_registration_path(user, form_render: "user_image"), remote: true
+        link_to "Upload Photo", edit_user_dashboard_registration_path(user, form_render: "user_image"), class: "primary-link", remote: true
       else
-        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_image"), remote: true
+        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_image"), class: "primary-link", remote: true
       end
     end
   end
