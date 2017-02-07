@@ -9,8 +9,8 @@ $global-body-sizes: (
   640px: 1.6rem
 );
 $subtext-sizes: (
-  0: 1.3rem,
-  640px: 1.5rem
+  0: 1.2rem,
+  640px: 1.4rem
 );
 @mixin font-size($fs-map) {
   @each $fs-breakpoint, $fs-font-size in $fs-map {

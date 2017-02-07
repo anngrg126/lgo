@@ -5,7 +5,7 @@ div.row
     h4 With Current HTML/CSS/SCSS
 div.row
   ul.accordion [data-accordion data-multi-expand="true" data-allow-all-closed="true"]
-    /li.accordion-item.is-active[data-accordion-item]
+    li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Typography
       div.accordion-content [data-tab-content]
         strong Body Text
@@ -860,15 +860,15 @@ div.row
             div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail" do 
             div &nbsp;&nbsp;&#61;&#61; user_photo(current_user, "large-thumb")
       div.accordion-content [data-tab-content]
-        h4 User Profile Image 
+        strong User Profile Image 
         div.row
           div.columns.medium-6
             == image_tag("pattern_screenshots/images/user_profile.png")
           div.columns.medium-6
-            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-profile" do
+            div.user-profile
               == image_tag("default_user_image.png")
         div.row.columns
-          code
+          .customcode
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "user-profile" do 
             div &nbsp;&#61;&#61; image_tag("default_user_image.png")
       div.accordion-content [data-tab-content]

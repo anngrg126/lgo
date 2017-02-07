@@ -5,16 +5,6 @@ module StoriesHelper
     end
   end
   
-  def poster_photo(user)
-    if user.image_file_name?
-      image_tag user.image.url(:medium)
-    elsif user.fbimage?
-      image_tag(user.smallsquareimage)
-    else
-      image_tag('default_user_image.png')
-    end
-  end
-  
   def story_title_show(story)
     if story.published?
       if story.last_user_to_update == "Admin"

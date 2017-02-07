@@ -1,17 +1,15 @@
 - if story.published?
-    -if story.anonymous?
-        - user = @anonymous_user
-    -else
-        - user = story.user
-- else
+  -if story.anonymous?
+    - user = @anonymous_user
+  -else
     - user = story.user
-
-div.large-2.small-3.columns
-        == poster_photo(user)
-div.large-10.small-9.columns
+- else
+  - user = story.user
+.user-thumbnail.columns
+  div[style="vertical-align: top;"]
+    == user_photo(user, "medium-thumb")
+  div
     div
-        == link_to "#{user.full_name}", dashboard_path(user)
-        
-    div
-        small
-            == story.created_at.strftime("%b %d, %Y")
+      == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
+    .subtext.dark-gray
+      == story.created_at.strftime("%b %d, %Y")
