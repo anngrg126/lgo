@@ -5,7 +5,7 @@
     h4 With Current HTML/CSS/SCSS
 .row
   ul.accordion [data-accordion data-multi-expand="true" data-allow-all-closed="true"]
-    /li.accordion-item.is-active[data-accordion-item]
+    li.accordion-item.is-active[data-accordion-item]
       a.accordion-title[href="#"] Typography
       .accordion-content [data-tab-content]
         strong Body Text
@@ -740,7 +740,7 @@
             code
               div &#61;&#61; link_to root_path, class: "social-icon footer-icon" do 
               div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-lg       
-    /li.accordion-item[data-accordion-item]
+    li.accordion-item[data-accordion-item]
       a.accordion-title[href="#"] Buttons
       .accordion-content [data-tab-content]
         strong Button
@@ -814,7 +814,7 @@
             div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "button fat-button-w-icon facebook" do 
             div &nbsp;&nbsp;span.fi-social-facebook
             div &nbsp;&nbsp;span Sign in with &#35;{OmniAuth::Utils.camelize(provider)}          
-    li.accordion-item.is-active[data-accordion-item]
+    li.accordion-item[data-accordion-item]
       a.accordion-title[href="#"] Images
       .accordion-content [data-tab-content]
         strong User Small Thumbnail (for header)
@@ -923,7 +923,7 @@
             div a[href="http://www.google.com"]
             div &nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/ChicagoTribune.png", class: "media-image")
       .accordion-content [data-tab-content]
-        strong Story Card Image 
+        strong Story Main Image (for story card)
         .row
           .columns.medium-6
             == image_tag("pattern_screenshots/images/story_card_image.png")
@@ -935,7 +935,7 @@
             div &#61;&#61; link_to story_path(story) do 
             div &nbsp;&nbsp;div.story-card-image[style="background-image: url(&#35;{story_main_image_show_path(story)})"]
       .accordion-content [data-tab-content]
-        strong Story Card Image Tiles
+        strong Story Pictures Tiles (for Story show view)
         .row
           .columns.medium-6
             == image_tag("pattern_screenshots/images/story_card_image.png")
