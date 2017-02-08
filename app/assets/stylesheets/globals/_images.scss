@@ -1,10 +1,11 @@
-$global-radius: 4px;
+//$global-radius: 4px;
 
 // user thumbnail - rounded square
 // user profile - larger size rounded square
 // story card image - full width
 // media image - dark gray with blue on hover
 // image tiles for additional story images
+
 %square-thumbnail {
   position: absolute;
   left: 50%;
@@ -45,13 +46,15 @@ $global-radius: 4px;
   }
   img {
     @extend %square-thumbnail;
-    &:hover {
-      filter: brightness(115%);
-    }
   }
 }
 .user-thumbnail {
   @extend %user-thumbnail;
+}
+a.user-thumbnail:hover {
+  img {
+    filter: brightness(115%);
+  }
 }
 %user-profile {
   @extend %thumbnail-container;
@@ -165,7 +168,6 @@ $global-radius: 4px;
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
     transition: all .2s ease-in-out;
-    
     &:hover {
       transform: scale(1.05);
     }
