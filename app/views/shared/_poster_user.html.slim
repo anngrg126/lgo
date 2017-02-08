@@ -3,9 +3,8 @@
 - else
   - user = story.user
 div.columns
-  .user-thumbnail.medium-thumb
-    div
-      == user_photo(user)
+  ==link_to dashboard_path(user), class: "user-thumbnail medium-thumb"
+    == user_photo(user)
   div[style="display: inline-block;"]
     div
       == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
