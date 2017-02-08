@@ -35,7 +35,8 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_link(@story4.final_title)
     expect(page).to have_content("Anonymous")
     
-    expect(page).to have_css("img[src*='mainimage.png']", count: 2)
+#    expect(page).to have_css("img[src*='mainimage.png']", count: 2)
+    expect(page).to have_css('div.story-card-image', count: 2)
    end
   
   scenario "Logged-in user can click back to her full list of published and unpublished stories", js: true do
