@@ -1,11 +1,21 @@
 module DashboardHelper
   def user_photo(user)
     if user.image_file_name?
-      image_tag user.image.url(:medium)
+      image_tag(user.image.url(:medium))
     elsif user.fbimage?
       image_tag(user.largesquareimage)
     else
       image_tag('default_user_image.png')
+    end
+  end
+  
+  def user_photo_path(user)
+    if user.image_file_name?
+      image_path(user.image.url(:medium))
+    elsif user.fbimage?
+      image_path(user.largesquareimage)
+    else
+      image_path('default_user_image.png')
     end
   end
   
@@ -18,9 +28,9 @@ module DashboardHelper
   def edit_user_photo(user)
     if user == current_user
       unless user.image_file_name? || user.fbimage?
-        link_to "Upload Photo", edit_user_dashboard_registration_path(user, form_render: "user_image"), remote: true
+        link_to "Upload Photo", edit_user_dashboard_registration_path(user, form_render: "user_image"), class: "primary-link", remote: true
       else
-        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_image"), remote: true
+        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_image"), class: "primary-link", remote: true
       end
     end
   end
@@ -86,15 +96,16 @@ module DashboardHelper
     end
   end
   
-  def story_pending(story)
-    unless story.published?
-      html = "<div>Pending</div>".html_safe
-    end
-  end
+#  def story_pending(story)
+#    unless story.published?
+#      html = "Pending".html_safe
+#    end
+#  end
   
   def story_anonymous(story)
     if story.anonymous?
-      html = "<div>Anonymous</div>".html_safe
+      content_tag(:div, "Anonymous (only you can see this story on your dashboard", class: "subtext")
+#      html = "<div>Anonymous (only you can see this story on your dashboard)</div>".html_safe
     end
   end
   

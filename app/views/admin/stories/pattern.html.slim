@@ -1,0 +1,970 @@
+.row
+  .columns.medium-6
+    strong Screenshot
+  .columns.medium-6
+    strong With Current HTML/CSS/SCSS
+.row
+  ul.accordion [data-accordion data-multi-expand="true" data-allow-all-closed="true"]
+    li.accordion-item.is-active[data-accordion-item]
+      a.accordion-title[href="#"] Typography
+      .accordion-content [data-tab-content]
+        strong Body Text
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/typography/body.jpg")
+          .columns.medium-6
+            p This is body text.
+            | Body text can also be used outside paragraphs. 
+        .row.columns
+          .customcode
+            div p This is body text
+      .accordion-content [data-tab-content]
+        strong Emphasized Body Text
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/typography/body_strong.jpg")
+          .columns.medium-6
+            strong This is emphasized body text.
+        .row.columns
+          .customcode
+            div strong This is emphasized body text
+      .accordion-content [data-tab-content]
+        strong Links
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/typography/links.jpg")
+          .columns.medium-6
+            == link_to "This is a Primary Link", root_path, class: "primary-link"
+            br
+            == link_to "This is a Secondary Link", root_path, class: "secondary-link"
+        .row.columns
+          .customcode
+            div &#61;&#61; link_to "This is a Primary Link", root_path, class: "primary-link"
+            div &#61;&#61; link_to "This is a Secondary Link", root_path, class: "secondary-link"
+      .accordion-content [data-tab-content]
+        strong Minor Links
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/typography/minor_links.jpg")
+          .columns.medium-6
+            == link_to "Minor Link", root_path, class: "minor-link"
+            br
+            == link_to root_path, class: "minor-link" do 
+              span.fa.fa-trash-o
+              span &nbsp;Minor Link w/ Icon
+        .row.columns
+          .customcode
+            div &#61;&#61; link_to "Minor Link", root_path, class: "minor-link"
+            div &#61;&#61; link_to root_path, class: "minor-link" do
+            div &nbsp;&nbsp; span.fa.fa-trash-o
+            div &nbsp;&nbsp; span &amp;nbsp;Minor Link w/ Icon
+      .accordion-content [data-tab-content]
+        strong Subtext
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/typography/subtext.jpg")
+          .columns.medium-6
+            .subtext This is subtext information
+        .row.columns
+          .customcode
+            div .subtext This is subtext information
+      .accordion-content [data-tab-content]
+        strong Tags
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/typography/tag.jpg")
+          .columns.medium-6
+            span.label
+              a.subtext.primary-link[href="#{stories_path}?search_tag=#{tag_search("This is a Tag")}"] This is a Tag
+            | &nbsp;&nbsp;
+            span.label
+              a.subtext.fail-link[href="#{stories_path}?search_tag=#{tag_search("Fail Tag")}"] Fail Tag
+        .row.columns
+          .customcode
+            div span.label
+            div &nbsp;&nbsp;a.subtext.primary-link[href="#stories_path}?search_tag=#{tag_search("This is a Tag")}"] This is a Tag
+            div | &nbsp;&nbsp;
+            div span.label
+            div &nbsp;&nbsp;a.subtext.fail-link[href="#stories_path}?search_tag=#{tag_search("Fail Tag Tag")}"] Fail Tag
+      .accordion-content [data-tab-content]
+        strong Header 1 (ex: story show view story title, dashboard page titles)
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/typography/h1.jpg")
+          .columns.medium-6
+            h1 This is an h1 header
+        .row.columns
+          .customcode
+            div h1 This is an h1 header
+      .accordion-content [data-tab-content]
+        strong Header 2 (ex: user name on story show page, form labels)
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/typography/h2.jpg")
+          .columns.medium-6
+            h2 This is an h2 header
+        .row.columns
+          .customcode
+            div h2 This is an h2 header
+      .accordion-content [data-tab-content]
+        strong Header 2 (ex: story card titles)
+        .row
+          .columns
+            h2 
+              == link_to "This is an h2 header link", root_path 
+        .row.columns
+          .customcode
+            div h2
+            div &nbsp;&nbsp;&#61;&#61; link_to "This is an h2 header link", root_path
+    li.accordion-item[data-accordion-item]
+        a.accordion-title[href="#"] Icons
+        /primary icons
+        .accordion-content [data-tab-content]
+          strong All Primary Icons with badges (clickable)
+          .row
+            .columns.small-12
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-comment.fa-lg.fa-lg [aria-describedby="comment_count"]
+                span#comment_count.icon-counter 3
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-thumbs-o-up.fa-lg [aria-describedby="like_count"]
+                span#like_count.icon-counter 33k
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-heart.fa-lg [aria-describedby="love_count"]
+                span#love_count.icon-counter 33k
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.text-stack [aria-describedby="omg_count"]
+                  .fa-stack-1x.circle-text.open.rotate-45 OMG
+                span#omg_count.icon-counter 41k
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.text-stack [aria-describedby="lol_count"]
+                  .fa-stack-1x.circle-text.filled.rotate-45 LOL
+                span#lol_count.icon-counter 41k
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-thumbs-o-up.fa-lg [aria-describedby="like_count"]
+              div &nbsp;&nbsp;span#like_count 33k 
+              br
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-heart.fa-lg [aria-describedby="love_count"]
+              div &nbsp;&nbsp;span#love_count.icon-counter 33k 
+              br
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.text-stack [aria-describedby="omg_count"]
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.open.rotate-45 OMG
+              div &nbsp;&nbsp;span#omg_count.icon-counter 41k
+              br
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.text-stack [aria-describedby="lol_count"
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.open.rotate-45 LOL
+              div &nbsp;&nbsp;span#lol_count.icon-counter 41k  
+        .accordion-content [data-tab-content]
+          strong All Primary Small Icons (not clickable, for notifications page)
+          .row
+            .columns.small-12
+              .small-icon.primary-icon
+                span.fa.fa-comment.fa-lg
+              .small-icon.primary-icon
+                span.fa.fa-thumbs-up.fa-lg
+              .small-icon.primary-icon
+                span.fa.fa-heart.fa-lg
+              .small-icon.primary-icon
+                span.text-stack
+                  .fa-stack-1x.circle-text.filled.rotate-45 OMG
+              .small-icon.primary-icon
+                span.text-stack
+                  .fa-stack-1x.circle-text.filled.rotate-45 LOL
+              .small-icon.primary-icon
+                span.fa.fa-bookmark.fa-lg
+              .small-icon.primary-icon
+                span.fa.fa-check.fa-lg
+              .small-icon.primary-icon
+                span.fa.fa-group.fa-lg
+          .row.columns
+            .customcode
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-comment.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-thumbs-up.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-heart.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.text-stack
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.filled.rotate-45 OMG
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.text-stack
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.filled.rotate-45 LOL
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-bookmark.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-check.fa-lg
+              br
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-group.fa-lg
+        .accordion-content [data-tab-content]
+          strong Bookmark Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/bookmark_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-bookmark-o.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-bookmark-o.fa-lg 
+        .accordion-content [data-tab-content]
+          strong Bookmark filled Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/bookmark_selected.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-bookmark.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-bookmark.fa-lg
+        .accordion-content [data-tab-content]
+          strong Comment Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/comment_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-comment-o.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-comment-o.fa-lg  
+        .accordion-content [data-tab-content]
+          strong Comment filled Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/comment_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-comment.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-comment.fa-lg
+        .accordion-content [data-tab-content]
+          strong Like Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/like_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-thumbs-o-up.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-thumbs-o-up.fa-lg
+        .accordion-content [data-tab-content]
+          strong Like filled Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/like_selected.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-thumbs-up.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-thumbs-up.fa-lg
+        .accordion-content [data-tab-content]
+          strong Like Icon with badge
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/like_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-thumbs-o-up.fa-lg [aria-describedby="like_count"]
+                span#like_count.icon-counter 33k
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-thumbs-o-up.fa-lg [aria-describedby="like_count"]
+              div &nbsp;&nbsp;span#like_count 33k
+        .accordion-content [data-tab-content]
+          strong Like filled Icon with Badge
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/like_selected.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-thumbs-up.fa-lg [aria-describedby="like_count"]
+                span#like_count.icon-counter 33k
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-thumbs-up.fa-lg [aria-describedby="like_count"]
+              div &nbsp;&nbsp;span#like_count.icon-counter 33k
+        .accordion-content [data-tab-content]
+          strong Love Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/love_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-heart-o.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-heart-o.fa-lg
+        .accordion-content [data-tab-content]
+          strong Love filled Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/love_selected.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-heart.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-heart.fa-lg
+        .accordion-content [data-tab-content]
+          strong Love Icon with Badge
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/love_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-heart-o.fa-lg [aria-describedby="love_count"]
+                span#love_count.icon-counter 33k
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-heart-o.fa-lg [aria-describedby="love_count"]
+              div &nbsp;&nbsp;span#love_count.icon-counter 33k.fa.fa-heart-o.fa-lg
+        .accordion-content [data-tab-content]
+          strong Love filled Icon with Badge
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/love_selected.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-heart.fa-lg [aria-describedby="love_count"]
+                span#love_count.icon-counter 33k
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-heart.fa-lg [aria-describedby="love_count"]
+              div &nbsp;&nbsp;span#love_count.icon-counter 33k.fa.fa-heart.fa-lg
+        .accordion-content [data-tab-content]
+          strong OMG Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/omg_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.text-stack
+                  .fa-stack-1x.circle-text.open.rotate-45 OMG
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.text-stack
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.open.rotate-45 OMG
+        .accordion-content [data-tab-content]
+          strong OMG filled Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/omg_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.text-stack
+                  .fa-stack-1x.circle-text.filled.rotate-45 OMG
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.text-stack
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.filled.rotate-45 OMG
+        .accordion-content [data-tab-content]
+          strong OMG Icon with Badge
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/omg_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.text-stack [aria-describedby="omg_count"]
+                  .fa-stack-1x.circle-text.open.rotate-45 OMG
+                span#omg_count.icon-counter 41k
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.text-stack [aria-describedby="omg_count"]
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.open.rotate-45 OMG
+              div &nbsp;&nbsp;span#omg_count.icon-counter 41k
+        .accordion-content [data-tab-content]
+          strong OMG filled Icon with Badge
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/omg_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.text-stack [aria-describedby="omg_count"]
+                  .fa-stack-1x.circle-text.filled.rotate-45 OMG
+                span#omg_count.icon-counter 41k
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.text-stack [aria-describedby="omg_count"]
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.filled.rotate-45 OMG
+              div &nbsp;&nbsp;span#omg_count.icon-counter 41k
+        .accordion-content [data-tab-content]
+          strong LOL Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/lol_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.text-stack
+                  .fa-stack-1x.circle-text.open.rotate-45 LOL
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.text-stack
+              div &nbsp;&nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.open.rotate-45 LOL
+        .accordion-content [data-tab-content]
+          strong LOL filled Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/lol_active.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.text-stack
+                  .fa-stack-1x.circle-text.filled.rotate-45 LOL
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.text-stack
+              div &nbsp;&nbsp;&nbsp;.fa-stack-1x.circle-text.filled.rotate-45 LOL
+        .accordion-content [data-tab-content]
+          strong Camera Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/camera.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-camera.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-camera.fa-lg
+        .accordion-content [data-tab-content]
+          strong Follow Plus Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/follow_plus.png")
+            .columns.medium-6
+              == link_to root_path, class: "icon-button primary-icon" do
+                span.fa.fa-plus-circle.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "icon-button primary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-plus-circle.fa-lg
+        /primary icons not-clickable
+        .accordion-content [data-tab-content]
+          strong Followers Icon (Small, Not clickable)
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/follow.png")
+            .columns.medium-6
+              .small-icon.primary-icon
+                span.fa.fa-group.fa-lg
+          .row.columns
+            .customcode
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-group.fa-lg  
+        .accordion-content [data-tab-content]
+          strong Check Icon (Small, Not clickable)
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/check.png")
+            .columns.medium-6
+              .small-icon.primary-icon
+                span.fa.fa-check.fa-lg
+          .row.columns
+            .customcode
+              div .small-icon.primary-icon
+              div &nbsp;&nbsp;span.fa.fa-check.fa-lg
+        /secondary icons  
+        .accordion-content [data-tab-content]
+          strong Bulb Icon (Big Secondary Icon, Not Clickable)
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/bulb.png")
+            .columns.medium-6
+              .icon.secondary-icon
+                span.fa.fa-lightbulb-o.fa-lg
+          .row.columns
+            .customcode
+              div .icon.secondary-icon
+              div &nbsp;&nbsp;span.fa.fa-lightbulb-o.fa-lg
+        .accordion-content [data-tab-content]
+          strong Pencil/Edit Icon (Small Secondary Icon, Clickable)
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/pencil.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-pencil.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-pencil.fa-lg
+        .accordion-content [data-tab-content]
+          strong Search Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/search.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-search.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-search.fa-lg
+        .accordion-content [data-tab-content]
+          strong Settings Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/settings.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-cog.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-cog.fa-lg
+        .accordion-content [data-tab-content]
+          strong Delete Icon (Extra-small)
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/delete.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-trash-o
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-trash-o
+        .accordion-content [data-tab-content]
+          strong Check Icon (Extra-Small)
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/check.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-check
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-check
+        .accordion-content [data-tab-content]
+          strong Bold Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/bold.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-bold
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-bold
+        .accordion-content [data-tab-content]
+          strong Italic Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/italic.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-italic
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-italic
+        .accordion-content [data-tab-content]
+          strong Strikethrough Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/strikethrough.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-strikethrough
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-strikethrough
+        .accordion-content [data-tab-content]
+          strong Text Size Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/text_size.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-font
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-font
+        .accordion-content [data-tab-content]
+          strong Bullet Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/bullet.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-list
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "smallicon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-list
+        .accordion-content [data-tab-content]
+          strong Ordered Bullet Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/ordered_bullet.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-list-ol
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-list-ol
+        .accordion-content [data-tab-content]
+          strong Undo Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/undo.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-undo
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-undo
+        .accordion-content [data-tab-content]
+          strong Redo Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/redo.png")
+            .columns.medium-6
+              == link_to root_path, class: "small-icon-button secondary-icon" do
+                span.fa.fa-repeat
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "small-icon-button secondary-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-repeat
+        //social media icons                
+        .accordion-content [data-tab-content]
+          strong Facebook Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/facebook.png", width: '36')
+            .columns.medium-6
+              == link_to root_path, class: "social-icon facebook" do
+                span.fa.fa-facebook-official.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "social-icon facebook" do 
+              div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-lg
+        .accordion-content [data-tab-content]
+          strong Google Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/google_plus.png", width: '36')
+            .columns.medium-6
+              == link_to root_path, class: "social-icon google" do
+                span.fa.fa-google-plus-square.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "social-icon google" do 
+              div &nbsp;&nbsp;span.fa.fa-google-plus-square.fa-lg
+        .accordion-content [data-tab-content]
+          strong Twitter Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/twitter.png", width: '36')
+            .columns.medium-6
+              == link_to root_path, class: "social-icon twitter" do
+                span.fa.fa-twitter-square.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "social-icon twitter" do 
+              div &nbsp;&nbsp;span.fa.fa-twitter-square.fa-lg
+        .accordion-content [data-tab-content]
+          strong Pinterest Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/pinterest.png", width: '36')
+            .columns.medium-6
+              == link_to root_path, class: "social-icon pinterest" do
+                span.fa.fa-pinterest-square.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "social-icon pinterest" do 
+              div &nbsp;&nbsp;span.fa.fa-pinterest-square.fa-lg
+        .accordion-content [data-tab-content]
+          strong Instagram Icon
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/instagram.png", width: '36')
+            .columns.medium-6
+              == link_to root_path, class: "social-icon instagram" do
+                span.fa.fa-instagram.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "social-icon instagram" do 
+              div &nbsp;&nbsp;span.fa.fa-instagram.fa-lg
+        //footer icons
+        .accordion-content [data-tab-content]
+          strong Footer Social Icons
+          .row
+            .columns.medium-6
+              == image_tag("pattern_screenshots/icons/facebook.png", width: '36')
+            .columns.medium-6
+              == link_to root_path, class: "social-icon footer-icon" do
+                span.fa.fa-facebook-official.fa-lg
+          .row.columns
+            .customcode
+              div &#61;&#61; link_to root_path, class: "social-icon footer-icon" do 
+              div &nbsp;&nbsp;span.fa.fa-facebook-official.fa-lg       
+    li.accordion-item[data-accordion-item]
+      a.accordion-title[href="#"] Buttons
+      .accordion-content [data-tab-content]
+        strong Button
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/buttons/button.jpg")
+          .columns.medium-6
+            == link_to "Post Story", root_path, class: "button"
+        .row.columns
+          .customcode
+            div &#61;&#61; f.submit "Post Story", class: "button"
+      .accordion-content [data-tab-content]
+        strong Inverted Button
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/buttons/hollow_btn.jpg")
+          .columns.medium-6
+            == link_to "Post Story", root_path, class: "button hollow"
+        .row.columns
+          .customcode
+            div &#61;&#61; f.submit "Post Story", class: "hollow button"
+      .accordion-content [data-tab-content]
+        strong Skinny Button (header only)
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/buttons/skinny_btn.jpg")
+          .columns.medium-6
+            == link_to "Sign up", root_path, class: "button skinny-button"
+        .row.columnu
+          .customcode
+            div &#61;&#61; link_to "Join", new_user_registration_path, class: "button skinny-button" 
+      .accordion-content [data-tab-content]
+        strong Button with Icon
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/buttons/share_story_button.jpg")
+          .columns.medium-6
+            == link_to root_path, class: "button button-w-icon" do
+              span.fi-pencil
+              span Share a Story  
+        .row.columns
+          .customcode
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do 
+            div &nbsp;&nbsp;span.fi-pencil
+            div &nbsp;&nbsp;span Share a Story
+      .accordion-content [data-tab-content]
+        strong Inverted Button with Icon
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/buttons/hollow_btn_icon.jpg")
+          .columns.medium-6
+            == link_to root_path, class: "button button-w-icon hollow" do
+              span.fi-pencil
+              span Share a Story  
+        .row.columns
+          .customcode
+            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon hollow" do 
+            div &nbsp;&nbsp;span.fi-pencil
+            div &nbsp;&nbsp;span Share a Story
+      .accordion-content [data-tab-content]
+        strong Social Button with Icon (Fat)
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/buttons/facebook_btn.jpg")
+          .columns.medium-6
+            == link_to root_path, class: "button fat-button-w-icon facebook" do
+              span.fi-social-facebook
+              span Sign in with Facebook 
+        .row.columns
+          .customcode
+            div &#61;&#61; link_to omniauth_authorize_path(resource_name, provider), class: "button fat-button-w-icon facebook" do 
+            div &nbsp;&nbsp;span.fi-social-facebook
+            div &nbsp;&nbsp;span Sign in with &#35;{OmniAuth::Utils.camelize(provider)}          
+    li.accordion-item[data-accordion-item]
+      a.accordion-title[href="#"] Images
+      .accordion-content [data-tab-content]
+        strong User Small Thumbnail (for header)
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/images/user_thumbnail_small.png")
+          .columns.medium-6
+            == link_to root_path, class: "user-thumbnail small-thumb" do
+              == image_tag("default_user_image.png")
+            | or &nbsp;
+            div.user-thumbnail.small-thumb
+              == user_photo(current_user)
+            | or &nbsp;
+            div.user-thumbnail.small-thumb
+              == image_tag("rectangle_user_image.png")
+        .row.columns
+          .customcode
+            div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail small-thumb" do 
+            div &nbsp;&nbsp;&#61;&#61; image_tag("default_user_image.png") 
+            | OR
+            div div.user-thumbnail.small-thumb
+            div &nbsp;&nbsp;&#61;&#61;user_photo(current_user)
+            | (second option for use inside containing divs/links)
+      .accordion-content [data-tab-content]
+        strong User Medium Thumbnail (for story cards)
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/images/user_thumbnail_small.png")
+          .columns.medium-6
+            == link_to dashboard_path(current_user), class: "user-thumbnail medium-thumb" do
+              == user_photo(current_user)
+        .row.columns
+          .customcode
+            div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail medium-thumb" do 
+            div &nbsp;&nbsp;&#61;&#61; user_photo(current_user)
+      .accordion-content [data-tab-content]
+        strong User Large Thumbnail (for followers/following page)
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/images/user_thumbnail_small.png")
+          .columns.medium-6
+            == link_to dashboard_path(current_user), class: "user-thumbnail large-thumb" do
+              == user_photo(current_user)
+        .row.columns
+          .customcode
+            div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail large-thumb" do 
+            div &nbsp;&nbsp;&#61;&#61; user_photo(current_user)
+      .accordion-content [data-tab-content]
+        strong User Profile Image The
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/images/user_profile.png")
+          .columns.medium-6
+            .user-profile
+              == image_tag("default_user_image.png")
+            | &nbsp;&amp; 
+            .user-profile
+              == user_photo(current_user)
+        .row.columns
+          .customcode
+            div .user-profile
+            div &nbsp;&nbsp;&#61;&#61; user_photo(current_user)
+      .accordion-content [data-tab-content]
+        strong User Profile Image for edit
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/images/user_profile.png")
+          .columns.medium-6
+            .overlay-container
+              .image-wrapper.overlay-fade-in
+                .user-profile
+                  == image_tag("default_user_image.png")
+                  == link_to root_path, class: "small-icon-button" do
+                    .fa.fa-camera.fa-lg
+                .image-overlay-content
+                  == link_to "Upload Photo", root_path, class: "primary-link"
+            | &nbsp;&amp; 
+            .overlay-container
+              .image-wrapper.overlay-fade-in
+                .user-profile
+                  == user_photo(current_user)
+                  == link_to root_path, class: "small-icon-button" do
+                    .fa.fa-camera.fa-lg
+                .image-overlay-content
+                  == link_to "Upload Photo", root_path, class: "primary-link"
+        .row.columns
+          .customcode
+            div .overlay-container
+            div &nbsp;&nbsp;.image-wrapper.overlay-fade-in
+            div &nbsp;&nbsp;&nbsp;&nbsp;.user-profile
+            div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; user_photo(@user)
+            div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; link_to edit_user_dashboard_path(@user, form_render: "user_image") do
+            div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.fa.fa-camera.fa-lg
+            div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; .image-overlay-content
+            div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; edit_user_photo(@user)
+      .accordion-content [data-tab-content]
+        strong Media Image 
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/images/media_image.png")
+          .columns.medium-6
+            a[href="http://www.google.com"]
+              == image_tag("pattern_screenshots/images/ChicagoTribune.png", class: "media-image")
+        .row.columns
+          .customcode
+            div a[href="http://www.google.com"]
+            div &nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/ChicagoTribune.png", class: "media-image")
+      .accordion-content [data-tab-content]
+        strong Story Main Image (for story card)
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/images/story_card_image.png")
+          .columns.medium-6
+            == link_to root_path do
+              div.story-card-image[style="background-image: url(#{image_path 'pattern_screenshots/images/story_card_image.png'})"]
+        .row.columns
+          .customcode
+            div &#61;&#61; link_to story_path(story) do 
+            div &nbsp;&nbsp;div.story-card-image[style="background-image: url(&#35;{story_main_image_show_path(story)})"]
+      .accordion-content [data-tab-content]
+        strong Story Pictures Tiles (for Story show view)
+        .row
+          .columns.medium-6
+            == image_tag("pattern_screenshots/images/story_card_image.png")
+          .columns.medium-6
+            .row.small-up-2.medium-up-3.large-up-4
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("default_user_image.png")
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("pattern_screenshots/images/story_card_image.png")
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("rectangle_user_image.png")
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == user_photo(current_user)
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("default_user_image.png")
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("pattern_screenshots/images/story_card_image.png")
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("rectangle_user_image.png")
+        .row.columns
+          .customcode 
+            div .row.small-up-2.medium-up-3.large-up-4
+            div &nbsp;&nbsp;div.column.column-block
+            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; link_to root_path, class: "thumbnail" do 
+            div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")

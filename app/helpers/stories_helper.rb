@@ -1,18 +1,12 @@
 module StoriesHelper
   def story_main_image_show(story)
     unless story.main_image_file_name.nil?
-      image_tag story.main_image.url
+      image_tag story.main_image.url, class: "story-card-image"
     end
   end
   
-  def poster_photo(user)
-    if user.image_file_name?
-      image_tag user.image.url(:medium)
-    elsif user.fbimage?
-      image_tag(user.smallsquareimage)
-    else
-      image_tag('default_user_image.png')
-    end
+  def story_main_image_show_path(story)
+    image_path story.main_image.url, class: "story-card-image"
   end
   
   def story_title_show(story)
@@ -62,7 +56,7 @@ module StoriesHelper
     else
       body = story.raw_gift_description
     end
-    html = "<div>#{body}</div>".html_safe
+    html = "#{body}".html_safe
   end
   
 #   def story_by_show(story)
@@ -202,11 +196,11 @@ module StoriesHelper
 #          @display_tag = @t.name
 
           # @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'">'+@t.name+'</a>'
-          @display_tag = '<span class="label ultra-light-gray"><a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'">'+@t.name+'</a></span>&nbsp;'
+          @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@t.name)+'" class="subtext primary-link">'+@t.name+'</a>'
         else
 #          @display_tag = c.description
           # @display_tag = '<a href="'+stories_path+'?search='+c.description+'">'+c.description+'</a>'
-          @display_tag = '<span class="label ultra-light-gray"><a href="'+stories_path+'?search='+c.description+'">'+c.description+'</a></span>&nbsp;'
+          @display_tag = '<a href="'+stories_path+'?search='+c.description+'" class="subtext primary-link">'+c.description+'</a>'
         end
       end    
     end
@@ -225,7 +219,7 @@ module StoriesHelper
     @fail_tag = @tags.select{|t|t.name=="fail"}.first
     if story.classifications.any?{|c| c[:tag_id] == @fail_tag.id}
 #      @display_tag = @fail_tag.name
-      @display_tag = '<span class="label ultra-light-gray"><a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'">'+@fail_tag.name+'</a></span>&nbsp;'
+      @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'" class="subtext fail-link">'+@fail_tag.name+'</a>'
     else
       @display_tag = ""
     end

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   
   namespace :admin do
     root to: 'stories#index'
+    get '/pattern' => 'stories#pattern'
     resources :stories do
       resources :classifications, only: [:destroy]
     end

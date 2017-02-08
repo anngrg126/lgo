@@ -20,10 +20,22 @@ module DeviseHelper
     messages_array = resource.errors.full_messages
     errormessage = messages_array.index{|s| s.include?("Email")}
     
-    if messages.include? "Email"
-      html = "<label for='user_email' class='is-invalid-label'>Email</label><input id='user_email' autofocus='autofocus' value='' name='user[email]' type='email' class='is-invalid-input'><span class='form-error is-visible'>#{messages_array[errormessage]}</span>".html_safe
+    unless errormessage.nil?
+      content_tag(:label, "Email", for: "user_email", class: "is-invalid-label") +
+      tag(:input, id:'user_email', name:'user[email]', type:'email', class:'is-invalid-input') +
+#      content_tag(:span, "#{messages_array[errormessage]}", class:'form-error is-visible')
+      if messages_array[errormessage].include?('has already been taken')
+        content_tag(:span, "#{messages_array[errormessage]}", class:'form-error is-visible') do
+          content_tag(:span, "Returning users, please ", class: "subtext") +
+          link_to("login", new_user_session_path, class: "subtext") +
+          content_tag(:span, ".", class: "subtext")
+        end
+      else
+        content_tag(:span, "#{messages_array[errormessage]}", class:'form-error is-visible')
+      end
     else
-      html = "<label for='user_email'>Email</label><input id='user_email' autofocus='autofocus' value='' name='user[email]' type='email'>".html_safe
+      content_tag(:label, "Email", for: "user_email") +
+      tag(:input, id: "user_email", name: "user[email]", type: "email")
     end
   end
 
@@ -33,9 +45,12 @@ module DeviseHelper
     errormessage = messages_array.index{|s| s.include?("Password") && s.exclude?("confirmation")}
     
     unless errormessage.nil?
-        html = "<label for='user_password' class='is-invalid-label'>Password</label><input id='user_password' autocomplete='off' name='user[password]' type='password' class='is-invalid-input form-control'><span class='form-error is-visible'>#{messages_array[errormessage]}</span>".html_safe
+      content_tag(:label, "Password", for: "user_password", class: "is-invalid-label") +
+      tag(:input, id: "user_password", autocomplete: "off", name: "user[password]", type: "password", class: "is-invalid-input form-control") +
+      content_tag(:span, "#{messages_array[errormessage]}", class: "form-error is-visible")
     else
-    html = "<label for='user_password'>Password</label><input class='form-control' id='user_password' autocomplete='off' name='user[password]' type='password'>".html_safe
+      content_tag(:label, "Password", for: "user_password") +
+      tag(:input, id: "user_password", autocomplete: "off", name: "user[password]", type: "password")
     end
   end
   def devise_password_confirmation_field

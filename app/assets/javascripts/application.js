@@ -33,12 +33,16 @@ $(document).on('turbolinks:load', function() {
 
 function myFunction() {
   //*NAVBAR*
-  //add or remove hidden class to navbar 
+  //add or remove hidden class to navbar & manage sticky
   if ($(window).width() > 639) {
     $("#tags-menu").addClass("is-hidden");
     
   } else {
     $("#tags-menu").removeClass("is-hidden");
+    if ($("nav.sticky").hasClass("is-at-bottom")) {
+      console.log("wuehifjskn");
+      $("nav.sticky").removeClass("is-at-bottom").css("top", 0);
+    };
   };
   //fcn to populate text of "Back" button in responsive menu  
   if ($(".nav-bottomtier ul.horizontal").hasClass("drilldown")) {

@@ -1,16 +1,38 @@
-%uppercase-button-w-icon {
-  &.button {
-    padding: 0.425em 0.5em; //overrides foundation padding
-  };
-  text-transform: uppercase;
+.button {
+  @include font-size($global-body-sizes);
+  padding: 0.85rem 1rem;//overrides foundation
   font-weight: 600;
+  line-height: 1.15;//overrides foundation
   span {
-    margin: 0.425em 0.5em;
-    display: inline-block;
+    @include font-size($global-body-sizes);
+  }
+  &.hollow {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-shadow: inset 0px 0px 0px 1px $primary-color;
   }
 }
-.uppercase-button-w-icon {
-  @extend %uppercase-button-w-icon;
+.skinny-button {//header only
+  padding: 0.45rem 1rem;//overrides foundation
+  font-weight: 500;
+}
+%button-w-icon {
+  &.button {
+//    padding: 0.425rem 0.5rem; //overrides foundation padding
+    padding: 0px 5.25px 4.5px 5.25px;//overrides foundation padding
+    line-height: 1.15; //overrides foundation setting of 1
+  }
+  font-weight: 600;
+  span {
+//    margin: 0.425rem 0.5rem;
+    margin: 4.5px 5.25px;
+    display: inline-block;
+  }
+  span:first-child {
+    font-size: 2.0rem;
+    margin: 4.5px 5.25px 0 5.25px; 
+  }
   &.facebook {
     background: $facebook-color;
     &:hover {
@@ -28,5 +50,20 @@
     &:hover {
       background: darken( $google-color, 10% );
     }
+  }
+}
+.button-w-icon {
+  @extend %button-w-icon;
+}
+.fat-button-w-icon {
+  @extend %button-w-icon;
+  &.button {
+    padding: 6px 7px;
+  }
+  span {
+    margin: 6px 7px;
+  }
+  span:first-child {
+    margin: 6px 7px 0 7px;
   }
 }

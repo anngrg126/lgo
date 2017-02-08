@@ -24,8 +24,9 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_content(@story2.final_gift_description)
     
     expect(page).not_to have_link("New Story")
-    expect(page).to have_content("Posted by: #{@user.full_name}")
-    expect(page).to have_css("img[src*='mainimage.png']", count: 4)
+    expect(page).to have_link("#{@user.full_name}")
+#    expect(page).to have_css("img[src*='mainimage.png']", count: 4)
+    expect(page).to have_css('div.story-card-image', count: 4)
   end
   
   scenario "List anonymous stories" do
@@ -43,6 +44,6 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_content(@story4.updated_title)
     expect(page).to have_content(@story4.updated_body.truncate(150))
     expect(page).to have_content(@story4.updated_gift_description)
-    expect(page).to have_content("Posted by: #{@user2.first_name} #{@user2.last_name}")
+    expect(page).to have_link("#{@user2.first_name} #{@user2.last_name}")
   end
 end

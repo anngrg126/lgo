@@ -1,13 +1,13 @@
 .row
   .columns.small-6
     - if @user == current_user
-      h2 Your Stories
+      h1 Your Stories
     - else
-      h2
+      h1
         == "#{@user.full_name}'s Stories"
   .columns.large-offset-3.large-3.small-6
-    == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button uppercase-button-w-icon" do
-      span.fi-clipboard-pencil
+    == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
+      span.fi-pencil
       span Share a Story
 .row
   - @dashboard_stories.each do |s|

@@ -1,17 +1,27 @@
 .card
-  .card-section
-    == story_pending(story)
+  - unless story.published?
+    .card-section
+      .subtext.italic Pending
   .card-section.row
     == render 'shared/poster_user', story: story
   .card-section
-    == link_to story_title(story), story_path(story)
-    == story_gift_description_show(story)
+    h2
+      == link_to story_title(story), story_path(story)
+    .subtext
+      == story_gift_description_show(story)
     - unless story.classifications.empty?
       .story_tags
-        == story_recipient_tag(story)
-        == story_occasion_tag(story)
-        == story_fail_tag(story)
-  == story_main_image_show(story)
+        span.label
+          == story_recipient_tag(story)
+        | &nbsp;&nbsp;
+        span.label
+          == story_occasion_tag(story)
+        | &nbsp;&nbsp;
+        span.label
+          == story_fail_tag(story)
+  - unless story.main_image_file_name.nil?
+    == link_to story_path(story) do
+      div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
   .card-section
     == story_body(story)
   - if current_user && story.anonymous? && story.author_id == current_user.id && params[:controller] == "dashboard"
