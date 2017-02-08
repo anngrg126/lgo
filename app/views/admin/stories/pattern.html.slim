@@ -863,14 +863,11 @@
             div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail large-thumb" do 
             div &nbsp;&nbsp;&#61;&#61; user_photo(current_user)
       .accordion-content [data-tab-content]
-        strong User Profile Image 
+        strong User Profile Image The
         .row
           .columns.medium-6
             == image_tag("pattern_screenshots/images/user_profile.png")
           .columns.medium-6
-            .user-profile
-              == image_tag("rectangle_user_image.png")
-            | &nbsp;&amp; 
             .user-profile
               == image_tag("default_user_image.png")
             | &nbsp;&amp; 
@@ -889,8 +886,8 @@
             .overlay-container
               .image-wrapper.overlay-fade-in
                 .user-profile
-                  == image_tag("rectangle_user_image.png")
-                  ==link_to root_path, class: "small-icon-button" do
+                  == image_tag("default_user_image.png")
+                  == link_to root_path, class: "small-icon-button" do
                     .fa.fa-camera.fa-lg
                 .image-overlay-content
                   == link_to "Upload Photo", root_path, class: "primary-link"
@@ -898,8 +895,8 @@
             .overlay-container
               .image-wrapper.overlay-fade-in
                 .user-profile
-                  == image_tag("default_user_image.png")
-                  ==link_to root_path, class: "small-icon-button" do
+                  == user_photo(current_user)
+                  == link_to root_path, class: "small-icon-button" do
                     .fa.fa-camera.fa-lg
                 .image-overlay-content
                   == link_to "Upload Photo", root_path, class: "primary-link"
@@ -938,42 +935,36 @@
             div &#61;&#61; link_to story_path(story) do 
             div &nbsp;&nbsp;div.story-card-image[style="background-image: url(&#35;{story_main_image_show_path(story)})"]
       .accordion-content [data-tab-content]
-        h4 Story Card Image Tiles
+        strong Story Card Image Tiles
         .row
           .columns.medium-6
             == image_tag("pattern_screenshots/images/story_card_image.png")
           .columns.medium-6
             .row.small-up-2.medium-up-3.large-up-4
-              div.column.column-no-margin.column-block
-                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("default_user_image.png")
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
                   == image_tag("pattern_screenshots/images/story_card_image.png")
-              div.column.column-no-margin.column-block
-                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("rectangle_user_image.png")
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == user_photo(current_user)
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("default_user_image.png")
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
                   == image_tag("pattern_screenshots/images/story_card_image.png")
-              div.column.column-no-margin.column-block
-                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
-                  == image_tag("pattern_screenshots/images/story_card_image.png")
-              div.column.column-no-margin.column-block
-                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
-                  == image_tag("pattern_screenshots/images/story_card_image.png")
-              div.column.column-no-margin.column-block
-                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
-                  == image_tag("pattern_screenshots/images/story_card_image.png")
-              div.column.column-no-margin.column-block
-                == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do
-                  == image_tag("pattern_screenshots/images/story_card_image.png")
+              div.column.column-block
+                == link_to root_path, class: "thumbnail" do
+                  == image_tag("rectangle_user_image.png")
         .row.columns
-          code 
+          .customcode 
             div .row.small-up-2.medium-up-3.large-up-4
-            div &nbsp;div.column.column-no-margin.column-block
-            div &nbsp;&nbsp;&#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do 
-            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
-            div &nbsp;div.column.column-no-margin.column-block
-            div &nbsp;&nbsp;&#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do 
-            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
-            div &nbsp;div.column.column-no-margin.column-block
-            div &nbsp;&nbsp;&#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do 
-            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
-            div &nbsp;div.column.column-no-margin.column-block
-            div &nbsp;&nbsp;&#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-tile-image" do 
-            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
+            div &nbsp;&nbsp;div.column.column-block
+            div &nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; link_to root_path, class: "thumbnail" do 
+            div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
