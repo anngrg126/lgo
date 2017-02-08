@@ -9,6 +9,16 @@ module DashboardHelper
     end
   end
   
+  def user_photo_path(user)
+    if user.image_file_name?
+      image_path(user.image.url(:medium))
+    elsif user.fbimage?
+      image_path(user.largesquareimage)
+    else
+      image_path('default_user_image.png')
+    end
+  end
+  
   def edit_user_name(user)
     if user == current_user
       link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_name"), remote: true

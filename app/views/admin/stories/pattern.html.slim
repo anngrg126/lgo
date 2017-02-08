@@ -914,29 +914,29 @@
             div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; .image-overlay-content
             div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; edit_user_photo(@user)
       .accordion-content [data-tab-content]
-        h4 Media Image 
+        strong Media Image 
         .row
           .columns.medium-6
             == image_tag("pattern_screenshots/images/media_image.png")
           .columns.medium-6
-            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "media-image" do
-              == image_tag("pattern_screenshots/images/ChicagoTribune.png")
+            a[href="http://www.google.com"]
+              == image_tag("pattern_screenshots/images/ChicagoTribune.png", class: "media-image")
         .row.columns
-          code
-            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "media-image" do 
-            div &nbsp;&#61;&#61; image_tag("pattern_screenshots/images/ChicagoTribune.png")
+          .customcode
+            div a[href="http://www.google.com"]
+            div &nbsp;&nbsp;&#61;&#61; image_tag("pattern_screenshots/images/ChicagoTribune.png", class: "media-image")
       .accordion-content [data-tab-content]
-        h4 Story Card Image 
+        strong Story Card Image 
         .row
           .columns.medium-6
             == image_tag("pattern_screenshots/images/story_card_image.png")
           .columns.medium-6
-            == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-image" do
-              == image_tag("pattern_screenshots/images/story_card_image.png")
+            == link_to root_path do
+              div.story-card-image[style="background-image: url(#{image_path 'pattern_screenshots/images/story_card_image.png'})"]
         .row.columns
-          code
-            div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "story-card-image" do 
-            div &nbsp;&#61;&#61; image_tag("pattern_screenshots/images/story_card_image.png")
+          .customcode
+            div &#61;&#61; link_to story_path(story) do 
+            div &nbsp;&nbsp;div.story-card-image[style="background-image: url(&#35;{story_main_image_show_path(story)})"]
       .accordion-content [data-tab-content]
         h4 Story Card Image Tiles
         .row

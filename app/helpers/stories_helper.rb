@@ -1,8 +1,12 @@
 module StoriesHelper
   def story_main_image_show(story)
     unless story.main_image_file_name.nil?
-      image_tag story.main_image.url
+      image_tag story.main_image.url, class: "story-card-image"
     end
+  end
+  
+  def story_main_image_show_path(story)
+    image_path story.main_image.url, class: "story-card-image"
   end
   
   def story_title_show(story)

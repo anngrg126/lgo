@@ -19,7 +19,9 @@
         | &nbsp;&nbsp;
         span.label
           == story_fail_tag(story)
-  == story_main_image_show(story)
+  - unless story.main_image_file_name.nil?
+    == link_to story_path(story) do
+      div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
   .card-section
     == story_body(story)
   - if current_user && story.anonymous? && story.author_id == current_user.id && params[:controller] == "dashboard"
