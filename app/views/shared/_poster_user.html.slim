@@ -2,10 +2,11 @@
   - user = @anonymous_user
 - else
   - user = story.user
-.user-thumbnail.columns
-  div[style="vertical-align: top;"]
-    == user_photo(user, "medium-thumb")
-  div
+div.columns
+  .user-thumbnail.medium-thumb
+    div
+      == user_photo(user)
+  div[style="display: inline-block;"]
     div
       == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
     .subtext.dark-gray

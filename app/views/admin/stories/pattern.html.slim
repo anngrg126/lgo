@@ -822,18 +822,21 @@
           .columns.medium-6
             == image_tag("pattern_screenshots/images/user_thumbnail_small.png")
           .columns.medium-6
-            == link_to root_path, class: "user-thumbnail" do
-              == image_tag("default_user_image.png", class: "small-thumb")
+            == link_to root_path, class: "user-thumbnail small-thumb" do
+              == image_tag("default_user_image.png")
             | or &nbsp;
-            div.user-thumbnail
-              == user_photo(current_user, "small-thumb")
+            div.user-thumbnail.small-thumb
+              == user_photo(current_user)
+            | or &nbsp;
+            div.user-thumbnail.small-thumb
+              == image_tag("rectangle_user_image.png")
         .row.columns
           .customcode
-            div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail" do 
-            div &nbsp;&nbsp;&#61;&#61; image_tag("default_user_image.png", class: "small-thumb") 
+            div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail small-thumb" do 
+            div &nbsp;&nbsp;&#61;&#61; image_tag("default_user_image.png") 
             | OR
-            div div.user-thumbnail
-            div &nbsp;&nbsp;&#61;&#61;user_photo(current_user, "small-thumb")
+            div div.user-thumbnail.small-thumb
+            div &nbsp;&nbsp;&#61;&#61;user_photo(current_user)
             | (second option for use inside containing divs/links)
       .accordion-content [data-tab-content]
         strong User Medium Thumbnail (for story cards)
@@ -841,24 +844,24 @@
           .columns.medium-6
             == image_tag("pattern_screenshots/images/user_thumbnail_small.png")
           .columns.medium-6
-            == link_to dashboard_path(current_user), class: "user-thumbnail" do
-              == user_photo(current_user, "medium-thumb")
+            == link_to dashboard_path(current_user), class: "user-thumbnail medium-thumb" do
+              == user_photo(current_user)
         .row.columns
           .customcode
-            div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail" do 
-            div &nbsp;&nbsp;&#61;&#61; user_photo(current_user, "medium-thumb")
+            div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail medium-thumb" do 
+            div &nbsp;&nbsp;&#61;&#61; user_photo(current_user)
       .accordion-content [data-tab-content]
         strong User Large Thumbnail (for followers/following page)
         .row
           .columns.medium-6
             == image_tag("pattern_screenshots/images/user_thumbnail_small.png")
           .columns.medium-6
-            == link_to dashboard_path(current_user), class: "user-thumbnail" do
-              == user_photo(current_user, "large-thumb")
+            == link_to dashboard_path(current_user), class: "user-thumbnail large-thumb" do
+              == user_photo(current_user)
         .row.columns
           .customcode
-            div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail" do 
-            div &nbsp;&nbsp;&#61;&#61; user_photo(current_user, "large-thumb")
+            div &#61;&#61; link_to dashboard_path(current_user), class: "user-thumbnail large-thumb" do 
+            div &nbsp;&nbsp;&#61;&#61; user_photo(current_user)
       .accordion-content [data-tab-content]
         strong User Profile Image 
         .row
@@ -870,10 +873,13 @@
             | &nbsp;&amp; 
             .user-profile
               == image_tag("default_user_image.png")
+            | &nbsp;&amp; 
+            .user-profile
+              == user_photo(current_user)
         .row.columns
           .customcode
             div .user-profile
-            div &nbsp;&nbsp;&#61;&#61; user_photo(current_user, "")
+            div &nbsp;&nbsp;&#61;&#61; user_photo(current_user)
       .accordion-content [data-tab-content]
         strong User Profile Image for edit
         .row
@@ -902,7 +908,7 @@
             div .overlay-container
             div &nbsp;&nbsp;.image-wrapper.overlay-fade-in
             div &nbsp;&nbsp;&nbsp;&nbsp;.user-profile
-            div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; user_photo(@user, "")
+            div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; user_photo(@user)
             div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; link_to edit_user_dashboard_path(@user, form_render: "user_image") do
             div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.fa.fa-camera.fa-lg
             div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#61;&#61; .image-overlay-content

@@ -5,25 +5,46 @@ $global-radius: 4px;
 // story card image - full width
 // media image - dark gray with blue on hover
 // image tiles for additional story images
-
-%user-thumbnail {
+%square-thumbnail {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 50%;
+  bottom: 50%;
+  height: auto;
+  width: auto;
+  min-width: 100%;
+//  these two classes help when the image is smaller than the containing div, but hurt when the image is larger than the containing div
+//  min-height: 100%;
+//  max-width: none;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+%thumbnail-container {
   display: inline-block;
-  >div {
-    display: inline-block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: $light-gray;
+}
+%user-thumbnail {
+  @extend %thumbnail-container;
+  margin-right: 10px;
+  &.small-thumb {
+    height: 30px;  
+    width: 30px; 
+  }
+  &.medium-thumb {
+    height: 40px;
+    width: 40px;
+  }
+  &.large-thumb {
+    height: 60px;
+    width: 60px;
   }
   img {
-    display: inline-block;
-    border-radius: 5px;
-    margin-right: 10px;
-    &.small-thumb {
-      max-height: 30px;  
-    }
-    &.medium-thumb {
-      max-height: 40px;
-    }
-    &.large-thumb {
-      max-height: 60px;
-    }
+    @extend %square-thumbnail;
     &:hover {
       filter: brightness(115%);
     }
@@ -33,24 +54,11 @@ $global-radius: 4px;
   @extend %user-thumbnail;
 }
 %user-profile {
-  display: inline-block;
-  position: relative;
+  @extend %thumbnail-container;
   width: 250px;
   height: 250px;
-  overflow: hidden;
-  border-radius: 5px;
   img {
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    top: 50%;
-    bottom: 50%;
-    height: 100%;
-    width: auto;
-    max-width: none;
-    -webkit-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+    @extend %square-thumbnail;
   }
   a {
     z-index: 10;

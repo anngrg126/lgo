@@ -1,11 +1,11 @@
 module DashboardHelper
-  def user_photo(user, classes)
+  def user_photo(user)
     if user.image_file_name?
-      image_tag(user.image.url(:medium), class: classes)
+      image_tag(user.image.url(:medium))
     elsif user.fbimage?
-      image_tag(user.largesquareimage, class: classes)
+      image_tag(user.largesquareimage)
     else
-      image_tag('default_user_image.png', class: classes)
+      image_tag('default_user_image.png')
     end
   end
   
