@@ -35,6 +35,7 @@ RSpec.feature "Listing Bookmarked Stories" do
     expect(page).not_to have_content(@story3.final_body.truncate(150))
     expect(page).not_to have_link(@story3.final_title)
     
-    expect(page).to have_css("img[src*='mainimage.png']", count: 2)
+#    expect(page).to have_css("img[src*='mainimage.png']", count: 2)
+    expect(page).to have_css('div.story-card-image', count: 2)
    end
 end

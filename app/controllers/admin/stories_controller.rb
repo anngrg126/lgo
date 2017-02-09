@@ -3,7 +3,7 @@ class Admin::StoriesController < ApplicationController
   before_action :require_admin
   before_action :set_story, only: [:show, :edit]
   before_action :set_tags, only: [:show, :index, :new, :edit, :pattern]
-  before_action :set_anonymous_user, only: [:update, :destroy, :show]
+  before_action :set_anonymous_user, only: [:update, :destroy, :show, :index]
   
   def index
     @stories = Story.includes(:user).unpublished.active
