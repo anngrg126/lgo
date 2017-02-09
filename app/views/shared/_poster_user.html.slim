@@ -1,12 +1,37 @@
--if story.anonymous?
-  - user = @anonymous_user
+-if featured.nil?
+  - cnt_stories = user.stories_posted.count
+  .columns
+    .row
+      div.column.small-2
+        ==link_to dashboard_path(user), class: "user-thumbnail large-thumb"
+          == user_photo(user)
+      div.column.small-6
+        div
+          h2
+            == link_to "#{user.full_name}", dashboard_path(user)
+        .subtext.dark-gray
+            == story.created_at.strftime("%b %d, %Y") 
+      div.column.small-4
+        == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
+          span.fa.fa-plus-circle
+          span Follow
+-elsif featured
+  /- cnt_stories = user.stories_posted.count
+  .columns
+    ==link_to dashboard_path(user), class: "user-thumbnail medium-thumb"
+      == user_photo(user)
+    div[style="display: inline-block;vertical-align: top;"]
+      div
+        == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
+      .subtext.dark-gray
+          | Shared #{cnt_stories.to_s} stories
 - else
-  - user = story.user
-div.columns
-  ==link_to dashboard_path(user), class: "user-thumbnail medium-thumb"
-    == user_photo(user)
-  div[style="display: inline-block;"]
-    div
-      == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
-    .subtext.dark-gray
-      == story.created_at.strftime("%b %d, %Y")
+  .columns
+    ==link_to dashboard_path(user), class: "user-thumbnail small-thumb"
+      == user_photo(user)
+    div[style="display: inline-block;"]
+      div
+        == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
+      .subtext.dark-gray
+          == story.created_at.strftime("%b %d, %Y") 
+        

@@ -3,7 +3,11 @@
     .card-section
       .subtext.italic Pending
   .card-section.row
-    == render 'shared/poster_user', story: story
+    -if story.anonymous?
+      - user = @anonymous_user
+    - else
+      - user = story.user
+    == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0
   .card-section
     h2
       == link_to story_title(story), story_path(story)
