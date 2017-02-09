@@ -13,7 +13,11 @@ div
 h2
   == story_title_show(@story)
 div
-  == render 'shared/poster_user', story: @story
+  -if @story.anonymous?
+    - user = @anonymous_user
+  -else
+    - user = @story.user 
+  == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0
 div
   == story_gift_description_show(@story)
 div
