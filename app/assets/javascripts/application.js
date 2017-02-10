@@ -40,7 +40,6 @@ function myFunction() {
   } else {
     $("#tags-menu").removeClass("is-hidden");
     if ($("nav.sticky").hasClass("is-at-bottom")) {
-      console.log("wuehifjskn");
       $("nav.sticky").removeClass("is-at-bottom").css("top", 0);
     };
   };
