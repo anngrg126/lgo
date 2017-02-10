@@ -1,0 +1,38 @@
+.user-snippet {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  &>div {
+    display: inline-block;
+    &:nth-child(2) {
+      white-space: normal;
+      width: calc(100% - 40px);//size of small user thumb
+    }
+  }
+  .secondary-link {
+    line-height: 2;
+  }
+}
+.user-snippet.large {
+  &>div {
+    &:nth-child(2) {
+      width: calc(100% - 70px);//size of large user thumb
+    }
+  }
+  &>div>div {
+    display: inline-block;
+  }
+  .subtext {
+    line-height: 2;
+  }
+}
+.snippet-button {
+  height: 35px;//height of follow/unfollow button
+}
+.snippet-button:before {
+  content: "";
+  display: inline-block;
+}
+.snippet-button>div {
+  transform: translate(0%, -60%);
+}

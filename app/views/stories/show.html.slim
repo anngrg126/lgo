@@ -17,6 +17,7 @@ div
     - user = @anonymous_user
   -else
     - user = @story.user 
+div.row.columns[style= "line-height: 0.9;"]
   == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0
 div
   == story_gift_description_show(@story)
