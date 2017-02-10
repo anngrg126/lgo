@@ -1,5 +1,8 @@
-div[id="story_comment_#{story.id}", style="display: inline-block;"]
+-if top.nil?
   -@comments = story.comments
+-else
+  -@comments = @story_comments
+div[id="story_comment_#{story.id}", style="display: inline-block;"]
   == link_to story_path(story), class: "icon-button primary-icon" do
     -unless current_user.nil?
       -if @comments.select {|c| c.user_id == current_user.id}.length > 0
