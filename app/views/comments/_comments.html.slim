@@ -1,0 +1,11 @@
+div[id="story_comment_#{story.id}", style="display: inline-block;"]
+  -@comments = story.comments
+  == link_to story_path(story), class: "icon-button primary-icon" do
+    -unless current_user.nil?
+      -if @comments.select {|c| c.user_id == current_user.id}.length > 0
+        span.fa.fa-comment.fa-lg [aria-describedby="comment_count"]
+      -else
+        span.fa.fa-comment-o.fa-lg [aria-describedby="comment_count"]
+    -else
+      span.fa.fa-comment-o.fa-lg [aria-describedby="comment_count"]
+    span#comment_count.icon-counter #{@comments.length}

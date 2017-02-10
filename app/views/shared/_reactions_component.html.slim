@@ -3,6 +3,7 @@
 /...
 
 /reactions icons + badge render here. the stories controller defines @reactions as either "like, love, omg, lol" or only "like, love".
+== render 'comments/comments', story: s
 - @reactions.each do |r|
   - unless r.name == "cool"
     == render 'reactions/'+(r.name), story: s
