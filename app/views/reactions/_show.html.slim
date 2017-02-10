@@ -2,4 +2,4 @@
   == render 'reactions/'+ (i+1).to_s
 - @reactions.each do |r|
   - unless r.name == "cool"
-    == render 'reactions/'+(r.name)
+    == render 'reactions/'+(r.name), story: @story
