@@ -6,6 +6,7 @@ class StoriesController < ApplicationController
   before_action :set_anonymous_user
   
   def index
+    @reactions = ReactionCategory.where(name: ["like", "love"])
     @active_browse = "active"
     if params[:search]
       @results = (Story.includes(:user, :classifications).search params[:search], operator: "or")
@@ -25,6 +26,7 @@ class StoriesController < ApplicationController
     else
       @stories = Story.includes(:user, :classifications).published.active
     end
+    
   end
   
   def new
@@ -59,6 +61,7 @@ class StoriesController < ApplicationController
   end
   
   def show
+    @reactions = ReactionCategory.all
     @story = Story.includes(:user, :classifications, :bookmarks, :reactions, :pictures).find(params[:id])
     @active_browse = "active"
     @comment = @story.comments.active.build
