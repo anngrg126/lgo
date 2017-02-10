@@ -56,7 +56,9 @@ a.user-thumbnail:hover {
 }
 %user-profile {
   @extend %thumbnail-container;
-  width: 250px;
+//  width: 250px;
+  width: 100%;
+  max-width: 250px;
   height: 250px;
   border-radius: 5px;
   img {
@@ -82,7 +84,10 @@ a.user-thumbnail:hover {
   text-align: center;
   .overlay-container & {
     height: 250px;
-    width: 250px;
+//    width: 250px;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
   }
   a .fa {
     background-color: rgba(0,0,0,0.65);
