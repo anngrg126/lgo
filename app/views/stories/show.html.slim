@@ -8,6 +8,9 @@
     == content_for :og_title, @story.updated_title
     == content_for :og_description, truncate(@story.updated_body, length: 200)
 
+<!-- Reactions -->
+== render 'shared/reactions_component', s: @story
+
 div 
   == story_main_image_show(@story)
 h2
