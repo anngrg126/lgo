@@ -3,10 +3,7 @@
     .card-section
       .subtext.italic Pending
   .card-section
-    - @reactions.each do |r|
-      == render 'reactions/'+(r.name), story: story
-  /- for i in 0..ReactionCategory.count-1
-    == render 'reactions/'+ (i+1).to_s
+    == render 'shared/reactions_component', s: story
   .card-section.row
     == render 'shared/poster_user', story: story
   .card-section
