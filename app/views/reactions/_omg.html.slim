@@ -1,4 +1,4 @@
-div[id="story_reaction_2"]
+div[id="story_reaction_2_#{@story.id}"]
   = link_to_reaction('OMG Story', @story, 2, {})
   p
     == reaction_count_label('OMG Story')
