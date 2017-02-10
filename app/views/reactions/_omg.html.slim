@@ -1,6 +1,6 @@
-div[id="story_reaction_2_#{@story.id}"]
-  = link_to_reaction('OMG Story', @story, 2, {})
+div[id="story_reaction_2_#{story.id}"]
+  = link_to_reaction('OMG Story', story, 2, {})
   p
     == reaction_count_label('OMG Story')
     span[id="story_reaction_count_2"]
-      == reaction_count('OMG Story', @story, 2)
+      == reaction_count('OMG Story', story, 2)
