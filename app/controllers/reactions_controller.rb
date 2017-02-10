@@ -2,6 +2,7 @@ class ReactionsController < ApplicationController
   before_action :authenticate_user!
   
   def create
+    @reactions = ReactionCategory.all
     @reaction = Reaction.create(reaction_params)
     if @reaction.save
       respond_to do |format|
@@ -16,6 +17,7 @@ class ReactionsController < ApplicationController
   end
   
   def destroy
+    @reactions = ReactionCategory.all
     @reaction = Reaction.find(params[:id])
     @story = Story.find(@reaction.story_id)
     respond_to do |format|
