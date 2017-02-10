@@ -1,6 +1,6 @@
-div[id="story_reaction_3_#{story.id}"]
+div[id="story_reaction_#{@reactions.select{|r| r.name=="lol"}.first.id}_#{story.id}"]
   = link_to_reaction('LOL Story', story, @reactions.select{|r| r.name=="lol"}.first.id, {})
   p
     == reaction_count_label('LOL Story')
-    span[id="story_reaction_count_3"]
+    span[id="story_reaction_count_#{@reactions.select{|r| r.name=="lol"}.first.id}"]
       == reaction_count('LOL Story', story, @reactions.select{|r| r.name=="lol"}.first.id)
