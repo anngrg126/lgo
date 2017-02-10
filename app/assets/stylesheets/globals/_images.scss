@@ -24,12 +24,12 @@
   display: inline-block;
   position: relative;
   overflow: hidden;
-  border-radius: 5px;
   background-color: $light-gray;
 }
 %user-thumbnail {
   @extend %thumbnail-container;
   margin-right: 10px;
+  border-radius: 5px;
   &.small-thumb {
     height: 30px;  
     width: 30px; 
@@ -58,6 +58,7 @@ a.user-thumbnail:hover {
   @extend %thumbnail-container;
   width: 250px;
   height: 250px;
+  border-radius: 5px;
   img {
     @extend %square-thumbnail;
   }
