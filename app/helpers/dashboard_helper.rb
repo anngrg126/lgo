@@ -20,9 +20,9 @@ module DashboardHelper
   end
   
   def edit_user_name(user)
-    if user == current_user
-      link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_name"), remote: true
-    end
+#    if user == current_user
+#      link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_name"), remote: true
+#    end
   end
   
   def edit_user_photo(user)

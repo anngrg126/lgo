@@ -1,0 +1,28 @@
+.user-dashboard {
+  .name-container {
+    position: relative;
+    margin: 15px auto;
+    >div:first-child, >div:nth-child(3) {
+      position: absolute;
+      width: 30px;
+      top: 0;
+      display: inline-block;
+    }
+    >div:first-child{
+      left: 0;
+    }
+    >div:nth-child(3) {
+      right: 0;
+    }  
+    >div:nth-child(2) {
+      display: inline-block;
+      padding: 0 30px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+    .small-icon-button {
+      padding-top: 0;
+    }
+  } 
+}
