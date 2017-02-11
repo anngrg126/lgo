@@ -1,0 +1,16 @@
+.comment {
+  display: inline-block;
+  padding:0px 15px 0px 15px;
+  width: 100%;
+  &>div {
+    display: inline-block;
+    padding:5px;
+    border-bottom: 1px solid $light-gray;
+    width: 100%;
+      &>div {
+        &:nth-child(2){
+        margin-left:50px;
+      }
+    }
+  }
+}

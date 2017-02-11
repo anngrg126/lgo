@@ -1,0 +1,14 @@
+.rows
+  .comment
+    div
+      == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0, comment:comment
+      div
+        div id="comment_#{comment.id}"
+          .rows
+            == comment.body
+          .rows
+            - if user_signed_in? && current_user == comment.user
+              == link_to  edit_story_comment_path(story, comment), remote: true, class: "small-icon-button secondary-icon" do
+                span.fa.fa-pencil.fa-lg
+              == link_to  story_comment_path(story, comment), method: :delete, data: {confirm: "Are you sure you want to delete the comment?"}, class: "small-icon-button secondary-icon" do
+                span.fa.fa-trash-o.fa-lg

@@ -1,16 +1,6 @@
 h2 Comments
 - if @story_comments.any?
   - @story_comments.each do |comment|
-    div id="comment_#{comment.id}"
-      div
-        == comment.body
-      div
-        == time_ago_in_words(comment.created_at)
-        |  ago by 
-        == link_to "#{comment.user.full_name}", dashboard_path(comment.user)
-      div 
-        - if user_signed_in? && current_user == comment.user
-          == link_to "Edit", edit_story_comment_path(@story, comment), remote: true
-          == link_to "Delete", story_comment_path(@story, comment), method: :delete, data: {confirm: "Are you sure you want to delete the comment?"}, class: "btn"
+    == render 'shared/comment_partial', story: @story, user: comment.user, comment: comment
 - else
   | There are no comments to show.
