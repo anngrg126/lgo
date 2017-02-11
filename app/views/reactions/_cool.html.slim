@@ -10,12 +10,14 @@ div[id="story_reaction_#{@reactions.select{|r| r.name=="cool"}.first.id}_#{story
           ==link_to reactions_path(user_id: current_user.id, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="cool"}.first.id), method: :post, class: "icon-button primary-icon", remote: true do
             span.text-stack [aria-describedby="cool_count"]
               .fa-stack-1x.circle-text.open.rotate-45 COOL
-        span#cool_count.icon-counter #{@cools.length}
+        -if @cools.length>0
+          span#cool_count.icon-counter #{@cools.length}
   -else
     ==link_to reactions_path(user_id: 0, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="cool"}.first.id), method: :post, class: "icon-button primary-icon", remote: true do
       span.text-stack [aria-describedby="cool_count"]
         .fa-stack-1x.circle-text.open.rotate-45 COOL
-    span#cool_count.icon-counter #{@cools.length}
+    -if @cools.length>0
+      span#cool_count.icon-counter #{@cools.length}
     
     
     

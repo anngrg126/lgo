@@ -1,5 +1,5 @@
 -if top.nil?
-  -@comments = story.comments
+  -@comments = story.comments.select{|c| c.deleted_at ==nil && c.author_deactive==false}
 -else
   -@comments = @story_comments
 div[id="story_comment_#{story.id}", style="display: inline-block;"]
@@ -11,4 +11,5 @@ div[id="story_comment_#{story.id}", style="display: inline-block;"]
         span.fa.fa-comment-o.fa-lg [aria-describedby="comment_count"]
     -else
       span.fa.fa-comment-o.fa-lg [aria-describedby="comment_count"]
-    span#comment_count.icon-counter #{@comments.length}
+    -if @comments.length>0
+      span#comment_count.icon-counter #{@comments.length}
