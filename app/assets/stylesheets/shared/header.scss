@@ -158,7 +158,8 @@ nav .dropdown-pane {
   border-bottom: 1px solid $medium-gray;
   border-bottom-style: inset;
   border-width: 1px;
-  background-color: $ultra-light-gray;
+//  background-color: $ultra-light-gray;
+  background-color: white;
   -webkit-box-shadow: inset 0px 5px 10px -7px $dark-gray;
   -moz-box-shadow: inset 0px 5px 10px -7px $dark-gray;
   box-shadow: inset 0px 5px 10px -7px $dark-gray;
@@ -297,7 +298,8 @@ nav .dropdown-pane {
    
   //navbar mid tier
   .nav-midtier {
-    background-color: $ultra-light-gray;
+//    background-color: $ultra-light-gray;
+    background-color: white;
     padding: 0;
     .row:first-child {
       border-bottom: 1px solid $medium-gray;
