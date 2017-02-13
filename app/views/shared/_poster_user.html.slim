@@ -1,12 +1,43 @@
--if story.anonymous?
-  - user = @anonymous_user
-- else
-  - user = story.user
-div.columns
-  ==link_to dashboard_path(user), class: "user-thumbnail medium-thumb"
-    == user_photo(user)
-  div[style="display: inline-block;"]
+/ == render with parent div line-height: 0.9
+/ == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0
+- if featured.nil?
+  / to use for story show page
+  div.user-snippet.large
     div
-      == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
-    .subtext.dark-gray
-      == story.created_at.strftime("%b %d, %Y")
+      == link_to dashboard_path(user), class: "user-thumbnail large-thumb"
+        == user_photo(user)
+    div
+      div[style="margin-right: 10px;"]
+        h2
+          == link_to "#{user.full_name}", dashboard_path(user)
+        .subtext.dark-gray
+          == story.created_at.strftime("%b %d, %Y") 
+      div[style="line-height: 1.5;"]
+        div.snippet-button
+          div
+            - if user != current_user
+              == render partial: 'followings/form', locals: { user: user, follower: current_user }
+- elsif featured
+  / to use for story show page
+  /- cnt_stories = user.stories_posted.count
+  div.user-snippet
+    div
+      == link_to dashboard_path(user), class: "user-thumbnail medium-thumb"
+        == user_photo(user)
+    div
+      div
+        == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
+      .subtext.dark-gray
+          | Shared #{cnt_stories.to_s} stories
+- else
+  / to use for story cards
+  div.user-snippet
+    div
+      ==link_to dashboard_path(user), class: "user-thumbnail medium-thumb"
+        == user_photo(user)
+    div
+      div
+        == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
+      .subtext.dark-gray
+          == story.created_at.strftime("%b %d, %Y") 
+        

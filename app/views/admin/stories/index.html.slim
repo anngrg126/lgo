@@ -1,22 +1,10 @@
-h1 Welcome to the admin view!
-
-== link_to "Pattern Library", admin_pattern_path
-
-h3 List of all Unpublished Stories
-
-- @stories.each do |story|
-  div
-    - unless story.raw_title == ""
-      == link_to story.raw_title, admin_story_path(story)
-    - else
-      == link_to "Untitled Story", admin_story_path(story)
-  div
-    == story.raw_gift_description? ? "Description: "+story.raw_gift_description : ""
-  div
-    == story_body(story)
-  div
-    - if story.author_id #if story.author exists, then show the following line:
-      small 
-        | Created by: 
-        == link_to "#{story.user.full_name}", dashboard_path(story.user)
-        /== link_to "#{User.find(story.author_id).full_name}", dashboard_path(User.find(story.author_id))
+.row[style="margin-top: 20px;"]
+  h1 Welcome to the admin view!
+  == link_to "Pattern Library", admin_pattern_path
+.row[style="margin-top: 20px;"]
+  h2 List of all Unpublished Stories
+  .columns.large-9.large-centered
+    .row
+      - @stories.each do |s|
+        .columns.medium-6
+          == render 'shared/story_card', story: s, admin_view: true

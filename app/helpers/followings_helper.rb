@@ -11,23 +11,25 @@ module FollowingsHelper
       unless user == follower
         unless @current_user_followers.nil?
           unless @current_user_followers.select{|u| u.user_id == user.id}.empty?
-            link_to "Unfollow", following_path(@current_user_followers.select{|u| u.user_id == user.id}), method: :delete, class: classes, remote: true
+            link_to "Unfollow", following_path(@current_user_followers.select{|u| u.user_id == user.id}), method: :delete, class: "hollow button", remote: true
           else
             unless user == follower
-              link_to "Follow", followings_path(user_id: user.id, follower_id: follower.id), method: :post, class: classes, remote: true
+#              link_to "Follow", followings_path(user_id: user.id, follower_id: follower.id), method: :post, class: classes, remote: true
+              link_to(content_tag(:span, "", class: "fa fa-plus-circle")+content_tag(:span, "Follow"), followings_path(user_id: user.id, follower_id: follower.id), method: :post, class: "button button-w-icon", style: "padding-bottom: 2px;", remote: true)
             end
           end
         else
         #method that hits db each time the Follow/Unfollow button is displayed
           if current_user.follows?(user)
             unless following.empty?
-              link_to "Unfollow", following_path(following), method: :delete, class: classes, remote: true
+              link_to "Unfollow", following_path(following), method: :delete, class: "hollow button", remote: true
             else
-              link_to "Unfollow", following_path(Following.find_by(user_id: user.id, follower_id: follower.id)), method: :delete, class: classes, remote: true
+              link_to "Unfollow", following_path(Following.find_by(user_id: user.id, follower_id: follower.id)), method: :delete, class: "hollow button", remote: true
             end
           else
             unless user == follower
-              link_to "Follow", followings_path(user_id: user.id, follower_id: follower.id), method: :post, class: classes, remote: true
+#              link_to "Follow", followings_path(user_id: user.id, follower_id: follower.id), method: :post, class: classes, remote: true
+              link_to(content_tag(:span, "", class: "fa fa-plus-circle")+content_tag(:span, "Follow"), followings_path(user_id: user.id, follower_id: follower.id), method: :post, class: "button button-w-icon", style: "padding-bottom: 2px;", remote: true)
             end
           end
         end

@@ -3,10 +3,21 @@
     .card-section
       .subtext.italic Pending
   .card-section.row
-    == render 'shared/poster_user', story: story
+    -if story.anonymous?
+      - user = @anonymous_user
+    - else
+      - user = story.user
+    .columns[style="line-height: 0.9;"]
+      == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0
   .card-section
     h2
-      == link_to story_title(story), story_path(story)
+      -if admin_view
+        - unless story.raw_title == ""
+          == link_to story.raw_title, admin_story_path(story)
+        - else
+          == link_to "Untitled Story", admin_story_path(story)
+      -else
+        == link_to story_title(story), story_path(story)
     .subtext
       == story_gift_description_show(story)
     - unless story.classifications.empty?

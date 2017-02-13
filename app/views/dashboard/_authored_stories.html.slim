@@ -12,4 +12,4 @@
 .row
   - @dashboard_stories.each do |s|
     div.large-6.small-12.columns
-      == render 'shared/story_card', story: s
+      == render 'shared/story_card', story: s, admin_view: false
