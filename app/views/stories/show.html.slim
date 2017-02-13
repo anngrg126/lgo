@@ -53,9 +53,9 @@ div.story_pictures
         - if classif.description?
           a[href="#{stories_path}?search=#{classif.description}"] #{classif.description}
   <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
-  
-  == render 'comments/form'
-  == render 'comments/show'
+  #comments
+    == render 'comments/form'
+    == render 'comments/show'
 
   <!-- Bookmarks -->
   == render 'bookmarks/show'
