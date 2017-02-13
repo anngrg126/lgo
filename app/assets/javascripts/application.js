@@ -71,7 +71,15 @@ function myFunction() {
   $('#add_image_fields').click(function(){
     $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
   });
-  
+  //*Story Show View*
+  $('a[href^="#comments"]').on('click', function(e){ //e for event
+    e.preventDefault();
+    var target = this.hash;
+    var $target = $(target);
+    $('html, body').stop().animate({
+      'scrollTop': $target.offset().top
+    }, 500, 'swing');
+  });
 };
 
 //*NAVBAR
