@@ -9,7 +9,8 @@
     == content_for :og_description, truncate(@story.updated_body, length: 200)
 
 <!-- Reactions -->
-== render 'shared/reactions_component', s: @story, top: true 
+div#top_reactions_bar
+  == render 'shared/reactions_component', s: @story, top: true 
 
 div 
   == story_main_image_show(@story)
