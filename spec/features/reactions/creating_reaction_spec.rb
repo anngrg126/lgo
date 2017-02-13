@@ -30,9 +30,14 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
     
     within '#top_reactions_bar' do
       page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "lol").first.id))
+      find('#lol_count').should have_content('1')
+      page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "like").first.id))
+      find('#like_count').should have_content('1')
+      page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "love").first.id))
+      find('#love_count').should have_content('1')
+      page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "omg").first.id))
+      find('#omg_count').should have_content('1')
     end
-    
-    find('#lol_count').should have_content('1')
     
     expect(page.current_path).to eq(story_path(@story))
     
@@ -42,7 +47,7 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
     visit "/"
     click_link "Notifications"
     
-    # expect(page).to have_content("#{@bar.full_name} liked your story #{@story.final_title}")
+    expect(page).to have_content("#{@bar.full_name} liked your story #{@story.final_title}")
     # expect(page).to have_content("#{@bar.full_name} OMG'd your story #{@story.final_title}")
     expect(page).to have_content("#{@bar.full_name} LOL'd your story #{@story.final_title}")
     # expect(page).to have_content("#{@bar.full_name} Cool'd your story #{@story.final_title}")
