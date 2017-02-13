@@ -2,8 +2,6 @@
   - unless story.published?
     .card-section
       .subtext.italic Pending
-  .card-section
-    == render 'shared/reactions_component', s: story, top: nil 
   .card-section.row
     -if story.anonymous?
       - user = @anonymous_user
@@ -37,6 +35,8 @@
       div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
   .card-section
     == story_body(story)
+  .card-section
+    == render 'shared/reactions_component', s: story, top: nil 
   - if current_user && story.anonymous? && story.author_id == current_user.id && params[:controller] == "dashboard"
     .card-section
       == story_anonymous(story)

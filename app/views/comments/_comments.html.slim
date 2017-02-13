@@ -1,7 +1,4 @@
--if top.nil?
-  -@comments = story.comments.select{|c| c.deleted_at ==nil && c.author_deactive==false}
--else
-  -@comments = @story_comments
+- @comments = story.comments.select{|c| c.deleted_at ==nil && c.author_deactive !=true && c.id != nil}
 div[id="story_comment_#{story.id}", style="display: inline-block;"]
   == link_to story_path(story), class: "icon-button primary-icon" do
     -unless current_user.nil?
