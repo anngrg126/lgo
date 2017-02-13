@@ -1,15 +1,13 @@
-.row
-  .columns.small-6
-    - if @user == current_user
-      h1 Your Stories
-    - else
-      h1
-        == "#{@user.full_name}'s Stories"
-  .columns.large-offset-3.large-3.small-6
-    == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
-      span.fi-pencil
-      span Share a Story
+div
+  - if @user == current_user
+    h1 Your Stories
+  - else
+    h1
+      == "#{@user.full_name}'s Stories"
+  == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
+    span.fi-pencil
+    span Share a Story
 .row
   - @dashboard_stories.each do |s|
-    div.large-6.small-12.columns
-      == render 'shared/story_card', story: s, admin_view: false
+    .columns.medium-6
+      == render 'shared/story_card', story: s, , admin_view: false

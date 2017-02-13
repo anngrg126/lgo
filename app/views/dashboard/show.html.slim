@@ -1,18 +1,17 @@
 .row[style="margin-top: 20px;"]
-  .columns.large-3.small-12
+  .columns.large-3
     == render partial: 'dashboard/pagetop'
-  .columns.large-9.small-12
-    div
-      == link_to "Stories: #{@dashboard_stories.length}", authored_stories_dashboard_path(@user), remote: true
-      |   
-      == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
-      - if @user == current_user
-        |  
-        == link_to "Saves: #{@bookmarked_stories.length}", bookmarked_stories_dashboard_path(@user), remote: true
-        |  
-        == link_to "Comments: #{@commented_stories.length}", commented_stories_dashboard_path(@user), remote: true
-        |  
-        span#dashboard_notifications_counter
-          == link_to "Notifications: #{@unread_notifications.length}", notifications_dashboard_path(@user), remote: true
+  .columns.large-9
+    == link_to "Stories: #{@dashboard_stories.length}", authored_stories_dashboard_path(@user), remote: true
+    |   
+    == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
+    - if @user == current_user
+      |  
+      == link_to "Saves: #{@bookmarked_stories.length}", bookmarked_stories_dashboard_path(@user), remote: true
+      |  
+      == link_to "Comments: #{@commented_stories.length}", commented_stories_dashboard_path(@user), remote: true
+      |  
+      span#dashboard_notifications_counter
+        == link_to "Notifications: #{@unread_notifications.length}", notifications_dashboard_path(@user), remote: true
     div#dashboard_partial
       == render partial: 'authored_stories'
