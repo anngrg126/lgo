@@ -30,13 +30,13 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
     
     within '#top_reactions_bar' do
       page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "lol").first.id))
-      find('#lol_count').should have_content('1')
+      expect('#lol_count').to have_content('1')
       page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "like").first.id))
-      find('#like_count').should have_content('1')
+      expect('#like_count').to have_content('1')
       page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "love").first.id))
-      find('#love_count').should have_content('1')
+      expect('#love_count').to have_content('1')
       page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "omg").first.id))
-      find('#omg_count').should have_content('1')
+      expect('#omg_count').to have_content('1')
     end
     
     expect(page.current_path).to eq(story_path(@story))
