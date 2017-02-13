@@ -17,7 +17,8 @@ RSpec.feature "Deleting Comments" do
     
     visit "/"
     click_link @story_foo.final_title  
-    click_link "Delete"
+    
+    page.click_link('', :href => story_comment_path(@story_foo, @comment1))
     
     expect(page).to have_content("Comment has been deleted")
     expect(page).not_to have_content(@comment1)
@@ -29,7 +30,7 @@ RSpec.feature "Deleting Comments" do
     visit "/"
     click_link @story_bar.final_title
     
-    expect(page).not_to have_content("Delete")
+    expect(page).not_to have_link('', :href => story_comment_path(@story_foo, @comment1))
     
   end
 end

@@ -18,8 +18,8 @@ RSpec.feature "Editing Comments" do
     visit "/"
     click_link @story_foo.final_title
     
-    link = "a[href='/stories/#{@story_foo.slug}/comments/#{@comment1.id}/edit']"
-    find(link).click
+    page.click_link('', :href => edit_story_comment_path(@story_foo, @comment1))
+    
     expect(page).to have_field('Edit Comment', :with => @comment1.body)
     within("#edit_comment_#{@comment1.id}"){fill_in("Edit Comment", with: "OK read" )}
     click_button "Update Comment"
@@ -34,7 +34,7 @@ RSpec.feature "Editing Comments" do
     visit "/"
     click_link @story_bar.final_title
     
-    expect(page).not_to have_content("Edit")
+    expect(page).not_to have_link('', :href => edit_story_comment_path(@story_foo, @comment1))
     
   end
 end
