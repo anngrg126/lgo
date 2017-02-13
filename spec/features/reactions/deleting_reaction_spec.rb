@@ -27,27 +27,16 @@ RSpec.feature "Deleting Reaction_Lol" do
     
     visit "/"
     click_link @story_bar.final_title 
-    click_on "UnLike"
-    click_on "UnOMG"
-    click_on "UnLOL"
-    click_on "UnCool"
-    click_on "UnLove"
     
-    expect(page).to have_content("Likes: 0")
-    expect(page).to have_content("OMGs: 0")
-    expect(page).to have_content("LOLs: 0")
-    expect(page).to have_content("Cools: 0")
-    expect(page).to have_content("Loves: 0")
-    
-    expect(page).to have_link("Like Story")
-    expect(page).to have_link("OMG Story")
-    expect(page).to have_link("LOL Story")
-    expect(page).to have_link("Cool Story")
-    expect(page).to have_link("Love Story")
-    expect(page).not_to have_link("UnLike Story")
-    expect(page).not_to have_link("UnOMG Story")
-    expect(page).not_to have_link("UnLOL Story")
-    expect(page).not_to have_link("UnCool Story")
-    expect(page).not_to have_link("UnLove Story")
+    within '#top_reactions_bar' do
+      page.click_link('', :href => reaction_path(Reaction.where(user_id: @foo.id, reaction_category_id: ReactionCategory.where(name: "lol").first.id, story_id: @story_bar.id).first.id))
+      expect('#lol_count').to have_content('')
+      page.click_link('', :href => reaction_path(Reaction.where(user_id: @foo.id, reaction_category_id: ReactionCategory.where(name: "like").first.id, story_id: @story_bar.id).first.id))
+      expect('#like_count').to have_content('')
+      page.click_link('', :href => reaction_path(Reaction.where(user_id: @foo.id, reaction_category_id: ReactionCategory.where(name: "love").first.id, story_id: @story_bar.id).first.id))
+      expect('#love_count').to have_content('')
+      page.click_link('', :href => reaction_path(Reaction.where(user_id: @foo.id, reaction_category_id: ReactionCategory.where(name: "omg").first.id, story_id: @story_bar.id).first.id))
+      expect('#omg_count').to have_content('')
+    end
   end
 end

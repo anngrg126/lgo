@@ -1,0 +1,25 @@
+div[id="story_reaction_#{@reactions.select{|r| r.name=="omg"}.first.id}_#{story.id}" style="display: inline-block;"]
+  -@omgs = story.reactions.select{|r| r.reaction_category_id == @reactions.select{|r| r.name=="omg"}.first.id}
+  -unless current_user.nil?
+      -unless @omgs.nil?
+        -if @omgs.select {|c| c.user_id == current_user.id}.length > 0
+          == link_to reaction_path(@omgs.select{|r| r.user_id == current_user.id && r.reaction_category_id == @reactions.select{|r| r.name=="omg"}.first.id}.first.id), remote: true, method: :delete, class: "icon-button primary-icon" do
+            span.text-stack [aria-describedby="omg_count"]
+              .fa-stack-1x.circle-text.filled.rotate-45 OMG
+            -if @omgs.length>0
+              span#omg_count.icon-counter #{@omgs.length}
+        -else
+          ==link_to reactions_path(user_id: current_user.id, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="omg"}.first.id), method: :post, class: "icon-button primary-icon", remote: true do
+            span.text-stack [aria-describedby="omg_count"]
+              .fa-stack-1x.circle-text.open.rotate-45 OMG
+            -if @omgs.length>0
+              span#omg_count.icon-counter #{@omgs.length}
+  -else
+    ==link_to reactions_path(user_id: 0, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="omg"}.first.id), method: :post, class: "icon-button primary-icon", remote: true do
+      span.text-stack [aria-describedby="omg_count"]
+        .fa-stack-1x.circle-text.open.rotate-45 OMG
+      -if @omgs.length>0
+        span#omg_count.icon-counter #{@omgs.length}
+    
+    
+    

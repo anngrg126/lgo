@@ -8,6 +8,10 @@
     == content_for :og_title, @story.updated_title
     == content_for :og_description, truncate(@story.updated_body, length: 200)
 
+<!-- Reactions -->
+div#top_reactions_bar
+  == render 'shared/reactions_component', s: @story, top: true 
+
 div 
   == story_main_image_show(@story)
 h2
@@ -55,12 +59,12 @@ div.story_pictures
         - if classif.description?
           a[href="#{stories_path}?search=#{classif.description}"] #{classif.description}
   <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
-  
-  == render 'comments/form'
-  == render 'comments/show'
+  #comments
+    == render 'comments/form'
+    == render 'comments/show'
 
   <!-- Bookmarks -->
   == render 'bookmarks/show'
   
   <!-- Reactions -->
-  == render 'reactions/show'
+  == render 'shared/reactions_component', s: @story, top: false 

@@ -1,1 +1,6 @@
-$("#story_reaction_<%= @reaction.reaction_category_id %>").html('<%= j render "reactions/"+@reaction.reaction_category_id.to_s %>');
+$('div[id^="story_reaction_<%= @reaction.reaction_category_id %>_<%= @story.id.to_s %>"]').each( function( ) {
+    var current = $(this);
+    current.html('<%= j render "reactions/"+ReactionCategory.select{|r| r.id == @reaction.reaction_category_id}.first.name, story: @story %>');
+});
+
+

@@ -6,9 +6,10 @@ class StoriesController < ApplicationController
   before_action :set_anonymous_user
   
   def index
+    @reactions = ReactionCategory.all
     @active_browse = "active"
     if params[:search]
-      @results = (Story.includes(:user, :classifications).search params[:search], operator: "or")
+      @results = (Story.includes(:user, :classifications, :reactions, :comments).search params[:search], operator: "or")
       @stories = @results.results.select{|s| s.active? && s.published}
       log_search_query(params[:search], @results.count)
       if @results.count <=0
@@ -16,15 +17,16 @@ class StoriesController < ApplicationController
         redirect_to root_path
       end
     elsif params[:search_tag]
-      @results = (Story.includes(:user, :classifications).search params[:search_tag], fields: [tags: :exact])
+      @results = (Story.includes(:user, :classifications, :reactions, :comments).search params[:search_tag], fields: [tags: :exact])
       @stories = @results.results.select{|s| s.active? && s.published}
       if @results.count <=0
         flash[:warning] = "No records matched : "+ params[:search_tag]
         redirect_to root_path
       end
     else
-      @stories = Story.includes(:user, :classifications).published.active
+      @stories = Story.includes(:user, :classifications, :reactions, :comments).published.active
     end
+    
   end
   
   def new
@@ -59,6 +61,7 @@ class StoriesController < ApplicationController
   end
   
   def show
+    @reactions = ReactionCategory.all
     @story = Story.includes(:user, :classifications, :bookmarks, :reactions, :pictures).find(params[:id])
     @active_browse = "active"
     @comment = @story.comments.active.build

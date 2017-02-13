@@ -27,18 +27,26 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
     
     visit "/"
     click_link @story.final_title
-  
-    click_on "Like Story"
-    click_on "OMG Story"
-    click_on "LOL Story"
-    click_on "Cool Story"
-    click_on "Love Story"
     
-    expect(page).to have_content("Likes: 1")
-    expect(page).to have_content("OMGs: 1")
-    expect(page).to have_content("LOLs: 1")
-    expect(page).to have_content("Cools: 1")
-    expect(page).to have_content("Loves: 1")
+    within '#top_reactions_bar' do
+      page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "lol").first.id))
+      within '#lol_count' do
+          expect(page).to have_content('1')
+      end
+      page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "like").first.id))
+      within '#like_count' do
+        expect(page).to have_content('1')
+      end
+      page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "love").first.id))
+      within '#love_count' do
+        expect(page).to have_content('1')
+      end
+      page.click_link('', :href => reactions_path(user_id: @bar.id, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "omg").first.id))
+      within '#omg_count' do
+        expect(page).to have_content('1')
+      end
+    end
+    
     expect(page.current_path).to eq(story_path(@story))
     
     logout(:user)
@@ -48,10 +56,10 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
     click_link "Notifications"
     
     expect(page).to have_content("#{@bar.full_name} liked your story #{@story.final_title}")
-    expect(page).to have_content("#{@bar.full_name} OMG'd your story #{@story.final_title}")
+    # expect(page).to have_content("#{@bar.full_name} OMG'd your story #{@story.final_title}")
     expect(page).to have_content("#{@bar.full_name} LOL'd your story #{@story.final_title}")
-    expect(page).to have_content("#{@bar.full_name} Cool'd your story #{@story.final_title}")
-    expect(page).to have_content("#{@bar.full_name} Loved your story #{@story.final_title}")
+    # expect(page).to have_content("#{@bar.full_name} Cool'd your story #{@story.final_title}")
+    # expect(page).to have_content("#{@bar.full_name} Loved your story #{@story.final_title}")
     expect(page).to have_link(@bar.full_name)
     expect(page).to have_link(@story.final_title)
   end
@@ -60,7 +68,9 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
     visit "/"
     click_link @story.final_title
     
-    click_on "LOL Story"
+    within '#top_reactions_bar' do
+      page.click_link('', :href => reactions_path(user_id: 0, story_id: @story.id, reaction_category_id: ReactionCategory.where(name: "lol").first.id))
+    end
     
     expect(page).to have_content("You need to sign in or sign up before continuing.")
     expect(page.current_path).to eq(new_user_session_path)
