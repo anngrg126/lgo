@@ -4,14 +4,16 @@ div[id="story_reaction_#{@reactions.select{|r| r.name=="love"}.first.id}_#{story
       -unless @loves.nil?
         -if @loves.select {|c| c.user_id == current_user.id}.length > 0
           == link_to reaction_path(@loves.select{|r| r.user_id == current_user.id && r.reaction_category_id == @reactions.select{|r| r.name=="love"}.first.id}.first.id), remote: true, method: :delete, class: "icon-button primary-icon" do
-           span.fa.fa-heart.fa-lg [aria-describedby="love_count"]
+            span.fa.fa-heart.fa-lg [aria-describedby="love_count"]
+            -if @loves.length>0
+              span#love_count.icon-counter #{@loves.length}
         -else
           ==link_to reactions_path(user_id: current_user.id, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="love"}.first.id), method: :post, class: "icon-button primary-icon", remote: true do
             span.fa.fa-heart-o.fa-lg [aria-describedby="love_count"]
-        -if @loves.length>0
-          span#love_count.icon-counter #{@loves.length}
+            -if @loves.length>0
+              span#love_count.icon-counter #{@loves.length}
   -else
     ==link_to reactions_path(user_id: 0, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="love"}.first.id), method: :post, class: "icon-button primary-icon", remote: true do
       span.fa.fa-heart-o.fa-lg [aria-describedby="love_count"]
-    -if @loves.length>0
-      span#love_count.icon-counter #{@loves.length}
+      -if @loves.length>0
+        span#love_count.icon-counter #{@loves.length}
