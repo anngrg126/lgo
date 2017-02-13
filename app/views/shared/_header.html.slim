@@ -243,7 +243,7 @@ div#stickhere[data-sticky-container]
           li
             = submit_tag "Search", class: "button"
     - if user_signed_in?
-      #user_dropdown.right.dropdown-pane.bottom[data-dropdown]
+      #user_dropdown.right.dropdown-pane.bottom.hide-for-small-only[data-dropdown]
         ul.menu.medium-vertical
           li
             == link_to "My Dashboard", dashboard_path(current_user), class: "primary-link"
