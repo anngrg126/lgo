@@ -38,7 +38,7 @@ module DashboardHelper
   def edit_user_about_me(user)
     if user == current_user
       if user.about_me == nil || user.about_me == ""
-        link_to "Add an about me", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
+        link_to "Introduce yourself here", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
       else
         link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
       end
@@ -47,12 +47,12 @@ module DashboardHelper
   
   def user_about_me(user)
     unless user.about_me.blank?
-      body = "<div>#{user.about_me}</div>".html_safe
+      body = user.about_me
     end
   end
   
   def user_about_me_title(user)
-    unless user.about_me.blank?
+    if !user.about_me.blank? || current_user == user
       "<div>About Me</div>".html_safe
     end
   end

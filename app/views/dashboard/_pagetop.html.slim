@@ -1,7 +1,8 @@
 .card.user-dashboard
   .card-section
-    .row#user_registration
-      .columns.large-12.medium-6#user_photo
+    #user_registration
+      /.columns.large-12.medium-6#user_photo
+      #user_photo
         - unless @user == current_user
           .user-profile
             == user_photo(@user)
@@ -14,9 +15,10 @@
                   .fa.fa-camera.fa-lg
               .image-overlay-content
                 == edit_user_photo(@user)
-      .columns.large-12.medium-6
+      /.columns.large-12.medium-6
+      div
         #user_name
-          div.name-container
+          div.name-container class=('room-for-icons' if @user == current_user)
             div
               - if @user == current_user
                 == link_to user_profile_dashboard_path(@user), class: "small-icon-button secondary-icon", remote: true do 
@@ -29,7 +31,7 @@
                 == link_to edit_user_dashboard_registration_path(@user, form_render: "user_name"), class: "small-icon-button secondary-icon", remote: true do
                   span.fa.fa-pencil
         div
-          h5
+          strong
             == user_about_me_title(@user)
           #user_about_me
             == user_about_me(@user)
