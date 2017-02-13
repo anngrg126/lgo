@@ -6,10 +6,12 @@ class Admin::StoriesController < ApplicationController
   before_action :set_anonymous_user, only: [:update, :destroy, :show, :index]
   
   def index
+    @reactions = ReactionCategory.all
     @stories = Story.includes(:user).unpublished.active
   end
   
   def show
+    @reactions = ReactionCategory.all
   end
   
   def edit

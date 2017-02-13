@@ -2,6 +2,7 @@ class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_profile]
   before_action :set_anonymous_user
   before_action :set_tags
+  before_action :set_reactions
   
   before_action :set_dashboard_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
   before_action :set_bookmarked_stories, only: [:show, :notifications, :bookmarked_stories]
@@ -193,5 +194,9 @@ class DashboardController < ApplicationController
   
   def set_anonymous_user
     @anonymous_user = User.where(anonymous: true).first
+  end
+  
+  def set_reactions
+    @reactions = ReactionCategory.all
   end
 end
