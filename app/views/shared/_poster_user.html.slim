@@ -30,7 +30,7 @@
       .subtext.dark-gray
           | Shared #{cnt_stories.to_s} stories
 - else
-  / to use for story cards
+  / to use for story cards & comments partial
   div.user-snippet
     div
       ==link_to dashboard_path(user), class: "user-thumbnail medium-thumb"
@@ -39,5 +39,7 @@
       div
         == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
       .subtext.dark-gray
+        -if comment.nil?
           == story.created_at.strftime("%b %d, %Y") 
-        
+        -else
+          == comment.created_at.strftime("%b %d, %Y") 
