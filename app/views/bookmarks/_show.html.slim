@@ -1,10 +1,7 @@
 div#bookmark_buttons
   /- if @story.bookmarks.find_by(user_id: current_user) != nil
   - if user_signed_in? && @story.bookmarks.select{|b| b.user_id == current_user.id}.any?
-    == link_to "Unsave Story", story_bookmark_path(@story, current_user), method: :delete, class: "button", remote: true
+    == link_to story_bookmark_path(@story, current_user), method: :delete, class: "icon-button primary-icon", remote: true
+      span.fa.fa-bookmark.fa-lg
   - else
     == render partial: 'bookmarks/form'
-p
-  | Saves: 
-  span#story_bookmarks_count 
-    == @story_bookmarks.length

@@ -2,10 +2,9 @@ $("#flash_notice").html('<div class="callout success" data-closable><button clas
 
 <% if controller.action_name == "create" %>
   $("#new_bookmark").remove();
-  $("#bookmark_buttons").html('<%= j link_to "Unsave Story", story_bookmark_path(@story, current_user), method: :delete, class: "button", remote: true %>');
+  $("#bookmark_buttons").html('<%= j render :partial => 'bookmarks/show' %>');
+
 <% elsif controller.action_name == "destroy" %>
   $('a[href="/stories/<%= j @story.id.to_s %>/bookmarks/<%= j @bookmark.id.to_s %>"]').remove();
  $("#bookmark_buttons").html('<%= j render :partial => 'bookmarks/form' %>');
 <% end %>
-  
-$("#story_bookmarks_count").html('<%= j @story.bookmarks.count.to_s %>');
