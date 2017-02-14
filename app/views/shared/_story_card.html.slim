@@ -10,29 +10,34 @@
     .columns[style="line-height: 0.9;"]
       == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0, comment:nil
   .card-section
-    h2
-      -if admin_view
-        - unless story.raw_title == ""
-          == link_to story.raw_title, admin_story_path(story)
-        - else
-          == link_to "Untitled Story", admin_story_path(story)
-      -else
-        == link_to story_title(story), story_path(story)
-    .subtext
-      == story_gift_description_show(story)
-    - unless story.classifications.empty?
-      .story_tags
-        span.label
-          == story_recipient_tag(story)
-        | &nbsp;&nbsp;
-        span.label
-          == story_occasion_tag(story)
-        | &nbsp;&nbsp;
-        span.label
-          == story_fail_tag(story)
-  - unless story.main_image_file_name.nil?
-    == link_to story_path(story) do
-      div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
+    .row
+      .columns.small-9
+        h2
+          -if admin_view
+            - unless story.raw_title == ""
+              == link_to story.raw_title, admin_story_path(story)
+            - else
+              == link_to "Untitled Story", admin_story_path(story)
+          -else
+            == link_to story_title(story), story_path(story)
+        .subtext
+          == story_gift_description_show(story)
+        - unless story.classifications.empty?
+          .story_tags
+            span.label
+              == story_recipient_tag(story)
+            | &nbsp;&nbsp;
+            span.label
+              == story_occasion_tag(story)
+            | &nbsp;&nbsp;
+            span.label
+              == story_fail_tag(story)
+      .columns.small-3[style="text-align:right"]
+        == render 'bookmarks/show', story: story
+  
+    - unless story.main_image_file_name.nil?
+      == link_to story_path(story) do
+        div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
   .card-section
     == story_body(story)
   .card-section
