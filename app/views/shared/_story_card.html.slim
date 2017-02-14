@@ -8,7 +8,7 @@
     - else
       - user = story.user
     .columns[style="line-height: 0.9;"]
-      == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0
+      == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0, comment:nil
   .card-section
     h2
       -if admin_view
