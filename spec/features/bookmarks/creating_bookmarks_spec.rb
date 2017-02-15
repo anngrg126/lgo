@@ -20,28 +20,38 @@ RSpec.feature "Adding Saves to Stories" do
     visit "/"
     click_link @story.final_title
   
-    click_button "Save Story"
-    
-    expect(page).to have_content("Story has been saved")
-    expect(page).to have_content("Saves: 1")
+    within "#bookmark_buttons_1" do
+      expect(page).to have_css('span[class="fa fa-bookmark-o fa-lg"]')
+      expect(page).to have_link('', :href => story_bookmarks_path(story_id: @story.id, user_id: @bar.id))
+      page.click_link('', :href => story_bookmarks_path(story_id: @story.id, user_id: @bar.id))
+      expect(page).to have_css('span[class="fa fa-bookmark fa-lg"]')
+    end
+
     expect(page.current_path).to eq(story_path(@story))
     
+    expect(Bookmark.where(user_id: @bar.id).count).to eq(1)
+
     logout(:user)
     
     login_as(@foo, :scope => :user)
     visit "/"
     click_link "Notifications"
+    
     expect(page).to have_content("Woohoo! Someone bookmarked your story #{@story.final_title}")
     expect(page).to have_link(@story.final_title)
   end
   
-  scenario "A non-signed in user fails to save a story", :js => true do
+  scenario "A non-signed in user fails to save a story" do
     visit "/"
     click_link @story.final_title
     
-    click_button "Save Story"
+    within "#bookmark_buttons_1" do
+      expect(page).to have_css('span[class="fa fa-bookmark-o fa-lg"]')
+      expect(page).to have_link('', :href => story_bookmarks_path(story_id: @story.id, user_id: 0))
+      page.click_link('', :href => story_bookmarks_path(story_id: @story.id, user_id: 0))
+    end
     
-    expect(page).to have_content("Please sign in to continue")
+    expect(page).to have_content("You need to sign in or sign up before continuing.")
     expect(page.current_path).to eq(new_user_session_path)
   end
 end

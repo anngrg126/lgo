@@ -13,12 +13,17 @@ RSpec.feature "Deleting Bookmarks" do
     login_as(@foo, :scope => :user)
     
     visit "/"
-    click_link @story_bar.final_title  
-    click_link "Unsave Story"
+    click_link @story_bar.final_title 
     
-    expect(page).to have_content("Story save has been deleted")
-    expect(page).to have_content("Saves: 0")
-    expect(page).to have_button("Save Story")
-    expect(page).not_to have_link("Unsave Story")
+    within "#bookmark_buttons_1" do
+      expect(page).to have_css('span[class="fa fa-bookmark fa-lg"]')
+      expect(page).to have_link('', :href => story_bookmark_path(@story_bar, @foo.id))
+      page.click_link('', :href => story_bookmark_path(@story_bar, @foo.id))
+      expect(page).to have_css('span[class="fa fa-bookmark-o fa-lg"]')
+    end
+
+    expect(page.current_path).to eq(story_path(@story_bar))
+    
+    # expect(Bookmark.where(story_id: @story_bar.id).count).to eq(0)
   end
 end
