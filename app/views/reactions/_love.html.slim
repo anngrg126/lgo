@@ -13,7 +13,7 @@ div[id="story_reaction_#{@reactions.select{|r| r.name=="love"}.first.id}_#{story
             -if @loves.length>0
               span#love_count.icon-counter #{@loves.length}
   -else
-    ==link_to reactions_path(user_id: 0, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="love"}.first.id), method: :post, class: "icon-button primary-icon", remote: true do
+    ==link_to reactions_path(user_id: 0, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="love"}.first.id), method: :post, class: "icon-button primary-icon" do
       span.fa.fa-heart-o.fa-lg [aria-describedby="love_count"]
       -if @loves.length>0
         span#love_count.icon-counter #{@loves.length}

@@ -15,7 +15,7 @@ div[id="story_reaction_#{@reactions.select{|r| r.name=="lol"}.first.id}_#{story.
             -if @lols.length>0
               span#lol_count.icon-counter #{@lols.length}
   -else
-    ==link_to reactions_path(user_id: 0, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="lol"}.first.id), method: :post, class: "icon-button primary-icon", remote: true do
+    ==link_to reactions_path(user_id: 0, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="lol"}.first.id), method: :post, class: "icon-button primary-icon" do
       span.text-stack [aria-describedby="lol_count"]
         .fa-stack-1x.circle-text.open.rotate-45 LOL
       -if @lols.length>0
