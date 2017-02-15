@@ -1,4 +1,4 @@
-.row[style="margin-top: 20px;"]
+.row[style="margin-top: 0.9375rem;"]
   .columns.large-3
     == render partial: 'dashboard/pagetop'
   .columns.large-9
@@ -12,6 +12,7 @@
           == link_to "Saves: #{@bookmarked_stories.length}", bookmarked_stories_dashboard_path(@user), remote: true
           |  
           == link_to "Comments: #{@commented_stories.length}", commented_stories_dashboard_path(@user), remote: true
+        hr.show-for-small-only[style="margin-top: 0;"]
       div
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fi-pencil
