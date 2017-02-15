@@ -10,8 +10,8 @@
       == link_to "Saves: #{@bookmarked_stories.length}", bookmarked_stories_dashboard_path(@user), remote: true
       |  
       == link_to "Comments: #{@commented_stories.length}", commented_stories_dashboard_path(@user), remote: true
-      |  
-      span#dashboard_notifications_counter
-        == link_to "Notifications: #{@unread_notifications.length}", notifications_dashboard_path(@user), remote: true
+    == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
+      span.fi-pencil
+      span Share a Story
     div#dashboard_partial
       == render partial: 'authored_stories'

@@ -4,9 +4,6 @@ div
   - else
     h1
       == "#{@user.full_name}'s Stories"
-  == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
-    span.fi-pencil
-    span Share a Story
 .row
   - @dashboard_stories.each do |s|
     .columns.medium-6

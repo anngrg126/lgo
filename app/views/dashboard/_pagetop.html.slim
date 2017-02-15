@@ -36,6 +36,9 @@
             p
               == user_about_me(@user)
               == edit_user_about_me(@user)
+        - if @user == current_user
+          #dashboard_notifications_counter
+            == link_to "Notifications: #{@unread_notifications.length}", notifications_dashboard_path(@user), remote: true
         - unless @user == current_user
           == render partial: 'followings/form', locals: { user: @user, follower: current_user }
         == link_to "Followers: #{@followers.length}", followers_dashboard_path(@user), remote: true 
