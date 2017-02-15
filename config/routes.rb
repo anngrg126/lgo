@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   
   resources :stories do 
     resources :comments
-    resources :bookmarks
+    resources :bookmarks, only: [:create, :destroy]
     resources :pictures, only: [:destroy, :new, :create]
   end
   
