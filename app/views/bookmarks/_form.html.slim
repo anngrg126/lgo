@@ -1,6 +1,0 @@
--if @story.nil?
-  -@story = story
--@bookmark = @story.bookmarks.build
-== form_for [@story, @bookmark], remote: true do |f|
-  = content_tag :button, :type => 'submit', :class => 'icon-button primary-icon' do
-    span.fa.fa-bookmark-o.fa-lg
