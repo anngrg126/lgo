@@ -1,3 +1,8 @@
-== render partial: 'dashboard/user_profile'
-div#dashboard_partial
-  == render partial: 'dashboard/notifications'
+.row[style="margin-top: 0.9375rem;"]
+  .columns.large-3
+    == render partial: 'dashboard/user_profile'
+  .columns.large-9
+    .header-nav
+      == render partial: 'dashboard/dashboard_nav'
+    div#dashboard_partial
+      == render partial: 'dashboard/notifications'
