@@ -3,18 +3,18 @@
     == render partial: 'dashboard/pagetop'
   .columns.large-9
     .header-nav
-      div.list
-        == link_to authored_stories_dashboard_path(@user), remote: true do
+      .list
+        == link_to authored_stories_dashboard_path(@user), id: "authored_stories", remote: true do
           span Stories
-          span #{@dashboard_stories.length}   
-        == link_to reacted_stories_dashboard_path(@user), remote: true do
+          span.count #{@dashboard_stories.length}   
+        == link_to reacted_stories_dashboard_path(@user), id: "reacted_stories", remote: true do
           span Reactions
           span.count #{@reacted_stories.length}
         - if @user == current_user 
-          == link_to bookmarked_stories_dashboard_path(@user), remote: true do
+          == link_to bookmarked_stories_dashboard_path(@user), id: "bookmarked_stories", remote: true do
             span Bookmarks
             span.count #{@bookmarked_stories.length}
-          == link_to commented_stories_dashboard_path(@user), remote: true do
+          == link_to commented_stories_dashboard_path(@user), id: "commented_stories", remote: true do
             span Comments
             span.count #{@commented_stories.length}
         hr.show-for-small-only[style="margin-top: 0;"]

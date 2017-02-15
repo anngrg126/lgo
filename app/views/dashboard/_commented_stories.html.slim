@@ -20,3 +20,7 @@ h2 List of All Commented Stories:
     div
       == @user.comments.group_by(&:story_id).select{|story_id| story_id == story.id}.first[1].last.body.truncate(100)
       /== Comment.where(story_id: story, user_id: @user).last.body.truncate(100)
+
+javascript:
+  $(".list a").removeClass("active");
+  $("#commented_stories").addClass("active");
