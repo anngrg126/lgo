@@ -1,0 +1,11 @@
+div[id="bookmark_buttons_#{story.id}"]
+  -unless current_user.nil?
+    -if story.bookmarks.select{|b| b.user_id == current_user.id}.any?
+      == link_to story_bookmark_path(story, current_user.id), method: :delete, class: "icon-button primary-icon", remote: true do
+        span.fa.fa-bookmark.fa-lg
+    -else
+      ==link_to story_bookmarks_path(story_id: story.id, user_id: current_user.id), method: :post, class: "icon-button primary-icon", remote: true do
+        span.fa.fa-bookmark-o.fa-lg
+  -else
+    ==link_to story_bookmarks_path(story_id: story.id, user_id: 0), method: :post, class: "icon-button primary-icon", remote: true do
+      span.fa.fa-bookmark-o.fa-lg 

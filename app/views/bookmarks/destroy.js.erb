@@ -1,0 +1,4 @@
+$('div[id^="bookmark_buttons_<%= @story.id.to_s %>"]').each( function( ) {
+    var current = $(this);
+    current.html('<%= j render 'bookmarks/bookmark', story: @story %>');
+});
