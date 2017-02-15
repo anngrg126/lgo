@@ -1,0 +1,27 @@
+//globals
+@import 'globals/colors';
+//@import 'globals/fonts';
+@import 'foundation';
+
+.header-nav {
+  border-bottom: 1px solid $medium-gray;
+  border-top: 1px solid $medium-gray;
+  background-color: $white;
+  margin-left: -1.875rem;
+  padding-left: 1.875rem;
+  margin-right: -0.9375rem;
+  padding-right: 0.9375rem;
+  >div {
+    display: inline-block;
+  }
+  >div:first-child {
+    width: calc(100% - 152px);
+  }
+  .list a {
+    color: $dark-gray;
+    padding: 0.7rem 1rem;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

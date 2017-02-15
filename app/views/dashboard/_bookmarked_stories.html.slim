@@ -1,10 +1,5 @@
-.row
-  .columns.small-6
-      h1 List of All Saved Stories:
-  .columns.large-offset-3.large-3.small-6
-    == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
-      span.fi-pencil
-      span Share a Story
+.row.columns
+  h1 List of All Saved Stories:
 .row
   - @bookmarked_stories.each do |story|
     div.large-6.small-12.columns
