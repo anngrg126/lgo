@@ -6,17 +6,17 @@
       .list
         == link_to authored_stories_dashboard_path(@user), id: "authored_stories", remote: true do
           span Stories
-          span.count #{@dashboard_stories.length}   
+          span.count class=('zero-count' if @dashboard_stories.length == 0) #{@dashboard_stories.length}   
         == link_to reacted_stories_dashboard_path(@user), id: "reacted_stories", remote: true do
           span Reactions
-          span.count #{@reacted_stories.length}
+          span.count class=('zero-count' if @reacted_stories.length == 0) #{@reacted_stories.length}
         - if @user == current_user 
           == link_to bookmarked_stories_dashboard_path(@user), id: "bookmarked_stories", remote: true do
             span Bookmarks
-            span.count #{@bookmarked_stories.length}
+            span.count class=('zero-count' if @bookmarked_stories.length == 0) #{@bookmarked_stories.length}
           == link_to commented_stories_dashboard_path(@user), id: "commented_stories", remote: true do
             span Comments
-            span.count #{@commented_stories.length}
+            span.count class=('zero-count' if @commented_stories.length == 0) #{@commented_stories.length}
         hr.show-for-small-only[style="margin-top: 0;"]
       div
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
