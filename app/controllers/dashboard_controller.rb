@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_profile]
+  before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_settings]
   before_action :set_anonymous_user
   before_action :set_tags
   before_action :set_reactions
@@ -63,9 +63,9 @@ class DashboardController < ApplicationController
     end
   end
   
-  def user_profile
+  def user_settings
     respond_to do |format|
-      format.js {render :partial => 'dashboard/user_profile'}
+      format.js {render :partial => 'dashboard/user_settings'}
       format.html
     end
   end

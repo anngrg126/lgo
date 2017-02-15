@@ -21,7 +21,7 @@
           div.name-container class=('room-for-icons' if @user == current_user)
             div
               - if @user == current_user
-                == link_to user_profile_dashboard_path(@user), class: "small-icon-button secondary-icon", remote: true do 
+                == link_to user_settings_dashboard_path(@user), class: "small-icon-button secondary-icon", remote: true do 
                   span.fa.fa-cog
             div
               h2
