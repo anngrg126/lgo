@@ -38,9 +38,15 @@ module DashboardHelper
   def edit_user_about_me(user)
     if user == current_user
       if user.about_me == nil || user.about_me == ""
-        link_to "Introduce yourself here", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
+        link_to edit_user_dashboard_registration_path(user, form_render: "user_about_me"), class: "primary-link", remote: true do
+          content_tag(:span, "Introduce yourself here ") +
+          content_tag(:span, "", class: "fa fa-pencil")
+        end
       else
-        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
+#        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
+        link_to edit_user_dashboard_registration_path(user, form_render: "user_about_me"), class: "small-icon-button secondary-icon", remote: true do
+          content_tag(:span, "", class: "fa fa-pencil")
+        end
       end
     end
   end
@@ -53,7 +59,7 @@ module DashboardHelper
   
   def user_about_me_title(user)
     if !user.about_me.blank? || current_user == user
-      "<div>About Me</div>".html_safe
+      content_tag(:strong, "About Me")
     end
   end
   
