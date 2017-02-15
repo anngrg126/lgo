@@ -14,7 +14,7 @@ $subtext-sizes: (
 );
 $global-larger-sizes: (
   0: 1.6rem,
-  640px: 1.7rem
+  640px: 1.8rem
 );
 @mixin font-size($fs-map) {
   @each $fs-breakpoint, $fs-font-size in $fs-map {
@@ -124,25 +124,43 @@ h2 a {
   color: $primary-color;
   line-height: 2;
 }
+.count.zero-count {
+  font-weight: 500;
+  color: $middark-gray;
+}
 .list {
   line-height: 2.5;
 }
 .list a {
+  border-bottom: 3px solid transparent;
   color: $dark-gray;
-  padding: 0.7rem 1rem;
+  margin: 0.7rem 1rem;
+  padding-bottom: 3px;
   &:hover {
     color: $primary-color;
     .count {
       color: darken($primary-color, 14%);
     }
+    .count.zero-count {
+      color: $primary-color;
+    }
   }
   span:first-child {
     margin-right: 10px;
   }
+  &.active {
+    color: $primary-color;
+    font-weight: 700;
+    border-bottom: 3px solid $primary-color;
+    &:hover {
+      color: darken($primary-color, 14%);
+      border-bottom: 3px solid darken($primary-color, 14%);
+    }
+  }
 }
 @media only screen and (max-width: 640px) {
   .list {
-    line-height: 2.3;
+    line-height: 2;
   }
   .list a {
     text-align: left;
@@ -152,11 +170,11 @@ h2 a {
       font-size: 1.6rem;
     }
     .count {
-      font-size: 1.7rem;
+      font-size: 1.8rem;
     }
   }
   .list a span:nth-child(2) {
     position: absolute;
-    right: 1rem;
+    right: 0;
   }
 }
