@@ -31,8 +31,7 @@
           span.label
             == story_occasion_tag(story)
           | &nbsp;&nbsp;
-          span.label
-            == story_fail_tag(story)
+          == story_fail_tag(story)
         
   
     - unless story.main_image_file_name.nil?
