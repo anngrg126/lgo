@@ -12,6 +12,10 @@ $subtext-sizes: (
   0: 1.2rem,
   640px: 1.4rem
 );
+$global-larger-sizes: (
+  0: 1.6rem,
+  640px: 1.7rem
+);
 @mixin font-size($fs-map) {
   @each $fs-breakpoint, $fs-font-size in $fs-map {
     @media screen and (min-width: $fs-breakpoint) {
@@ -110,5 +114,49 @@ h2 a {
   font-weight: 500;
   &:hover {
     color: darken(red, 14%);
+  }
+}
+//lists
+.count {
+//  font-family: "Raleway", sans-serif;
+  @include font-size($global-larger-sizes);
+  font-weight: 700;
+  color: $primary-color;
+  line-height: 2;
+}
+.list {
+  line-height: 2.5;
+}
+.list a {
+  color: $dark-gray;
+  padding: 0.7rem 1rem;
+  &:hover {
+    color: $primary-color;
+    .count {
+      color: darken($primary-color, 14%);
+    }
+  }
+  span:first-child {
+    margin-right: 10px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .list {
+    line-height: 2.3;
+  }
+  .list a {
+    text-align: left;
+    position: relative;
+    display: block;
+    span {
+      font-size: 1.6rem;
+    }
+    .count {
+      font-size: 1.7rem;
+    }
+  }
+  .list a span:nth-child(2) {
+    position: absolute;
+    right: 1rem;
   }
 }
