@@ -4,14 +4,19 @@
   .columns.large-9
     .header-nav
       div.list
-        == link_to "Stories: #{@dashboard_stories.length}", authored_stories_dashboard_path(@user), remote: true
-        |   
-        == link_to "Reactions: #{@reacted_stories.length}", reacted_stories_dashboard_path(@user), remote: true
-        - if @user == current_user
-          |  
-          == link_to "Saves: #{@bookmarked_stories.length}", bookmarked_stories_dashboard_path(@user), remote: true
-          |  
-          == link_to "Comments: #{@commented_stories.length}", commented_stories_dashboard_path(@user), remote: true
+        == link_to authored_stories_dashboard_path(@user), remote: true do
+          span Stories&nbsp;&nbsp;
+          span #{@dashboard_stories.length}   
+        == link_to reacted_stories_dashboard_path(@user), remote: true do
+          span Reactions&nbsp;&nbsp;
+          span #{@reacted_stories.length}
+        - if @user == current_user 
+          == link_to bookmarked_stories_dashboard_path(@user), remote: true do
+            span Bookmarks&nbsp;&nbsp;
+            span #{@bookmarked_stories.length}
+          == link_to commented_stories_dashboard_path(@user), remote: true do
+            span Comments&nbsp;&nbsp;
+            span #{@commented_stories.length}
         hr.show-for-small-only[style="margin-top: 0;"]
       div
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do

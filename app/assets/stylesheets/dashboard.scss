@@ -66,5 +66,13 @@
         padding-bottom: 4.5px;
       }
     }
+    .list a {
+      text-align: left;
+      position: relative;
+    }
+    .list a span:nth-child(2) {
+      position: absolute;
+      right: 1rem;
+    }
   }
 }
