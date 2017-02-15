@@ -159,7 +159,7 @@ nav .dropdown-pane {
   border-bottom-style: inset;
   border-width: 1px;
 //  background-color: $ultra-light-gray;
-  background-color: white;
+  background-color: $white;
   -webkit-box-shadow: inset 0px 5px 10px -7px $dark-gray;
   -moz-box-shadow: inset 0px 5px 10px -7px $dark-gray;
   box-shadow: inset 0px 5px 10px -7px $dark-gray;
@@ -204,6 +204,9 @@ nav .dropdown-pane {
   }
   .is-dropdown-submenu {
     padding: 15px 10px;
+  }
+  .is-drilldown-submenu {
+    background-color: $ultra-light-gray;
   }
   .occasion {
     min-width: 500px;
@@ -269,7 +272,8 @@ nav .dropdown-pane {
 
 //tag links
 #tags-menu ul ul a {
-  @extend .header-blue-link;
+//  @extend .header-blue-link;
+  @extend %header-gray-link;
   &:hover {
     border-bottom: none;
   }
@@ -299,7 +303,7 @@ nav .dropdown-pane {
   //navbar mid tier
   .nav-midtier {
 //    background-color: $ultra-light-gray;
-    background-color: white;
+    background-color: $white;
     padding: 0;
     .row:first-child {
       border-bottom: 1px solid $medium-gray;
