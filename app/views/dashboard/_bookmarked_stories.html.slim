@@ -1,9 +1,10 @@
-.row.columns
-  h1 List of All Saved Stories:
+div
+  h1 Your Bookmarked Stories
+  .subtext This is your private collection of saved stories.
 .row
-  - @bookmarked_stories.each do |story|
-    div.large-6.small-12.columns
-      == render 'shared/story_card', story: story, admin_view: false
+  - @bookmarked_stories.each do |s|
+    .columns.medium-6
+      == render 'shared/story_card', story: s, admin_view: false
 
 javascript:
   $(".list a").removeClass("active");

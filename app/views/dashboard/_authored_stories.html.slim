@@ -3,7 +3,7 @@ div
     h1 Your Stories
   - else
     h1
-      == "#{@user.full_name}'s Stories"
+      == "#{@user.first_name}'s Stories"
 .row
   - @dashboard_stories.each do |s|
     .columns.medium-6
