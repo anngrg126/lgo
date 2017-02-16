@@ -69,10 +69,6 @@
       
       <!-- Reactions -->
       == render 'shared/reactions_component', s: @story, top: false 
-    .row.columns.clearfix
-      h1 This is my story title
-      .float-right 
-        .fa.fa-bookmark
   .columns.large-3
     - if @story.published?
       - unless @story.classifications.empty?
