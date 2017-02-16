@@ -4,7 +4,7 @@ $('div[id="<%= j ids.to_s %>"]').children('.unread, .mark_as_read').remove();
 $('#dashboard_notifications_counter').html('<%= @user.notifications.select{|n| n.read==false}.length.to_s %>');
 
 <% if @user.notifications.select{|n| n.read==false}.length == 0 %>
-  $("#dashboard_notifications_counter_<%= j current_user.id.t o_s %>").closest(".count").addClass("zero-count");
+  $("#dashboard_notifications_counter_<%= j current_user.id.to_s %>").closest(".count").addClass("zero-count");
 <% end %>
 
 //update notificatios counter in navbar
