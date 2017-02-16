@@ -6,6 +6,9 @@ h2 List of All Notifications:
     div
       == consolidate_notifications(@unread_notifications, "false")
 - unless @read_notifications.empty?
-  h3 Your Notifications
-  == link_to "Delete All Notifications", destroy_all_read_notifications_path(@user)
-  == consolidate_notifications(@read_notifications, "true")
+  div#old_notifications
+    h3 Past Notifications
+    == link_to "Delete All Notifications", destroy_all_read_notifications_path(@user)
+    div
+      == consolidate_notifications(@read_notifications, "true")
+  /== render 'shared/notification_partial'

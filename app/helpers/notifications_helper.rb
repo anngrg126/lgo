@@ -62,6 +62,7 @@ module NotificationsHelper
 #  end
 #  
 #  helper to consolidate all notifications
+  
   def consolidate_notifications(notifications_array, read_boolean)
     n_stories = []
     n_users = []
@@ -72,6 +73,12 @@ module NotificationsHelper
     messages = []
     id_array = []
     @followers_id_array = []  
+    my_message = []
+    # my_message[0]["message_id"]
+    # my_message[0]["users"]
+    # my_message[0]["message"]
+    # my_message[0]["category_id"]
+    # my_message[0]["category_option"]
     
     #consolidate all stories to avoid N+1 db queries
     notifications_array.each do |n|
@@ -94,22 +101,43 @@ module NotificationsHelper
         story = @n_stories.select{|s| s.id == n.story_id}.first
         link = link_to story_title(story), story_path(story)
         ids = []
+        author = @n_users.select{|u| u.id == story.author_id}.first
         if n.options == "admin"
           # Story admin notification
-          author = @n_users.select{|u| u.id == story.author_id}.first
           link_author = link_to author.full_name, dashboard_path(author)
           messages.push(link_author+" updated a story where you are an admin. See it here: "+link)
           ids.push(n.id)
+          my_message_admin = Hash.new
+          my_message_admin["message_id"]=n.id
+          my_message_admin["users"] = author
+          my_message_admin["message"] = link_author+" updated a story where you are an admin. See it here: "+link
+          my_message_admin["option"] = "admin"
+          my_message_admin["category"] = "Story"
+          my_message.push(my_message_admin)
         elsif n.options == "followers"
           # Story poster's followers notification
             poster = @n_users.select{|u| u.id == story.poster_id}.first
           link_poster = link_to poster.full_name, dashboard_path(poster)
           messages.push(link_poster+" published a new story! See it here: "+link)
           ids.push(n.id)
+          my_message_follower = Hash.new
+          my_message_follower["message_id"]=n.id
+          my_message_follower["users"] = author
+          my_message_follower["message"] = link_poster+" published a new story! See it here: "+link
+          my_message_follower["option"] = "followers"
+          my_message_follower["category"] = "Story"
+          my_message.push(my_message_follower)
         else
           # Story author notification
           messages.push("Your story has been published! See it here: "+link)
           ids.push(n.id)
+          my_message_author = Hash.new
+          my_message_author["message_id"]=n.id
+          my_message_author["users"] = author
+          my_message_author["message"] = "Your story has been published! See it here: "+link
+          my_message_author["option"] = "published"
+          my_message_author["category"] = "Story"
+          my_message.push(my_message_author)
         end
         id_array.push(ids)
       when "Comment"
@@ -127,30 +155,49 @@ module NotificationsHelper
     unless notifications_array.select{|n| n.notification_category.name == "Comment"}.empty?
       optionsarray = [nil, "commenters"]
       stories_comments.uniq.each do |s|
+        my_message_comments = Hash.new
+        my_message_comments["category"]="Comment"
+        commenter_messages=[]
+        commenter_users=[]
+        noti_ids=[]
         optionsarray.each do |o|
           commenters = []
           ids = []
           commenter_links = []
+          
           unless notifications_array.select{|n| n.notification_category.name == "Comment" && n.options == o && n.story_id == s.id}.empty?
             notifications_array.select{|n| n.notification_category.name == "Comment" && n.options == o && n.story_id == s.id}.each do |n|
               commenters.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
               ids.push(n.id)
+              
+              noti_ids.push(n.id)
             end
           end
+          my_message_comments["message_id"]= noti_ids
+          
           commenters.uniq.each do |c|
             commenter_links.push(link_to c.full_name, dashboard_path(c))
-          end 
+            commenter_users.push(c)
+          end
+          my_message_comments["users"] = commenter_users
+          
           link = link_to story_title(s), story_path(s)
           unless commenter_links.empty?
             if o == nil
               messages.push("#{commenter_links.to_sentence} commented on your story #{link}")
               id_array.push(ids)
+              commenter_messages.push("#{commenter_links.to_sentence} commented on your story #{link}")
             else
               messages.push("#{commenter_links.to_sentence} also commented on #{link}")
               id_array.push(ids)
+              commenter_messages.push("#{commenter_links.to_sentence} also commented on #{link}")
             end
           end
+          my_message_comments["message"] = commenter_messages[0]
+          my_message_comments["option"] = 0
         end
+        
+        my_message.push(my_message_comments)
       end
     end
     
@@ -163,6 +210,9 @@ module NotificationsHelper
       @cool_reaction = @reaction_categories.select{|r| r.name=="cool"}.first
       stories_reactions.uniq.each do |s|
         @reaction_categories.each do |o|
+          reaction_messages=[]
+          reaction_users=[]
+          noti_ids=[]
           reactors = []
           ids = []
           reactor_links = []
@@ -170,29 +220,45 @@ module NotificationsHelper
             notifications_array.select{|n| n.notification_category.name == "Reaction" && n.options==o.id.to_s && n.story_id == s.id}.each do |n|
               reactors.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
               ids.push(n.id)
+              noti_ids.push(n.id)
             end
+            my_message_reactions = Hash.new
+            my_message_reactions["category"]="Reaction"
+            my_message_reactions["option"]=o.name
+            my_message_reactions["message_id"]= noti_ids
             reactors.uniq.each do |c|
               reactor_links.push(link_to c.full_name, dashboard_path(c))
-            end 
+              reaction_users.push(c)
+            end
+            my_message_reactions["users"] = reaction_users
             link = link_to story_title(s), story_path(s)
             unless reactor_links.empty?
               if o == @like_reaction
                 messages.push("#{reactor_links.to_sentence} liked your story #{link}")
                 id_array.push(ids)
+                reaction_messages.push("#{reactor_links.to_sentence} liked your story #{link}")
               elsif o == @omg_reaction
                 messages.push("#{reactor_links.to_sentence} OMG'd your story #{link}")
                 id_array.push(ids)
+                reaction_messages.push("#{reactor_links.to_sentence} OMG'd your story #{link}")
               elsif o == @lol_reaction
                 messages.push("#{reactor_links.to_sentence} LOL'd your story #{link}")
                 id_array.push(ids)
+                reaction_messages.push("#{reactor_links.to_sentence} LOL'd your story #{link}")
               elsif o == @cool_reaction
                 messages.push("#{reactor_links.to_sentence} Cool'd your story #{link}")
                 id_array.push(ids)
+                reaction_messages.push("#{reactor_links.to_sentence} Cool'd your story #{link}")
               elsif o == @love_reaction
                 messages.push("#{reactor_links.to_sentence} Loved your story #{link}") 
                 id_array.push(ids)
+                reaction_messages.push("#{reactor_links.to_sentence} Loved your story #{link}") 
               end
             end
+            my_message_reactions["message"] = reaction_messages[0]
+          end
+          unless my_message_reactions.nil?
+            my_message.push(my_message_reactions)
           end
         end
       end
@@ -200,39 +266,76 @@ module NotificationsHelper
     
     unless notifications_array.select{|n| n.notification_category.name == "Bookmark"}.empty?
       stories_bookmarks.uniq.each do |s|
+        my_message_bookmarks = Hash.new
+        my_message_bookmarks["category"]="Bookmark"
+        bookmarks_messages=[]
+        bookmarks_users=[]
+        noti_ids=[]
+        
         bookmarkers = []
         ids = []
         unless notifications_array.select{|n| n.notification_category.name == "Bookmark" && n.story_id == s.id}.empty?
           notifications_array.select{|n| n.notification_category.name == "Bookmark" && n.story_id == s.id}.each do |n|
             bookmarkers.push(@n_users.select{|u| u.id == n.notified_by_user_id}.first)
             ids.push(n.id)
+            noti_ids.push(n.id)
           end
         end
-        bookmarkers = bookmarkers.uniq.count
+        my_message_bookmarks["message_id"]= noti_ids
         
+        bookmarkers.uniq.each do |b|
+            bookmarks_users.push(b)
+        end
+        bookmarkers = bookmarkers.uniq.count
+        my_message_bookmarks["users"] = bookmarks_users
         link = link_to story_title(s), story_path(s)
         link_bookmark = link_to "bookmarked", bookmarked_stories_dashboard_path(current_user)
         if bookmarkers == 1 
           messages.push("Woohoo! Someone #{link_bookmark} your story #{link}")
           id_array.push(ids)
+          bookmarks_messages.push("Woohoo! Someone #{link_bookmark} your story #{link}")
         else
           messages.push("Woohoo! #{bookmarkers} people #{link_bookmark} your story #{link}")
           id_array.push(ids)
+          bookmarks_messages.push("Woohoo! #{bookmarkers} people #{link_bookmark} your story #{link}")
         end
-      end      
+        my_message_bookmarks["message"] = bookmarks_messages[0]
+        my_message_bookmarks["option"] = 0
+        unless my_message_bookmarks.nil?
+          my_message.push(my_message_bookmarks)
+        end
+      end 
     end
 
     unless notifications_array.select{|n| n.notification_category.name == "Following"}.empty?
+      my_message_followers = Hash.new
+      my_message_followers["category"]="Following"
+      followers_messages=[]
+      followers_users=[]
+      noti_ids=[]
+      
       follower_links = []
       ids = []
       followers.uniq
       ids = followers.find_all {|x| x.instance_of? Fixnum}
       followers = followers.find_all {|x| !x.instance_of? Fixnum}
+      noti_ids.push(ids)
+      my_message_followers["message_id"]= noti_ids
+      
       followers.each do |f|
         follower_links.push(link_to f.full_name, dashboard_path(f))
+        followers_users.push(f)
       end
+      my_message_followers["users"] = followers_users
+      
       messages.push("#{follower_links.to_sentence} followed you")
+      followers_messages.push("#{follower_links.to_sentence} followed you")
+      my_message_followers["message"] = followers_messages[0]
+      my_message_followers["option"] = 0
       id_array.push(ids)
+      unless my_message_followers.nil?
+        my_message.push(my_message_followers)
+      end
     end
     
     #All together here
@@ -240,9 +343,10 @@ module NotificationsHelper
     ordered_ids = id_array.sort_by{|x| x.max}
     ordered_ids.reverse!
     messages.uniq!
+    my_message.uniq!
     index = -1
     output = [""]
-      
+     
     ordered_ids.each do |i|     
       index = id_array.index(i)
       output.push(content_tag(:div) {
@@ -252,17 +356,10 @@ module NotificationsHelper
           @max_index = id_array[index].max
         end
         @noti = notifications_array.select{|n| n.id == @max_index}.first
-        unless index > messages.length-1
-          concat "<div id='#{id_array[index]}'>".html_safe
-          concat "<div>".html_safe
-          safe_concat messages[index]
-          concat "</div>".html_safe
-          concat "<div>#{time_ago_in_words(@noti.created_at)} ago</div>".html_safe
-          if read_boolean == "false"
-            concat "<div class='unread'>UNREAD</div>".html_safe
-            concat "<div class='mark_as_read'>#{link_to("Mark as read", mark_as_read_array_path(notification: id_array[index]), remote: true)}</div>".html_safe
-          end
-          concat link_to("Delete", notification_path(notification: id_array[index]), method: :delete, remote: true)
+        
+        unless index > my_message.length-1
+          partial =  render partial: 'shared/notification_partial', locals: { my_message: my_message[index], time: time_ago_in_words(@noti.created_at), read: read_boolean}
+          concat "#{partial}".html_safe
           concat "</div>".html_safe
         end
       })
