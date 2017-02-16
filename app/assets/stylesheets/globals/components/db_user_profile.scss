@@ -1,6 +1,6 @@
 .user-dashboard {
   border: 1px solid $light-gray;
-  .count div {
+  .count div {//styles numbers inside divs with dynamic ids
     font-size: 1.8rem;
   }
   .list.stacked .fa-lg {
