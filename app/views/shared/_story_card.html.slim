@@ -33,7 +33,7 @@
           | &nbsp;&nbsp;
           == story_fail_tag(story)
         
-  
+  .card-section
     - unless story.main_image_file_name.nil?
       == link_to story_path(story) do
         div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
