@@ -6,6 +6,24 @@
 // media image - dark gray with blue on hover
 // image tiles for additional story images
 
+$profile-image-sizes: (
+  0: 175px,
+  640px: 250px
+);
+@mixin image-width($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @media screen and (min-width: $fs-breakpoint) {
+      max-width: $fs-font-size;
+    }
+  }
+}
+@mixin image-height($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @media screen and (min-width: $fs-breakpoint) {
+      height: $fs-font-size;
+    }
+  }
+}
 %square-thumbnail {
   position: absolute;
   left: 0;
@@ -58,8 +76,10 @@ a.user-thumbnail:hover {
   @extend %thumbnail-container;
 //  width: 250px;
   width: 100%;
-  max-width: 250px;
-  height: 250px;
+  @include image-width($profile-image-sizes);
+//  max-width: 250px;
+//  height: 250px;
+  @include image-height($profile-image-sizes);
   border-radius: 5px;
   img {
     @extend %square-thumbnail;
@@ -83,10 +103,12 @@ a.user-thumbnail:hover {
   position: relative;
   text-align: center;
   .overlay-container & {
-    height: 250px;
+    @include image-height($profile-image-sizes);
+//    height: 250px;
 //    width: 250px;
     width: 100%;
-    max-width: 250px;
+    @include image-width($profile-image-sizes);
+//    max-width: 250px;
     margin: 0 auto;
   }
   a .fa {
