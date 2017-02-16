@@ -27,15 +27,16 @@
             == edit_user_about_me(@user)
         - unless @user == current_user
           hr
-          == render partial: 'followings/form', locals: { user: @user, follower: current_user }
+          div[style="text-align: center;"]
+            == render partial: 'followings/form', locals: { user: @user, follower: current_user }
         .list
           - if @user == current_user
-            hr
+            hr[style="margin-bottom: 0;"]
               == link_to notifications_dashboard_path(@user), id: "db_notifications", remote: true do
                 span Notifications
                 span.count class=('zero-count' if @unread_notifications.length == 0) 
                   #dashboard_notifications_counter[style="display: inline-block;"] #{@unread_notifications.length}
-            hr
+            hr[style="margin: 0;"]
           == link_to followers_dashboard_path(@user), id: "user_followers", remote: true do
             span Followers
             span.count class=('zero-count' if @followers.length == 0) #{@followers.length}
@@ -44,7 +45,7 @@
               span Following
               span.count class=('zero-count' if @followings.length == 0) #{@followings.length}
           - if @user == current_user
-            hr
+            hr[style="margin: 0;"]
             == link_to user_settings_dashboard_path(@user), class: "secondary-icon", id: "user_settings", remote: true do 
               span Settings
               span.fa.fa-cog.fa-lg

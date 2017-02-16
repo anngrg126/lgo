@@ -141,21 +141,30 @@ h2 a {
     .count {
       color: darken($primary-color, 14%);
     }
-    .count.zero-count {
+    .count.zero-count, &.secondary-icon .fa {
       color: $primary-color;
     }
   }
   span:first-child {
     margin-right: 10px;
   }
+  &.secondary-icon .fa {
+    color: $middark-gray;
+  }
   &.active {
     color: $primary-color;
     font-weight: 700;
     border-bottom: 3px solid $primary-color;
+    &.secondary-icon .fa {
+      color: $primary-color;
+    }
     &:hover {
       color: darken($primary-color, 14%);
       border-bottom: 3px solid darken($primary-color, 14%);
       .count.zero-count {
+        color: darken($primary-color, 14%);
+      }
+      &.secondary-icon .fa {
         color: darken($primary-color, 14%);
       }
     }
@@ -175,6 +184,10 @@ h2 a {
     display: block;
     span {
       font-size: 1.6rem;
+    }
+    .fa-lg {
+      font-size: 1.33333333em;
+      line-height: 1.5;
     }
     .count {
       font-size: 1.8rem;

@@ -1,5 +1,8 @@
 .user-dashboard {
   border: 1px solid $light-gray;
+  .count div {
+    font-size: 1.8rem;
+  }
 }
 .name-container {
   text-align: center;
@@ -72,8 +75,17 @@
   }
   .about_me_container {
     text-align: center;
+    max-width: inherit;
     .body {
       padding: 0 25px;
+    }
+    .secondary-icon {
+      padding-right: 10px;
+    }
+  }
+  .user-dashboard {
+    >.card-section:first-child {
+      padding-bottom: 0;
     }
   }
 }
