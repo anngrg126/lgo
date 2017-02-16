@@ -2,30 +2,8 @@
   border: 1px solid $medium-gray;
 }
 .name-container {
-//  position: relative;
   text-align: center;
   margin: 15px auto;
-//  >div:first-child, >div:nth-child(3) {
-//    position: absolute;
-//    width: 30px;
-//    top: 0;
-//    display: inline-block;
-//  }
-//  >div:first-child{
-//    left: 0;
-//  }
-//  >div:nth-child(3) {
-//    right: 0;
-//  }  
-//  >div:nth-child(2) {
-//    display: inline-block;
-//    margin: 0 auto;
-//    width: 100%;
-//    text-align: center;
-//  }
-//  .small-icon-button {
-//    padding-top: 0;
-//  }
 } 
 #user_registration >.columns:first-child {
   padding: 0;
@@ -38,9 +16,29 @@
 }
 .about_me_container {
   text-align: center;
-  margin-bottom: 10px;
+  position: relative;
+  line-height: 2;
+  max-width: 250px;
+  margin: 0 auto;
+//  margin-bottom: 10px;
   .secondary-icon {
     padding-top: 0;
+  }
+  .fa-pencil {
+    margin-left: 5px;
+  }
+  div > div {
+    display: inline-block;
+  }
+  div > div:first-child {
+    padding: 0 20px;
+  }
+  div > div:nth-child(2) {
+    position: absolute;
+    right: 0;
+    a {
+      vertical-align: middle;
+    }
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -54,11 +52,11 @@
       display: inline-block;
     }
   }
-//  .name-container >div:nth-child(2) {
-//    text-align: left;
-//  }
   .about_me_container {
     text-align: left;
+    div > div:first-child {
+      padding: 0 20px 0 0;
+    }
   }
 }
 @media only screen and (max-width: 640px) {
@@ -72,10 +70,10 @@
       display: block;
     }
   }
-//  .name-container >div:nth-child(2) {
-//    text-align: center;
-//  }
   .about_me_container {
     text-align: center;
+    div > div:first-child {
+      padding: 0 20px;
+    }
   }
 }

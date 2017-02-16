@@ -39,7 +39,7 @@ module DashboardHelper
     if user == current_user
       if user.about_me == nil || user.about_me == ""
         link_to edit_user_dashboard_registration_path(user, form_render: "user_about_me"), class: "primary-link", remote: true do
-          content_tag(:span, "Introduce yourself here ") +
+          content_tag(:span, "Introduce yourself here  ") +
           content_tag(:span, "", class: "fa fa-pencil")
         end
       else
