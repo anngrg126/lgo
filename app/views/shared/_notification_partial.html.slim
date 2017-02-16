@@ -3,7 +3,14 @@
   .columns.large-2
     ==my_message["category"]
   .columns.large-8
-    == my_message["message"]
+    .row
+      == my_message["message"]
+    .row
+      -unless my_message["users"].nil?
+        - my_message["users"].each do |u|
+          -unless u.nil?
+            == link_to dashboard_path(u), class: "user-thumbnail medium-thumb" do
+              == user_photo(u)
     /==noti_user.name
   .columns.large-2
     .row
