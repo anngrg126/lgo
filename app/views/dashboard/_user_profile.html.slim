@@ -29,7 +29,7 @@
           hr
           div[style="text-align: center;"]
             == render partial: 'followings/form', locals: { user: @user, follower: current_user }
-        .list
+        .list.stacked
           - if @user == current_user
             hr[style="margin-bottom: 0;"]
               == link_to notifications_dashboard_path(@user), id: "db_notifications", remote: true do

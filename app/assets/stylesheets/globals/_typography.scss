@@ -130,6 +130,21 @@ h2 a {
 }
 .list {
   line-height: 2.5;
+  
+}
+.list.stacked {
+  position: relative;
+  .count {
+    line-height: 1.5;
+  }
+}
+.list.stacked a {
+  display: block;
+  line-height: 1.4;
+}
+.list.stacked a span:nth-child(2) {
+  position: absolute;
+  right: 10px;
 }
 .list a {
   border-bottom: 3px solid transparent;

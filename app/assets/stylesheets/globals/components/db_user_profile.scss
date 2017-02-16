@@ -43,6 +43,9 @@
       vertical-align: middle;
     }
   }
+  .list.stacked .fa {
+    line-height: 1;
+  }
 }
 @media only screen and (max-width: 1024px) {
   #user_registration {

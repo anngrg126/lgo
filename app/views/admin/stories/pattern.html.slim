@@ -142,6 +142,32 @@
             div &nbsp;&nbsp;&#61;&#61; link_to root_path, class: "active" do
             div &nbsp;&nbsp;&nbsp;&nbsp; span List Item
             div &nbsp;&nbsp;&nbsp;&nbsp; span.count 10
+      .accordion-content [data-tab-content]
+        strong Stacked list with numbers
+        .row
+          .columns
+            .list.stacked
+              == link_to root_path do
+                span List Item
+                span.count 10
+              == link_to root_path do
+                span List Item
+                span.count.zero-count 0
+              == link_to root_path, class: "active" do
+                span List Item
+                span.count 10
+        .row.columns
+          .customcode
+            div .list.stacked
+            div &nbsp;&nbsp;&#61;&#61; link_to root_path do
+            div &nbsp;&nbsp;&nbsp;&nbsp; span List Item
+            div &nbsp;&nbsp;&nbsp;&nbsp; span.count 10
+            div &nbsp;&nbsp;&#61;&#61; link_to root_path do
+            div &nbsp;&nbsp;&nbsp;&nbsp; span List Item
+            div &nbsp;&nbsp;&nbsp;&nbsp; span.count.zero-count 10
+            div &nbsp;&nbsp;&#61;&#61; link_to root_path, class: "active" do
+            div &nbsp;&nbsp;&nbsp;&nbsp; span List Item
+            div &nbsp;&nbsp;&nbsp;&nbsp; span.count 10
     li.accordion-item[data-accordion-item]
         a.accordion-title[href="#"] Icons
         /primary icons

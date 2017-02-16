@@ -123,7 +123,6 @@ nav .dropdown-pane {
     font-size: 110%;
     color: $dark-gray;
     &:hover {
-      //color: $topbar-link-color-hover;
       color: $primary-color;
       img {
         filter: brightness(115%);
@@ -131,8 +130,6 @@ nav .dropdown-pane {
     }
     span {
       font-weight: 600;
-//      border-right: 1px solid $middark-gray;
-//      padding-right: 5px;
       margin-right: 5px;
     }
   }
