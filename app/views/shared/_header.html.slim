@@ -15,7 +15,7 @@ div#stickhere[data-sticky-container]
         - unless params[:controller].include? "users"
           - unless current_page? registration_step_path(:basic_details)
             div.user-info
-              #user_notifications.hide-for-small-only
+              #user_notifications.nav-notifications.hide-for-small-only
                 == user_notifications_link
               - if user_signed_in?
                 == link_to dashboard_path(current_user), class: "logged-in" do

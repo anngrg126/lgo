@@ -72,24 +72,38 @@ nav .dropdown-pane {
 }
 
 //user notifications
-#user_notifications {
+.nav-notifications {
   vertical-align: bottom;
   margin-right: 10px; 
   position: relative;
 }
-#user_notifications a {
-  @extend %header-gray-link;
-  font-size: 1.4rem;
-  &.inactive-link {
-    @extend .inactive-link;
+.notifications_count_small {
+  color: $primary-color;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-left: 5px;
+  &:hover {
+    color: darken($primary-color, 14%);
   }
-  &:hover .notifications_count {
-    color: lighten($red, 15%);
+}
+.nav-notifications {
+  span {
+    @extend %header-gray-link;
+    font-size: 1.4rem;
+  }
+  &:hover {
+    span {
+      color: $primary-color;
+    }
+    .notifications_count {
+      color: darken($primary-color, 14%);
+    }
   }
   .notifications_count {
-    color: $red;
-    font-weight: 500;
-    font-size: 1.4rem;
+    color: $primary-color;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-left: 5px;
   }
 }
 
@@ -410,7 +424,7 @@ nav .dropdown-pane {
     }
     
   }
-  #user_notifications {
+  .nav-notifications {
     margin-right: 0; 
     font-size: 1rem;
   }
