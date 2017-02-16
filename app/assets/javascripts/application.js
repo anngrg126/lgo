@@ -72,7 +72,7 @@ function myFunction() {
     $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
   });
   //*Story Show View*
-  $('a[href^="#comments"]').on('click', function(e){ //e for event
+  $('a[href^="#comments"], a[href^="#stickhere"]').on('click', function(e){
     e.preventDefault();
     var target = this.hash;
     var $target = $(target);
@@ -81,7 +81,7 @@ function myFunction() {
     }, 500, 'swing');
   });
   //*Dashboard View*
-  $('.header-nav .list a, .user-dashboard .list').on('click', function(e){ //e for event
+  $('.header-nav .list a, .user-dashboard .list').on('click', function(e){
     if ($(window).width() < 640) {
       e.preventDefault();
       var $target = $('#dashboard_partial');
@@ -90,6 +90,15 @@ function myFunction() {
       }, 500, 'swing');
     }
   });
+  if ($(window).width() < 640) {
+    $(window).bind('scroll', function(){
+      if($(this).scrollTop()>1000) {
+        $("#go-to-top").show();
+      } else {
+        $("#go-to-top").hide();
+      }
+    })
+  };
 };
 
 //*NAVBAR
