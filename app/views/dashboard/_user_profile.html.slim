@@ -35,7 +35,7 @@
               == link_to notifications_dashboard_path(@user), id: "db_notifications", remote: true do
                 span Notifications
                 span.count class=('zero-count' if @unread_notifications.length == 0) 
-                  #dashboard_notifications_counter[style="display: inline-block;"] #{@unread_notifications.length}
+                  #dashboard_notifications_counter #{@unread_notifications.length}
             hr[style="margin: 0;"]
           == link_to followers_dashboard_path(@user), id: "user_followers", remote: true do
             span Followers
@@ -43,7 +43,7 @@
           == link_to followings_dashboard_path(@user), id: "user_followings", remote: true do
             span Following
             span.count class=('zero-count' if @followings.length == 0)
-              div[id= "dashboard_followings_counter_#{@user.id.to_s}", style="display: inline-block;"] #{@followings.length}
+              div[id= "dashboard_followings_counter_#{@user.id.to_s}"] #{@followings.length}
           - if @user == current_user
             hr[style="margin: 0;"]
             == link_to user_settings_dashboard_path(@user), class: "secondary-icon", id: "user_settings", remote: true do 

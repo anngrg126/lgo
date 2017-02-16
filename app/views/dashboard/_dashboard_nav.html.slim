@@ -8,7 +8,8 @@
   - if @user == current_user 
     == link_to bookmarked_stories_dashboard_path(@user), id: "bookmarked_stories", remote: true do
       span Bookmarks
-      span.count class=('zero-count' if @bookmarked_stories.length == 0) #{@bookmarked_stories.length}
+      span.count class=('zero-count' if @bookmarked_stories.length == 0) 
+        #dashboard_bookmarks_counter[style="display: inline-block;"] #{@bookmarked_stories.length}
     == link_to commented_stories_dashboard_path(@user), id: "commented_stories", remote: true do
       span Comments
       span.count class=('zero-count' if @commented_stories.length == 0) #{@commented_stories.length}

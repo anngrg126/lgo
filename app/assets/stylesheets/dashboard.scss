@@ -23,6 +23,9 @@
       padding-bottom: 0;
     }
   }
+  .count div {//styles numbers inside divs with dynamic ids
+    font-size: 1.8rem;
+  }
 }
 @media only screen and (max-width: 1024px) {
   .header-nav  {
