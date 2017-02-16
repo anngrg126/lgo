@@ -88,7 +88,7 @@ module StoriesHelper
     body.gsub!('</li>', ' ')
     body.gsub!('<ol>', ' ')
     body.gsub!('<ul>', ' ')
-    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 300)
+    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 250)
   end
   
   def admin_tag_story(story, tag_scope_array)

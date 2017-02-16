@@ -47,7 +47,7 @@ RSpec.feature "Searching for a story", :type => :feature do
     end
        
     expect(page).to have_content(@story_foo.final_title)
-    expect(page).to have_content(@story_foo.final_body.truncate(150))
+    expect(page).to have_content(@story_foo.final_body.truncate(250))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
 #    expect(page).to have_css("img[src*='mainimage.png']", count: 1)
@@ -79,7 +79,7 @@ RSpec.feature "Searching for a story", :type => :feature do
     end
        
     expect(page).to have_content(@story_foo.final_title)
-    expect(page).to have_content(@story_foo.final_body.truncate(150))
+    expect(page).to have_content(@story_foo.final_body.truncate(250))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
     expect(page).to have_css('div.story-card-image', count: 1)
@@ -109,7 +109,7 @@ RSpec.feature "Searching for a story", :type => :feature do
     end
        
     expect(page).to have_content(@story_foo.final_title)
-    expect(page).to have_content(@story_foo.final_body.truncate(150))
+    expect(page).to have_content(@story_foo.final_body.truncate(250))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
     expect(page).to have_css('div.story-card-image', count: 1)
@@ -140,7 +140,7 @@ RSpec.feature "Searching for a story", :type => :feature do
     end
        
     expect(page).to have_content(@story_foo.final_title)
-    expect(page).to have_content(@story_foo.final_body.truncate(150))
+    expect(page).to have_content(@story_foo.final_body.truncate(250))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
     expect(page).to have_css('div.story-card-image', count: 1)
@@ -169,7 +169,7 @@ RSpec.feature "Searching for a story", :type => :feature do
     end
        
     expect(page).to have_content(@story_foo.final_title)
-    expect(page).to have_content(@story_foo.final_body.truncate(150))
+    expect(page).to have_content(@story_foo.final_body.truncate(250))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
     expect(page).to have_css('div.story-card-image', count: 1)

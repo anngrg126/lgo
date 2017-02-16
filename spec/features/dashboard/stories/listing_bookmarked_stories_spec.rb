@@ -24,15 +24,15 @@ RSpec.feature "Listing Bookmarked Stories" do
     expect(page).to have_content("Saves: 2")
 
     expect(page).to have_content(@story1.final_title)
-    expect(page).to have_content(@story1.final_body.truncate(150))
+    expect(page).to have_content(@story1.final_body.truncate(250))
     expect(page).to have_link(@story1.final_title)
     
     expect(page).to have_content(@story2.final_title)
-    expect(page).to have_content(@story2.final_body.truncate(150))
+    expect(page).to have_content(@story2.final_body.truncate(250))
     expect(page).to have_link(@story2.final_title)
     
     expect(page).not_to have_content(@story3.final_title)
-    expect(page).not_to have_content(@story3.final_body.truncate(150))
+    expect(page).not_to have_content(@story3.final_body.truncate(250))
     expect(page).not_to have_link(@story3.final_title)
     
 #    expect(page).to have_css("img[src*='mainimage.png']", count: 2)

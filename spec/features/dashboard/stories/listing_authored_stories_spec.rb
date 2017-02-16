@@ -20,18 +20,18 @@ RSpec.feature "Listing Stories" do
     
     expect(page).to have_content(Story.where(author_id: @user.id, deleted_at: nil).count)
     expect(page).to have_content(@story1.raw_title)
-    expect(page).to have_content(@story1.raw_body.truncate(150))
+    expect(page).to have_content(@story1.raw_body.truncate(250))
     expect(page).to have_link(@story1.raw_title)
     expect(page).to have_content(@story2.raw_title)
-    expect(page).to have_content(@story2.raw_body.truncate(150))
+    expect(page).to have_content(@story2.raw_body.truncate(250))
     expect(page).to have_link(@story2.raw_title)
     expect(page).to have_content(@story3.final_title)
-    expect(page).to have_content(@story3.final_body.truncate(150))
+    expect(page).to have_content(@story3.final_body.truncate(250))
     expect(page).to have_link(@story3.final_title)
     expect(page).to have_content("Pending")
     
     expect(page).to have_content(@story4.final_title)
-    expect(page).to have_content(@story4.final_body.truncate(150))
+    expect(page).to have_content(@story4.final_body.truncate(250))
     expect(page).to have_link(@story4.final_title)
     expect(page).to have_content("Anonymous")
     
@@ -48,16 +48,16 @@ RSpec.feature "Listing Stories" do
     click_link "Stories"
     expect(page).to have_content("Your Stories")
     expect(page).to have_content(@story1.raw_title)
-    expect(page).to have_content(@story1.raw_body.truncate(150))
+    expect(page).to have_content(@story1.raw_body.truncate(250))
     expect(page).to have_link(@story1.raw_title)
     expect(page).to have_content(@story2.raw_title)
-    expect(page).to have_content(@story2.raw_body.truncate(150))
+    expect(page).to have_content(@story2.raw_body.truncate(250))
     expect(page).to have_link(@story2.raw_title)
     expect(page).to have_content(@story3.final_title)
-    expect(page).to have_content(@story3.final_body.truncate(150))
+    expect(page).to have_content(@story3.final_body.truncate(250))
     expect(page).to have_link(@story3.final_title)
     expect(page).to have_content(@story4.final_title)
-    expect(page).to have_content(@story4.final_body.truncate(150))
+    expect(page).to have_content(@story4.final_body.truncate(250))
     expect(page).to have_link(@story4.final_title)
     expect(page).to have_content("Anonymous")
    end
@@ -67,19 +67,19 @@ RSpec.feature "Listing Stories" do
     visit(dashboard_path(@user))
     
     expect(page).to have_content(@story3.final_title)
-    expect(page).to have_content(@story3.final_body.truncate(150))
+    expect(page).to have_content(@story3.final_body.truncate(250))
     expect(page).to have_link(@story3.final_title)
     
     expect(page).not_to have_content(@story1.raw_title)
-    expect(page).not_to have_content(@story1.raw_body.truncate(150))
+    expect(page).not_to have_content(@story1.raw_body.truncate(250))
     expect(page).not_to have_link(@story1.raw_title)
     expect(page).not_to have_content(@story4.final_title)
-    expect(page).not_to have_content(@story4.final_body.truncate(150))
+    expect(page).not_to have_content(@story4.final_body.truncate(250))
     expect(page).not_to have_link(@story4.final_title)   
     
     visit(dashboard_path(@anonymous_user))
     expect(page).to have_content(@story4.final_title)
-    expect(page).to have_content(@story4.final_body.truncate(150))
+    expect(page).to have_content(@story4.final_body.truncate(250))
     expect(page).to have_link(@story4.final_title) 
   end
 end
