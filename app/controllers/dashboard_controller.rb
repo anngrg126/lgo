@@ -90,7 +90,7 @@ class DashboardController < ApplicationController
         @dashboard_stories = @user.stories_posted.includes(:classifications, :reactions, :comments, :bookmarks).select {|s| s.active? && s.published?}
       end
     else
-      @dashboard_stories = @user.stories.includes(:classifications, :reactions, :comments, :bookmarks).select {|s| s.active?}
+      @dashboard_stories = @user.stories.includes(:classifications, :reactions, :comments, :bookmarks).select {|s| s.active? && s.published?}
     end
     @dashboard_stories.uniq!
   end
@@ -113,7 +113,7 @@ class DashboardController < ApplicationController
  
   def set_reacted_stories
     @reacted_stories = []
-    @user.reactions.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{|r| r.story.active? }.each do |reaction|
+    @user.reactions.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{|r| r.story.active? && r.story.published? }.each do |reaction|
       if @user == current_user
         unless reaction.story.author_id == @user.id
           @reacted_stories.push(reaction.story)
@@ -136,7 +136,7 @@ class DashboardController < ApplicationController
   
   def set_bookmarked_stories
     @bookmarked_stories = []
-    @user.bookmarks.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |b| b.story.active? }.each do |bookmark|
+    @user.bookmarks.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |b| b.story.active? && b.story.published?}.each do |bookmark|
       unless bookmark.story.author_id == @user.id
         @bookmarked_stories.push(bookmark.story)
       end
@@ -155,7 +155,7 @@ class DashboardController < ApplicationController
   
   def set_commented_stories
     @commented_stories = []
-    @user.comments.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |c| c.story.active? }.each do |comment|
+    @user.comments.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |c| c.story.active? && c.story.published?}.each do |comment|
       unless comment.story.author_id == @user.id
         @commented_stories.push(comment.story)
       end
