@@ -80,6 +80,16 @@ function myFunction() {
       'scrollTop': $target.offset().top
     }, 500, 'swing');
   });
+  //*Dashboard View*
+  $('.header-nav .list a, .user-dashboard .list').on('click', function(e){ //e for event
+    if ($(window).width() < 640) {
+      e.preventDefault();
+      var $target = $('#dashboard_partial');
+      $('html, body').stop().animate({
+        'scrollTop': $target.offset().top
+      }, 500, 'swing');
+    }
+  });
 };
 
 //*NAVBAR
