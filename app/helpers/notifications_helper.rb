@@ -87,12 +87,13 @@ module NotificationsHelper
     @n_stories = Story.where(id: n_stories)
     
     #consolidate all story posters to avoid N+1 db queries
-    notifications_array.each do |n|
-      n_users.push(n.notified_by_user_id)
-    end
-    n_users.push(current_user.id)
-    n_users.uniq!
-    @n_users = User.where(id: n_users)
+    # notifications_array.each do |n|
+    #   n_users.push(n.notified_by_user_id)
+    # end
+    # n_users.push(current_user.id)
+    # n_users.uniq!
+    # @n_users = User.where(id: n_users)
+    @n_users =User.all
     
     #begin consolidating notifications
     notifications_array.each do |n|
