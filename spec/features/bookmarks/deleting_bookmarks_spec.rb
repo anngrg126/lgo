@@ -15,7 +15,7 @@ RSpec.feature "Deleting Bookmarks" do
     visit "/"
     click_link @story_bar.final_title 
     
-    within "#bookmark_buttons_1" do
+    within "#bookmark_buttons_#{@story_bar.id.to_s}" do
       expect(page).to have_css('span[class="fa fa-bookmark fa-lg"]')
       expect(page).to have_link('', :href => story_bookmark_path(@story_bar, @foo.id))
       page.click_link('', :href => story_bookmark_path(@story_bar, @foo.id))
