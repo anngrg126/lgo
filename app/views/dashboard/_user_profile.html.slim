@@ -32,19 +32,19 @@
           - if @user == current_user
             hr
             #dashboard_notifications_counter
-              == link_to notifications_dashboard_path(@user), remote: true do
+              == link_to notifications_dashboard_path(@user), id: "user_notifications", remote: true do
                 span Notifications
                 span.count class=('zero-count' if @unread_notifications.length == 0) #{@unread_notifications.length}
-            
-          == link_to followers_dashboard_path(@user), remote: true do
+            hr
+          == link_to followers_dashboard_path(@user), id: "user_followers", remote: true do
             span Followers
             span.count class=('zero-count' if @followers.length == 0) #{@followers.length}
           div[id= "dashboard_followings_counter_#{@user.id.to_s}"]
-            == link_to followings_dashboard_path(@user), remote: true do
+            == link_to followings_dashboard_path(@user), id: "user_followings", remote: true do
               span Following
               span.count class=('zero-count' if @followings.length == 0) #{@followings.length}
           - if @user == current_user
             hr
-            == link_to user_settings_dashboard_path(@user), class: "secondary-icon", remote: true do 
+            == link_to user_settings_dashboard_path(@user), class: "secondary-icon", id: "user_settings", remote: true do 
               span Settings
               span.fa.fa-cog.fa-lg
