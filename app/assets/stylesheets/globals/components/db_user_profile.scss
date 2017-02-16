@@ -3,6 +3,9 @@
   .count div {
     font-size: 1.8rem;
   }
+  .list.stacked .fa-lg {
+    line-height: 1;
+  }
 }
 .name-container {
   text-align: center;
@@ -42,9 +45,6 @@
     a {
       vertical-align: middle;
     }
-  }
-  .list.stacked .fa {
-    line-height: 1;
   }
 }
 @media only screen and (max-width: 1024px) {

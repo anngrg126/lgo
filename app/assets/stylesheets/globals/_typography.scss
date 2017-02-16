@@ -141,6 +141,9 @@ h2 a {
 .list.stacked a {
   display: block;
   line-height: 1.4;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 .list.stacked a span:nth-child(2) {
   position: absolute;
