@@ -13,10 +13,10 @@
     display: inline-block;
   }
   >div:first-child {
-    width: calc(100% - 152px);
+    width: calc(100% - 155px);
   }
   >div:nth-child(2) {
-    .fi-pencil {
+    .fa-pencil {
       margin-top: 0;
     }
     .button-w-icon {
@@ -49,12 +49,17 @@
     >div:nth-child(2) {
       display: inline-block;
       margin-bottom: 1.25rem;
-      .fi-pencil {
+      .fa-pencil {
         margin-top: 4.5px;
       }
       .button-w-icon {
         padding-bottom: 4.5px;
       }
     }
+  }
+}
+#go-to-top {
+  .fa {
+    box-shadow: 10px 10px 5px $dark-gray;
   }
 }

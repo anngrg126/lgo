@@ -7,9 +7,8 @@
       strong Real-lift gift stories &amp; ideas
       .float-right
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
-          span.fi-pencil
-          span Share a Story  
-    
+          span.fa.fa-pencil
+          span Share a Story
     .row
       - @stories.each do |s|
         .columns.medium-6

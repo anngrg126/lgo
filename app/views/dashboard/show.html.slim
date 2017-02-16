@@ -6,3 +6,7 @@
       == render partial: 'dashboard/dashboard_nav'
     div#dashboard_partial
       == render partial: 'authored_stories'
+    #go-to-top.show-for-small-only
+      == link_to root_path, class: "icon-button primary-icon" do
+        span.fa.fa-chevron-circle-up.fa-lg
+    

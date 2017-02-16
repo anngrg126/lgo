@@ -831,12 +831,12 @@
             == image_tag("pattern_screenshots/buttons/share_story_button.jpg")
           .columns.medium-6
             == link_to root_path, class: "button button-w-icon" do
-              span.fi-pencil
+              span.fa.fa-pencil.fa-lg
               span Share a Story  
         .row.columns
           .customcode
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do 
-            div &nbsp;&nbsp;span.fi-pencil
+            div &nbsp;&nbsp;span.fa.fa-pencil.fa-lg
             div &nbsp;&nbsp;span Share a Story
       .accordion-content [data-tab-content]
         strong Inverted Button with Icon
@@ -845,12 +845,12 @@
             == image_tag("pattern_screenshots/buttons/hollow_btn_icon.jpg")
           .columns.medium-6
             == link_to root_path, class: "button button-w-icon hollow" do
-              span.fi-pencil
+              span.fa.fa-pencil.fa-lg
               span Share a Story  
         .row.columns
           .customcode
             div &#61;&#61; link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon hollow" do 
-            div &nbsp;&nbsp;span.fi-pencil
+            div &nbsp;&nbsp;span.fa.fa-pencil.fa-lg
             div &nbsp;&nbsp;span Share a Story
       .accordion-content [data-tab-content]
         strong Social Button with Icon (Fat)
