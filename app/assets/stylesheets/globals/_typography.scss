@@ -215,4 +215,7 @@ h2 a {
     position: absolute;
     right: 0;
   }
+  .list.stacked a span:nth-child(2) {
+    right: 0px;
+  }
 }

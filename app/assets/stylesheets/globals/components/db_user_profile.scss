@@ -24,8 +24,8 @@
   text-align: center;
   position: relative;
   line-height: 1.5;
-  max-width: 250px;
-  margin: 0 auto;
+//  max-width: 250px;
+//  margin: 0 auto;
   .secondary-icon {
     padding-top: 0;
     padding-right: 0;
@@ -37,11 +37,11 @@
     display: inline-block;
   }
   .body {
-    padding: 0 25px;
+    padding: 0 30px;
   }
   .edit {
     position: absolute;
-    right: 0;
+    right: 10px;
     a {
       vertical-align: middle;
     }
@@ -56,14 +56,28 @@
     }
     >div:nth-child(2) {
       display: inline-block;
+      width: calc(100% - 260px);
+      >div {
+        max-width: 350px;
+        margin: 0 auto;
+      }
+      >hr {
+        max-width: 350px;
+      }
     }
   }
   .about_me_container {
-    text-align: left;
+    text-align: center;
     .body {
       padding: 0 20px 0 0;
     }
+    .edit {
+      right: 10px;
+    }
   }
+  .name-container h2 {
+    margin: 10px auto;
+  } 
 }
 @media only screen and (max-width: 640px) {
   #user_registration {
@@ -74,16 +88,26 @@
     }
     >div:nth-child(2) {
       display: block;
+      width: auto;
+      >div {
+        max-width: none;
+      }
+      >hr {
+        max-width: none;
+      }
     }
   }
   .about_me_container {
     text-align: center;
     max-width: inherit;
     .body {
-      padding: 0 25px;
+      padding: 0 30px;
     }
     .secondary-icon {
       padding-right: 10px;
+    }
+    .edit {
+      right: 0px;
     }
   }
   .user-dashboard {
