@@ -40,11 +40,10 @@
           == link_to followers_dashboard_path(@user), id: "user_followers", remote: true do
             span Followers
             span.count class=('zero-count' if @followers.length == 0) #{@followers.length}
-          div
-            == link_to followings_dashboard_path(@user), id: "user_followings", remote: true do
-              span Following
-              span.count class=('zero-count' if @followings.length == 0)
-                div[id= "dashboard_followings_counter_#{@user.id.to_s}", style="display: inline-block;"] #{@followings.length}
+          == link_to followings_dashboard_path(@user), id: "user_followings", remote: true do
+            span Following
+            span.count class=('zero-count' if @followings.length == 0)
+              div[id= "dashboard_followings_counter_#{@user.id.to_s}", style="display: inline-block;"] #{@followings.length}
           - if @user == current_user
             hr[style="margin: 0;"]
             == link_to user_settings_dashboard_path(@user), class: "secondary-icon", id: "user_settings", remote: true do 

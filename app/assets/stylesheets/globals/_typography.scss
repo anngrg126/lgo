@@ -138,7 +138,7 @@ h2 a {
     line-height: 1.5;
   }
 }
-.list.stacked a {
+.list.stacked > a {
   display: block;
   line-height: 1.4;
   &:last-child {
