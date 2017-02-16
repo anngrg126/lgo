@@ -2,4 +2,7 @@ $("#flash_notice").html('<div class="callout success" data-closable><button clas
 $("#follow_user_<%= j @user.id.to_s %>").html('<%= render partial: "followings/form.html.slim", locals: { user: @user, follower: current_user}%>');
 
 //if user is on her own dashboard
-$("#dashboard_followings_counter_<%= j current_user.id.to_s %>").html('<%= j link_to "Following: #{followings}", followings_dashboard_path(current_user), remote: true %>');
+$("#dashboard_followings_counter_<%= j current_user.id.to_s %>").html('<%= j followings.to_s %>');
+<% if followings > 0 %>
+  $("#dashboard_followings_counter_<%= j current_user.id.to_s %>").closest(".count").removeClass("zero-count");
+<% end %>

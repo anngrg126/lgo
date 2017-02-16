@@ -1,7 +1,11 @@
 $('div[id="<%= j ids.to_s %>"]').children('.unread, .mark_as_read').remove();
 
 //update notifications counter on dashboard
-$('#dashboard_notifications_counter').html('<%= Notification.where(user_id: current_user.id, read: false).count.to_s %>');
+$('#dashboard_notifications_counter').html('<%= @user.notifications.select{|n| n.read==false}.length.to_s %>');
+
+<% if @user.notifications.select{|n| n.read==false}.length == 0 %>
+  $("#dashboard_notifications_counter_<%= j current_user.id.t o_s %>").closest(".count").addClass("zero-count");
+<% end %>
 
 //update notificatios counter in navbar
 $("#user_notifications").html("<%= j user_notifications_link %>");
@@ -10,6 +14,7 @@ $("#user_notifications").html("<%= j user_notifications_link %>");
 $(".show-for-small-only #user_notifications").html("<%= j user_notifications_link_small %>");
 
 //remove New Notifications & Mark all a read if no more new notifications
-<% if Notification.where(user_id: current_user.id, read: false).count == 0 %>
+<% if @user.notifications.select{|n| n.read==false}.length == 0 %>
   $("a[href*='mark_all_as_read']").remove();
 <% end %> 
+  
