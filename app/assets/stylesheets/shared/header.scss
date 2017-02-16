@@ -6,6 +6,7 @@
   outline:0;
 }
 nav .dropdown-pane {
+  border: 1px solid $light-gray;
   hr {
     margin: .5rem auto;
   }
@@ -15,7 +16,7 @@ nav .dropdown-pane {
 .nav-toptier {
   padding-bottom: 0;
   max-width: none;
-  border-bottom: 1px solid $medium-gray;
+  border-bottom: 1px solid $light-gray;
   border-bottom-style: inset;
   border-width: 1px;
   line-height: 0.8;
@@ -155,7 +156,7 @@ nav .dropdown-pane {
 //navbar bottom tier
 .nav-bottomtier {
 //  padding: 0.3rem 0 0;
-  border-bottom: 1px solid $medium-gray;
+  border-bottom: 1px solid $light-gray;
   border-bottom-style: inset;
   border-width: 1px;
 //  background-color: $ultra-light-gray;
@@ -306,7 +307,7 @@ nav .dropdown-pane {
     background-color: $white;
     padding: 0;
     .row:first-child {
-      border-bottom: 1px solid $medium-gray;
+      border-bottom: 1px solid $light-gray;
       border-bottom-style: inset; 
     }
     .columns {
@@ -402,7 +403,7 @@ nav .dropdown-pane {
   //other
   #search_dropdown_mobile {
     display: none;
-    border-bottom: 1px solid $medium-gray;
+    border-bottom: 1px solid $light-gray;
     border-bottom-style: inset;
     .input-group-field {
       width: 98%;

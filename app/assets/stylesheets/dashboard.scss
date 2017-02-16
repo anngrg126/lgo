@@ -3,7 +3,7 @@
 @import 'foundation';
 
 .header-nav {
-  border: 1px solid $medium-gray;
+  border: 1px solid $light-gray;
   border-left: 0;
   background-color: $white;
   margin-left: -1.875rem;
@@ -33,7 +33,7 @@
 @media only screen and (max-width: 640px) {
   .header-nav {
     margin: 0;
-    border: 1px solid $medium-gray;
+    border: 1px solid $light-gray;
     padding-left: 0;
     padding-right: 0;
     text-align: center;
