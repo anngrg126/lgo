@@ -1,17 +1,16 @@
-div.row[style="margin-top: 20px;"]
-  div.columns.large-3
+.row[style="margin-top: 20px;"]
+  .columns.large-3
   
   
-  div.columns.large-9
-    div.row
-      div.columns.large-6.small-6
-        h4 REAL LIFE GIFT STORIES &amp; IDEAS
-      div.columns.large-offset-3.large-3.small-6
+  .columns.large-9
+    .row.columns
+      strong Real-lift gift stories &amp; ideas
+      .float-right
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fi-pencil
           span Share a Story  
     
-    div.row
+    .row
       - @stories.each do |s|
-        div.large-6.small-12.columns
+        .columns.medium-6
           == render 'shared/story_card', story: s, admin_view: false
