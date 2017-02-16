@@ -90,7 +90,7 @@ class DashboardController < ApplicationController
         @dashboard_stories = @user.stories_posted.includes(:classifications, :reactions, :comments, :bookmarks).select {|s| s.active? && s.published?}
       end
     else
-      @dashboard_stories = @user.stories.includes(:classifications, :reactions, :comments, :bookmarks).select {|s| s.active? && s.published?}
+      @dashboard_stories = @user.stories.includes(:classifications, :reactions, :comments, :bookmarks).select {|s| s.active?}
     end
     @dashboard_stories.uniq!
   end
