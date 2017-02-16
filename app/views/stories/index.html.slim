@@ -13,8 +13,4 @@
       - @stories.each do |s|
         .columns.medium-6
           == render 'shared/story_card', story: s, admin_view: false
-    #go-to-top.show-for-small-only
-      == link_to "#stickhere", class: "icon-button primary-icon" do
-        span.fa-stack
-          i.fa.fa-circle.fa-stack-2x
-          i.fa.fa-chevron-up.fa-stack-1x.fa-inverse
+    == render partial: 'shared/go_to_top'
