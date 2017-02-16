@@ -23,19 +23,20 @@
         .about_me_container
           == user_about_me_title(@user)
           #user_about_me
-            div
-              == user_about_me(@user)
-            div
-              == edit_user_about_me(@user)
+            == user_about_me(@user)
+            == edit_user_about_me(@user)
         - if @user == current_user
+          hr
           #dashboard_notifications_counter
             == link_to "Notifications: #{@unread_notifications.length}", notifications_dashboard_path(@user), remote: true
+        hr
         - unless @user == current_user
           == render partial: 'followings/form', locals: { user: @user, follower: current_user }
         == link_to "Followers: #{@followers.length}", followers_dashboard_path(@user), remote: true 
         div[id= "dashboard_followings_counter_#{@user.id.to_s}"]
           == link_to "Following: #{@followings.length}", followings_dashboard_path(@user), remote: true
         - if @user == current_user
+          hr
           == link_to user_settings_dashboard_path(@user), class: "small-icon-button secondary-icon", remote: true do 
             span Settings
             span.fa.fa-cog

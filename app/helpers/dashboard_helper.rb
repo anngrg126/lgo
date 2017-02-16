@@ -43,17 +43,14 @@ module DashboardHelper
           content_tag(:span, "", class: "fa fa-pencil")
         end
       else
-#        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
-        link_to edit_user_dashboard_registration_path(user, form_render: "user_about_me"), class: "small-icon-button secondary-icon", remote: true do
-          content_tag(:span, "", class: "fa fa-pencil")
-        end
+        content_tag(:div, link_to(content_tag(:span, "", class: "fa fa-pencil"), edit_user_dashboard_registration_path(user, form_render: "user_about_me"), class: "small-icon-button secondary-icon", remote: true), class: "edit")
       end
     end
   end
   
   def user_about_me(user)
     unless user.about_me.blank?
-      body = user.about_me
+      content_tag(:div, user.about_me, class: "body")
     end
   end
   

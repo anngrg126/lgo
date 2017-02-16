@@ -17,12 +17,12 @@
 .about_me_container {
   text-align: center;
   position: relative;
-  line-height: 2;
+  line-height: 1.5;
   max-width: 250px;
   margin: 0 auto;
-//  margin-bottom: 10px;
   .secondary-icon {
     padding-top: 0;
+    padding-right: 0;
   }
   .fa-pencil {
     margin-left: 5px;
@@ -30,10 +30,10 @@
   div > div {
     display: inline-block;
   }
-  div > div:first-child {
-    padding: 0 20px;
+  .body {
+    padding: 0 25px;
   }
-  div > div:nth-child(2) {
+  .edit {
     position: absolute;
     right: 0;
     a {
@@ -54,7 +54,7 @@
   }
   .about_me_container {
     text-align: left;
-    div > div:first-child {
+    .body {
       padding: 0 20px 0 0;
     }
   }
@@ -72,8 +72,8 @@
   }
   .about_me_container {
     text-align: center;
-    div > div:first-child {
-      padding: 0 20px;
+    .body {
+      padding: 0 25px;
     }
   }
 }
