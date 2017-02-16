@@ -9,7 +9,7 @@ class StoriesController < ApplicationController
     @reactions = ReactionCategory.all
     @active_browse = "active"
     if params[:search]
-      @results = (Story.includes(:user, :classifications, :reactions, :comments).search params[:search], operator: "or")
+      @results = (Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).search params[:search], operator: "or")
       @stories = @results.results.select{|s| s.active? && s.published}
       log_search_query(params[:search], @results.count)
       if @results.count <=0
@@ -17,14 +17,14 @@ class StoriesController < ApplicationController
         redirect_to root_path
       end
     elsif params[:search_tag]
-      @results = (Story.includes(:user, :classifications, :reactions, :comments).search params[:search_tag], fields: [tags: :exact])
+      @results = (Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).search params[:search_tag], fields: [tags: :exact])
       @stories = @results.results.select{|s| s.active? && s.published}
       if @results.count <=0
         flash[:warning] = "No records matched : "+ params[:search_tag]
         redirect_to root_path
       end
     else
-      @stories = Story.includes(:user, :classifications, :reactions, :comments).published.active
+      @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active
     end
     
   end
@@ -65,7 +65,6 @@ class StoriesController < ApplicationController
     @story = Story.includes(:user, :classifications, :bookmarks, :reactions, :pictures).find(params[:id])
     @active_browse = "active"
     @comment = @story.comments.active.build
-    @bookmark = @story.bookmarks.build
     @story_comments = @story.comments.includes(:user).select{|c| c.deleted_at == nil && c.author_deactive != true && c.id != nil}
     @story_bookmarks = @story.bookmarks.select{|b| b.id != nil}
   end

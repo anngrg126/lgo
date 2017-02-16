@@ -33,17 +33,17 @@ RSpec.feature "Listing Reacted Stories" do
     expect(page).to have_content("Reactions: 2")
 
     expect(page).to have_content(@story1.final_title)
-    expect(page).to have_content(@story1.final_body.truncate(150))
+    expect(page).to have_content(@story1.final_body.truncate(275))
     expect(page).to have_link(@story1.final_title)
     expect(page).to have_content("Like")
     
     expect(page).to have_content(@story2.final_title)
-    expect(page).to have_content(@story2.final_body.truncate(150))
+    expect(page).to have_content(@story2.final_body.truncate(275))
     expect(page).to have_link(@story2.final_title)
     expect(page).to have_content("OMG")
     
     expect(page).not_to have_content(@story3.final_title)
-    expect(page).not_to have_content(@story3.final_body.truncate(150))
+    expect(page).not_to have_content(@story3.final_body.truncate(275))
     expect(page).not_to have_link(@story3.final_title)
     expect(page).not_to have_content("LOL")
     

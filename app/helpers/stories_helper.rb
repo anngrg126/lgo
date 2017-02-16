@@ -88,7 +88,7 @@ module StoriesHelper
     body.gsub!('</li>', ' ')
     body.gsub!('<ol>', ' ')
     body.gsub!('<ul>', ' ')
-    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
+    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 275)
   end
   
   def admin_tag_story(story, tag_scope_array)
@@ -219,7 +219,7 @@ module StoriesHelper
     @fail_tag = @tags.select{|t|t.name=="fail"}.first
     if story.classifications.any?{|c| c[:tag_id] == @fail_tag.id}
 #      @display_tag = @fail_tag.name
-      @display_tag = '<a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'" class="subtext fail-link">'+@fail_tag.name+'</a>'
+      @display_tag = '<span class="label"><a href="'+stories_path+'?search_tag='+tag_search(@fail_tag.name)+'" class="subtext fail-link">'+@fail_tag.name+'</a></span>'
     else
       @display_tag = ""
     end

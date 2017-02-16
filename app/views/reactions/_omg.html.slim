@@ -15,7 +15,7 @@ div[id="story_reaction_#{@reactions.select{|r| r.name=="omg"}.first.id}_#{story.
             -if @omgs.length>0
               span#omg_count.icon-counter #{@omgs.length}
   -else
-    ==link_to reactions_path(user_id: 0, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="omg"}.first.id), method: :post, class: "icon-button primary-icon", remote: true do
+    ==link_to reactions_path(user_id: 0, story_id: story.id, reaction_category_id: @reactions.select{|r| r.name=="omg"}.first.id), method: :post, class: "icon-button primary-icon" do
       span.text-stack [aria-describedby="omg_count"]
         .fa-stack-1x.circle-text.open.rotate-45 OMG
       -if @omgs.length>0

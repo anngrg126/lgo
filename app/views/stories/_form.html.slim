@@ -47,7 +47,7 @@
       span class="form-error"
     div
       = f.label :updated_gift_description, "Gift Description"
-      = f.text_field :updated_gift_description, autofocus: true, value: @story.updated_gift_description
+      = f.text_field :updated_gift_description, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_gift_description : @story.updated_gift_description
       span class="form-error"
     div
       = f.label :anonymous

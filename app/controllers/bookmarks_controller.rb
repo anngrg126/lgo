@@ -1,24 +1,18 @@
 class BookmarksController < ApplicationController
   before_action :set_story
+  before_action :authenticate_user!
   
   def create
-    unless current_user
-      flash[:warning] = "Please sign in to continue"
-      redirect_to new_user_session_path
-    else
-      @bookmark = @story.bookmarks.build(bookmarks_params)
-      @bookmark.user = current_user
+    @bookmark = Bookmark.create(bookmark_params)
+    if @bookmark.save
       respond_to do |format|
-        if @bookmark.save
-          create_notification(@bookmark)
-          flash.now[:success] = "Story has been saved"
-          format.js {render :partial => 'bookmarks/showbookmarks'}
-          format.html {redirect_to story_path(@story)}
-        else
-          flash[:warning] = "Save has not been added"
-          format.html { redirect_to story_path(@story)}
-        end
+        create_notification(@bookmark)
+        @story = Story.find(@bookmark.story_id)
+        format.js {render :data => [ @bookmark.to_json, @story.to_json] }
       end
+    else
+      flash[:warning] = "Your bookmark could not be recorded."
+      redirect_to story_path(@story)
     end
   end
   
@@ -27,17 +21,19 @@ class BookmarksController < ApplicationController
     respond_to do |format|
       if @bookmark.destroy
         destroy_notification(@bookmark)
-        flash.now[:success] = "Story save has been deleted"
-        format.js {render :partial => 'bookmarks/showbookmarks'}
-#        redirect_to story_path(@story)
+        format.js {render :data => @story.to_json }
+      else
+        flash[:danger] = "Your bookmark could not be removed."
+        redirect_to story_path(@story)
       end
     end
   end
   
   private
   
-  def bookmarks_params
-#    params.require(:story_like).permit(:user_id, :story_id) #Q:Do i need to whitelist this? It throws an error.
+  def bookmark_params
+    params.permit(:story_id, :user_id) 
+    # params.require(:story_like).permit(:user_id, :story_id) #Q:Do i need to whitelist this? It throws an error.
   end
   
   def set_story
