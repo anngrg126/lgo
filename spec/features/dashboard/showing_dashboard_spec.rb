@@ -23,7 +23,7 @@ RSpec.feature "Showing Dashboard" do
     login_as(@user2, :scope => :user)
     visit(dashboard_path(@user2))
     
-    expect(page).to have_link("Add an about me")
+    expect(page).to have_link("Introduce yourself here")
   end
   
   scenario "Non-logged-in user can go to other user's dashboards" do

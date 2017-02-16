@@ -16,7 +16,7 @@ RSpec.feature "Listing Stories" do
   scenario "Logged-in user can see full list of her published, unpublished, and anonymous stories" do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
-    expect(page).to have_content("Stories: 4")
+    expect(page).to have_content("Stories4")
     
     expect(page).to have_content(Story.where(author_id: @user.id, deleted_at: nil).count)
     expect(page).to have_content(@story1.raw_title)
@@ -42,8 +42,8 @@ RSpec.feature "Listing Stories" do
   scenario "Logged-in user can click back to her full list of published and unpublished stories", js: true do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
-    click_link "Saves"
-    expect(page).to have_content("List of All Saved Stories:")
+    click_link "Bookmarks"
+    expect(page).to have_content("Your Bookmarked Stories")
     
     click_link "Stories"
     expect(page).to have_content("Your Stories")
