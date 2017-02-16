@@ -90,6 +90,7 @@ module NotificationsHelper
     notifications_array.each do |n|
       n_users.push(n.notified_by_user_id)
     end
+    n_users.push(current_user.id)
     n_users.uniq!
     @n_users = User.where(id: n_users)
     
@@ -100,14 +101,16 @@ module NotificationsHelper
         story = @n_stories.select{|s| s.id == n.story_id}.first
         link = link_to story_title(story), story_path(story)
         noti_ids = []
+        story_users=[]
         author = @n_users.select{|u| u.id == story.author_id}.first
+        story_users.push(author)
         if n.options == "admin"
           # Story admin notification
           link_author = link_to author.full_name, dashboard_path(author)
           noti_ids.push(n.id)
           my_message_admin = Hash.new
           my_message_admin["message_id"]=noti_ids
-          my_message_admin["users"] = author
+          my_message_admin["users"] = story_users
           my_message_admin["message"] = link_author+" updated a story where you are an admin. See it here: "+link
           my_message_admin["option"] = "admin"
           my_message_admin["category"] = "Story"
@@ -119,7 +122,7 @@ module NotificationsHelper
           noti_ids.push(n.id)
           my_message_follower = Hash.new
           my_message_follower["message_id"]=noti_ids
-          my_message_follower["users"] = author
+          my_message_follower["users"] = story_users
           my_message_follower["message"] = link_poster+" published a new story! See it here: "+link
           my_message_follower["option"] = "followers"
           my_message_follower["category"] = "Story"
@@ -129,7 +132,7 @@ module NotificationsHelper
           noti_ids.push(n.id)
           my_message_author = Hash.new
           my_message_author["message_id"]=noti_ids
-          my_message_author["users"] = author
+          my_message_author["users"] = story_users
           my_message_author["message"] = "Your story has been published! See it here: "+link
           my_message_author["option"] = "published"
           my_message_author["category"] = "Story"
