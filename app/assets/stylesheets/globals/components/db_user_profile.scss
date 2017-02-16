@@ -2,33 +2,31 @@
   border: 1px solid $medium-gray;
 }
 .name-container {
-  position: relative;
+//  position: relative;
+  text-align: center;
   margin: 15px auto;
-  >div:first-child, >div:nth-child(3) {
-    position: absolute;
-    width: 30px;
-    top: 0;
-    display: inline-block;
-  }
-  >div:first-child{
-    left: 0;
-  }
-  >div:nth-child(3) {
-    right: 0;
-  }  
-  >div:nth-child(2) {
-    display: inline-block;
-    margin: 0 auto;
-    width: 100%;
-    text-align: center;
-  }
-  .small-icon-button {
-    padding-top: 0;
-  }
+//  >div:first-child, >div:nth-child(3) {
+//    position: absolute;
+//    width: 30px;
+//    top: 0;
+//    display: inline-block;
+//  }
+//  >div:first-child{
+//    left: 0;
+//  }
+//  >div:nth-child(3) {
+//    right: 0;
+//  }  
+//  >div:nth-child(2) {
+//    display: inline-block;
+//    margin: 0 auto;
+//    width: 100%;
+//    text-align: center;
+//  }
+//  .small-icon-button {
+//    padding-top: 0;
+//  }
 } 
-.name-container.room-for-icons {
-  padding: 0 30px;
-}
 #user_registration >.columns:first-child {
   padding: 0;
 }
@@ -56,9 +54,9 @@
       display: inline-block;
     }
   }
-  .name-container >div:nth-child(2) {
-    text-align: left;
-  }
+//  .name-container >div:nth-child(2) {
+//    text-align: left;
+//  }
   .about_me_container {
     text-align: left;
   }
@@ -74,9 +72,9 @@
       display: block;
     }
   }
-  .name-container >div:nth-child(2) {
-    text-align: center;
-  }
+//  .name-container >div:nth-child(2) {
+//    text-align: center;
+//  }
   .about_me_container {
     text-align: center;
   }

@@ -1,8 +1,9 @@
-h2 This is the user profile.
-
-h3 Account Settings
+h1 Your Account Settings
 
 div#user_account_settings
+  h2#user_name
+    == @user.full_name
+  ==link_to "Edit Name", edit_user_dashboard_registration_path(@user, form_render: "user_name"), remote: true
   p 
     | Email: 
     span
@@ -38,4 +39,6 @@ div#user_account_settings
     div 
       == link_to "Deactivate account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete
 
-  
+javascript:
+  $(".list a").removeClass("active");
+  $("#user_settings").addClass("active");

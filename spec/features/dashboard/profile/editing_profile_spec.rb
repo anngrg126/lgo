@@ -8,6 +8,8 @@ RSpec.feature "Editing Account Settings" do
     @new_password = Faker::Internet.password
     @new_email = Faker::Internet.email
     @new_birthday = Faker::Date.birthday(min_age = 18, max_age = 65)
+    @new_first_name = Faker::Name::first_name
+    @new_last_name = Faker::Name::last_name
   end
   
   scenario "Logged-in user edits her password via the dashboard", js:true do
@@ -32,6 +34,34 @@ RSpec.feature "Editing Account Settings" do
     fill_in "Current password", with: @new_password
     click_button "Update"
     expect(page).to have_content("Current password is invalid")
+  end
+  
+  scenario "Logged-in user edits her name via the dashboard", js:true do
+    login_as(@user, :scope => :user)
+    visit(dashboard_path(@user))
+    click_link "Settings"
+    
+    click_link("Edit Name")
+    fill_in "First Name", with: @new_first_name
+    fill_in "Last Name", with: @new_last_name
+    click_button "Update"
+    expect(page).to have_content("Profile has been updated")
+    expect(page).to have_content(@new_first_name.titleize.gsub(/\b\w/) { |w| w.upcase })
+    expect(page).to have_content(@new_last_name.titleize.gsub(/\b\w/) { |w| w.upcase })
+  end
+  
+  scenario "Logged-in user fails to edit her name via the dashboard", js:true do
+    login_as(@user, :scope => :user)
+    visit(dashboard_path(@user))
+    click_link "Settings"
+    
+    click_link("Edit Name")
+    fill_in "First Name", with: ""
+    fill_in "Last Name", with: ""
+    click_button "Update"
+    expect(page).to have_content("Profile has not been updated")
+    expect(page).to have_content("First name can't be blank")
+    expect(page).to have_content("Last name can't be blank")
   end
   
   scenario "Logged-in user edits her email via the dashboard", js:true do
