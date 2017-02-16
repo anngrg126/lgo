@@ -31,10 +31,10 @@
         .list
           - if @user == current_user
             hr
-            #dashboard_notifications_counter
-              == link_to notifications_dashboard_path(@user), id: "user_notifications", remote: true do
+              == link_to notifications_dashboard_path(@user), id: "db_notifications", remote: true do
                 span Notifications
-                span.count class=('zero-count' if @unread_notifications.length == 0) #{@unread_notifications.length}
+                span.count class=('zero-count' if @unread_notifications.length == 0) 
+                  #dashboard_notifications_counter[style="display: inline-block;"] #{@unread_notifications.length}
             hr
           == link_to followers_dashboard_path(@user), id: "user_followers", remote: true do
             span Followers
