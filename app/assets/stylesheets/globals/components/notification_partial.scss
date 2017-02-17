@@ -9,8 +9,8 @@
 }
 .notification {
   .columns>div {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 //    border-bottom: 1px solid $light-gray;
     vertical-align: top;
     &>div {
@@ -34,7 +34,11 @@
     padding-top: 0;
   }
 }
-
+.subtext.read.minor-link {
+  &:hover {
+    color: $middark-gray;
+  }
+}
 @media only screen and (max-width: 640px) {
   .notification {
     .columns:first-child>div {

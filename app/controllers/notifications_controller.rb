@@ -38,12 +38,12 @@ class NotificationsController < ApplicationController
         if @notification.last.update(notification_params)
           @notification = @notification[0]
           format.html {redirect_to notifications_dashboard_path(@user) }
-          format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json, :locals => {ids: @ids.to_json.gsub(",", ", ")}}
+          format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json, :locals => {ids: @ids}}
         end
       else
         if @notification.update(notification_params)
           format.html {redirect_to notifications_dashboard_path(@user) }
-          format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json, :locals => {ids: @ids.to_json}}
+          format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json, :locals => {ids: @ids}}
         end
       end
     end
@@ -86,12 +86,12 @@ class NotificationsController < ApplicationController
       if type == 1
         if @notification.last.destroy
           format.html {redirect_to notifications_dashboard_path(@user) }
-          format.js {render :partial => 'dashboard/notifications/destroy', :locals => {ids: @ids.to_json.gsub(",", ", ")}}
+          format.js {render :partial => 'dashboard/notifications/destroy', :locals => {ids: @ids}}
         end
       else
         if @notification.destroy
           format.html {redirect_to notifications_dashboard_path(@user) }
-          format.js {render :partial => 'dashboard/notifications/destroy', :locals => {ids: @ids.to_json.gsub(",", ", ")}}
+          format.js {render :partial => 'dashboard/notifications/destroy', :locals => {ids: @ids}}
         end
       end
     end
