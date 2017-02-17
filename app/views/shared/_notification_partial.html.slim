@@ -47,7 +47,10 @@
     .columns.medium-3.large-2
       div[data-equalizer-watch]
         .subtext
-          == "#{time} ago" 
+          - unless read == "true"
+            == "#{time} ago" 
+          - else
+            == "#{date}"
         div
           -unless read == "true"
             == link_to mark_as_read_array_path(notification: my_message["message_id"]), remote: true, class: "minor-link" do
@@ -55,6 +58,6 @@
               span &nbsp;Mark as read&nbsp;&nbsp;
         div
           == link_to notification_path(notification: my_message["message_id"]), method: :delete, remote: true, class: "minor-link" do
-            span.fa.fa-trash
+            span.fa.fa-trash-o
             span &nbsp;Delete&nbsp;&nbsp;
       

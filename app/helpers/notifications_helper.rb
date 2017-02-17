@@ -337,7 +337,7 @@ module NotificationsHelper
       end
       @noti = notifications_array.select{|n| n.id == @max_index}.first
       unless index > my_message.length-1
-        partial =  render partial: 'shared/notification_partial', locals: { my_message: my_message[index], time: time_ago_in_words(@noti.created_at), read: read_boolean}
+        partial =  render partial: 'shared/notification_partial', locals: { my_message: my_message[index], time: time_ago_in_words(@noti.created_at), date: @noti.created_at.strftime("%b %d, %Y"), read: read_boolean}
       end
       
       output.push(partial)
