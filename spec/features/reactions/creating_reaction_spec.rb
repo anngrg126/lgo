@@ -56,8 +56,9 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
     click_link "Notifications"
     
     expect(page).to have_content("#{@bar.full_name} liked your story #{@story.final_title}")
+    expect(page).to have_content("#{@bar.full_name} reacted to your story #{@story.final_title}", count: 3)
     # expect(page).to have_content("#{@bar.full_name} OMG'd your story #{@story.final_title}")
-    expect(page).to have_content("#{@bar.full_name} LOL'd your story #{@story.final_title}")
+#    expect(page).to have_content("#{@bar.full_name} LOL'd your story #{@story.final_title}")
     # expect(page).to have_content("#{@bar.full_name} Cool'd your story #{@story.final_title}")
     # expect(page).to have_content("#{@bar.full_name} Loved your story #{@story.final_title}")
     expect(page).to have_link(@bar.full_name)

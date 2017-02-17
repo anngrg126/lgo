@@ -1,4 +1,5 @@
-$('div[id="<%= j ids.to_s %>"]').remove();
+//remove the notification
+$('#noti_id_<%= j ids[0].to_s %>').remove();
 
 //update notifications counter on dashboard
 $('#dashboard_notifications_counter').html('<%= @user.notifications.select{|n| n.read==false}.length.to_s %>');
@@ -15,6 +16,6 @@ $("#user_notifications").html("<%= j user_notifications_link %>");
 $(".show-for-small-only #user_notifications").html("<%= j user_notifications_link_small %>");
 
 //remove New Notifications & Mark all a read if no more new notifications
-<% if @user.notifications.select{|n| n.read==false}.length == 0 %>
-  $("a[href*='mark_all_as_read']").remove();
+<% if @user.notifications.select{|n| n.read == false}.length == 0 %>
+  $("#new_notifications").remove();
 <% end %> 
