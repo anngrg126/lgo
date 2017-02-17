@@ -43,6 +43,5 @@ RSpec.feature "Deleting Notifications" do
     click_link "Delete all read notifications"
     expect(page).not_to have_content("#{@bar.full_name} followed you")
     expect(page).not_to have_link(@bar.full_name)
-    
   end
 end
