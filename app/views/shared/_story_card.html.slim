@@ -1,4 +1,4 @@
-.card
+.card.story-card
   - unless story.published?
     .card-section
       .subtext.italic Pending
@@ -12,7 +12,7 @@
   .card-section
     .row.columns.clearfix
       .float-right 
-            == render 'bookmarks/bookmark', story: story
+        == render 'bookmarks/bookmark', story: story
       h2
         -if admin_view
           - unless story.raw_title == ""
@@ -33,7 +33,7 @@
           | &nbsp;&nbsp;
           == story_fail_tag(story)
         
-  .card-section
+  .card-section[style="padding-top: 0;"]
     - unless story.main_image_file_name.nil?
       == link_to story_path(story) do
         div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]

@@ -66,7 +66,7 @@ p
   div
     = f.label :final_title, "Final Title" 
     = f.text_field :final_title, autofocus: true, value: (@story.updated_title? ? @story.updated_title : @story.raw_title)
-    p class="help-text" Max. 90 characters (prefer &lt;70 characters)
+    p class="help-text" Max. 60 characters
     span class="form-error" 
   div
     = f.label :final_gift_description, "Final Gift Description" 

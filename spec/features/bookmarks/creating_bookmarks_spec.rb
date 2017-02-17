@@ -20,7 +20,7 @@ RSpec.feature "Adding Saves to Stories" do
     visit "/"
     click_link @story.final_title
   
-    within "#bookmark_buttons_1" do
+    within "#bookmark_buttons_#{@story.id.to_s}" do
       expect(page).to have_css('span[class="fa fa-bookmark-o fa-lg"]')
       expect(page).to have_link('', :href => story_bookmarks_path(story_id: @story.id, user_id: @bar.id))
       page.click_link('', :href => story_bookmarks_path(story_id: @story.id, user_id: @bar.id))
@@ -45,7 +45,7 @@ RSpec.feature "Adding Saves to Stories" do
     visit "/"
     click_link @story.final_title
     
-    within "#bookmark_buttons_1" do
+    within "#bookmark_buttons_#{@story.id.to_s}" do
       expect(page).to have_css('span[class="fa fa-bookmark-o fa-lg"]')
       expect(page).to have_link('', :href => story_bookmarks_path(story_id: @story.id, user_id: 0))
       page.click_link('', :href => story_bookmarks_path(story_id: @story.id, user_id: 0))

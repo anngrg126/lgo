@@ -17,10 +17,10 @@ RSpec.feature "Listing Stories" do
     visit "/"
     
     expect(page).to have_link(@story1.final_title)
-    expect(page).to have_content(@story1.final_body.truncate(150))
+    expect(page).to have_content(@story1.final_body.truncate(275))
     expect(page).to have_content(@story1.final_gift_description)
     expect(page).to have_link(@story2.final_title)
-    expect(page).to have_content(@story2.final_body.truncate(150))
+    expect(page).to have_content(@story2.final_body.truncate(275))
     expect(page).to have_content(@story2.final_gift_description)
     
     expect(page).not_to have_link("New Story")
@@ -33,7 +33,7 @@ RSpec.feature "Listing Stories" do
     visit "/"
     
     expect(page).to have_content(@story3.final_title)
-    expect(page).to have_content(@story3.final_body.truncate(150))
+    expect(page).to have_content(@story3.final_body.truncate(275))
     expect(page).to have_link("#{@anonymous_user.first_name} #{@anonymous_user.last_name}")
     expect(page).not_to have_content("#{@user1.full_name}")
   end
@@ -42,7 +42,7 @@ RSpec.feature "Listing Stories" do
     visit "/"
     
     expect(page).to have_content(@story4.updated_title)
-    expect(page).to have_content(@story4.updated_body.truncate(150))
+    expect(page).to have_content(@story4.updated_body.truncate(275))
     expect(page).to have_content(@story4.updated_gift_description)
     expect(page).to have_link("#{@user2.first_name} #{@user2.last_name}")
   end
