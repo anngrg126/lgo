@@ -1,0 +1,13 @@
+.notification {
+  display: inline-block;
+  padding: 5px 15px 5px 15px;
+  width: 100%;
+  &>div {
+    border-bottom: 1px solid $light-gray;
+    vertical-align: top;
+    &>div {
+    vertical-align: top;
+    text-align: center;
+    }
+  }
+}
