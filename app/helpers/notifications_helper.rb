@@ -100,14 +100,14 @@ module NotificationsHelper
       case n.notification_category.name
       when "Story"
         story = @n_stories.select{|s| s.id == n.story_id}.first
-        link = link_to story_title(story), story_path(story)
+        link = link_to story_title(story), story_path(story), class: "bold-text-link"
         noti_ids = []
         story_users=[]
         author = @n_users.select{|u| u.id == story.author_id}.first
         story_users.push(author)
         if n.options == "admin"
           # Story admin notification
-          link_author = link_to author.full_name, dashboard_path(author)
+          link_author = link_to author.full_name, dashboard_path(author), class: "bold-text-link"
           noti_ids.push(n.id)
           my_message_admin = Hash.new
           my_message_admin["message_id"]=noti_ids
@@ -119,7 +119,7 @@ module NotificationsHelper
         elsif n.options == "followers"
           # Story poster's followers notification
             poster = @n_users.select{|u| u.id == story.poster_id}.first
-          link_poster = link_to poster.full_name, dashboard_path(poster)
+          link_poster = link_to poster.full_name, dashboard_path(poster), class: "bold-text-link"
           noti_ids.push(n.id)
           my_message_follower = Hash.new
           my_message_follower["message_id"]=noti_ids
@@ -173,12 +173,12 @@ module NotificationsHelper
           my_message_comments["message_id"]= noti_ids
           
           commenters.uniq.each do |c|
-            commenter_links.push(link_to c.full_name, dashboard_path(c))
+            commenter_links.push(link_to c.full_name, dashboard_path(c), class: "bold-text-link")
             commenter_users.push(c)
           end
           my_message_comments["users"] = commenter_users
           
-          link = link_to story_title(s), story_path(s)
+          link = link_to story_title(s), story_path(s), class: "bold-text-link"
           unless commenter_links.empty?
             if o == nil
               id_array.push(noti_ids)
@@ -220,11 +220,11 @@ module NotificationsHelper
             my_message_reactions["option"]=o.name
             my_message_reactions["message_id"]= noti_ids
             reactors.uniq.each do |c|
-              reactor_links.push(link_to c.full_name, dashboard_path(c))
+              reactor_links.push(link_to c.full_name, dashboard_path(c), class: "bold-text-link")
               reaction_users.push(c)
             end
             my_message_reactions["users"] = reaction_users
-            link = link_to story_title(s), story_path(s)
+            link = link_to story_title(s), story_path(s), class: "bold-text-link"
             unless reactor_links.empty?
               if o == @like_reaction
                 id_array.push(noti_ids)
@@ -273,8 +273,8 @@ module NotificationsHelper
         end
         bookmarkers = bookmarkers.uniq.count
         my_message_bookmarks["users"] = bookmarks_users
-        link = link_to story_title(s), story_path(s)
-        link_bookmark = link_to "bookmarked", bookmarked_stories_dashboard_path(current_user)
+        link = link_to story_title(s), story_path(s), class: "bold-text-link"
+        link_bookmark = link_to "bookmarked", bookmarked_stories_dashboard_path(current_user), class: "bold-text-link"
         if bookmarkers == 1 
           id_array.push(noti_ids)
           bookmarks_messages.push("Woohoo! Someone #{link_bookmark} your story #{link}")
@@ -305,7 +305,7 @@ module NotificationsHelper
       my_message_followers["message_id"]= noti_ids
       
       followers.each do |f|
-        follower_links.push(link_to f.full_name, dashboard_path(f))
+        follower_links.push(link_to f.full_name, dashboard_path(f), class: "bold-text-link")
         followers_users.push(f)
       end
       my_message_followers["users"] = followers_users
