@@ -229,18 +229,21 @@ module NotificationsHelper
               if o == @like_reaction
                 id_array.push(noti_ids)
                 reaction_messages.push("#{reactor_links.to_sentence} liked your story #{link}")
-              elsif o == @omg_reaction
+#              elsif o == @omg_reaction
+#                id_array.push(noti_ids)
+#                reaction_messages.push("#{reactor_links.to_sentence} OMG'd your story #{link}")
+#              elsif o == @lol_reaction
+#                id_array.push(noti_ids)
+#                reaction_messages.push("#{reactor_links.to_sentence} LOL'd your story #{link}")
+#              elsif o == @cool_reaction
+#                id_array.push(noti_ids)
+#                reaction_messages.push("#{reactor_links.to_sentence} Cool'd your story #{link}")
+#              elsif o == @love_reaction
+#                id_array.push(noti_ids)
+#                reaction_messages.push("#{reactor_links.to_sentence} Loved your story #{link}") 
+              else
                 id_array.push(noti_ids)
-                reaction_messages.push("#{reactor_links.to_sentence} OMG'd your story #{link}")
-              elsif o == @lol_reaction
-                id_array.push(noti_ids)
-                reaction_messages.push("#{reactor_links.to_sentence} LOL'd your story #{link}")
-              elsif o == @cool_reaction
-                id_array.push(noti_ids)
-                reaction_messages.push("#{reactor_links.to_sentence} Cool'd your story #{link}")
-              elsif o == @love_reaction
-                id_array.push(noti_ids)
-                reaction_messages.push("#{reactor_links.to_sentence} Loved your story #{link}") 
+                reaction_messages.push("#{reactor_links.to_sentence} reacted to your story #{link}")
               end
             end
             my_message_reactions["message"] = reaction_messages[0]
