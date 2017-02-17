@@ -12,7 +12,7 @@ RSpec.feature "Deleting Notifications" do
       {id: 4, name: "Bookmark"},
       {id: 5, name: "Following"}
       ])
-    Notification.create(user: @foo, notified_by_user: @bar, notification_category_id: 5, read: true)
+    @notification1 = Notification.create(user: @foo, notified_by_user: @bar, notification_category_id: 5, read: true)
     login_as(@foo, :scope => :user)
   end
   
@@ -22,8 +22,12 @@ RSpec.feature "Deleting Notifications" do
     
     expect(page).to have_content("#{@bar.full_name} followed you")
     expect(page).to have_link(@bar.full_name)
+   
+    within("#noti_id_1") do
+      expect(page).to have_link("Delete")
+      page.click_link("Delete")
+    end
     
-    click_link "Delete"
     expect(page).not_to have_content("#{@bar.full_name} followed you")
     expect(page).not_to have_link(@bar.full_name)
   end
@@ -32,11 +36,11 @@ RSpec.feature "Deleting Notifications" do
     visit dashboard_path(@foo)
     click_link "Notifications"
     
-    expect(page).to have_link("Delete All Notifications")
+    expect(page).to have_link("Delete All Read Notifications")
     expect(page).to have_content("#{@bar.full_name} followed you")
     expect(page).to have_link(@bar.full_name)
     
-    click_link "Delete All Notifications"
+    click_link "Delete All Read Notifications"
     expect(page).not_to have_content("#{@bar.full_name} followed you")
     expect(page).not_to have_link(@bar.full_name)
     

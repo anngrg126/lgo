@@ -1,58 +1,59 @@
 /render partial: 'shared/notification_partial', locals: { my_message: my_message[index], time: time_ago_in_words(@noti.created_at), read: read_boolean}
-.row.notification[id="#{my_message["message_id"]}"]
-  div
-    div[style="display: inline-block;width: 50px"]
-      .icon.primary-icon
-        -if my_message["category"] == "Reaction"
-          -if my_message["option"] == "like"
-            span.fa.fa-thumbs-up.fa-lg
-          -elsif my_message["option"] == "love"
-            span.fa.fa-heart.fa-lg
-          -elsif my_message["option"] == "lol"
-            span.text-stack
-              .fa-stack-1x.circle-text.open.rotate-45 LOL
-          -elsif my_message["option"] == "omg"
-            span.text-stack
-              .fa-stack-1x.circle-text.open.rotate-45 OMG
-          -elsif my_message["option"] == "cool"
-            span.text-stack
-              .fa-stack-1x.circle-text.open.rotate-45 COOL
-        -elsif my_message["category"] =="Bookmark"
-          span.fa.fa-bookmark.fa-lg
-        -elsif my_message["category"] =="Comment"
-          span.fa.fa-comment.fa-lg
-        -elsif my_message["category"] =="Following"
-          span.fa.fa-group.fa-lg
-        -elsif my_message["category"] =="Story"
-          -if my_message["option"] == "admin"
-            span.fa.fa-check.fa-lg
-          -elsif my_message["option"] == "followers"
-            span.text-stack
-              .fa-stack-1x.circle-text.filled.rotate-45 NEW
-          -else
-            span.fa.fa-check.fa-lg
-    div[style="display: inline-block;width: calc(100% - 50px - 120px); text-align: left"]
-      div
-        == my_message["message"]
-      div
-        -unless my_message["users"].nil?
-          - my_message["users"].each do |u|
-            -unless u.nil?
-              - if my_message["category"] =="Bookmark" || my_message["option"] == "published"
-              - else 
-                == link_to dashboard_path(u), class: "user-thumbnail medium-thumb" do
-                  == user_photo(u)
-      /==noti_user.name
-    div[style="display: inline-block;width: 120px"]
-      .subtext
-        == "#{time} ago" 
-      div
-        -unless read == "true"
-          == link_to mark_as_read_array_path(notification: my_message["message_id"]), remote: true, class: "minor-link" do
-            span.fa.fa-check-square-o
-            span &nbsp;Mark as read&nbsp;&nbsp;
-      div
-        == link_to notification_path(notification: my_message["message_id"]), method: :delete, remote: true, class: "minor-link" do
-          span.fa.fa-trash
-          span &nbsp;Delete&nbsp;&nbsp;
-    
+.row[id="noti_id_#{my_message["message_id"][0]}"]
+  .notification[id="#{my_message["message_id"]}"]
+    div
+      div[style="display: inline-block;width: 50px"]
+        .icon.primary-icon
+          -if my_message["category"] == "Reaction"
+            -if my_message["option"] == "like"
+              span.fa.fa-thumbs-up.fa-lg
+            -elsif my_message["option"] == "love"
+              span.fa.fa-heart.fa-lg
+            -elsif my_message["option"] == "lol"
+              span.text-stack
+                .fa-stack-1x.circle-text.open.rotate-45 LOL
+            -elsif my_message["option"] == "omg"
+              span.text-stack
+                .fa-stack-1x.circle-text.open.rotate-45 OMG
+            -elsif my_message["option"] == "cool"
+              span.text-stack
+                .fa-stack-1x.circle-text.open.rotate-45 COOL
+          -elsif my_message["category"] =="Bookmark"
+            span.fa.fa-bookmark.fa-lg
+          -elsif my_message["category"] =="Comment"
+            span.fa.fa-comment.fa-lg
+          -elsif my_message["category"] =="Following"
+            span.fa.fa-group.fa-lg
+          -elsif my_message["category"] =="Story"
+            -if my_message["option"] == "admin"
+              span.fa.fa-check.fa-lg
+            -elsif my_message["option"] == "followers"
+              span.text-stack
+                .fa-stack-1x.circle-text.filled.rotate-45 NEW
+            -else
+              span.fa.fa-check.fa-lg
+      div[style="display: inline-block;width: calc(100% - 50px - 120px); text-align: left"]
+        div
+          == my_message["message"]
+        div
+          -unless my_message["users"].nil?
+            - my_message["users"].each do |u|
+              -unless u.nil?
+                - if my_message["category"] =="Bookmark" || my_message["option"] == "published"
+                - else 
+                  == link_to dashboard_path(u), class: "user-thumbnail medium-thumb" do
+                    == user_photo(u)
+        /==noti_user.name
+      div[style="display: inline-block;width: 120px"]
+        .subtext
+          == "#{time} ago" 
+        div
+          -unless read == "true"
+            == link_to mark_as_read_array_path(notification: my_message["message_id"]), remote: true, class: "minor-link" do
+              span.fa.fa-check-square-o
+              span &nbsp;Mark as read&nbsp;&nbsp;
+        div
+          == link_to notification_path(notification: my_message["message_id"]), method: :delete, remote: true, class: "minor-link" do
+            span.fa.fa-trash
+            span &nbsp;Delete&nbsp;&nbsp;
+      
