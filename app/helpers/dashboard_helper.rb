@@ -106,7 +106,7 @@ module DashboardHelper
 #  end
   
   def story_anonymous(story)
-    if story.anonymous?
+    if story.anonymous? && @user == current_user
       content_tag(:div, "Anonymous (only you can see this story on your dashboard)", class: "subtext")
 #      html = "<div>Anonymous (only you can see this story on your dashboard)</div>".html_safe
     end
