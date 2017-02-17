@@ -23,7 +23,7 @@ RSpec.feature "Deleting Notifications" do
     expect(page).to have_content("#{@bar.full_name} followed you")
     expect(page).to have_link(@bar.full_name)
    
-    within("#noti_id_1") do
+    within("#noti_id_#{@notification1.id}") do
       expect(page).to have_link("Delete")
       page.click_link("Delete")
     end
@@ -36,11 +36,11 @@ RSpec.feature "Deleting Notifications" do
     visit dashboard_path(@foo)
     click_link "Notifications"
     
-    expect(page).to have_link("Delete All Read Notifications")
+    expect(page).to have_link("Delete all read notifications")
     expect(page).to have_content("#{@bar.full_name} followed you")
     expect(page).to have_link(@bar.full_name)
     
-    click_link "Delete All Read Notifications"
+    click_link "Delete all read notifications"
     expect(page).not_to have_content("#{@bar.full_name} followed you")
     expect(page).not_to have_link(@bar.full_name)
     

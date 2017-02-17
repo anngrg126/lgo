@@ -22,10 +22,11 @@ RSpec.feature "Updating Notifications" do
     
     expect(page).to have_link("Mark all as read")
     #followings notifications
-    within("#noti_id_1") do
+    within("#noti_id_#{@notification1.id}") do
       expect(page).to have_link("Mark as read")
       page.click_link("Mark as read")
       expect(page).not_to have_link("Mark as read")
+      expect(page).to have_content("Read")
     end
   end
   

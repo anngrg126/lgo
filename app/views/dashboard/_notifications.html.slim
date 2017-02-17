@@ -3,19 +3,19 @@ h1 Your Notifications
   div#new_notifications
     .card.notifications-container
       .card-section
-        .row[style="border-bottom: 0; margin-bottom: 20px;"]
-          .columns.medium-9.large-10
+        .row[style="border-bottom: 0;"]
+          .columns.medium-9
             h2 New Notifications
-          .columns.medium-3.large-2
+          .columns.medium-3
             == link_to "Mark all as read", mark_all_as_read_path(@user), class: "secondary-link"
         == consolidate_notifications(@unread_notifications, "false")
 - unless @read_notifications.empty?
   div#old_notifications
     .card.notifications-container
       .card-section
-        .row[style="border-bottom: 0; margin-bottom: 20px;"]
-          .columns.medium-9.large-10
+        .row[style="border-bottom: 0;"]
+          .columns.medium-9
             h2 Read Notifications
-          .columns.medium-3.large-2
+          .columns.medium-3
             == link_to "Delete all read notifications", destroy_all_read_notifications_path(@user), class: "secondary-link"
         == consolidate_notifications(@read_notifications, "true")
