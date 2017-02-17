@@ -73,11 +73,6 @@ module NotificationsHelper
     id_array = []
     @followers_id_array = []  
     my_message = []
-    # my_message[0]["message_id"]
-    # my_message[0]["users"]
-    # my_message[0]["message"]
-    # my_message[0]["category"]
-    # my_message[0]["option"]
     
     #consolidate all stories to avoid N+1 db queries
     notifications_array.each do |n|
@@ -87,13 +82,13 @@ module NotificationsHelper
     @n_stories = Story.where(id: n_stories)
     
     #consolidate all story posters to avoid N+1 db queries
-    # notifications_array.each do |n|
-    #   n_users.push(n.notified_by_user_id)
-    # end
-    # n_users.push(current_user.id)
-    # n_users.uniq!
-    # @n_users = User.where(id: n_users)
-    @n_users =User.all
+     notifications_array.each do |n|
+       n_users.push(n.notified_by_user_id)
+     end
+     n_users.push(current_user.id)
+     n_users.uniq!
+     @n_users = User.where(id: n_users)
+#    @n_users =User.all
     
     #begin consolidating notifications
     notifications_array.each do |n|
@@ -342,7 +337,6 @@ module NotificationsHelper
       unless index > my_message.length-1
         partial =  render partial: 'shared/notification_partial', locals: { my_message: my_message[index], time: time_ago_in_words(@noti.created_at), date: @noti.created_at.strftime("%b %d, %Y"), read: read_boolean}
       end
-      
       output.push(partial)
     end
     return output.join(" ")
