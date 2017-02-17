@@ -3,7 +3,7 @@
   .notification[id="#{my_message["message_id"]}"]
     div
       div[style="display: inline-block;width: 50px"]
-        .icon.primary-icon
+        .small-icon.primary-icon
           -if my_message["category"] == "Reaction"
             -if my_message["option"] == "like"
               span.fa.fa-thumbs-up.fa-lg
@@ -11,13 +11,13 @@
               span.fa.fa-heart.fa-lg
             -elsif my_message["option"] == "lol"
               span.text-stack
-                .fa-stack-1x.circle-text.open.rotate-45 LOL
+                .fa-stack-1x.circle-text.filled.rotate-45 LOL
             -elsif my_message["option"] == "omg"
               span.text-stack
-                .fa-stack-1x.circle-text.open.rotate-45 OMG
+                .fa-stack-1x.circle-text.filled.rotate-45 OMG
             -elsif my_message["option"] == "cool"
               span.text-stack
-                .fa-stack-1x.circle-text.open.rotate-45 COOL
+                .fa-stack-1x.circle-text.filled.rotate-45 COOL
           -elsif my_message["category"] =="Bookmark"
             span.fa.fa-bookmark.fa-lg
           -elsif my_message["category"] =="Comment"
