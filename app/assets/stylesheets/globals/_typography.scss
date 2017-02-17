@@ -91,6 +91,13 @@ h2 a {
     color: $primary-color;
   }
 }
+.bold-text-link {
+  color: $black;
+  font-weight: 600;
+  &:hover {
+    color: $primary-color;
+  }
+}
 .minor-link {
   @include font-size($subtext-sizes);
   color: $middark-gray;

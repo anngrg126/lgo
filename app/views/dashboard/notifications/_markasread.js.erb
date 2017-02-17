@@ -1,4 +1,6 @@
-$('div[id="<%= j ids.to_s %>"]').children('.unread, .mark_as_read').remove();
+//remove mark-as-read link and replace with "read"
+$('#noti_id_<%= j ids[0].to_s %>').find('.mark-as-read').remove();
+$('#noti_id_<%= j ids[0].to_s %>').find('.subtext.read').css("display","inherit");
 
 //update notifications counter on dashboard
 $('#dashboard_notifications_counter').html("<%= j link_to 'Notifications: '+ Notification.where(user_id: current_user.id, read: false).count.to_s, notifications_dashboard_path(@user), remote: true %>");
@@ -6,7 +8,7 @@ $('#dashboard_notifications_counter').html("<%= j link_to 'Notifications: '+ Not
 //update notificatios counter in navbar
 $("#user_notifications").html("<%= j user_notifications_link %>");
 
-//remove New Notifications & Mark all a read if no more new notifications
-<% if Notification.where(user_id: current_user.id, read: false).count == 0 %>
+//remove 'Mark all as read' if no more new notifications
+<% if current_user.notifications.select{|n| n.read == false}.length == 0 %>
   $("a[href*='mark_all_as_read']").remove();
-<% end %> 
+<% end %>

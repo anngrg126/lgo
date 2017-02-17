@@ -1,4 +1,5 @@
-$('div[id="<%= j ids.to_s %>"]').remove();
+//remove the notification
+$('#noti_id_<%= j ids[0].to_s %>').remove();
 
 //update notifications counter on dashboard
 $('#dashboard_notifications_counter').html("<%= j link_to 'Notifications: '+ Notification.where(user_id: current_user.id, read: false).count.to_s, notifications_dashboard_path(@user), remote: true %>");
@@ -6,6 +7,7 @@ $('#dashboard_notifications_counter').html("<%= j link_to 'Notifications: '+ Not
 //update notificatios counter in navbar
 $("#user_notifications").html("<%= j user_notifications_link %>");
 
-<% if Notification.where(user_id: current_user.id, read: false).count == 0 %>
+//remove New Notifications & Mark all a read if no more new notifications
+<% if current_user.notifications.select{|n| n.read == false}.length == 0 %>
   $("#new_notifications").remove();
 <% end %> 
