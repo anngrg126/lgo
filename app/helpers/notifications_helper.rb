@@ -330,20 +330,17 @@ module NotificationsHelper
      
     ordered_ids.each do |i|     
       index = id_array.index(i)
-      output.push(content_tag(:div) {
-        if id_array[index].instance_of? Fixnum
-          @max_index = id_array[index]
-        else
-          @max_index = id_array[index].max
-        end
-        @noti = notifications_array.select{|n| n.id == @max_index}.first
-        
-        unless index > my_message.length-1
-          partial =  render partial: 'shared/notification_partial', locals: { my_message: my_message[index], time: time_ago_in_words(@noti.created_at), read: read_boolean}
-          concat "#{partial}".html_safe
-          concat "</div>".html_safe
-        end
-      })
+      if id_array[index].instance_of? Fixnum
+        @max_index = id_array[index]
+      else
+        @max_index = id_array[index].max
+      end
+      @noti = notifications_array.select{|n| n.id == @max_index}.first
+      unless index > my_message.length-1
+        partial =  render partial: 'shared/notification_partial', locals: { my_message: my_message[index], time: time_ago_in_words(@noti.created_at), read: read_boolean}
+      end
+      
+      output.push(partial)
     end
     return output.join(" ")
   end
