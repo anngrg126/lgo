@@ -199,6 +199,9 @@ h2 a {
   }
 }
 @media only screen and (max-width: 640px) {
+  .label{
+    padding: 15px;
+  }
   .list {
     line-height: 2;
   }
