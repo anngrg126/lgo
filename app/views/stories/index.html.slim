@@ -1,10 +1,11 @@
+== render 'stories/hero'
 .row[style="margin-top: 20px;"]
   .columns.large-3
   
   
   .columns.large-9
     .row.columns
-      strong Real-lift gift stories &amp; ideas
+      h2[style="display: inline-block;"] Real-life gift stories &amp; ideas
       .float-right
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fa.fa-pencil
