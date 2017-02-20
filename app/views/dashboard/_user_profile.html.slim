@@ -11,7 +11,7 @@
             .image-wrapper.overlay-fade-in 
               .user-profile
                 == user_photo(@user)
-                == link_to edit_user_dashboard_registration_path(@user, form_render: "user_image") do
+                == link_to edit_user_dashboard_registration_path(@user, form_render: "user_image"), remote: true do
                   .fa.fa-camera.fa-lg
               .image-overlay-content
                 == edit_user_photo(@user)
