@@ -2,21 +2,23 @@
 .row[style="margin-top: 20px;"]
   .columns.large-9.large-push-3
     .row.columns
-      .float-right
+      .index_subinfo
+        div
+          h2[style="display: inline-block;"] Real-life gift stories
+          p from people just like you.
+      .index_story_share
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fa.fa-pencil
           span Share a Story
-      h2[style="display: inline-block;"] Real-life gift stories
-      p from people just like you.
     .row
       - @stories.each do |s|
         .columns.medium-6
           == render 'shared/story_card', story: s, admin_view: false
   .columns.large-3.large-pull-9
-    .row[style="background-color: #fefefe;"]
+    .row.columns[style="background-color: #fefefe;"]
       .columns.large-12.medium-6[style="background-color: #fefefe; padding-top: 10px; padding-bottom: 10px;"]
         .text-center
-          p We've all felt stuck on gift ideas. Reading stories about other people's gifts inspires ideas and cautions against what not to do.
+          p[style="color: #4a4a4a; padding: 0 10px;"] We've all felt stuck on gift ideas. Reading stories about other people's gifts inspires ideas and cautions against what not to do.
         .text-center[style="margin: 30px auto;"]
           strong Share your story today.
       .columns.large-12.medium-6

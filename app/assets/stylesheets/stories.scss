@@ -4,4 +4,24 @@ trix-toolbar .button_group button {
 //  z-index: -1;
   border: 1px solid red;
 }
+.index_subinfo {
+  display: inline-block;
+  width: calc(100% - 155px);
+}
+.index_story_share {
+  display: inline-block;
+  vertical-align: top;
+}
 
+@media only screen and (max-width: 640px) {
+  .index_subinfo {
+    display: block;
+    text-align: center;
+    width: auto;
+  }
+  .index_story_share {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
