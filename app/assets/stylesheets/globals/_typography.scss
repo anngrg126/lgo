@@ -5,15 +5,15 @@ html {
 $global-font-size: 62.5%; //for foundation
 
 $global-body-sizes: (
-  0: 1.4rem,
+  0: 1.6rem,
   640px: 1.6rem
 );
 $subtext-sizes: (
-  0: 1.2rem,
+  0: 1.4rem,
   640px: 1.4rem
 );
 $global-larger-sizes: (
-  0: 1.6rem,
+  0: 1.8rem,
   640px: 1.8rem
 );
 @mixin font-size($fs-map) {
