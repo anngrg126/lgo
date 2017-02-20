@@ -1,17 +1,19 @@
 == render 'stories/hero'
 .row[style="margin-top: 20px;"]
-  .columns.large-3
-  
-  
-  .columns.large-9
+  .columns.large-9.large-push-3
     .row.columns
-      h2[style="display: inline-block;"] Real-life gift stories &amp; ideas
       .float-right
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fa.fa-pencil
           span Share a Story
+      h2[style="display: inline-block;"] Real-life gift stories
+      p from people just like you.
     .row
       - @stories.each do |s|
         .columns.medium-6
           == render 'shared/story_card', story: s, admin_view: false
+  .columns.large-3.large-pull-9
+    .row.columns[style="background-color: #fefefe;"]
+      .columns
+        p Storytelling is We're proven that the best way to building the largest collection of real-life gift stories. Share yours today.
     == render partial: 'shared/go_to_top'
