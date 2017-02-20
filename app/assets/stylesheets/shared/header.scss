@@ -382,6 +382,9 @@ nav .dropdown-pane {
     ul .columns {
       font-size: 100%;
     }
+    ul .columns a {
+    @include font-size($global-body-sizes);
+    }  
     .occasion, .relationship, .interests, .type {
       min-width: auto;
     }
@@ -390,6 +393,9 @@ nav .dropdown-pane {
     }
     ul, .menu > li > a {
       line-height: 1.8;
+    }
+    .is-drilldown .is-drilldown-submenu li {
+    padding: 5px;
     }
   }
 
