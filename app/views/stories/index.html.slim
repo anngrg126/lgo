@@ -13,9 +13,16 @@
         .columns.medium-6
           == render 'shared/story_card', story: s, admin_view: false
   .columns.large-3.large-pull-9
-    .row.columns[style="background-color: #fefefe; padding-top: 10px; padding-bottom: 10px;"]
-      .columns.text-center
-        p We've all felt stuck on gift ideas. Reading stories about other people's gifts inspires ideas and cautions against what not to do.
-        strong Share your story today.
-    /==render partial: 
+    .row[style="background-color: #fefefe;"]
+      .columns.large-12.medium-6[style="background-color: #fefefe; padding-top: 10px; padding-bottom: 10px;"]
+        .text-center
+          p We've all felt stuck on gift ideas. Reading stories about other people's gifts inspires ideas and cautions against what not to do.
+        .text-center[style="margin: 30px auto;"]
+          strong Share your story today.
+      .columns.large-12.medium-6
+        ==render partial: 'stories/featured_prompt'
+      .columns.text-center.share.large-12.large-pull-0.medium-6.medium-pull-6[style="padding-top: 1.5rem; padding-bottom: 1.5rem;"]
+        == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
+          span.fa.fa-pencil
+          span Share a Story
 == render partial: 'shared/go_to_top'

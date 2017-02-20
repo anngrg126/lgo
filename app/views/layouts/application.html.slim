@@ -5,7 +5,7 @@ html lang="en"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
 
     title
-      == content_for?(:title) ? yield(:title) : "Lets GiftOn"
+      == content_for?(:title) ? yield(:title) : "Let's GiftOn"
 
     == stylesheet_link_tag "application"
     - if Rails.application.assets.resolve(params[:controller]).present?
