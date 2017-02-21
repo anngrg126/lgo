@@ -3,17 +3,18 @@ class DashboardController < ApplicationController
   before_action :set_anonymous_user
   before_action :set_tags
   before_action :set_reactions
+  before_action :get_story_counts
   
-  before_action :set_dashboard_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
-  before_action :set_bookmarked_stories, only: [:show, :notifications, :bookmarked_stories]
-  before_action :set_commented_stories, only: [:show, :commented_stories, :notifications, :bookmarked_stories]
-  before_action :set_reacted_stories, only: [:show, :reacted_stories, :notifications, :bookmarked_stories]
-  before_action :set_notifications, only: [:show, :notifications, :bookmarked_stories]
+  before_action :set_dashboard_stories, only: [:show, :authored_stories]  
+  before_action :set_bookmarked_stories, only: [:bookmarked_stories]
+  before_action :set_commented_stories, only: [:commented_stories]
+  before_action :set_reacted_stories, only: [:reacted_stories]
+  before_action :set_notifications, only: [:show, :notifications]
   before_action :set_bookmark_posters, only: [:bookmarked_stories]
   before_action :set_reaction_posters, only: [:reacted_stories]
   before_action :set_commented_story_posters, only:  [:commented_stories]
-  before_action :set_followers, only: [:show, :followers, :notifications, :bookmarked_stories]
-  before_action :set_followings, only: [:show, :followings, :notifications, :bookmarked_stories]
+  before_action :set_followers, only: [:show, :followers, :notifications]
+  before_action :set_followings, only: [:show, :followings, :notifications]
   before_action :set_current_user_followings, only: [:followings, :followers]
     
   def show
@@ -199,4 +200,26 @@ class DashboardController < ApplicationController
   def set_reactions
     @reactions = ReactionCategory.all
   end
+  
+  def get_story_counts
+    if current_user == @user
+      @bookmark_count = @user.bookmarks.select{ |b| b.story.active? && b.story.published? && b.story.author_id != @user.id}.length
+      @reaction_count = @user.reactions.select{|r| r.story.active? && r.story.published? && r.story.author_id != @user.id}.length
+      @comment_count = @user.comments.select{ |c| c.story.active? && c.story.published? && c.story.author_id != @user.id}.length
+      
+      unless @user == @anonymous_user
+        @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}.length
+      else
+        @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}.length
+      end
+    else
+      @reaction_count = @user.reactions.select{|r| r.story.active? && r.story.published? }.length
+      unless @user == @anonymous_user
+        @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}.length
+      else
+        @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}.length
+      end
+    end
+  end
+  
 end
