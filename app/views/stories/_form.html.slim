@@ -1,69 +1,73 @@
-- if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.final_title )
-  = form_for(@story, :html => {class: "form", multipart: true}, remote: true) do |f|
-    - if (controller.action_name == "new")
-      div#picture_fields
-        = f.fields_for :pictures do |picture|
-          = picture.label :image
-          = picture.file_field :image, multiple: true, :name =>"image[]"
-          /OTHERWISE, the name would be: /story[pictures_attributes][0][image][]
-        .links
-          = link_to_add_association 'Add another image', f, :pictures
-        span class="form-error"
-    div
-      = f.label :raw_title, "Title"
-      = f.text_field :raw_title, autofocus: true, value: @story.raw_title
-      span class="form-error"
-    div
-      = f.label :raw_body, "Body"
-      = f.trix_editor :raw_body
-      span class="form-error"
-    div
-      = f.label :raw_gift_description, "Gift Description"
-      = f.text_field :raw_gift_description, autofocus: true, value: @story.raw_gift_description
-      span class="form-error"
-    div
-      = f.label :anonymous
-      = f.check_box :anonymous, type: "checkbox"
-    div 
-      = f.label :fail
-      = f.check_box :fail, type: "checkbox"
-    div
-      = f.radio_button :review, false
-      = f.label :review, "No, thanks"
-      = f.radio_button :review, true
-      = f.label :review, "Yes, thanks a lot!"
-    div
-      - sanitize @story.raw_body
-      = f.submit "Contribute Story", class: "button"
-- elsif controller.action_name == "edit"
-  = form_for(@story, :html => {class: "form"}, remote: true) do |f|
-    div
-      = f.label :updated_title, "Title"
-      = f.text_field :updated_title, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_title : @story.updated_title
-      span class="form-error"
-    div
-      = f.label :updated_body, "Body"
-      == f.trix_editor :updated_body
-      span class="form-error"
-    div
-      = f.label :updated_gift_description, "Gift Description"
-      = f.text_field :updated_gift_description, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_gift_description : @story.updated_gift_description
-      span class="form-error"
-    div
-      = f.label :anonymous
-      = f.check_box :anonymous, type: "checkbox"
-    div 
-      = f.label :fail
-      = f.check_box :fail, type: "checkbox"
-    div
-      - unless @story.final_title?
-        = f.radio_button :review, false
-        = f.label :review, "No, thanks", checked: true
-        = f.radio_button :review, true
-        = f.label :review, "Yes, thanks a lot!"
-    div
-      - sanitize @story.updated_body
-      = f.submit class: "button"
-      = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
+.card
+  .card-section
+    div#error_block
+  .card-section
+    - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.final_title )
+      = form_for(@story, :html => {class: "form", multipart: true}, remote: true) do |f|
+        - if (controller.action_name == "new")
+          div#picture_fields
+            = f.fields_for :pictures do |picture|
+              = picture.label :image
+              = picture.file_field :image, multiple: true, :name =>"image[]"
+              /OTHERWISE, the name would be: /story[pictures_attributes][0][image][]
+            .links
+              = link_to_add_association 'Add another image', f, :pictures
+            span class="form-error"
+        div
+          = f.label :raw_title, "Title"
+          = f.text_field :raw_title, autofocus: true, value: @story.raw_title
+          span class="form-error"
+        div
+          = f.label :raw_body, "Body"
+          = f.trix_editor :raw_body
+          span class="form-error"
+        div
+          = f.label :raw_gift_description, "Gift Description"
+          = f.text_field :raw_gift_description, autofocus: true, value: @story.raw_gift_description
+          span class="form-error"
+        div
+          = f.label :anonymous
+          = f.check_box :anonymous, type: "checkbox"
+        div 
+          = f.label :fail
+          = f.check_box :fail, type: "checkbox"
+        div
+          = f.radio_button :review, false
+          = f.label :review, "No, thanks"
+          = f.radio_button :review, true
+          = f.label :review, "Yes, thanks a lot!"
+        div
+          - sanitize @story.raw_body
+          = f.submit "Contribute Story", class: "button"
+    - elsif controller.action_name == "edit"
+      = form_for(@story, :html => {class: "form"}, remote: true) do |f|
+        div
+          = f.label :updated_title, "Title"
+          = f.text_field :updated_title, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_title : @story.updated_title
+          span class="form-error"
+        div
+          = f.label :updated_body, "Body"
+          == f.trix_editor :updated_body
+          span class="form-error"
+        div
+          = f.label :updated_gift_description, "Gift Description"
+          = f.text_field :updated_gift_description, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_gift_description : @story.updated_gift_description
+          span class="form-error"
+        div
+          = f.label :anonymous
+          = f.check_box :anonymous, type: "checkbox"
+        div 
+          = f.label :fail
+          = f.check_box :fail, type: "checkbox"
+        div
+          - unless @story.final_title?
+            = f.radio_button :review, false
+            = f.label :review, "No, thanks", checked: true
+            = f.radio_button :review, true
+            = f.label :review, "Yes, thanks a lot!"
+        div
+          - sanitize @story.updated_body
+          = f.submit class: "button"
+          = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
 script
   == render partial: 'trix_input_id.js.erb', story: @story
