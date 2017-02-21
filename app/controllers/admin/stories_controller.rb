@@ -123,7 +123,7 @@ class Admin::StoriesController < ApplicationController
                         story_id: story.id)
     
     #Notification for all people who follow the poster
-    followings = Following.where(user_id: story.poster_id)
+    followings = Following.select{|f| f.user_id == story.poster_id && f.user.deactivated_at.nil?}
     followings.each do |follower|
       Notification.create(user_id: follower.follower_id,
                         notified_by_user_id: story.poster_id,
