@@ -1,0 +1,10 @@
+.featured-prompt
+  .row.columns.text-center
+    h2 Featured Story Prompt
+  .row.columns
+    == link_to user_signed_in? ? new_story_path : new_user_session_path do
+      .story-card-image[style="background-image: url(#{image_path 'surprise.jpg'});"]
+      .prompts.text-center
+        div What was your most 
+        h2 unexpected 
+        div gift?
