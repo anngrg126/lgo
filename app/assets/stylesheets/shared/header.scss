@@ -1,6 +1,8 @@
 //misc
 .sticky {
   width: 100%;
+  position: fixed;
+  z-index: 99;
 }
 .sticky button:focus {
   outline:0;
