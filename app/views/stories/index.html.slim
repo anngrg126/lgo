@@ -27,4 +27,6 @@
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fa.fa-pencil
           span Share a Story
+    .row.columns.hide-for-small-only
+      ==render 'stories/as_seen_in'
 == render partial: 'shared/go_to_top'
