@@ -1,3 +1,6 @@
+//globals
+@import 'globals/colors';
+
 //story index view
 .index_subinfo {
   display: inline-block;
@@ -15,11 +18,37 @@
     bottom: 40%;
   }
 }
+//story form {
+.story-form {
+  h2 {
+    display: inline-block;
+    & label {
+      font-size: inherit;
+    }
+  }
+  .subtext {
+    display: inline-block;
+  }
+  trix-editor.body {
+    height: 200px;
+  }
+  .card-section {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    &:last-child {
+      padding-bottom: 10px;
+    }
+    &:first-child {
+      padding-top: 10px;
+    }
+  }
+  .subtext {
+    color: $middark-gray;
+  }
+}
 //dummy css as an example of how to target trix editor buttons
 trix-toolbar .button_group button {
-//  position: relative;
-//  z-index: -1;
-  border: 1px solid red;
+//  border: 1px solid red;
 }
 @media only screen and (max-width: 1024px) {
   .new-story-intro .large-9 {
