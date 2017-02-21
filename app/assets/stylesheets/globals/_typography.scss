@@ -5,7 +5,7 @@ html {
 $global-font-size: 62.5%; //for foundation
 
 $global-body-sizes: (
-  0: 1.6rem,
+  0: 1.5rem,
   640px: 1.6rem
 );
 $subtext-sizes: (
@@ -13,7 +13,7 @@ $subtext-sizes: (
   640px: 1.4rem
 );
 $global-larger-sizes: (
-  0: 1.8rem,
+  0: 1.7rem,
   640px: 1.8rem
 );
 @mixin font-size($fs-map) {
@@ -200,7 +200,8 @@ h2 a {
 }
 @media only screen and (max-width: 640px) {
   .label{
-    padding: 15px;
+    padding: 8px;
+    border-radius: 5px;
   }
   .list {
     line-height: 2;
