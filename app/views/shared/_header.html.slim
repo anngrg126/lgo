@@ -15,7 +15,7 @@ div#stickhere[data-sticky-container]
         - unless params[:controller].include? "users"
           - unless current_page? registration_step_path(:basic_details)
             div.user-info
-              #user_notifications.hide-for-small-only
+              #user_notifications.nav-notifications.hide-for-small-only
                 == user_notifications_link
               - if user_signed_in?
                 == link_to dashboard_path(current_user), class: "logged-in" do
@@ -56,6 +56,7 @@ div#stickhere[data-sticky-container]
     .row.nav-bottomtier#tags-menu[data-toggler="is-hidden"]
       .columns.show-for-small-only
         == render partial: 'shared/standalone_header_links'
+      hr.show-for-small-only[style="margin-bottom: 0;"]
       .columns
         ul.horizontal.menu[data-responsive-menu="drilldown medium-dropdown"]
           li
@@ -243,7 +244,7 @@ div#stickhere[data-sticky-container]
           li
             = submit_tag "Search", class: "button"
     - if user_signed_in?
-      #user_dropdown.right.dropdown-pane.bottom[data-dropdown]
+      #user_dropdown.right.dropdown-pane.bottom.hide-for-small-only[data-dropdown]
         ul.menu.medium-vertical
           li
             == link_to "My Dashboard", dashboard_path(current_user), class: "primary-link"

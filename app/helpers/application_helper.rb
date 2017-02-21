@@ -15,8 +15,8 @@ module ApplicationHelper
       @current_user_notifications_header = current_user.notifications.select{ |n| n.read == false}.length
       unless @current_user_notifications_header == 0
         link_to notifications_dashboard_path(current_user) do
-          concat "My Notifications ".html_safe
-          concat "<span class='notifications_count'>(#{@current_user_notifications_header})</span>".html_safe
+          content_tag(:span, "My Notifications") + 
+          content_tag(:span, @current_user_notifications_header, class: "notifications_count")
         end
       end
     end
@@ -26,7 +26,7 @@ module ApplicationHelper
       @current_user_notifications_header = current_user.notifications.select{ |n| n.read == false}.length
       unless @current_user_notifications_header == 0
         link_to notifications_dashboard_path(current_user) do
-          concat "<span class='notifications_count'>(#{@current_user_notifications_header})</span>".html_safe
+          content_tag(:span, @current_user_notifications_header, class: "notifications_count_small")
         end
       end
     end

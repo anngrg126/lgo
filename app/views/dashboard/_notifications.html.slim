@@ -19,3 +19,7 @@ h1 Your Notifications
           .columns.medium-3
             == link_to "Delete all read notifications", destroy_all_read_notifications_path(@user), class: "secondary-link"
         == consolidate_notifications(@read_notifications, "true")
+
+javascript:
+  $(".list a").removeClass("active");
+  $("#db_notifications").addClass("active");

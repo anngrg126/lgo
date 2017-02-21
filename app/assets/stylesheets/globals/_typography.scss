@@ -5,12 +5,16 @@ html {
 $global-font-size: 62.5%; //for foundation
 
 $global-body-sizes: (
-  0: 1.4rem,
+  0: 1.5rem,
   640px: 1.6rem
 );
 $subtext-sizes: (
-  0: 1.2rem,
+  0: 1.4rem,
   640px: 1.4rem
+);
+$global-larger-sizes: (
+  0: 1.7rem,
+  640px: 1.8rem
 );
 @mixin font-size($fs-map) {
   @each $fs-breakpoint, $fs-font-size in $fs-map {
@@ -117,5 +121,111 @@ h2 a {
   font-weight: 500;
   &:hover {
     color: darken(red, 14%);
+  }
+}
+//lists
+.count {
+//  font-family: "Raleway", sans-serif;
+  @include font-size($global-larger-sizes);
+  font-weight: 700;
+  color: $primary-color;
+  line-height: 2;
+}
+.count.zero-count {
+  font-weight: 500;
+  color: $middark-gray;
+}
+.list {
+  line-height: 2.5;
+}
+.list.stacked {
+  position: relative;
+  .count {
+    line-height: 1.5;
+  }
+}
+.list.stacked > a {
+  display: block;
+  line-height: 1.4;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.list.stacked a span:nth-child(2) {
+  position: absolute;
+  right: 10px;
+}
+.list a {
+  border-bottom: 3px solid transparent;
+  color: $dark-gray;
+  margin: 0.7rem 1rem;
+  padding-bottom: 3px;
+  &:hover {
+    color: $primary-color;
+    .count {
+      color: darken($primary-color, 14%);
+    }
+    .count.zero-count, &.secondary-icon .fa {
+      color: $primary-color;
+    }
+  }
+  span:first-child {
+    margin-right: 10px;
+  }
+  &.secondary-icon .fa {
+    color: $middark-gray;
+  }
+  &.active {
+    color: $primary-color;
+    font-weight: 700;
+    border-bottom: 3px solid $primary-color;
+    &.secondary-icon .fa {
+      color: $primary-color;
+    }
+    &:hover {
+      color: darken($primary-color, 14%);
+      border-bottom: 3px solid darken($primary-color, 14%);
+      .count.zero-count {
+        color: darken($primary-color, 14%);
+      }
+      &.secondary-icon .fa {
+        color: darken($primary-color, 14%);
+      }
+    }
+    .count.zero-count {
+      color: $primary-color;
+      font-weight: 700;
+    }
+  }
+}
+@media only screen and (max-width: 640px) {
+  .label{
+    padding: 8px;
+    border-radius: 5px;
+  }
+  .list {
+    line-height: 2;
+  }
+  .list a {
+    text-align: left;
+    position: relative;
+    display: block;
+    span {
+      font-size: 1.6rem;
+    }
+    .fa-lg {
+      font-size: 1.33333333em;
+      line-height: 1.5;
+    }
+    .count {
+      font-size: 1.8rem;
+    }
+  }
+  .list a span:nth-child(2) {
+    position: absolute;
+    right: 0;
+  }
+  .list.stacked a span:nth-child(2) {
+    right: 0px;
   }
 }

@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_profile]
+  before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_settings]
   before_action :set_anonymous_user
   before_action :set_tags
   before_action :set_reactions
@@ -63,9 +63,9 @@ class DashboardController < ApplicationController
     end
   end
   
-  def user_profile
+  def user_settings
     respond_to do |format|
-      format.js {render :partial => 'dashboard/user_profile'}
+      format.js {render :partial => 'dashboard/user_settings'}
       format.html
     end
   end
@@ -85,12 +85,12 @@ class DashboardController < ApplicationController
   def set_dashboard_stories
     unless @user == current_user
       unless @user == @anonymous_user
-        @dashboard_stories = @user.stories.includes(:classifications).select {|s| s.poster_id == @user.id && s.active? && s.published?}
+        @dashboard_stories = @user.stories.includes(:classifications, :reactions, :comments, :bookmarks).select {|s| s.poster_id == @user.id && s.active? && s.published?}
       else
-        @dashboard_stories = @user.stories_posted.includes(:classifications).select {|s| s.active? && s.published?}
+        @dashboard_stories = @user.stories_posted.includes(:classifications, :reactions, :comments, :bookmarks).select {|s| s.active? && s.published?}
       end
     else
-      @dashboard_stories = @user.stories.includes(:classifications).select {|s| s.active?}
+      @dashboard_stories = @user.stories.includes(:classifications, :reactions, :comments, :bookmarks).select {|s| s.active?}
     end
     @dashboard_stories.uniq!
   end
@@ -113,7 +113,7 @@ class DashboardController < ApplicationController
  
   def set_reacted_stories
     @reacted_stories = []
-    @user.reactions.includes(:story).select{|r| r.story.active? }.each do |reaction|
+    @user.reactions.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{|r| r.story.active? && r.story.published? }.each do |reaction|
       if @user == current_user
         unless reaction.story.author_id == @user.id
           @reacted_stories.push(reaction.story)
@@ -136,7 +136,7 @@ class DashboardController < ApplicationController
   
   def set_bookmarked_stories
     @bookmarked_stories = []
-    @user.bookmarks.includes(:story).select{ |b| b.story.active? }.each do |bookmark|
+    @user.bookmarks.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |b| b.story.active? && b.story.published?}.each do |bookmark|
       unless bookmark.story.author_id == @user.id
         @bookmarked_stories.push(bookmark.story)
       end
@@ -155,7 +155,7 @@ class DashboardController < ApplicationController
   
   def set_commented_stories
     @commented_stories = []
-    @user.comments.includes(:story).select{ |c| c.story.active? }.each do |comment|
+    @user.comments.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |c| c.story.active? && c.story.published?}.each do |comment|
       unless comment.story.author_id == @user.id
         @commented_stories.push(comment.story)
       end

@@ -18,10 +18,10 @@ RSpec.feature "Listing Bookmarked Stories" do
   
   scenario "Logged-in user can see the list of the stories she's bookmarked", js: true do
     visit(dashboard_path(@user))
-    click_link "Saves"
+    click_link "Bookmarks"
     
     expect(page).to have_content(Story.where.not(author_id: @user.id).joins(:bookmarks).where(:bookmarks => {:user_id => @user.id}).count)
-    expect(page).to have_content("Saves: 2")
+    expect(page).to have_content("Bookmarks2")
 
     expect(page).to have_content(@story1.final_title)
     expect(page).to have_content(@story1.final_body.truncate(275))

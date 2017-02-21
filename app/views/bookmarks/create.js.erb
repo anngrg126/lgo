@@ -1,4 +1,9 @@
-$('div[id^="bookmark_buttons_<%= @story.id.to_s %>"]').each( function( ) {
-    var current = $(this);
-    current.html('<%= j render 'bookmarks/bookmark', story: @story %>');
+$('#bookmark_buttons_<%= @story.id.to_s %>').each( function( ) {
+  $(this).html('<%= j render 'bookmarks/bookmark', story: @story %>');
 });
+
+//if user is on her own dashboard
+$("#dashboard_bookmarks_counter_<%= current_user.id.to_s %>").html('<%= j current_user.bookmarks.select{|b| b.story.active? && b.story.published? && b.story.author_id != current_user.id}.length.to_s %>');
+<% if current_user.bookmarks.select{|b| b.story.active? && b.story.published? && b.story.author_id != current_user.id}.length > 0 %>
+  $("#dashboard_bookmarks_counter_<%= current_user.id.to_s %>").closest(".count").removeClass("zero-count");
+<% end %>

@@ -22,7 +22,7 @@ RSpec.feature "Listing Commented Stories" do
     visit(dashboard_path(@user))
     click_link "Comments"
     
-    expect(page).to have_content("Comments: 2")
+    expect(page).to have_content("Comments2")
 
     expect(page).to have_content(@story1.final_title)
     expect(page).to have_content(@story1.final_body.truncate(275))
@@ -42,6 +42,7 @@ RSpec.feature "Listing Commented Stories" do
     expect(page).not_to have_content(@story4.final_body.truncate(275))
     expect(page).not_to have_link(@story4.final_title)
     
-    expect(page).to have_css("img[src*='mainimage.png']", count: 2)
+#    expect(page).to have_css("img[src*='mainimage.png']", count: 2)
+    expect(page).to have_css('div.story-card-image', count: 2)
    end
 end

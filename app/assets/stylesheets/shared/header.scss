@@ -6,6 +6,7 @@
   outline:0;
 }
 nav .dropdown-pane {
+  border: 1px solid $light-gray;
   hr {
     margin: .5rem auto;
   }
@@ -15,7 +16,7 @@ nav .dropdown-pane {
 .nav-toptier {
   padding-bottom: 0;
   max-width: none;
-  border-bottom: 1px solid $medium-gray;
+  border-bottom: 1px solid $light-gray;
   border-bottom-style: inset;
   border-width: 1px;
   line-height: 0.8;
@@ -71,24 +72,38 @@ nav .dropdown-pane {
 }
 
 //user notifications
-#user_notifications {
+.nav-notifications {
   vertical-align: bottom;
   margin-right: 10px; 
   position: relative;
 }
-#user_notifications a {
-  @extend %header-gray-link;
-  font-size: 1.4rem;
-  &.inactive-link {
-    @extend .inactive-link;
+.notifications_count_small {
+  color: $primary-color;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-left: 5px;
+  &:hover {
+    color: darken($primary-color, 14%);
   }
-  &:hover .notifications_count {
-    color: lighten($red, 15%);
+}
+.nav-notifications {
+  span {
+    @extend %header-gray-link;
+    font-size: 1.4rem;
+  }
+  &:hover {
+    span {
+      color: $primary-color;
+    }
+    .notifications_count {
+      color: darken($primary-color, 14%);
+    }
   }
   .notifications_count {
-    color: $red;
-    font-weight: 500;
-    font-size: 1.4rem;
+    color: $primary-color;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-left: 5px;
   }
 }
 
@@ -108,7 +123,6 @@ nav .dropdown-pane {
     font-size: 110%;
     color: $dark-gray;
     &:hover {
-      //color: $topbar-link-color-hover;
       color: $primary-color;
       img {
         filter: brightness(115%);
@@ -116,8 +130,6 @@ nav .dropdown-pane {
     }
     span {
       font-weight: 600;
-//      border-right: 1px solid $middark-gray;
-//      padding-right: 5px;
       margin-right: 5px;
     }
   }
@@ -155,10 +167,11 @@ nav .dropdown-pane {
 //navbar bottom tier
 .nav-bottomtier {
 //  padding: 0.3rem 0 0;
-  border-bottom: 1px solid $medium-gray;
+  border-bottom: 1px solid $light-gray;
   border-bottom-style: inset;
   border-width: 1px;
-  background-color: $ultra-light-gray;
+//  background-color: $ultra-light-gray;
+  background-color: $white;
   -webkit-box-shadow: inset 0px 5px 10px -7px $dark-gray;
   -moz-box-shadow: inset 0px 5px 10px -7px $dark-gray;
   box-shadow: inset 0px 5px 10px -7px $dark-gray;
@@ -203,6 +216,9 @@ nav .dropdown-pane {
   }
   .is-dropdown-submenu {
     padding: 15px 10px;
+  }
+  .is-drilldown-submenu {
+    background-color: $ultra-light-gray;
   }
   .occasion {
     min-width: 500px;
@@ -268,13 +284,14 @@ nav .dropdown-pane {
 
 //tag links
 #tags-menu ul ul a {
-  @extend .header-blue-link;
+//  @extend .header-blue-link;
+  @extend %header-gray-link;
   &:hover {
     border-bottom: none;
   }
 }
 
-@media only screen and (max-width: 40.063em) {
+@media only screen and (max-width: 640px) {
   //navbar top tier
   .nav-toptier {
     padding-top: 4px;
@@ -297,10 +314,11 @@ nav .dropdown-pane {
    
   //navbar mid tier
   .nav-midtier {
-    background-color: $ultra-light-gray;
+//    background-color: $ultra-light-gray;
+    background-color: $white;
     padding: 0;
     .row:first-child {
-      border-bottom: 1px solid $medium-gray;
+      border-bottom: 1px solid $light-gray;
       border-bottom-style: inset; 
     }
     .columns {
@@ -364,6 +382,9 @@ nav .dropdown-pane {
     ul .columns {
       font-size: 100%;
     }
+    ul .columns a {
+    @include font-size($global-body-sizes);
+    }  
     .occasion, .relationship, .interests, .type {
       min-width: auto;
     }
@@ -372,6 +393,9 @@ nav .dropdown-pane {
     }
     ul, .menu > li > a {
       line-height: 1.8;
+    }
+    .is-drilldown .is-drilldown-submenu li {
+    padding: 5px;
     }
   }
 
@@ -396,14 +420,14 @@ nav .dropdown-pane {
   //other
   #search_dropdown_mobile {
     display: none;
-    border-bottom: 1px solid $medium-gray;
+    border-bottom: 1px solid $light-gray;
     border-bottom-style: inset;
     .input-group-field {
       width: 98%;
     }
     
   }
-  #user_notifications {
+  .nav-notifications {
     margin-right: 0; 
     font-size: 1rem;
   }

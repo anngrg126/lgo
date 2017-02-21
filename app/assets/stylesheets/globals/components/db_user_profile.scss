@@ -1,0 +1,116 @@
+.user-dashboard {
+  border: 1px solid $light-gray;
+  .count div {//styles numbers inside divs with dynamic ids
+    font-size: 1.8rem;
+  }
+  .list.stacked .fa-lg {
+    line-height: 1;
+  }
+}
+.name-container {
+  text-align: center;
+  margin: 15px auto;
+} 
+#user_registration >.columns:first-child {
+  padding: 0;
+}
+#user_registration {
+  >div:first-child {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+.about_me_container {
+  text-align: center;
+  position: relative;
+  line-height: 1.5;
+  .secondary-icon {
+    padding-top: 0;
+    padding-right: 0;
+  }
+  .fa-pencil {
+    margin-left: 5px;
+  }
+  div > div {
+    display: inline-block;
+  }
+  .body {
+    padding: 0 30px;
+  }
+  .edit {
+    position: absolute;
+    right: 10px;
+    a {
+      vertical-align: middle;
+    }
+  }
+}
+@media only screen and (max-width: 1024px) {
+  #user_registration {
+    >div:first-child {
+      display: inline-block;
+      width: 250px;
+      margin-right: 10px;
+    }
+    >div:nth-child(2) {
+      display: inline-block;
+      width: calc(100% - 260px);
+      >div {
+        max-width: 350px;
+        margin: 0 auto;
+      }
+      >hr {
+        max-width: 350px;
+      }
+    }
+  }
+  .about_me_container {
+    text-align: center;
+    .body {
+      padding: 0 20px 0 0;
+    }
+    .edit {
+      right: 10px;
+    }
+  }
+  .name-container h2 {
+    margin: 10px auto;
+  } 
+}
+@media only screen and (max-width: 640px) {
+  #user_registration {
+    >div:first-child {
+      display: block;
+      width: auto;
+      margin: 0 auto;
+    }
+    >div:nth-child(2) {
+      display: block;
+      width: auto;
+      >div {
+        max-width: none;
+      }
+      >hr {
+        max-width: none;
+      }
+    }
+  }
+  .about_me_container {
+    text-align: center;
+    max-width: inherit;
+    .body {
+      padding: 0 30px;
+    }
+    .secondary-icon {
+      padding-right: 10px;
+    }
+    .edit {
+      right: 0px;
+    }
+  }
+  .user-dashboard {
+    >.card-section:first-child {
+      padding-bottom: 0;
+    }
+  }
+}

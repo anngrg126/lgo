@@ -1,22 +1,17 @@
-h2 List of All Commented Stories:
-- @commented_stories.each do |story|
-  div
-    == story_main_image(story)
-  div
-    == link_to story_title(story), story_path(story)
-  div
-    == story_body(story)
-  div
-    small 
-      | Posted by: 
-      == link_to "#{@c_posters.select{|u| u.id == story.poster_id}.first.full_name}", dashboard_path(@c_posters.select{|u| u.id == story.poster_id}.first)
-      /== link_to "#{User.find(story.poster_id).full_name}", dashboard_path(User.find(story.poster_id))
-  div
-    small
-      | Posted on: 
-      == story.created_at.strftime("%b %d, %Y")
-  div
-    small My last comment:
-    div
-      == @user.comments.group_by(&:story_id).select{|story_id| story_id == story.id}.first[1].last.body.truncate(100)
-      /== Comment.where(story_id: story, user_id: @user).last.body.truncate(100)
+div
+  h1 Your Commented Stories
+  .subtext This is private and visible only to you.
+.row
+  - @commented_stories.each do |s|
+    .columns.medium-6
+      == render 'shared/story_card', story: s, admin_view: false
+      div
+        small My last comment:
+        div
+          /== @user.comments.group_by(&:story_id).select{|story_id| story_id == story.id}.first[1].last.body.truncate(100)
+          /== Comment.where(story_id: story, user_id: @user).last.body.truncate(100)
+          == @user.comments.select{|c| c.story_id == s.id}.last.body.truncate(100)
+
+javascript:
+  $(".list a").removeClass("active");
+  $("#commented_stories").addClass("active");

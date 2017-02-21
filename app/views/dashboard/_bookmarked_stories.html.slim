@@ -1,11 +1,11 @@
+div
+  h1 Your Bookmarked Stories
+  .subtext This is your private collection of saved stories.
 .row
-  .columns.small-6
-      h1 List of All Saved Stories:
-  .columns.large-offset-3.large-3.small-6
-    == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
-      span.fi-pencil
-      span Share a Story
-.row
-  - @bookmarked_stories.each do |story|
-    div.large-6.small-12.columns
-      == render 'shared/story_card', story: story, admin_view: false
+  - @bookmarked_stories.each do |s|
+    .columns.medium-6
+      == render 'shared/story_card', story: s, admin_view: false
+
+javascript:
+  $(".list a").removeClass("active");
+  $("#bookmarked_stories").addClass("active");

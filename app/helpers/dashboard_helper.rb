@@ -20,9 +20,9 @@ module DashboardHelper
   end
   
   def edit_user_name(user)
-    if user == current_user
-      link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_name"), remote: true
-    end
+#    if user == current_user
+#      link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_name"), remote: true
+#    end
   end
   
   def edit_user_photo(user)
@@ -38,22 +38,25 @@ module DashboardHelper
   def edit_user_about_me(user)
     if user == current_user
       if user.about_me == nil || user.about_me == ""
-        link_to "Add an about me", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
+        link_to edit_user_dashboard_registration_path(user, form_render: "user_about_me"), class: "primary-link", remote: true do
+          content_tag(:span, "Introduce yourself here  ") +
+          content_tag(:span, "", class: "fa fa-pencil")
+        end
       else
-        link_to "Edit", edit_user_dashboard_registration_path(user, form_render: "user_about_me"), remote: true
+        content_tag(:div, link_to(content_tag(:span, "", class: "fa fa-pencil"), edit_user_dashboard_registration_path(user, form_render: "user_about_me"), class: "small-icon-button secondary-icon", remote: true), class: "edit")
       end
     end
   end
   
   def user_about_me(user)
     unless user.about_me.blank?
-      body = "<div>#{user.about_me}</div>".html_safe
+      content_tag(:div, user.about_me, class: "body")
     end
   end
   
   def user_about_me_title(user)
-    unless user.about_me.blank?
-      "<div>About Me</div>".html_safe
+    if !user.about_me.blank? || current_user == user
+      content_tag(:strong, "About Me")
     end
   end
   
@@ -103,8 +106,8 @@ module DashboardHelper
 #  end
   
   def story_anonymous(story)
-    if story.anonymous?
-      content_tag(:div, "Anonymous (only you can see this story on your dashboard", class: "subtext")
+    if story.anonymous? && @user == current_user
+      content_tag(:div, "Anonymous (only you can see this story on your dashboard)", class: "subtext")
 #      html = "<div>Anonymous (only you can see this story on your dashboard)</div>".html_safe
     end
   end

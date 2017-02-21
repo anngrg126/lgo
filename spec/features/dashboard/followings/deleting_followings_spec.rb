@@ -12,7 +12,7 @@ RSpec.feature "Deleting Followings" do
   
   scenario "Owner succeeds in deleting following via user's dashboard", :js => true do
     visit(dashboard_path(@foo))
-    expect(page).to have_content("Followers: 1")
+    expect(page).to have_content("Followers1")
     click_link "Unfollow"
  
 #    expect(page).to have_content("Followers: 0")

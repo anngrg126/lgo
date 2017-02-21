@@ -1,41 +1,51 @@
-h2 This is the user profile.
-
-h3 Account Settings
-
-div#user_account_settings
-  p 
-    | Email: 
-    span
-      == @user.email
-    br
-    == link_to "Change Email", edit_user_dashboard_registration_path(@user, form_render: "user_email")
-  p 
-    | Password: 
-    == link_to "Change Password", edit_user_dashboard_registration_path(@user, form_render: "user_password")
-  p 
-    | Gender:
-    div#user_gender
-      = form_for @user, url: registration_path(@user), remote: true do |f|
-        div.form-group
-          = f.radio_button :gender, 'male', disabled: true
-          = f.label :gender_male, 'Male'
-          = f.radio_button :gender, 'female', disabled: true
-          = f.label :gender_female, 'Female'
-          = f.radio_button :gender, nil, :id => :custom_defined_gender, disabled: true
-          = f.label :gender_custom, 'Custom'
-          input#free_system_input
-      == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_gender"), remote: true
-  p 
-    | Birthday: 
-    div#user_birthday
-      = form_for @user, url: registration_path(@user), remote: true do |f|
-        div.form-group
-          = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}, disabled: true
-      == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_birthday"), remote: true
-  div
-    p 
-      | Account
-    div 
-      == link_to "Deactivate account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete
-
-  
+.card.user-dashboard
+  .card-section
+    #user_registration
+      /.columns.large-12.medium-6#user_photo
+      #user_photo
+        - unless @user == current_user
+          .user-profile
+            == user_photo(@user)
+        - else
+          .overlay-container
+            .image-wrapper.overlay-fade-in 
+              .user-profile
+                == user_photo(@user)
+                == link_to edit_user_dashboard_registration_path(@user, form_render: "user_image"), remote: true do
+                  .fa.fa-camera.fa-lg
+              .image-overlay-content
+                == edit_user_photo(@user)
+      /.columns.large-12.medium-6
+      div
+        .name-container
+          h2
+            == @user.full_name
+        .about_me_container
+          == user_about_me_title(@user)
+          #user_about_me
+            == user_about_me(@user)
+            == edit_user_about_me(@user)
+        - unless @user == current_user
+          hr
+          div[style="text-align: center;"]
+            == render partial: 'followings/form', locals: { user: @user, follower: current_user }
+        .list.stacked
+          - if @user == current_user
+            hr[style="margin-bottom: 0;"]
+              == link_to notifications_dashboard_path(@user), id: "db_notifications", remote: true do
+                span Notifications
+                span.count class=('zero-count' if @unread_notifications.length == 0) 
+                  #dashboard_notifications_counter #{@unread_notifications.length}
+            hr[style="margin: 0;"]
+          == link_to followers_dashboard_path(@user), id: "user_followers", remote: true do
+            span Followers
+            span.count class=('zero-count' if @followers.length == 0) #{@followers.length}
+          == link_to followings_dashboard_path(@user), id: "user_followings", remote: true do
+            span Following
+            span.count class=('zero-count' if @followings.length == 0)
+              div[id= "dashboard_followings_counter_#{@user.id.to_s}"] #{@followings.length}
+          - if @user == current_user
+            hr[style="margin: 0;"]
+            == link_to user_settings_dashboard_path(@user), class: "secondary-icon", id: "user_settings", remote: true do 
+              span Settings
+              span.fa.fa-cog.fa-lg

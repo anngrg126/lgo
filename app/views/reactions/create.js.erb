@@ -1,5 +1,9 @@
 $('div[id^="story_reaction_<%= @reaction.reaction_category_id %>_<%= @story.id.to_s %>"]').each( function( ) {
-    var current = $(this);
-    current.html('<%= j render "reactions/"+ReactionCategory.select{|r| r.id == @reaction.reaction_category_id}.first.name, story: @story %>');
+    $(this).html('<%= j render "reactions/"+ReactionCategory.select{|r| r.id == @reaction.reaction_category_id}.first.name, story: @story %>');
 });
 
+//if user is on her own dashboard
+$("#dashboard_reactions_counter_<%= current_user.id.to_s %>").html('<%= j current_user.reactions.select{|r| r.story.active? && r.story.published? && r.story.author_id != current_user.id}.group_by{|r| r.story_id}.length.to_s %>');
+<% if current_user.reactions.select{|r| r.story.active? && r.story.published? && r.story.author_id != current_user.id}.group_by{|r| r.story_id}.length > 0 %>
+  $("#dashboard_reactions_counter_<%= current_user.id.to_s %>").closest(".count").removeClass("zero-count");
+<% end %>
