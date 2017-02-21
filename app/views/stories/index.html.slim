@@ -22,7 +22,7 @@
         .text-center[style="margin: 30px auto;"]
           strong Share your story today.
       .columns.large-12.medium-6
-        ==render partial: 'stories/featured_prompt'
+        ==render 'stories/featured_prompt', share_view: false
       .columns.text-center.share.large-12.large-pull-0.medium-6.medium-pull-6[style="padding-top: 1.5rem; padding-bottom: 1.5rem;"]
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fa.fa-pencil

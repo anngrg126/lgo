@@ -205,9 +205,9 @@ a.user-thumbnail:hover {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  &:hover {
-    filter: brightness(115%);
-  }
+}
+a:hover .story-card-image {
+  filter: brightness(115%);
 }
 .column-block .thumbnail {
   border: 0;
