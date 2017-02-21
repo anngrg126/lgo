@@ -45,6 +45,9 @@
   .subtext {
     color: $middark-gray;
   }
+  .links {
+    display: none;
+  }
 }
 //dummy css as an example of how to target trix editor buttons
 trix-toolbar .button_group button {
