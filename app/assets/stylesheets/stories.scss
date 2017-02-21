@@ -1,9 +1,4 @@
-//dummy css as an example of how to target trix editor buttons
-trix-toolbar .button_group button {
-//  position: relative;
-//  z-index: -1;
-  border: 1px solid red;
-}
+//story index view
 .index_subinfo {
   display: inline-block;
   width: calc(100% - 155px);
@@ -12,8 +7,31 @@ trix-toolbar .button_group button {
   display: inline-block;
   vertical-align: top;
 }
-
+//story new view
+.new-story-intro .large-9 {
+  position: relative;
+  &>div {
+    position: absolute;
+    bottom: 40%;
+  }
+}
+//dummy css as an example of how to target trix editor buttons
+trix-toolbar .button_group button {
+//  position: relative;
+//  z-index: -1;
+  border: 1px solid red;
+}
+@media only screen and (max-width: 1024px) {
+  .new-story-intro .large-9 {
+    position: static;
+    &>div {
+      position: static;
+      margin: 20px auto;
+    }
+  }
+}
 @media only screen and (max-width: 640px) {
+  //story index view
   .index_subinfo {
     display: block;
     text-align: center;
