@@ -52,7 +52,7 @@
             br
             = f.check_box :fail, type: "checkbox"
             = f.label :fail, "Yes"
-            input[type="checkbox"]
+            input[type="checkbox" checked='#{@story.fail ? "" : "checked"}' id="no_fail"]
             label No
           .card-section
             h2 Review
@@ -72,44 +72,54 @@
               = f.submit "Contribute Story", class: "button"
       - elsif controller.action_name == "edit"
         = form_for(@story, :html => {class: "form"}, remote: true) do |f|
-          div
-            = f.label :updated_title, "Title"
+          .card-section[style="padding-top: 0px;"]
+            h2
+              = f.label :updated_title, "Your story title"
             = f.text_field :updated_title, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_title : @story.updated_title
             span class="form-error"
-          div
-            = f.label :updated_body, "Body"
-            == f.trix_editor :updated_body
-            span class="form-error"
-          div
-            = f.label :updated_gift_description, "Gift Description"
+          .card-section
+            h2
+              = f.label :updated_gift_description, "In 10 words or less, what was the gift?"
             = f.text_field :updated_gift_description, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_gift_description : @story.updated_gift_description
             span class="form-error"
-          div
-            = f.label :anonymous
-            = f.check_box :anonymous, type: "checkbox"
-          div 
-            = f.label :fail
+          .card-section
+            h2 Is your story about a gift fail?
+            br
             = f.check_box :fail, type: "checkbox"
-          div
-            - unless @story.final_title?
-              = f.radio_button :review, false
-              = f.label :review, "No, thanks", checked: true
-              = f.radio_button :review, true
-              = f.label :review, "Yes, thanks a lot!"
-          div
+            = f.label :fail, "Yes"
+            input[type="checkbox" checked='#{@story.fail ? "" : "checked"}' id="no_fail"]
+            label No
+          .card-section
+            h2
+              = f.label :updated_body, "Compose your story here"
+            == f.trix_editor :updated_body
+            span class="form-error"
+            = f.check_box :anonymous, type: "checkbox"
+            = f.label :anonymous, "Post anonymously", class: "subtext", style: "color: #0a0a0a;"
+          .card-section.text-center
             - sanitize @story.updated_body
             = f.submit class: "button"
-            = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
+            = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
 script
   == render partial: 'trix_input_id.js.erb', story: @story
 javascript:
   'use strict';
   ;( function( $, window, document, undefined ) {
     uploadLabel(); 
-      $( '.add_fields').click( function() {
-        $( document ).on('cocoon:after-insert', function(e, insertedItem) {
-          uploadLabel();
-          $(".links").css("display", "none"); 
-        });  
-      });
+    $( '.add_fields').click( function() {
+      $( document ).on('cocoon:after-insert', function(e, insertedItem) {
+        uploadLabel();
+        $(".links").css("display", "none"); 
+      });  
+    });
+    $('#story_fail').click(function() {
+      if ($(this.checked).length > 0) {
+        $('#no_fail').attr('checked', false);
+      } 
+    });
+    $('#no_fail').click(function() {
+      if ($(this.checked).length > 0) {
+        $('#story_fail').attr('checked', false);
+      } 
+    });
   })( jQuery, window, document );
