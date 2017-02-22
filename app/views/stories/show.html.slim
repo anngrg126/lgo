@@ -29,15 +29,17 @@
             == render 'bookmarks/bookmark', story: @story
           h2
             == story_title_show(@story)
-          div
+          .subtext
             == story_gift_description_show(@story)
-            
-          div
-            - unless @story.classifications.empty?
-              div.story_tags
+          - unless @story.classifications.empty?
+            .story_tags
+              span.label
                 == story_recipient_tag(@story)
+              | &nbsp;&nbsp;
+              span.label
                 == story_occasion_tag(@story)
-                == story_fail_tag(@story)
+              | &nbsp;&nbsp;
+              == story_fail_tag(@story)
         
       .card-section
         div 
@@ -72,13 +74,24 @@
     
 
   .columns.large-3
-    - if @story.published?
-      - unless @story.classifications.empty?
-      div.all_story_tags
-        - @story.classifications.each do |classif|
-          - @t = @tags.select{|t| t.id == classif.tag_id}.first
-          - unless @t.name == "other"
-            a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}"] #{@t.name}
-          - else
-            - if classif.description?
-              a[href="#{stories_path}?search=#{classif.description}"] #{classif.description}
+    .card
+      .card-section
+        - if @story.published?
+          - unless @story.classifications.empty?
+            .story_tags
+              - @story.classifications.each do |classif|
+                - @t = @tags.select{|t| t.id == classif.tag_id}.first
+                - unless @t.name == "other"
+                  - unless @t.name == "fail"
+                    span.label
+                      a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext primary-link"] #{@t.name}
+                    | &nbsp;&nbsp;
+                  - else
+                    span.label
+                      a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext fail-link"] #{@t.name}
+                    | &nbsp;&nbsp;
+                - else
+                  - if classif.description?
+                    span.label
+                      a[href="#{stories_path}?search=#{classif.description}" class="subtext primary-link"] #{classif.description}
+                    | &nbsp;&nbsp;
