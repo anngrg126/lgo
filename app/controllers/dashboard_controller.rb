@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
   before_action :set_anonymous_user
   before_action :set_tags
   before_action :set_reactions
-  before_action :get_story_counts
+  before_action :get_story_counts, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_settings]
   
   before_action :set_dashboard_stories, only: [:show, :authored_stories]  
   before_action :set_bookmarked_stories, only: [:bookmarked_stories]
@@ -114,7 +114,7 @@ class DashboardController < ApplicationController
  
   def set_reacted_stories
     @reacted_stories = []
-    @user.reactions.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{|r| r.story.active? && r.story.published? }.each do |reaction|
+    @user.reactions.includes(story: [:user, :classifications, :reactions, :comments, :bookmarks]).select{|r| r.story.active? && r.story.published? }.each do |reaction|
       if @user == current_user
         unless reaction.story.author_id == @user.id
           @reacted_stories.push(reaction.story)
@@ -137,7 +137,7 @@ class DashboardController < ApplicationController
   
   def set_bookmarked_stories
     @bookmarked_stories = []
-    @user.bookmarks.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |b| b.story.active? && b.story.published?}.each do |bookmark|
+    @user.bookmarks.includes(story: [:user, :classifications, :reactions, :comments, :bookmarks]).select{ |b| b.story.active? && b.story.published?}.each do |bookmark|
       unless bookmark.story.author_id == @user.id
         @bookmarked_stories.push(bookmark.story)
       end
@@ -156,7 +156,7 @@ class DashboardController < ApplicationController
   
   def set_commented_stories
     @commented_stories = []
-    @user.comments.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |c| c.story.active? && c.story.published?}.each do |comment|
+    @user.comments.includes(story: [:user, :classifications, :reactions, :comments, :bookmarks]).select{ |c| c.story.active? && c.story.published?}.each do |comment|
       unless comment.story.author_id == @user.id
         @commented_stories.push(comment.story)
       end
@@ -202,22 +202,22 @@ class DashboardController < ApplicationController
   end
   
   def get_story_counts
-    if current_user == @user
-      @bookmark_count = @user.bookmarks.select{ |b| b.story.active? && b.story.published? && b.story.author_id != @user.id}.length
-      @reaction_count = @user.reactions.select{|r| r.story.active? && r.story.published? && r.story.author_id != @user.id}.length
-      @comment_count = @user.comments.select{ |c| c.story.active? && c.story.published? && c.story.author_id != @user.id}.length
+    if @user == current_user
+      @bookmark_count = @user.bookmarks.includes(:story).select{ |b| b.story.active? && b.story.published? && b.story.author_id != @user.id}
+      @reaction_count = @user.reactions.includes(:story).select{|r| r.story.active? && r.story.published? && r.story.author_id != @user.id}
+      @comment_count = @user.comments.includes(:story).select{ |c| c.story.active? && c.story.published? && c.story.author_id != @user.id}
       
       unless @user == @anonymous_user
-        @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}.length
+        @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}
       else
-        @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}.length
+        @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}
       end
     else
-      @reaction_count = @user.reactions.select{|r| r.story.active? && r.story.published? }.length
+      @reaction_count = @user.reactions.includes(:story).select{|r| r.story.active? && r.story.published?}
       unless @user == @anonymous_user
-        @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}.length
+        @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}
       else
-        @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}.length
+        @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}
       end
     end
   end
