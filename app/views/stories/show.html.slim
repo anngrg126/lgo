@@ -1,4 +1,4 @@
-.row
+.row[style="margin-top: 20px"]
   .columns.large-9
     .card
       .card-section
@@ -7,8 +7,8 @@
         -else
           - user = @story.user 
         div.row.columns[style= "line-height: 0.9;"]
-          == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0, comment:nil   
-    .card
+          == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0, comment:nil 
+      hr[style="margin: 10px; max-width: 100%"]
       .card-section 
         <!-- Reactions -->
         div#top_reactions_bar
