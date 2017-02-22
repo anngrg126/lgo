@@ -67,7 +67,7 @@
             - sanitize @story.raw_body
             - if controller.action_name == "edit"
               = f.submit "Edit Story", class: "button"
-              = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
+              = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
             - else
               = f.submit "Contribute Story", class: "button"
       - elsif controller.action_name == "edit"
