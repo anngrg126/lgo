@@ -40,6 +40,12 @@
                 == story_occasion_tag(@story)
               | &nbsp;&nbsp;
               == story_fail_tag(@story)
+      .card-section    
+        - if user_signed_in? && @story.author_id == current_user.id
+          .row
+            .columns
+              == link_to "Edit Story", edit_story_path(@story), class: "primary-link"
+              | &nbsp; &nbsp;
       .card-section[style="padding-top: 0;"]
         - unless @story.main_image_file_name.nil?
           .story-image[style="background-image: url(#{story_main_image_show_path(@story)})"]
@@ -49,8 +55,16 @@
           == story_body_show(@story)
       .card-section    
         - if user_signed_in? && @story.author_id == current_user.id
-          == link_to "Edit Story", edit_story_path(@story), class: "btn"
-          == link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn"
+          .row
+            .columns
+              == link_to "Edit Story", edit_story_path(@story), class: "primary-link"
+              | &nbsp; &nbsp;
+            .columns
+              == link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "primary-link"
+              | &nbsp; &nbsp;
+            .columns
+              == link_to "Upload More Pictures", new_story_picture_path(@story), class: "primary-link"
+      .card-section
         div.story_pictures
           - unless @story.pictures.empty?
             .columns.medium-12
@@ -63,9 +77,6 @@
                       == link_to story_picture_path(@story, picture), method: :delete, data: {confirm: "Are you sure you want to delete the picture?"}, class: "minor-link" do
                           span.fa.fa-trash-o
                           span &nbsp;Delete Picture
-          - if user_signed_in? && @story.author_id == current_user.id
-            div
-              = link_to "Upload More Pictures", new_story_picture_path(@story), class: "primary-link"
       .card-section
         <!-- Reactions -->
         h2 Whats your Reaction?
