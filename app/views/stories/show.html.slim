@@ -14,7 +14,7 @@
         div#top_reactions_bar
           == render 'shared/reactions_component', s: @story, top: true      
       .card-section
-        .columns.large-6
+        .columns.large-12
           == content_for :og_url, request.base_url + request.original_fullpath
           - if @story.published? 
             == content_for :og_image, @story.main_image.url(:large)
@@ -23,21 +23,21 @@
               == content_for :og_description, truncate(@story.final_body, length: 200)
             - else
               == content_for :og_title, @story.updated_title
-              == content_for :og_description, truncate(@story.updated_body, length: 200)        
-            h2
-              == story_title_show(@story)
-            div
-              == story_gift_description_show(@story)
-              
-            div
-              - unless @story.classifications.empty?
-                div.story_tags
-                  == story_recipient_tag(@story)
-                  == story_occasion_tag(@story)
-                  == story_fail_tag(@story)
-        .columns.large-6
-          <!-- Bookmarks -->
-          == render 'bookmarks/bookmark', story: @story
+              == content_for :og_description, truncate(@story.updated_body, length: 200) 
+        .row.columns.clearfix
+          .float-right 
+            == render 'bookmarks/bookmark', story: @story
+          h2
+            == story_title_show(@story)
+          div
+            == story_gift_description_show(@story)
+            
+          div
+            - unless @story.classifications.empty?
+              div.story_tags
+                == story_recipient_tag(@story)
+                == story_occasion_tag(@story)
+                == story_fail_tag(@story)
         
       .card-section
         div 
