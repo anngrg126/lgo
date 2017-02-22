@@ -1,74 +1,76 @@
 .row
   .columns.large-9
-    == content_for :og_url, request.base_url + request.original_fullpath
-    - if @story.published? 
-      == content_for :og_image, @story.main_image.url(:large)
-      - if @story.last_user_to_update == "Admin"
-        == content_for :og_title, @story.final_title
-        == content_for :og_description, truncate(@story.final_body, length: 200)
-      - else
-        == content_for :og_title, @story.updated_title
-        == content_for :og_description, truncate(@story.updated_body, length: 200)
-
-    <!-- Reactions -->
-    div#top_reactions_bar
-      == render 'shared/reactions_component', s: @story, top: true 
-
-    div 
-      == story_main_image_show(@story)
-    h2
-      == story_title_show(@story)
-    div
-      -if @story.anonymous?
-        - user = @anonymous_user
-      -else
-        - user = @story.user 
-    div.row.columns[style= "line-height: 0.9;"]
-      == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0, comment:nil
-    div
-      == story_gift_description_show(@story)
-    div
-      - unless @story.classifications.empty?
-        div.story_tags
-          == story_recipient_tag(@story)
-          == story_occasion_tag(@story)
-          == story_fail_tag(@story)
-    p.small
-      == @story.created_at.strftime("%b %d, %Y")
-    p
-      == story_body_show(@story)
-    - if user_signed_in? && @story.author_id == current_user.id
-      == link_to "Edit Story", edit_story_path(@story), class: "btn"
-      == link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn"
-    div.story_pictures
-      - unless @story.pictures.empty?
-        - @story.pictures.each do |picture|
-          = image_tag picture.image.url
+    .card
+      .card-section
+        -if @story.anonymous?
+          - user = @anonymous_user
+        -else
+          - user = @story.user 
+        div.row.columns[style= "line-height: 0.9;"]
+          == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0, comment:nil   
+    .card
+      .card-section 
+        <!-- Reactions -->
+        div#top_reactions_bar
+          == render 'shared/reactions_component', s: @story, top: true      
+      .card-section
+        .columns.large-6
+          == content_for :og_url, request.base_url + request.original_fullpath
+          - if @story.published? 
+            == content_for :og_image, @story.main_image.url(:large)
+            - if @story.last_user_to_update == "Admin"
+              == content_for :og_title, @story.final_title
+              == content_for :og_description, truncate(@story.final_body, length: 200)
+            - else
+              == content_for :og_title, @story.updated_title
+              == content_for :og_description, truncate(@story.updated_body, length: 200)        
+            h2
+              == story_title_show(@story)
+            div
+              == story_gift_description_show(@story)
+              
+            div
+              - unless @story.classifications.empty?
+                div.story_tags
+                  == story_recipient_tag(@story)
+                  == story_occasion_tag(@story)
+                  == story_fail_tag(@story)
+        .columns.large-6
+          <!-- Bookmarks -->
+          == render 'bookmarks/bookmark', story: @story
+        
+      .card-section
+        div 
+          == story_main_image_show(@story)
+          
+      .card-section
+        p
+          == story_body_show(@story)
+      .card-section    
+        - if user_signed_in? && @story.author_id == current_user.id
+          == link_to "Edit Story", edit_story_path(@story), class: "btn"
+          == link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn"
+        div.story_pictures
+          - unless @story.pictures.empty?
+            - @story.pictures.each do |picture|
+              = image_tag picture.image.url
+              - if user_signed_in? && @story.author_id == current_user.id
+                = link_to "Delete Picture", story_picture_path(@story, picture), data: {confirm: "Are you sure?"}, method: :delete
           - if user_signed_in? && @story.author_id == current_user.id
-            = link_to "Delete Picture", story_picture_path(@story, picture), data: {confirm: "Are you sure?"}, method: :delete
-      - if user_signed_in? && @story.author_id == current_user.id
-        div
-          = link_to "Upload More Pictures", new_story_picture_path(@story), class: "btn"
-    - if @story.published?
-      - unless @story.classifications.empty?
-      div.all_story_tags
-        - @story.classifications.each do |classif|
-          - @t = @tags.select{|t| t.id == classif.tag_id}.first
-          - unless @t.name == "other"
-            a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}"] #{@t.name}
-          - else
-            - if classif.description?
-              a[href="#{stories_path}?search=#{classif.description}"] #{classif.description}
+            div
+              = link_to "Upload More Pictures", new_story_picture_path(@story), class: "btn"
+      .card-section
+        <!-- Reactions -->
+        h2 Whats your Reaction?
+        == render 'shared/reactions_component', s: @story, top: false 
+
+    div
       <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
       #comments
         == render 'comments/form'
         == render 'comments/show'
     
-      <!-- Bookmarks -->
-      == render 'bookmarks/bookmark', story: @story
-      
-      <!-- Reactions -->
-      == render 'shared/reactions_component', s: @story, top: false 
+
   .columns.large-3
     - if @story.published?
       - unless @story.classifications.empty?
