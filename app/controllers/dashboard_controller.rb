@@ -1,20 +1,20 @@
 class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_settings]
-  before_action :set_anonymous_user
-  before_action :set_tags
-  before_action :set_reactions
-  before_action :get_story_counts, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_settings]
+  before_action :set_anonymous_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
+  before_action :set_tags, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
+  before_action :set_reactions, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
+  before_action :get_story_counts, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
   
   before_action :set_dashboard_stories, only: [:show, :authored_stories]  
   before_action :set_bookmarked_stories, only: [:bookmarked_stories]
   before_action :set_commented_stories, only: [:commented_stories]
   before_action :set_reacted_stories, only: [:reacted_stories]
-  before_action :set_notifications, only: [:show, :notifications]
+  before_action :set_notifications, only: [:show, :notifications, :bookmarked_stories]
   before_action :set_bookmark_posters, only: [:bookmarked_stories]
   before_action :set_reaction_posters, only: [:reacted_stories]
   before_action :set_commented_story_posters, only:  [:commented_stories]
-  before_action :set_followers, only: [:show, :followers, :notifications]
-  before_action :set_followings, only: [:show, :followings, :notifications]
+  before_action :set_followers, only: [:show, :followers, :notifications, :bookmarked_stories]
+  before_action :set_followings, only: [:show, :followings, :notifications, :bookmarked_stories]
   before_action :set_current_user_followings, only: [:followings, :followers]
     
   def show
@@ -206,19 +206,13 @@ class DashboardController < ApplicationController
       @bookmark_count = @user.bookmarks.includes(:story).select{ |b| b.story.active? && b.story.published? && b.story.author_id != @user.id}
       @reaction_count = @user.reactions.includes(:story).select{|r| r.story.active? && r.story.published? && r.story.author_id != @user.id}
       @comment_count = @user.comments.includes(:story).select{ |c| c.story.active? && c.story.published? && c.story.author_id != @user.id}
-      
-      unless @user == @anonymous_user
-        @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}
-      else
-        @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}
-      end
     else
       @reaction_count = @user.reactions.includes(:story).select{|r| r.story.active? && r.story.published?}
-      unless @user == @anonymous_user
-        @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}
-      else
-        @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}
-      end
+    end
+    unless @user == @anonymous_user
+      @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}
+    else
+      @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}
     end
   end
   
