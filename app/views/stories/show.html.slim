@@ -40,10 +40,9 @@
                 == story_occasion_tag(@story)
               | &nbsp;&nbsp;
               == story_fail_tag(@story)
-        
-      .card-section
-        div 
-          == story_main_image_show(@story)
+      .card-section[style="padding-top: 0;"]
+        - unless @story.main_image_file_name.nil?
+          .story-image[style="background-image: url(#{story_main_image_show_path(@story)})"]
           
       .card-section
         p
