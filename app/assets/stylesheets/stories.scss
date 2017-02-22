@@ -53,6 +53,9 @@
 trix-toolbar .button_group button {
 //  border: 1px solid red;
 }
+trix-editor {
+  overflow: scroll;
+}
 @media only screen and (max-width: 1024px) {
   .new-story-intro .large-9 {
     position: static;
