@@ -248,7 +248,8 @@ a:hover .story-card-image {
   display: inline-block;
   padding: 40px;
   border: 2px dashed $blue;
-  max-width: 200px;
+  min-width: 190px;
+  margin: 10px;
   p {
     font-size: 1.4rem;
     margin-bottom: 0;
@@ -263,6 +264,9 @@ a:hover .story-card-image {
 .image-input:focus + label {
   outline: 1px dotted #000;
   outline: -webkit-focus-ring-color auto 5px;
+}
+.remove_fields {
+  display: none;
 }
 @media only screen and (max-width: 40.063em) {
   .story-card-image {

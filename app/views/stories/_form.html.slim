@@ -32,14 +32,9 @@
                 | &nbsp;&nbsp;(optional)
               #picture_fields
                 = f.fields_for :pictures do |picture|
-                  = picture.file_field :image, multiple: true, :name =>"image[]", class: "image-input"
-                  /OTHERWISE, the name would be: /story[pictures_attributes][0][image][]
-                  = picture.label :image, "Choose a file", class: "image-label" do
-                    .text-center
-                      .fa.fa-camera.fa-2x
-                      p upload an image
+                  = render 'shared/picture_fields', f: picture
                 .links
-                  = link_to_add_association 'Add another image', f, :pictures
+                  = link_to_add_association 'Add another image', f, :pictures, partial: 'shared/picture_fields'
                 span class="form-error"
           .card-section
             h2
@@ -110,53 +105,10 @@ script
 javascript:
   'use strict';
   ;( function( $, window, document, undefined ) {
-    //$( '.image-input' ).each( function() {
-      //var $input	 = $( this ),
-          //$label	 = $input.next( 'label' );
-          //labelVal   = $label.html();
-      $( '.image-input' ).on( 'change', function( e ) {
-        var fileCount = '',
-            fileName  = '',
-            $label	  = $( this ).next( 'label' ),
-            links     = '';
-        if( this.files && this.files.length > 1 ) {
-          //fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-          fileCount = this.files.length
-        } else if( e.target.value ) {
-          fileName = e.target.value.split( '\\' ).pop();
-        };
-        
-        if( fileCount ) {
-          if (fileCount > 1) {
-            $label.find( 'p' ).html( fileCount.toString()+" files selected" );
-          } else {
-            $label.find( 'p' ).html( fileCount.toString()+" file selected" );
-          }
-          links = true;
-        } else {
-            //$label.html( labelVal );
-        };
-        if( fileName ) {
-          $label.find( 'p' ).html( fileName );
-          links = true;
-        }
-        if (links) {
-          $(".links").css("display", "block"); 
-        }
-      });
-      // Firefox bug fix
-      $( '.image-input' )
-      .on( 'focus', function(){ $( this ).addClass( 'has-focus' ); })
-      .on( 'blur', function(){ $( this ).removeClass( 'has-focus' ); });
-    //});    
+    uploadLabel(); 
       $( '.add_fields').click( function() {
-        //console.log("wheofslj1");
         $( document ).on('cocoon:after-insert', function(e, insertedItem) {
-        //console.log( insertedItem);
-          $(insertedItem).find("input").each(function() {
-            $(this).addClass("image-input");
-          })
-          $(insertedItem).find("input[type='hidden']").after('<label class="image-label" for="story_pictures_attributes_0_image"><div class="text-center"><div class="fa fa-camera fa-2x"></div><p>upload an image</p></div></label>');
+          uploadLabel();
           $(".links").css("display", "none"); 
         });  
       });
