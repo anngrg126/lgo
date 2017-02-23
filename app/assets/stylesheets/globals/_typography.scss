@@ -198,10 +198,22 @@ h2 a {
     }
   }
 }
+.center-on-mobile-left{
+  text-align: left;
+}
+.center-on-mobile-right{
+  text-align: right;
+}
 @media only screen and (max-width: 640px) {
   .label{
     padding: 8px;
     border-radius: 5px;
+  }
+  .center-on-mobile-left{
+    text-align: center;
+  }
+  .center-on-mobile-right{
+    text-align: center;
   }
   .list {
     line-height: 2;

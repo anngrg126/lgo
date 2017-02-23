@@ -14,7 +14,7 @@
         == render 'reactions/'+(r.name), story: s
 -else
   /for story show page bottom - all reactions except comments and cool
-  .div[style="text-align:right"]
+  .div.center-on-mobile-right
     - @reactions.each do |r|
       - unless r.name == "cool"
         == render 'reactions/'+(r.name), story: s

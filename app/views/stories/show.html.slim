@@ -34,7 +34,7 @@
               == content_for :og_description, truncate(@story.updated_body, length: 200) 
         .row
           .columns[style="width: calc(100% - 50px);"]
-            h2
+            h1
               == story_title_show(@story)
             .subtext
               == story_gift_description_show(@story)
@@ -88,9 +88,12 @@
                           span.fa.fa-trash-o
                           span &nbsp;Delete Picture
       .card-section
-        <!-- Reactions -->
-        h2 Whats your Reaction?
-        == render 'shared/reactions_component', s: @story, top: false 
+        .row.center-on-mobile-left
+          .columns.medium-8
+            <!-- Reactions -->
+            h2 Whats your Reaction?
+          .columns.medium-4[style="min-width: 200px"]
+            == render 'shared/reactions_component', s: @story, top: false 
 
     div
       <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
