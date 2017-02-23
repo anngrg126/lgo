@@ -25,10 +25,13 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
   end
   
   scenario "A user creates a new story w/ many pictures", js: true do
+    execute_script("$('input[name=\"image[]\"]').removeClass('image-input')")
     attach_file('image[]', './spec/fixtures/image.png')
     
     click_link "Add another image"
-    within('.nested-fields') do
+    expect(page).to have_css(".fa-camera", count: 2)
+    within('#picture_fields > .nested-fields:nth-child(2)') do
+      execute_script("$('input[name=\"image[]\"]').removeClass('image-input')")
       attach_file('image[]', './spec/fixtures/image.png')
     end
     click_button "Share Story"
@@ -41,6 +44,7 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
   end
   
   scenario "Logged-in user fails to add pictures to a story", js: true do
+    execute_script("$('input[name=\"image[]\"]').removeClass('image-input')")
     attach_file('image[]', './spec/fixtures/text.rtf')
     click_button "Share Story"
     
