@@ -117,7 +117,7 @@
           .text-center
             h2 Your Story Card
           == render 'shared/story_card', story: @story, admin_view: false, preview: true
-/script
+script
   == render partial: 'trix_input_id.js.erb', story: @story
 javascript:
   'use strict';
