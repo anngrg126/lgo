@@ -15,7 +15,6 @@ function toJSDate(dateTime) {
 }
 
 $(document).ready(function() {
-  console.log("test");
   if ("<%= @story.last_user_to_update %>" == "Admin") {
     $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.final_body %>"));
     $("trix-editor[input=story_updated_body_trix_input_story_<%= j @story.id.to_s %>]").html( htmlDecode("<%= @story.final_body %>"));
