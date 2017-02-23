@@ -57,6 +57,11 @@
     margin: 20px 0;
     color: $middark-gray;
   }
+  .story-card {
+    max-width: 350px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
 }
 //dummy css as an example of how to target trix editor buttons
 trix-toolbar .button_group button {

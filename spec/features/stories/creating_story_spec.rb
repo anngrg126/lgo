@@ -11,17 +11,17 @@ RSpec.feature "Creating Stories", :type => :feature do
   
   scenario "A user creates a new story" do
     visit "/"
-  
-    click_link "Share a Story"
-    
-    fill_in "Title", with: Faker::Hipster::sentence
+    within(".index_story_share") do
+      click_link "Share a Story"
+    end
+    fill_in "Give your story a title", with: Faker::Hipster::sentence
     fill_in_trix_editor('story_raw_body_trix_input_story', Faker::Hipster::paragraph)
-    fill_in "Gift Description", with: Faker::Hipster::sentence
+    fill_in "In 10 words or less, what was the gift?", with: Faker::Hipster::sentence
     check "story_anonymous"
     choose "story_review_true"
     check "story_fail"
     
-    click_button "Contribute Story"    
+    click_button "Share Story"    
 
     expect(page).to have_content("Story has been submitted")
 #    expect(page.current_path).to eq(stories_path)
@@ -30,13 +30,14 @@ RSpec.feature "Creating Stories", :type => :feature do
   
   scenario "A user fails to create a new story", :js => true do
     visit "/"
+    within(".index_story_share") do
+      click_link "Share a Story"
+    end
     
-    click_link "Share a Story"
-    
-    fill_in "Title", with: ""
+    fill_in "Give your story a title", with: ""
     fill_in_trix_editor('story_raw_body_trix_input_story', "")
-    fill_in "Gift Description", with: ""
-    click_button "Contribute Story"
+    fill_in "In 10 words or less, what was the gift?", with: ""
+    click_button "Share Story"
     assert_text("Body can't be blank")
     
     expect(page).to have_content("Story has not been submitted")

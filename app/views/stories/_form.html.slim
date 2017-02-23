@@ -1,6 +1,6 @@
 .card
   .row[data-equalizer data-equalize-on="medium"]
-    .columns.medium-6.large-8.story-form[data-equalizer-watch]
+    .columns.medium-6.large-7.story-form[data-equalizer-watch]
       .card-section
         div#error_block
       - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
@@ -75,7 +75,7 @@
               = f.submit "Edit Story", class: "button"
               = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
             - else
-              = f.submit "Contribute Story", class: "button"
+              = f.submit "Share Story", class: "button"
       - elsif controller.action_name == "edit"
         = form_for(@story, :html => {class: "form"}, remote: true) do |f|
           .card-section[style="padding-top: 0px;"]
@@ -109,8 +109,8 @@
             - sanitize @story.updated_body
             = f.submit class: "button"
             = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
-    .columns.medium-6.large-4.form-sidebar.hide-for-small-only[data-equalizer-watch]
-      - if (controller.action_name == "new") || (controller.action_name == "edit" && @story.raw_title == "" )
+    .columns.medium-6.large-5.form-sidebar.hide-for-small-only[data-equalizer-watch]
+      - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
         div TBU
       - elsif controller.action_name == "edit"
         .columns.form-sidebar
