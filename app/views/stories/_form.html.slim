@@ -12,8 +12,8 @@
             - else
               h2
                 = f.label :raw_title, "Your story title"
-            .subtext
-              | &nbsp;&nbsp;(optional)            
+            span.subtext
+              | (optional)            
             = f.text_field :raw_title, autofocus: true, value: @story.raw_title
             span class="form-error"
             .subtext
@@ -29,7 +29,7 @@
             .card-section
               h2[style="margin-bottom: 10px;"] Images
               .subtext 
-                | &nbsp;&nbsp;(optional)
+                | (optional)
               #picture_fields
                 = f.fields_for :pictures do |picture|
                   = render 'shared/picture_fields', f: picture
@@ -40,7 +40,7 @@
             h2
               = f.label :raw_gift_description, "In 10 words or less, what was the gift?"
             .subtext
-              | &nbsp;&nbsp;(optional)
+              | (optional)
             = f.text_field :raw_gift_description, autofocus: true, value: @story.raw_gift_description
             span class="form-error"
             .subtext
@@ -48,19 +48,25 @@
           .card-section
             h2 Is your story about a gift fail?
             .subtext
-              | &nbsp;&nbsp;(optional)
+              | (optional)
             br
             = f.check_box :fail, type: "checkbox"
             = f.label :fail, "Yes"
-            input[type="checkbox" attribute='#{@story.fail ? "" : "checked=true"}' id="no_fail"]
+            - unless @story.fail
+              input[type="checkbox" checked='true' id="no_fail"]
+            - else
+              input[type="checkbox" id="no_fail"]
             label No
           .card-section
             h2 Review
             .subtext
-              | &nbsp;&nbsp;(optional)
-            p Our team of editors can help with minor spelling and grammar touch-ups to bring our the best in your story. This service is free, and you can always make changes later. 
-            = f.radio_button :review, false
-            = f.label :review, "No, thanks"
+              | (optional)
+            p Our team of editors can help with minor spelling and grammar touch-ups to bring our the best in:your story. This service is free, and you can always make changes later. 
+            - if (controller.action_name == "new")
+              = f.radio_button :review, false, checked: true
+            - else
+              = f.radio_button :review, false
+            = f.label :review, "No thanks"
             = f.radio_button :review, true
             = f.label :review, "Yes, thanks a lot!"
           .card-section.text-center
@@ -111,7 +117,7 @@
           .text-center
             h2 Your Story Card
           == render 'shared/story_card', story: @story, admin_view: false, preview: true
-script
+/script
   == render partial: 'trix_input_id.js.erb', story: @story
 javascript:
   'use strict';

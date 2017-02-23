@@ -21,9 +21,11 @@
 //story form {
 .story-form {
   h2 {
-    display: inline-block;
+    display: inline;
+    margin-right: 10px;
     & label {
       font-size: inherit;
+      display: inline;
     }
   }
   .subtext {
