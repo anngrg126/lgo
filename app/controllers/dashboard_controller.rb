@@ -1,17 +1,18 @@
 class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_settings]
-  before_action :set_anonymous_user
-  before_action :set_tags
-  before_action :set_reactions
+  before_action :set_anonymous_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
+  before_action :set_tags, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
+  before_action :set_reactions, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
+  before_action :get_story_counts, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
   
-  before_action :set_dashboard_stories, only: [:show, :authored_stories, :notifications, :bookmarked_stories]  
-  before_action :set_bookmarked_stories, only: [:show, :notifications, :bookmarked_stories]
-  before_action :set_commented_stories, only: [:show, :commented_stories, :notifications, :bookmarked_stories]
-  before_action :set_reacted_stories, only: [:show, :reacted_stories, :notifications, :bookmarked_stories]
-  before_action :set_notifications, only: [:show, :notifications, :bookmarked_stories]
-  before_action :set_bookmark_posters, only: [:bookmarked_stories]
-  before_action :set_reaction_posters, only: [:reacted_stories]
-  before_action :set_commented_story_posters, only:  [:commented_stories]
+  before_action :set_dashboard_stories, only: [:show, :authored_stories]  
+  before_action :set_bookmarked_stories, only: [:bookmarked_stories]
+  before_action :set_commented_stories, only: [:commented_stories]
+  before_action :set_reacted_stories, only: [:reacted_stories]
+  before_action :set_notifications, only: [:notifications]
+#  before_action :set_bookmark_posters, only: [:bookmarked_stories]
+#  before_action :set_reaction_posters, only: [:reacted_stories]
+#  before_action :set_commented_story_posters, only:  [:commented_stories]
   before_action :set_followers, only: [:show, :followers, :notifications, :bookmarked_stories]
   before_action :set_followings, only: [:show, :followings, :notifications, :bookmarked_stories]
   before_action :set_current_user_followings, only: [:followings, :followers]
@@ -96,24 +97,25 @@ class DashboardController < ApplicationController
   end
   
   def set_notifications
-    @notifications = @user.notifications.includes(:notification_category)
-    
-    unless @notifications.select{|n| n.read == false}.empty? 
-      @unread_notifications = @notifications.select{|n| n.read == false}
-    else 
-      @unread_notifications = []
+    if @user == current_user
+      @notifications = @user.notifications.includes(:notification_category)
+      unless @notifications.select{|n| n.read == false}.empty? 
+        @unread_notifications = @notifications.select{|n| n.read == false}
+      else 
+        @unread_notifications = []
+      end
+
+      unless @notifications.select{|n| n.read == true}.empty? 
+        @read_notifications = @notifications.select{|n| n.read == true}
+      else 
+        @read_notifications = []
+      end
     end
-    
-    unless @notifications.select{|n| n.read == true}.empty? 
-      @read_notifications = @notifications.select{|n| n.read == true}
-    else 
-      @read_notifications = []
-    end 
   end
  
   def set_reacted_stories
     @reacted_stories = []
-    @user.reactions.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{|r| r.story.active? && r.story.published? }.each do |reaction|
+    @user.reactions.includes(story: [:user, :classifications, :reactions, :comments, :bookmarks]).select{|r| r.story.active? && r.story.published? }.each do |reaction|
       if @user == current_user
         unless reaction.story.author_id == @user.id
           @reacted_stories.push(reaction.story)
@@ -126,50 +128,54 @@ class DashboardController < ApplicationController
   end
   
   def set_reaction_posters
-    @r_posters_query = []
-    @reacted_stories.each do |r|
-      @r_posters_query.push(r.poster_id)
-    end
-    @r_posters_query.uniq!  
-    @r_posters = User.find(@r_posters_query)
+#    @r_posters_query = []
+#    @reacted_stories.each do |r|
+#      @r_posters_query.push(r.poster_id)
+#    end
+#    @r_posters_query.uniq!  
+#    @r_posters = User.find(@r_posters_query)
   end
   
   def set_bookmarked_stories
-    @bookmarked_stories = []
-    @user.bookmarks.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |b| b.story.active? && b.story.published?}.each do |bookmark|
-      unless bookmark.story.author_id == @user.id
-        @bookmarked_stories.push(bookmark.story)
+    if @user == current_user
+      @bookmarked_stories = []
+      @user.bookmarks.includes(story: [:user, :classifications, :reactions, :comments, :bookmarks]).select{ |b| b.story.active? && b.story.published?}.each do |bookmark|
+        unless bookmark.story.author_id == @user.id
+          @bookmarked_stories.push(bookmark.story)
+        end
       end
+      @bookmarked_stories.uniq!
     end
-    @bookmarked_stories.uniq!
   end
   
   def set_bookmark_posters
-    @b_posters_query = []
-    @bookmarked_stories.each do |b|
-      @b_posters_query.push(b.poster_id)
-    end
-    @b_posters_query.uniq!  
-    @b_posters = User.find(@b_posters_query)
+#    @b_posters_query = []
+#    @bookmarked_stories.each do |b|
+#      @b_posters_query.push(b.poster_id)
+#    end
+#    @b_posters_query.uniq!  
+#    @b_posters = User.find(@b_posters_query)
   end
   
   def set_commented_stories
-    @commented_stories = []
-    @user.comments.includes(story: [:classifications, :reactions, :comments, :bookmarks]).select{ |c| c.story.active? && c.story.published?}.each do |comment|
-      unless comment.story.author_id == @user.id
-        @commented_stories.push(comment.story)
+    if @user == current_user
+      @commented_stories = []
+      @user.comments.includes(story: [:user, :classifications, :reactions, :comments, :bookmarks]).select{ |c| c.story.active? && c.story.published?}.each do |comment|
+        unless comment.story.author_id == @user.id
+          @commented_stories.push(comment.story)
+        end
       end
+      @commented_stories.uniq!
     end
-    @commented_stories.uniq!
   end
   
   def set_commented_story_posters
-    @c_posters_query = []
-    @commented_stories.each do |c|
-      @c_posters_query.push(c.poster_id)
-    end
-    @c_posters_query.uniq!  
-    @c_posters = User.find(@c_posters_query)
+#    @c_posters_query = []
+#    @commented_stories.each do |c|
+#      @c_posters_query.push(c.poster_id)
+#    end
+#    @c_posters_query.uniq!  
+#    @c_posters = User.find(@c_posters_query)
   end
   
   def set_followers
@@ -178,7 +184,7 @@ class DashboardController < ApplicationController
   end
   
   def set_followings
-    @followings = User.joins(:followings).where(:followings => { follower_id: @user.id}).select{ |f| f.deactivated_at==nil }
+    @followings = User.joins(:followings).where(deactivated_at: nil, :followings => { follower_id: @user.id})
     #yields a collection of Users
   end
   
@@ -198,5 +204,23 @@ class DashboardController < ApplicationController
   
   def set_reactions
     @reactions = ReactionCategory.all
+  end
+  
+  def get_story_counts
+    if @user == current_user
+      @bookmark_count = @user.bookmarks.includes(:story).select{ |b| b.story.active? && b.story.published? && b.story.author_id != @user.id}.length
+      @reaction_count = @user.reactions.includes(:story).select{|r| r.story.active? && r.story.published? && r.story.author_id != @user.id}.group_by{|r| r.story_id}.length
+      @comment_count = @user.comments.includes(:story).select{ |c| c.story.active? && c.story.published? && c.story.author_id != @user.id}.length
+      @unread_notification_count = @user.notifications.select{|n| n.read == false}.length
+    else
+      @reaction_count = @user.reactions.includes(:story).select{|r| r.story.active? && r.story.published?}.group_by{|r| r.story_id}.length
+    end
+    if @user == @anonymous_user
+      @authored_count = @user.stories_posted.select {|s| s.active? && s.published?}.length
+    elsif @user == current_user
+      @authored_count = @user.stories.select {|s| s.active?}.length
+    else
+      @authored_count = @user.stories.select {|s| s.poster_id == @user.id && s.active? && s.published?}.length
+    end
   end
 end

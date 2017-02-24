@@ -1,19 +1,19 @@
 .list
   == link_to authored_stories_dashboard_path(@user), id: "authored_stories", remote: true do
     span Stories
-    span.count class=('zero-count' if @dashboard_stories.length == 0) #{@dashboard_stories.length}   
+    span.count class=('zero-count' if @authored_count == 0) #{@authored_count}   
   == link_to reacted_stories_dashboard_path(@user), id: "reacted_stories", remote: true do
     span Reactions
-    span.count class=('zero-count' if @reacted_stories.length == 0) 
-      div[id="dashboard_reactions_counter_#{@user.id}" style="display: inline-block;"] #{@reacted_stories.length}
+    span.count class=('zero-count' if @reaction_count == 0) 
+      div[id="dashboard_reactions_counter_#{@user.id}" style="display: inline-block;"] #{@reaction_count}
   - if @user == current_user 
     == link_to bookmarked_stories_dashboard_path(@user), id: "bookmarked_stories", remote: true do
       span Bookmarks
-      span.count class=('zero-count' if @bookmarked_stories.length == 0) 
-        div[id="dashboard_bookmarks_counter_#{@user.id}" style="display: inline-block;"] #{@bookmarked_stories.length}
+      span.count class=('zero-count' if @bookmark_count == 0) 
+        div[id="dashboard_bookmarks_counter_#{@user.id}" style="display: inline-block;"] #{@bookmark_count}
     == link_to commented_stories_dashboard_path(@user), id: "commented_stories", remote: true do
       span Comments
-      span.count class=('zero-count' if @commented_stories.length == 0) #{@commented_stories.length}
+      span.count class=('zero-count' if @comment_count == 0) #{@comment_count}
   hr.show-for-small-only[style="margin-top: 0;"]
 div
   == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do

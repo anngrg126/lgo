@@ -113,7 +113,7 @@ module NotificationsHelper
           my_message.push(my_message_admin)
         elsif n.options == "followers"
           # Story poster's followers notification
-            poster = @n_users.select{|u| u.id == story.poster_id}.first
+          poster = @n_users.select{|u| u.id == story.poster_id}.first
           link_poster = link_to poster.full_name, dashboard_path(poster), class: "bold-text-link"
           noti_ids.push(n.id)
           my_message_follower = Hash.new
