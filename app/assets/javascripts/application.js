@@ -72,7 +72,7 @@ function myFunction() {
     $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
   });
   //*Story Show View*
-  $('a[href^="#comments"], a[href^="#stickhere"]').on('click', function(e){
+  $('a[href^="#comments"], a[href^="#stickhere"], a[href^="#featured_prompt"]').on('click', function(e){
     e.preventDefault();
     var target = this.hash;
     var $target = $(target);
@@ -92,7 +92,7 @@ function myFunction() {
   });
   if ($(window).width() < 640) {
     $(window).bind('scroll', function(){
-      if($(this).scrollTop()>1000) {
+      if($(this).scrollTop()>500) {
         $("#go-to-top").show();
       } else {
         $("#go-to-top").hide();

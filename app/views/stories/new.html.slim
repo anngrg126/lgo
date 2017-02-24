@@ -4,5 +4,9 @@
       h1 Share Your Gift Story
       p We all have memorable gift stories, whether about gifts we'll hold on to forever or trememdous gift fails. We're so excited you're here to share your story with this online community.
     .text-center[style="margin-top: 20px;"]
-      .subtext Got writer's block? Check out our featured story prompt.
+      .subtext 
+        | Got writer's block? Check out our 
+        span
+          == link_to 'featured story prompt', "#featured_prompt", class: "primary-link"
+        | .
 == render 'form_container'
