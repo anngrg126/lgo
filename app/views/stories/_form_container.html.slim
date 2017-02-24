@@ -3,7 +3,8 @@
     == render 'form'
   .columns.medium-6.large-5.form-sidebar[data-equalizer-watch]
     - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
-      div TBU
+      div 
+        == render 'featured_prompt', share_view: true
     - elsif controller.action_name == "edit"
       div
         .text-center

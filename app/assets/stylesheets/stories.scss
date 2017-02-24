@@ -70,8 +70,6 @@
     margin-bottom: 20px;
   }
   .story-card {
-    max-width: 350px;
-    margin: 0 auto;
     margin-bottom: 20px;
     .float-right div {
       padding-top: 0;
@@ -79,6 +77,10 @@
       padding-left: 25px;
       background-color: white;
     }
+  }
+  .featured-prompt, .story-card {
+    max-width: 350px;
+    margin: 0 auto;
   }
 }
 trix-editor {
