@@ -29,18 +29,6 @@
 
       hr[style="margin: 10px; max-width: 100%"]
       .card-section
-        .row
-          .columns[style="width: calc(100% - 50px);"]
-            .float-left
-              <!-- Reactions -->
-              div#top_reactions_bar
-                == render 'shared/reactions_component', s: @story, top: true
-          .columns[style="width: 50px;"]
-            .float-right
-              <!-- Social Icons -->
-              == link_to root_path, class: "social-icon facebook" do
-                span.fa.fa-facebook-official.fa-lg[style="font-size: 1.6em; margin-top: 12px"]
-      .card-section
         .columns.large-12
           == content_for :og_url, request.base_url + request.original_fullpath
           - if @story.published? 
@@ -55,6 +43,7 @@
           .columns[style="width: calc(100% - 50px);"]
             h1
               == story_title_show(@story)
+
             .subtext
               == story_gift_description_show(@story)
             - unless @story.classifications.empty?
@@ -66,9 +55,14 @@
                   == story_occasion_tag(@story)
                 | &nbsp;&nbsp;
                 == story_fail_tag(@story)
+            div#top_reactions_bar
+              == render 'shared/reactions_component', s: @story, top: true
+              
           .columns[style="width: 50px;"]
             .float-right 
               == render 'bookmarks/bookmark', story: @story
+              == link_to root_path, class: "social-icon facebook" do
+                span.fa.fa-facebook-official.fa-lg[style="font-size: 1.6em; margin-top: 12px"]
       .card-section    
         - if user_signed_in? && @story.author_id == current_user.id
           .row
