@@ -1,123 +1,116 @@
-.card
-  .row[data-equalizer data-equalize-on="medium"]
-    .columns.medium-6.large-7.story-form[data-equalizer-watch]
+.card.story-form
+  - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
+    = form_for(@story, :html => {class: "form", multipart: true}, remote: true) do |f|
+      .card-section[style="padding-top: 0px;"]
+        .label-container
+          - if (controller.action_name == "new") || (controller.action_name == "edit" && @story.raw_title == "" )
+            h2
+              = f.label :raw_title, "Give your story a title"
+          - else
+            h2
+              = f.label :raw_title, "Your story title"
+          span.subtext
+            | (optional)            
+        = f.text_field :raw_title, autofocus: true, value: @story.raw_title
+        span class="form-error"
+        .subtext
+          | We'll lend a hand if you can't think of one. You can always change it later.
       .card-section
-        div#error_block
-      - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
-        = form_for(@story, :html => {class: "form", multipart: true}, remote: true) do |f|
-          .card-section[style="padding-top: 0px;"]
-            - if (controller.action_name == "new") || (controller.action_name == "edit" && @story.raw_title == "" )
-              h2
-                = f.label :raw_title, "Give your story a title"
-            - else
-              h2
-                = f.label :raw_title, "Your story title"
-            span.subtext
-              | (optional)            
-            = f.text_field :raw_title, autofocus: true, value: @story.raw_title
-            span class="form-error"
-            .subtext
-              | We'll lend a hand if you can't think of one. You can always change it later.
-          .card-section
-            h2
-              = f.label :raw_body, "Compose your story here"
-            = f.trix_editor :raw_body, class: "body"
-            span class="form-error"
-            = f.check_box :anonymous, type: "checkbox"
-            = f.label :anonymous, "Post anonymously", class: "subtext", style: "color: #0a0a0a;"
-          - if (controller.action_name == "new")
-            .card-section
-              h2[style="margin-bottom: 10px;"] Images
-              .subtext 
-                | (optional)
-              #picture_fields
-                = f.fields_for :pictures do |picture|
-                  = render 'shared/picture_fields', f: picture
-                .links
-                  = link_to_add_association 'Add another image', f, :pictures, partial: 'shared/picture_fields'
-                span class="form-error"
-          .card-section
-            h2
-              = f.label :raw_gift_description, "In 10 words or less, what was the gift?"
-            .subtext
+        .label-container
+          h2
+            = f.label :raw_body, "Compose your story here"
+        = f.trix_editor :raw_body, class: "body"
+        span class="form-error"
+        = f.check_box :anonymous, type: "checkbox"
+        = f.label :anonymous, "Post anonymously", class: "subtext", style: "color: #0a0a0a;"
+      - if (controller.action_name == "new")
+        .card-section
+          .label-container
+            h2[style="margin-bottom: 10px;"] Images
+            .subtext 
               | (optional)
-            = f.text_field :raw_gift_description, autofocus: true, value: @story.raw_gift_description
+          #picture_fields
+            = f.fields_for :pictures do |picture|
+              = render 'shared/picture_fields', f: picture
+            .links
+              = link_to_add_association 'Add another image', f, :pictures, partial: 'shared/picture_fields'
             span class="form-error"
-            .subtext
-              | We'll help you if you leave this blank. You can always change it later.
-          .card-section
-            h2 Is your story about a gift fail?
-            .subtext
-              | (optional)
-            br
-            = f.check_box :fail, type: "checkbox"
-            = f.label :fail, "Yes"
-            - unless @story.fail
-              input[type="checkbox" checked='true' id="no_fail"]
-            - else
-              input[type="checkbox" id="no_fail"]
-            label No
-          .card-section
-            h2 Review
-            .subtext
-              | (optional)
-            p Our team of editors can help with minor spelling and grammar touch-ups to bring our the best in:your story. This service is free, and you can always make changes later. 
-            - if (controller.action_name == "new")
-              = f.radio_button :review, false, checked: true
-            - else
-              = f.radio_button :review, false
-            = f.label :review, "No thanks"
-            = f.radio_button :review, true
-            = f.label :review, "Yes, thanks a lot!"
-          .card-section.text-center
-            - sanitize @story.raw_body
-            - if controller.action_name == "edit"
-              = f.submit "Edit Story", class: "button"
-              = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
-            - else
-              = f.submit "Share Story", class: "button"
-      - elsif controller.action_name == "edit"
-        = form_for(@story, :html => {class: "form"}, remote: true) do |f|
-          .card-section[style="padding-top: 0px;"]
-            h2
-              = f.label :updated_title, "Your story title"
-            = f.text_field :updated_title, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_title : @story.updated_title
-            span class="form-error"
-          .card-section
-            h2
-              = f.label :updated_gift_description, "In 10 words or less, what was the gift?"
-            = f.text_field :updated_gift_description, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_gift_description : @story.updated_gift_description
-            span class="form-error"
-          .card-section
-            h2 Is your story about a gift fail?
-            br
-            = f.check_box :fail, type: "checkbox"
-            = f.label :fail, "Yes"
-            - unless @story.fail
-              input[type="checkbox" checked='true' id="no_fail"]
-            - else
-              input[type="checkbox" id="no_fail"]
-            label No
-          .card-section
-            h2
-              = f.label :updated_body, "Compose your story here"
-            == f.trix_editor :updated_body
-            span class="form-error"
-            = f.check_box :anonymous, type: "checkbox"
-            = f.label :anonymous, "Post anonymously", class: "subtext", style: "color: #0a0a0a;"
-          .card-section.text-center
-            - sanitize @story.updated_body
-            = f.submit class: "button"
-            = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
-    .columns.medium-6.large-5.form-sidebar.hide-for-small-only[data-equalizer-watch]
-      - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
-        div TBU
-      - elsif controller.action_name == "edit"
-        .columns.form-sidebar
-          .text-center
-            h2 Your Story Card
-          == render 'shared/story_card', story: @story, admin_view: false, preview: true
-script
+      .card-section
+        .label-container
+          h2
+            = f.label :raw_gift_description, "In 10 words or less, what was the gift?"
+          .subtext
+            | (optional)
+        = f.text_field :raw_gift_description, autofocus: true, value: @story.raw_gift_description
+        span class="form-error"
+        .subtext
+          | We'll help you if you leave this blank. You can always change it later.
+      .card-section
+        .label-container
+          h2 Is your story about a gift fail?
+          .subtext
+            | (optional)
+        = f.check_box :fail, type: "checkbox"
+        = f.label :fail, "Yes"
+        - unless @story.fail
+          input[type="checkbox" checked='true' id="no_fail"]
+        - else
+          input[type="checkbox" id="no_fail"]
+        label No
+      .card-section
+        .label-container
+          h2 Review
+          .subtext
+            | (optional)
+        p Our team of editors can help with minor spelling and grammar touch-ups to bring our the best in your story. This service is free, and you can always make changes later. 
+        - if (controller.action_name == "new")
+          = f.radio_button :review, false, checked: true
+        - else
+          = f.radio_button :review, false
+        = f.label :review, "No thanks"
+        = f.radio_button :review, true
+        = f.label :review, "Yes, thanks a lot!"
+      .card-section.text-center
+        - sanitize @story.raw_body
+        - if controller.action_name == "edit"
+          = f.submit "Edit Story", class: "button"
+          = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
+        - else
+          = f.submit "Share Story", class: "button"
+  - elsif controller.action_name == "edit"
+    = form_for(@story, :html => {class: "form"}, remote: true) do |f|
+      .card-section[style="padding-top: 0px;"]
+        h2
+          = f.label :updated_title, "Your story title"
+        = f.text_field :updated_title, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_title : @story.updated_title
+        span class="form-error"
+      .card-section
+        h2
+          = f.label :updated_gift_description, "In 10 words or less, what was the gift?"
+        = f.text_field :updated_gift_description, autofocus: true, value: (@story.last_user_to_update == "Admin") ? @story.final_gift_description : @story.updated_gift_description
+        span class="form-error"
+      .card-section
+        h2 Is your story about a gift fail?
+        br
+        = f.check_box :fail, type: "checkbox"
+        = f.label :fail, "Yes"
+        - unless @story.fail
+          input[type="checkbox" checked='true' id="no_fail"]
+        - else
+          input[type="checkbox" id="no_fail"]
+        label No
+      .card-section
+        h2
+          = f.label :updated_body, "Compose your story here"
+        == f.trix_editor :updated_body
+        span class="form-error"
+        = f.check_box :anonymous, type: "checkbox"
+        = f.label :anonymous, "Post anonymously", class: "subtext", style: "color: #0a0a0a;"
+      .card-section.text-center
+        - sanitize @story.updated_body
+        = f.submit class: "button"
+        = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
+/script
   == render partial: 'trix_input_id.js.erb', story: @story
 javascript:
   'use strict';

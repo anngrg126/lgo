@@ -11,21 +11,28 @@
   vertical-align: top;
 }
 //story new view
-.new-story-intro .large-9 {
-  position: relative;
-  &>div {
-    position: absolute;
-    bottom: 40%;
+.new-story-intro {
+  padding: 40px 0px;
+  h1 {
+    margin-bottom: 20px;
   }
+  max-width: 650px;
+  margin: 0 auto;
 }
 //story form {
 .story-form {
+  margin-bottom: 0;
+  padding: 40px 20px;
+  .label-container {
+    margin-bottom: 20px;
+  }
   h2 {
     display: inline;
     margin-right: 10px;
     & label {
       font-size: inherit;
       display: inline;
+      line-height: 1.15;
     }
   }
   .subtext {
@@ -52,7 +59,11 @@
   }
 }
 .form-sidebar {
-  background-color: $light-gray;
+  >div {
+    background-color: $light-gray;
+    height: 100%;
+    padding: 40px 20px;
+  }
   .text-center h2 {
     margin: 20px 0;
     color: $middark-gray;
@@ -79,13 +90,6 @@ trix-editor {
   max-height: 400px;
 }
 @media only screen and (max-width: 1024px) {
-  .new-story-intro .large-9 {
-    position: static;
-    &>div {
-      position: static;
-      margin: 20px auto;
-    }
-  }
 }
 @media only screen and (max-width: 640px) {
   //story index view
@@ -98,5 +102,17 @@ trix-editor {
     display: block;
     text-align: center;
     margin-bottom: 20px;
+  }
+  .new-story-intro {
+    padding: 20px 0px;
+  }
+  .story-form {
+    margin-bottom: 10px;
+    padding: 40px 10px;
+  }
+  .form-sidebar {
+    >div {
+      padding: 40px 20px;
+    }
   }
 }

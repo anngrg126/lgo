@@ -1,0 +1,11 @@
+.row[style="margin: 20px auto;" data-equalizer data-equalize-on="medium"]
+  .columns.medium-6.large-7[data-equalizer-watch]
+    == render 'form'
+  .columns.medium-6.large-5.form-sidebar[data-equalizer-watch]
+    - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
+        div TBU
+    - elsif controller.action_name == "edit"
+      .columns.form-sidebar
+        .text-center
+          h2 Your Story Card
+        == render 'shared/story_card', story: @story, admin_view: false, preview: true

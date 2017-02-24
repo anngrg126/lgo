@@ -1,13 +1,8 @@
-.row.new-story-intro[data-equalizer data-equalize-on="large"]
-  .columns.large-9[data-equalizer-watch]
-    div
-      .text-center[style="margin: 0 15px;"]
-        h1 Share Your Gift Story
-        p We all have memorable gift stories, whether about gifts we'll hold on to forever or trememdous gift fails. We're so excited you're here to share your story with this online community.
-      .text-center[style="margin-top: 20px;"]
-        .subtext Got writer's block? Check out our featured story prompt.
-  .columns.large-3[data-equalizer-watch]
-    == render 'stories/featured_prompt', share_view: true
-.row[style="margin-top: 20px;"]
-  .columns
-    == render 'form'
+.row.new-story-intro
+  div
+    .text-center[style="margin: 0 15px;"]
+      h1 Share Your Gift Story
+      p We all have memorable gift stories, whether about gifts we'll hold on to forever or trememdous gift fails. We're so excited you're here to share your story with this online community.
+    .text-center[style="margin-top: 20px;"]
+      .subtext Got writer's block? Check out our featured story prompt.
+== render 'form_container'
