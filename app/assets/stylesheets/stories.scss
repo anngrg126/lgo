@@ -70,6 +70,8 @@
     margin-bottom: 20px;
   }
   .story-card {
+    max-width: 350px;
+    margin: 0 auto;
     margin-bottom: 20px;
     .float-right div {
       padding-top: 0;
@@ -78,8 +80,8 @@
       background-color: white;
     }
   }
-  .featured-prompt, .story-card {
-    max-width: 350px;
+  .featured-prompt {
+    max-width: 300px;
     margin: 0 auto;
   }
 }
