@@ -6,7 +6,7 @@
           - user = @anonymous_user
         -else
           - user = @story.user 
-        div.row.columns[style= "line-height: 0.9;"]
+        div.row.columns[style= "line-height: 0.9;padding-left: 40px; padding-top: 20px"]
           == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0, comment:nil 
       hr[style="margin: 10px; max-width: 100%"]
       .card-section
