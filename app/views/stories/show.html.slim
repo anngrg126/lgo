@@ -94,6 +94,11 @@
             h2 Whats your Reaction?
           .columns.medium-4[style="min-width: 200px"]
             == render 'shared/reactions_component', s: @story, top: false 
+      .card-divider[style="text-align:center"]
+        h2[style="padding-bottom:10px;"] Feeling Inspired?
+        == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
+          span.fa.fa-pencil
+          span Share my Gift Story
 
     div
       <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
@@ -104,9 +109,25 @@
 
   .columns.large-3
     .card
+      .card-divider[style="text-align:center"]
+        h3 Browse
+      .card-section
+        - if @story.published?
+          - @c_tags = @story.classifications.select{|c| c.tag.tag_category_id==7}
+          - unless @c_tags.empty?
+            .div
+              h4 This story is part of the following themed collections:
+            .story_tags
+              - @c_tags.each do |classif|
+                - @t = @tags.select{|t| t.id == classif.tag_id}.first
+                span.label
+                  a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext primary-link"] #{@t.name}
+                | &nbsp;&nbsp;
       .card-section
         - if @story.published?
           - unless @story.classifications.empty?
+            .div
+              h4 More stories about
             .story_tags
               - @story.classifications.each do |classif|
                 - @t = @tags.select{|t| t.id == classif.tag_id}.first
