@@ -56,10 +56,13 @@
   .links {
     display: none;
   }
+  .button {
+    margin-bottom: 0;
+  }
 }
 .form-sidebar {
   >div {
-//    background-color: $light-gray;
+    background-color: $light-gray;
     height: 100%;
     padding: 40px 20px;
   }
@@ -77,10 +80,6 @@
       background-color: white;
     }
   }
-}
-//dummy css as an example of how to target trix editor buttons
-trix-toolbar .button_group button {
-//  border: 1px solid red;
 }
 trix-editor {
   overflow: scroll;
