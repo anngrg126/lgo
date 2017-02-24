@@ -34,8 +34,8 @@
             hr[style="margin-bottom: 0;"]
               == link_to notifications_dashboard_path(@user), id: "db_notifications", remote: true do
                 span Notifications
-                span.count class=('zero-count' if @unread_notifications.length == 0) 
-                  #dashboard_notifications_counter #{@unread_notifications.length}
+                span.count class=('zero-count' if @unread_notification_count == 0) 
+                  #dashboard_notifications_counter #{@unread_notification_count}
             hr[style="margin: 0;"]
           == link_to followers_dashboard_path(@user), id: "user_followers", remote: true do
             span Followers
