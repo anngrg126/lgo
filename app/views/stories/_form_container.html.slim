@@ -3,9 +3,9 @@
     == render 'form'
   .columns.medium-6.large-5.form-sidebar[data-equalizer-watch]
     - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
-        div TBU
+      div TBU
     - elsif controller.action_name == "edit"
-      .columns.form-sidebar
+      div
         .text-center
-          h2 Your Story Card
+          h2.secondary Your Story Card
         == render 'shared/story_card', story: @story, admin_view: false, preview: true

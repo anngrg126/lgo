@@ -19,7 +19,6 @@
   max-width: 650px;
   margin: 0 auto;
 }
-//story form {
 .story-form {
   margin-bottom: 0;
   padding: 40px 20px;
@@ -60,13 +59,12 @@
 }
 .form-sidebar {
   >div {
-    background-color: $light-gray;
+//    background-color: $light-gray;
     height: 100%;
     padding: 40px 20px;
   }
   .text-center h2 {
-    margin: 20px 0;
-    color: $middark-gray;
+    margin-bottom: 20px;
   }
   .story-card {
     max-width: 350px;
@@ -103,12 +101,17 @@ trix-editor {
     text-align: center;
     margin-bottom: 20px;
   }
+  //story form view
   .new-story-intro {
     padding: 20px 0px;
   }
   .story-form {
     margin-bottom: 10px;
     padding: 40px 10px;
+    .card-section {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
   }
   .form-sidebar {
     >div {
