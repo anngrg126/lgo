@@ -6,8 +6,27 @@
           - user = @anonymous_user
         -else
           - user = @story.user 
-        div.row.columns[style= "line-height: 0.9;padding-left: 40px; padding-top: 20px"]
-          == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0, comment:nil 
+        .row.columns.clearfix
+          .float-left
+            .columns[style= "line-height: 0.9;padding-left: 40px; padding-top: 20px; width: auto;"]
+              == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0, comment:nil 
+          - if user_signed_in? && @story.author_id == current_user.id
+            .float-right 
+              .row.columns[style="text-align: center;margin-top: 10px"]
+                .div[style="display:inline-block; margin: 10px"]
+                  == link_to  new_story_picture_path(@story), class: "button button-w-icon" do
+                    span.fa.fa-cloud-upload
+                    span Upload More Pictures
+                .div[style="display:inline-block; margin: 10px"]
+                  == link_to edit_story_path(@story), class: "button button-w-icon" do
+                    span.fa.fa-pencil
+                    span Edit Story
+                .div[style="display:inline-block; margin: 10px;"]
+                  == link_to  story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "minor-link" do
+                    span.fa.fa-trash
+                    span &nbsp; Delete Story
+
+
       hr[style="margin: 10px; max-width: 100%"]
       .card-section
         .row
