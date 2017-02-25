@@ -91,11 +91,11 @@
                           span.fa.fa-trash-o
                           span &nbsp;Delete Picture
       .card-section
-        .row.center-on-mobile-left
+        .row.center-on-mobile-left[style="padding: 20px 0px"]
           .columns.medium-8
             <!-- Reactions -->
-            h2 Whats your Reaction?
-          .columns.medium-4[style="min-width: 200px"]
+            h2[style="padding-left: 10px"] Whats your Reaction?
+          .columns.medium-4[style="min-width: 200px;"]
             == render 'shared/reactions_component', s: @story, top: false 
       .card-divider[style="text-align:center"]
         h2[style="padding-bottom:10px;"] Feeling Inspired?
