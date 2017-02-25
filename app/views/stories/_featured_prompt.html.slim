@@ -1,18 +1,17 @@
-/#featured_prompt.featured-prompt.anchor
-.featured-prompt
-  .row.columns.text-center
-    h2 Featured Story Prompt
-  .row.columns
-    - unless share_view
-      == link_to user_signed_in? ? new_story_path : new_user_session_path do
-        .story-card-image[style="background-image: url(#{image_path 'surprise.jpg'});"]
-        .prompts.text-center
-          div What was your most 
-          h2 unexpected 
-          div gift?
-    - else
+== link_to share_view ? "#featured_prompt" : user_signed_in? ? new_story_path : new_user_session_path, class: share_view ? "no-link" : "" do
+  /#featured_prompt.featured-prompt.anchor
+  .featured-prompt[class= '#{share_view ? "extra-padding" : "no-share"}']
+    .row.columns.text-center
+      h3.secondary Featured Story Prompt
+    .row.columns
       .story-card-image[style="background-image: url(#{image_path 'surprise.jpg'});"]
       .prompts.text-center
-        div What was your most 
-        h2 unexpected 
-        div gift?
+        h3 
+          | What was your most 
+          span.handwriting unexpected 
+          | gift?
+    - unless share_view
+      .row.columns.text-center[style="padding-top: 1.5rem; padding-bottom: 1.5rem;"]
+        == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
+          span.fa.fa-pencil
+          span Share a Story

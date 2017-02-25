@@ -15,18 +15,14 @@
         .columns.medium-6
           == render 'shared/story_card', story: s, admin_view: false, preview: false
   .columns.large-3.large-pull-9
-    .row.columns[style="background-color: #fefefe;"]
-      .columns.large-12.medium-6[style="background-color: #fefefe; padding-top: 10px; padding-bottom: 10px;"]
+    .row.columns.index_sidebar
+      .columns.large-12.medium-6[style="padding-top: 10px; padding-bottom: 10px;"]
         .text-center
-          p[style="color: #4a4a4a; padding: 0 10px;"] We've all felt stuck on gift ideas. Reading stories about other people's gifts inspires ideas and cautions against what not to do.
-        .text-center[style="margin: 30px auto;"]
-          strong Share your story today.
+          p[style="color: #4a4a4a; padding: 0 10px;"] We dream big about showing love and affection to the people in our lives. Gifts help us do that. Even the best givers need more ideas.
+        .text-center[style="margin: 40px auto;"]
+          strong Share your gift story today
       .columns.large-12.medium-6
         ==render 'featured_prompt', share_view: false
-      .columns.text-center.share.large-12.large-pull-0.medium-6.medium-pull-6[style="padding-top: 1.5rem; padding-bottom: 1.5rem;"]
-        == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
-          span.fa.fa-pencil
-          span Share a Story
     .row.columns.hide-for-small-only
       ==render 'stories/as_seen_in'
 == render partial: 'shared/go_to_top'
