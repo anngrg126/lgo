@@ -1,4 +1,4 @@
-h2 Comments
+strong Comments
 - if @story_comments.any?
   - @story_comments.each do |comment|
     == render 'shared/comment_partial', story: @story, user: comment.user, comment: comment

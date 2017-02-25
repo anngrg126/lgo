@@ -1,5 +1,5 @@
-.card.comment
-  .card-section
+.columns.comment
+  .div
     == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0, comment:comment
     div
       div id="comment_#{comment.id}"
@@ -9,7 +9,7 @@
           - if user_signed_in? && current_user == comment.user
             == link_to edit_story_comment_path(story, comment), remote: true, class: "minor-link" do
               span.fa.fa-pencil
-              span &nbsp;Edit&nbsp;&nbsp;
+              span &nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             == link_to story_comment_path(story, comment), method: :delete, data: {confirm: "Are you sure you want to delete the comment?"}, class: "minor-link" do
               span.fa.fa-trash-o
               span &nbsp;Delete
