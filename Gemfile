@@ -76,12 +76,12 @@ gem 'whenever', :require => false
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :production do
-  # configure elasticsearch for aws
-  gem 'elasticsearch', '>= 1.0.15'
-  # use signed request for aws elasticsearch - uncomment the next line
-  # gem 'faraday_middleware-aws-signers-v4'
-end
+#group :production do
+#  # configure elasticsearch for aws
+#  gem 'elasticsearch', '>= 1.0.15'
+#  # use signed request for aws elasticsearch - uncomment the next line
+#  gem 'faraday_middleware-aws-signers-v4'
+#end
 
 group :development, :test do
   gem 'pry'
