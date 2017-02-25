@@ -1,5 +1,5 @@
 .row[style="margin: 20px auto;" data-equalizer data-equalize-on="medium"]
-  .columns.medium-6.large-7[data-equalizer-watch]
+  .columns.medium-6.large-7.form-container[data-equalizer-watch]
     == render 'form'
   .columns.medium-6.large-5.form-sidebar[data-equalizer-watch]
     - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
@@ -9,5 +9,5 @@
     - elsif controller.action_name == "edit"
       div
         .text-center
-          h2.secondary Your Story Card
+          h2.secondary Your story card
         == render 'shared/story_card', story: @story, admin_view: false, preview: true
