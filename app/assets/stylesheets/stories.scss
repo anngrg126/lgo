@@ -102,7 +102,7 @@
   >div {
     background-color: $light-gray;
     height: 100%;
-    padding: 40px 20px;
+    padding: 40px 40px;
   }
   .text-center h2 {
     margin-bottom: 20px;
@@ -121,6 +121,15 @@
   .featured-prompt {
     max-width: 300px;
     margin: 0 auto;
+  }
+  .fa-2x {
+    color: $midpt-gray;
+  }
+  .icon-section {
+    padding: 40px 10px;
+  }
+  .anchor h2 {
+    margin: 60px 0 80px;
   }
 }
 trix-editor {
@@ -171,6 +180,9 @@ trix-editor {
     padding-left: 0.625rem;
     >div {
       padding: 50px 20px 40px 20px;
+    }
+    .icon-section {
+      padding: 20px 0;
     }
   }
   .form-container {
