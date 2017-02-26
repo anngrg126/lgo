@@ -17,7 +17,7 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
     attach_file('image[]', './spec/fixtures/image.png')
     click_button "Share Story"
     
-    expect(page).to have_content("Story has been submitted")
+    expect(page).to have_content("Thanks for sharing a story")
     expect(page.current_path).to eq(dashboard_path(@user))
     
     click_link @title
@@ -36,7 +36,7 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
     end
     click_button "Share Story"
     
-    expect(page).to have_content("Story has been submitted")
+    expect(page).to have_content("Thanks for sharing a story")
     expect(page.current_path).to eq(dashboard_path(@user))
     
     click_link @title
