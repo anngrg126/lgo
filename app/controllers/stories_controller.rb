@@ -47,8 +47,8 @@ class StoriesController < ApplicationController
       end
       if @picture.nil? || !@picture.errors.any?
         if @story.save
-          flash[:story_thank_you] = "Story has been submitted"
-          format.html {redirect_to dashboard_path(current_user)}
+          flash[:partial] = @story
+          format.html {redirect_to dashboard_path(current_user), :data => [ story = @story.to_json]}
           NotificationsMailer.admin_story_email(@story).deliver_now
         end
       end

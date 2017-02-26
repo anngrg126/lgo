@@ -6,8 +6,8 @@ div#flash_notice
         button[class="close-button" aria-label="dismiss alert" type="button" data-close]
           span[aria-hidden="true"] &times;
     - elsif msg == nil
-    - elsif name == "story_thank_you" && msg != nil
-      == render 'shared/super'
+    - elsif name == "partial"
+      == render 'shared/thank_you', locals: {var: msg}
     - else
       div[class="callout #{name}" data-closable]
         == content_tag :div, msg if msg.is_a?(String)
