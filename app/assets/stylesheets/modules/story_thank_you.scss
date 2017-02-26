@@ -1,10 +1,11 @@
 .thank-you {
-  height: 350px;
-  width: 100%;
+  min-height: 350px;
   background-color: $primary-color;
   margin-bottom: 50px;
   margin-top: -8px;//adjustment for navbar
   position: relative;
+  padding: 40px;
+  color: lighten($black, 14%);
   &:after {
     content: '';
     left: 50%;
@@ -18,8 +19,53 @@
     border-width: 40px;
     margin-left: -40px;
   }
+  .text-center {
+    max-width: 650px;
+    margin: 0 auto;
+  }
   h1 {
     color: white;
-    padding: 40px
+    padding: 40px 0;
+  }
+  a {
+    color: $white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    &:hover {
+      color: $dark-gray;
+    }
+  }
+  .icon-button {
+    position: absolute;
+    right: 3rem;
+    top: 2rem;
+  }
+  img {
+    max-height: 75px;
+    margin-top: 20px;
+  }
+  p {
+    font-weight: 500;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .thank-you {
+    padding: 20px;
+    min-height: 250px;
+    margin-bottom: 20px;
+    &:after {
+      border-width: 20px;
+      margin-left: -20px;
+    }
+    h1 {
+      padding: 30px 0 40px;
+    }
+    .icon-button {
+      right: 1rem;
+      top: 0.5rem;
+    }
+    a {
+      font-size: 1.7rem;
+    }
   }
 }

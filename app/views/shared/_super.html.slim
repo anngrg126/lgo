@@ -1,5 +1,12 @@
 .thank-you[data-closable]
   .text-center
+    == image_tag("GiftOn-White-lightbulb.png")
     h1 Thanks for sharing a story!
-    button.icon-button.white-icon.close-button[aria-label = "dismiss alert" type="button" data-close]
+    button.icon-button.white-icon[aria-label = "dismiss alert" type="button" data-close]
       i.fi-x.fa-lg[aria-hidden="true"]
+    p 
+      | Our awesome bots are tagging your story so that others can find it. You'll get a notification once they finish and publish your story. In the meantime, 
+      == link_to "preview your story ", root_path
+      | or 
+      == link_to "browse more stories", root_path
+      | .
