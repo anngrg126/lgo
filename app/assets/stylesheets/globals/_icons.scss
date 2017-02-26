@@ -17,6 +17,9 @@ $footer-icon-color: $black;
   &.secondary-icon {
     color: $secondary-icon-color;
   }
+  &.white-icon {
+    color: $white;
+  }
 }
 %icon-button {
   @extend %icon;
@@ -28,6 +31,11 @@ $footer-icon-color: $black;
   &.secondary-icon {
     &:hover {
     color: darken($primary-icon-color, 14%);
+    }
+  };
+  &.white-icon {
+    &:hover {
+    color: $black;
     }
   };
   .circle-text.open:hover {
