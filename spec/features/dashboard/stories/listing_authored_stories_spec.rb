@@ -43,10 +43,10 @@ RSpec.feature "Listing Stories" do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
     click_link "Bookmarks"
-    expect(page).to have_content("Your Bookmarked Stories")
+    expect(page).to have_content("Your bookmarked stories")
     
     click_link "Stories"
-    expect(page).to have_content("Your Stories")
+    expect(page).to have_content("Your stories")
     expect(page).to have_content(@story1.raw_title)
     expect(page).to have_content(@story1.raw_body.truncate(275))
     expect(page).to have_link(@story1.raw_title)

@@ -40,6 +40,6 @@
         == link_to "#{user.full_name}", dashboard_path(user), class: 'secondary-link'
       .subtext.dark-gray
         -if comment.nil?
-          == story.created_at.strftime("%b %d, %Y") 
+          == story.created_at.strftime("%b %d, %Y") + " "
         -else
-          == comment.created_at.strftime("%b %d, %Y") 
+          == comment.created_at.strftime("%b %d, %Y")
