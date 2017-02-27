@@ -14,7 +14,8 @@ class ApplicationController < ActionController::Base
       activate_comments(@user)
     end
     log_user_sign_in(@user)
-    super resource   
+    super resource
+    dashboard_path(@user)
   end
   
   def activate_stories(user)

@@ -136,7 +136,7 @@ class StoriesController < ApplicationController
     if @story.save
       destroy_notification(@story)
       flash[:success] = "Story has been deleted"
-      redirect_to stories_path
+      redirect_to dashboard_path(@story.user)
     end
   end
   

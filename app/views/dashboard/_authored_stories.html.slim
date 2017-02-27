@@ -1,9 +1,9 @@
 div
   - if @user == current_user
-    h1 Your Stories
+    h1 Your stories
   - else
     h1
-      == "#{@user.first_name}'s Stories"
+      == "#{@user.first_name.titleize}'s stories"
 .row
   - @dashboard_stories.each do |s|
     .columns.medium-6

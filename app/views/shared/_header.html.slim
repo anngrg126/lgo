@@ -9,6 +9,8 @@ div#stickhere[data-sticky-container]
           li.hide-for-small-only[class="#{@active_browse}"]
             button#browse_navbar[data-toggle="tags-menu"] 
               h5[class="#{@active_browse}"] Browse
+          li
+            .extra-space
           li.hide-for-small-only[class="#{@active_share}"]
             == link_to new_story_path do
               h5[class="#{@active_share}"] Share

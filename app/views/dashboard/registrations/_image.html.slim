@@ -1,9 +1,18 @@
 == form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }, remote: true do |f|
   div.field
-    = f.label :image
-    = f.file_field :image
+    strong[style="margin-bottom: 10px;"] Profile Picture
+    br
+    = f.file_field :image, class: "image-input"
+    = f.label :image, "Choose a file", class: "image-label" do
+      .text-center
+        .fa.fa-camera.fa-2x
+        p upload an image
     span class="form-error"
 
   div.actions
     = f.submit "Update", class: "button"
-    = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
+    = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
+javascript:
+  ;( function( $, window, document, undefined ) {
+    uploadLabel(); 
+  })( jQuery, window, document );

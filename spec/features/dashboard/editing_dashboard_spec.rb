@@ -8,7 +8,7 @@ RSpec.feature "Editing Dashboard" do
     @new_about_me = Faker::Hipster::sentence
   end
   
-  scenario "Logged-in user can edit her basic profile information via the dashboard", js:true do
+  scenario "Logged-in user can edit her basic profile information via the dashboard", js: true do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
     
@@ -18,8 +18,14 @@ RSpec.feature "Editing Dashboard" do
     click_button "Update"
     expect(page).to have_content(@new_about_me)
     
-    click_link "Upload Photo"
-    attach_file('user_image', './spec/fixtures/image.png')
+#    click_link "Upload Photo"
+#    attach_file('user_image', './spec/fixtures/image.png')
+    within '.user-profile' do
+      find("a[href*='user_image']").click
+    end
+    expect(page).to have_css("input.image-input")
+    execute_script("$('input[name=\"user[image]\"]').removeClass('image-input')")
+    attach_file('user[image]', './spec/fixtures/image.png')
     click_button "Update"
     
     expect(page).to have_content("Profile has been updated")
@@ -30,7 +36,12 @@ RSpec.feature "Editing Dashboard" do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
     
-    click_link "Upload Photo"
+#    click_link "Upload Photo"
+    within '.user-profile' do
+      find("a[href*='user_image']").click
+    end
+    expect(page).to have_css("input.image-input")
+    execute_script("$('input[name=\"user[image]\"]').removeClass('image-input')")
     attach_file('user_image', './spec/fixtures/text.rtf')
     click_button "Update"
     expect(page).to have_content("Image is invalid")
