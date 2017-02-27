@@ -23,7 +23,7 @@ RSpec.feature "Creating Stories", :type => :feature do
     
     click_button "Share Story"    
 
-    expect(page).to have_content("Story has been submitted")
+    expect(page).to have_content("Thanks for sharing a story")
 #    expect(page.current_path).to eq(stories_path)
     expect(page.current_path).to eq(dashboard_path(@user))
   end
