@@ -1,9 +1,9 @@
 div
   - if @user == current_user
-    h1 Your Story Reactions
+    h1 Your story reactions
   - else
     h1
-      == "#{@user.first_name}'s Story Reactions"
+      == "#{@user.first_name}'s story reactions"
 .row
   - @reacted_stories.each do |s|
     .columns.medium-6
