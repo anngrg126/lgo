@@ -33,6 +33,9 @@ h1 {
   font-size: 4.25rem;
   font-weight: 700;
 }
+h3 {
+  @include font-size($global-larger-sizes);
+}
 .secondary {//for use on a $light-gray background
   color: $middark-gray;
 }
@@ -56,6 +59,10 @@ h2 a {
 }
 .italic {
   font-style: italic;
+}
+.handwriting {
+  font-family: $handwritten-font-family;
+  font-weight: 500;
 }
 .anchor {//class to add to elements that links scroll to (when nav height is a concern)
   padding-top: 50px;

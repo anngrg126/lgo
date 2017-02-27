@@ -10,6 +10,11 @@
   display: inline-block;
   vertical-align: top;
 }
+.row .row.columns.index_sidebar {
+  background-color: $white;
+  padding: 20px 10px;
+  border: 1px solid $light-gray;
+}
 //story new view
 .new-story-intro {
   padding: 40px 0px;
@@ -205,5 +210,8 @@ trix-editor {
       margin-top: 0;
       margin-left: -41px;
     }
+  }
+  .index_sidebar {
+    margin-bottom: 10px;
   }
 }
