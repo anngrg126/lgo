@@ -26,12 +26,21 @@ $global-larger-sizes: (
 a, p, span, button, li, div, label {
   @include font-size($global-body-sizes);
 }
-.subtext {
+.subtext, .subtext a {
   @include font-size($subtext-sizes);
 }
 h1 {
   font-size: 4.25rem;
   font-weight: 700;
+}
+.secondary {//for use on a $light-gray background
+  color: $middark-gray;
+}
+p.secondary, .subtext.secondary {
+  color: $dark-gray;
+}
+strong.secondary {
+  color: $midpt-gray;
 }
 h2, h2 a{
   font-size: 2.5rem;
@@ -47,6 +56,10 @@ h2 a {
 }
 .italic {
   font-style: italic;
+}
+.anchor {//class to add to elements that links scroll to (when nav height is a concern)
+  padding-top: 50px;
+  margin-top: -50px;
 }
 //labels
 .label {
@@ -227,5 +240,9 @@ h2 a {
   }
   .list.stacked a span:nth-child(2) {
     right: 0px;
+  }
+  .anchor {
+    padding-top: 0px;
+    margin-top: 0px;
   }
 }

@@ -72,7 +72,7 @@ function myFunction() {
     $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
   });
   //*Story Show View*
-  $('a[href^="#comments"], a[href^="#stickhere"]').on('click', function(e){
+  $('a[href^="#comments"], a[href^="#stickhere"], a[href^="#featured_prompt"]').on('click', function(e){
     e.preventDefault();
     var target = this.hash;
     var $target = $(target);
@@ -92,7 +92,7 @@ function myFunction() {
   });
   if ($(window).width() < 640) {
     $(window).bind('scroll', function(){
-      if($(this).scrollTop()>1000) {
+      if($(this).scrollTop()>500) {
         $("#go-to-top").show();
       } else {
         $("#go-to-top").hide();
@@ -169,7 +169,43 @@ $(document).on("hide.zf.dropdown", function(e) {
 $(document).on('click', '.remove_image_field', function(event){
   $(this).closest(".upload_image").remove();
 });
-
+//fcn to change text of image upload label
+function uploadLabel() {
+  $( '.image-input' ).on( 'change', function( e ) {
+    var fileCount = '',
+        fileName  = '',
+        $label	  = $( this ).next( 'label' ),
+        links     = '';
+    if( this.files && this.files.length > 1 ) {
+      //fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+      fileCount = this.files.length
+    } else if( e.target.value ) {
+      fileName = e.target.value.split( '\\' ).pop();
+    };
+    if( fileCount ) {
+      if (fileCount > 1) {
+        $label.find( 'p' ).html( fileCount.toString()+" files selected" );
+      } else {
+        $label.find( 'p' ).html( fileCount.toString()+" file selected" );
+      }
+      links = true;
+    } else {
+        //$label.html( labelVal );
+    };
+    if( fileName ) {
+      $label.find( 'p' ).html( fileName );
+      links = true;
+    }
+    if (links) {
+      $(".links").css("display", "block"); 
+      $(this).siblings("a.remove_fields").css("display", "inline-block");
+    }
+  });
+  // Firefox bug fix
+  $( '.image-input' )
+  .on( 'focus', function(){ $( this ).addClass( 'has-focus' ); })
+  .on( 'blur', function(){ $( this ).removeClass( 'has-focus' ); });
+};
 //fcn to hinder built-in capability of trix editor to accept embedded files
 document.addEventListener("trix-file-accept", function(event) {
   event.preventDefault()

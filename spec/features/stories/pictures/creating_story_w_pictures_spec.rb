@@ -7,16 +7,15 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
     @anonymous_user = FactoryGirl.create(:anonymous_user)
     @user = FactoryGirl.create(:user)
     login_as(@user, :scope => :user)
-    visit "/"
-    click_link "Share a Story"
+    visit "/stories/new"
     @title = Faker::Hipster::sentence
-    fill_in "Title", with: @title
+    fill_in "Give your story a title", with: @title
     fill_in_trix_editor('story_raw_body_trix_input_story', Faker::Hipster::paragraph)
   end
   
   scenario "A user creates a new story w/ one picture" do
     attach_file('image[]', './spec/fixtures/image.png')
-    click_button "Contribute Story"
+    click_button "Share Story"
     
     expect(page).to have_content("Story has been submitted")
     expect(page.current_path).to eq(dashboard_path(@user))
@@ -26,13 +25,16 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
   end
   
   scenario "A user creates a new story w/ many pictures", js: true do
+    execute_script("$('input[name=\"image[]\"]').removeClass('image-input')")
     attach_file('image[]', './spec/fixtures/image.png')
     
     click_link "Add another image"
-    within('.nested-fields') do
+    expect(page).to have_css(".fa-camera", count: 2)
+    within('#picture_fields > .nested-fields:nth-child(2)') do
+      execute_script("$('input[name=\"image[]\"]').removeClass('image-input')")
       attach_file('image[]', './spec/fixtures/image.png')
     end
-    click_button "Contribute Story"
+    click_button "Share Story"
     
     expect(page).to have_content("Story has been submitted")
     expect(page.current_path).to eq(dashboard_path(@user))
@@ -42,8 +44,9 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
   end
   
   scenario "Logged-in user fails to add pictures to a story", js: true do
+    execute_script("$('input[name=\"image[]\"]').removeClass('image-input')")
     attach_file('image[]', './spec/fixtures/text.rtf')
-    click_button "Contribute Story"
+    click_button "Share Story"
     
     expect(page).to have_content("Image content type is invalid")
   end

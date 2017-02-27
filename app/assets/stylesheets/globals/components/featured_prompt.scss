@@ -18,6 +18,8 @@
     border: 1px solid $medium-gray;
     border-top: 0;
     color: $black;
+  }
+  a .prompts {
     &:hover, &:hover h2 {
       color: $primary-color;
     }

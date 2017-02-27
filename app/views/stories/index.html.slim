@@ -4,7 +4,7 @@
     .row.columns
       .index_subinfo
         div
-          h2[style="display: inline-block;"] Real-life gift stories
+          h2[style="display: inline-block;"] Browse real-life gift stories
           p from people just like you.
       .index_story_share
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
@@ -13,7 +13,7 @@
     .row
       - @stories.each do |s|
         .columns.medium-6
-          == render 'shared/story_card', story: s, admin_view: false
+          == render 'shared/story_card', story: s, admin_view: false, preview: false
   .columns.large-3.large-pull-9
     .row.columns[style="background-color: #fefefe;"]
       .columns.large-12.medium-6[style="background-color: #fefefe; padding-top: 10px; padding-bottom: 10px;"]
@@ -22,7 +22,7 @@
         .text-center[style="margin: 30px auto;"]
           strong Share your story today.
       .columns.large-12.medium-6
-        ==render partial: 'stories/featured_prompt'
+        ==render 'featured_prompt', share_view: false
       .columns.text-center.share.large-12.large-pull-0.medium-6.medium-pull-6[style="padding-top: 1.5rem; padding-bottom: 1.5rem;"]
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fa.fa-pencil

@@ -8,8 +8,8 @@ RSpec.feature "Editing Stories" do
     @user2 = FactoryGirl.create(:user_with_unpublished_stories)
     @story = Story.where(author_id: @user.id).active.first
     @story2 = Story.where(author_id: @user2.id).active.first
-    @updated_title = Faker::Hipster::sentence
-    @updated_title2 = Faker::Hipster::sentence
+    @updated_title = Faker::Hipster::sentence[0..60]
+    @updated_title2 = Faker::Hipster::sentence[0..60]
     @updated_body = Faker::Hipster::paragraph
     @updated_body2 = Faker::Hipster::paragraph
     @updated_description = Faker::Hipster::sentence
@@ -55,9 +55,9 @@ RSpec.feature "Editing Stories" do
     end
     click_link "Edit Story"
     
-    fill_in "Title", with: @updated_title
+    fill_in "Your story title", with: @updated_title
     fill_in_trix_editor('story_updated_body_trix_input_story_'+@story.id.to_s, @updated_body)
-    fill_in "Gift Description", with: @updated_description
+    fill_in "In 10 words or less, what was the gift?", with: @updated_description
     uncheck("story_fail")
     click_button "Update Story"
     
@@ -78,10 +78,10 @@ RSpec.feature "Editing Stories" do
     click_link @story2.raw_title
     click_link "Edit Story"
     
-    fill_in "Title", with: @updated_title2
+    fill_in "Your story title", with: @updated_title2
     fill_in_trix_editor('story_raw_body_trix_input_story_'+@story2.id.to_s, @updated_body2)
-    fill_in "Gift Description", with: @updated_description
-    click_button "Contribute Story"
+    fill_in "In 10 words or less, what was the gift?", with: @updated_description
+    click_button "Edit Story"
     
     expect(page).to have_content("Story has been updated")
     expect(page).to have_content(@updated_title2)
@@ -97,9 +97,9 @@ RSpec.feature "Editing Stories" do
     click_link @story.final_title
     click_link "Edit Story"
     
-    fill_in "Title", with: ""
+    fill_in "Your story title", with: ""
+    fill_in "In 10 words or less, what was the gift?", with: ""
     fill_in_trix_editor('story_updated_body_trix_input_story_'+@story.id.to_s, "")
-    fill_in "Gift Description", with: ""
     click_button "Update Story"
     
     expect(page).to have_content("Story has not been updated")

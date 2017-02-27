@@ -17,11 +17,6 @@ function myFunction2() {
   });
 };
 
-//fcn to load all radio buttons as unchecked
-$(document).ready(function() {
-  $('input[type="radio"]').removeAttr("checked");
-});
-
 //*USER DASHBOARD
 //fcn to show/hide custom gender field when updating information via user dashboard
 $(document).ajaxComplete(function() {

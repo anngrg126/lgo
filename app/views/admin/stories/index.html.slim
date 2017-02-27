@@ -7,4 +7,4 @@
     .row
       - @stories.each do |s|
         .columns.medium-6
-          == render 'shared/story_card', story: s, admin_view: true
+          == render 'shared/story_card', story: s, admin_view: true, preview: false
