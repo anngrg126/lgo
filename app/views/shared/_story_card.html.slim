@@ -45,9 +45,10 @@
           div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
   .card-section
     == story_body(story)
-  .card-section
+  .card-section.last-section
+    == link_to "Read full story", story_path(story), class: "primary-link"
     - if preview
-      div[style="text-align:right"]
+      .float-right.reactions
         .icon-button.primary-icon
           span.fa.fa-comment-o.fa-lg
         .icon-button.primary-icon
