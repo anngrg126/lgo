@@ -41,8 +41,9 @@
               -unless u.nil?
                 - if my_message["category"] =="Bookmark" || my_message["option"] == "published"
                 - else 
-                  == link_to dashboard_path(u), class: "user-thumbnail medium-thumb" do
-                    == user_photo(u)
+                  - if u.image_file_name? || u.fbimage?
+                    == link_to dashboard_path(u), class: "user-thumbnail medium-thumb" do
+                      == user_photo(u)
         /==noti_user.name
     .columns.medium-3
       div
