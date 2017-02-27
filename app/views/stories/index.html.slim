@@ -21,8 +21,9 @@
           p[style="color: #4a4a4a; padding: 0 10px;"] We dream big about showing love and affection to the people in our lives. Gifts help us do that. Even the best givers need more ideas.
         .text-center[style="margin: 40px auto;"]
           strong Share your gift story today
+        hr.hide-for-medium-only[style="margin: 1.25rem 0 2rem 0;"]
       .columns.large-12.medium-6
         ==render 'featured_prompt', share_view: false
-    .row.columns.hide-for-small-only
+    .row.columns.show-for-large-only
       ==render 'stories/as_seen_in'
 == render partial: 'shared/go_to_top'
