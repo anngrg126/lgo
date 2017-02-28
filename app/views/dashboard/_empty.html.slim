@@ -1,0 +1,8 @@
+if @user == current_user
+  - if view == "authored"
+    .text-center
+      h2.secondary You haven't written any stories yet! 
+      p Get started by sharing your first gift story.
+      ==image_tag('empty_gift_gray.png')
+      
+      /or browse stories that others shared.
