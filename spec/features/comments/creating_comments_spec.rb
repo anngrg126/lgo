@@ -21,7 +21,7 @@ RSpec.feature "Adding Comments to Stories" do
     
     visit "/"
     click_link @story.final_title
-    fill_in "New Comment", with: @comment1
+    fill_in "comment[body]", with: @comment1
     click_button "Add Comment"
     
     expect(page).to have_content("Comment has been added")
@@ -44,7 +44,7 @@ RSpec.feature "Adding Comments to Stories" do
     
     visit "/"
     click_link @story.final_title
-    fill_in "New Comment", with: ""
+    fill_in "comment[body]", with: ""
     click_button "Add Comment"
     assert_text("Body can't be blank")
     

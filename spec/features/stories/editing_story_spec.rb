@@ -50,7 +50,7 @@ RSpec.feature "Editing Stories" do
     visit "/"
     
     click_link @story.final_title
-    within(".story_tags") do
+    within(".large-9 .story_tags") do
       expect(page).to have_content("fail")
     end
     click_link "Edit Story"
@@ -65,7 +65,7 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content(@updated_body)
     expect(page).to have_content(@updated_description)
     expect(page).to have_content("Story has been updated")
-    within(".story_tags") do
+    within(".large-9 .story_tags") do
       expect(page).not_to have_content("fail")
     end
     expect(page.current_path).to eq(story_path(Story.find(@story.id).slug))   
