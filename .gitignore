@@ -23,6 +23,3 @@
 
 #Ignore all public test & dev files
 /public/system/*
-
-#Ignore database.yml
-/config/database.yml
