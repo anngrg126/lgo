@@ -10,6 +10,12 @@
 #  pool: 5
 #  timeout: 5000
 
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: letsgifton_production
+  pool: 5
+  
 development:
   adapter: postgresql
   encoding: unicode
@@ -24,11 +30,4 @@ test:
   adapter: postgresql
   encoding: unicode
   database: letsgifton_test
-  pool: 5
-
-production:
-#  <<: *default
-  adapter: postgresql
-  encoding: unicode
-  database: letsgifton_production
   pool: 5
