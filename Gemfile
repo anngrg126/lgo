@@ -67,6 +67,9 @@ gem 'searchkick'
 #gem for handling cron jobs
 gem 'whenever', :require => false
 
+#gem for AWS
+gem 'puma'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
