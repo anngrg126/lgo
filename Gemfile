@@ -111,3 +111,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
 end
+
+group :production do
+  gem 'pg'
+end
