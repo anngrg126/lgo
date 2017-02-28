@@ -47,8 +47,8 @@ class StoriesController < ApplicationController
       end
       if @picture.nil? || !@picture.errors.any?
         if @story.save
-          flash[:success] = "Story has been submitted"
-          format.html {redirect_to dashboard_path(current_user)}
+          flash[:partial] = @story
+          format.html {redirect_to dashboard_path(current_user), :data => [ story = @story.to_json]}
           NotificationsMailer.admin_story_email(@story).deliver_now
         end
       end
@@ -136,7 +136,7 @@ class StoriesController < ApplicationController
     if @story.save
       destroy_notification(@story)
       flash[:success] = "Story has been deleted"
-      redirect_to stories_path
+      redirect_to dashboard_path(@story.user)
     end
   end
   
@@ -158,7 +158,7 @@ class StoriesController < ApplicationController
   
   def create_notification(story)
     #Notification for all people who follow the poster
-    followings = Following.select{|f| f.user_id == story.poster_id && f.user.deactivated_at.nil?}
+    followings = Following.joins(:follower).where(user_id: story.poster_id, users: {deactivated_at: nil})
     followings.each do |follower|
       Notification.create(user_id: follower.follower_id,
                         notified_by_user_id: story.poster_id,

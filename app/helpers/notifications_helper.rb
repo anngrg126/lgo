@@ -118,7 +118,7 @@ module NotificationsHelper
           noti_ids.push(n.id)
           my_message_follower = Hash.new
           my_message_follower["message_id"]=noti_ids
-          my_message_follower["users"] = story_users
+          my_message_follower["users"] = story.anonymous ? [@anonymous_user] : story_users
           my_message_follower["message"] = link_poster+" published a new story! See it here: "+link
           my_message_follower["option"] = "followers"
           my_message_follower["category"] = "Story"

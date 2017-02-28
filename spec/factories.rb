@@ -26,7 +26,7 @@ FactoryGirl.define do
       published true
       final_title { Faker::Hipster.sentence }
       final_body { Faker::Hipster.paragraph }
-      final_gift_description { Faker::Hipster.sentence }
+      final_gift_description { " " + Faker::Hipster.sentence + " " }
       admin_published_at { Faker::Time.backward(1, :morning) }
       last_user_to_update { "Admin" }
       main_image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') }

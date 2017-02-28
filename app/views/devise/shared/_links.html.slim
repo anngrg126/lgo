@@ -30,4 +30,4 @@
   - resource_class.omniauth_providers.each do |provider|
     == link_to omniauth_authorize_path(resource_name, provider), class: "button button-w-icon facebook" do
       span.fi-social-facebook
-      span Sign in with #{OmniAuth::Utils.camelize(provider)}
+      span Continue with #{OmniAuth::Utils.camelize(provider)}

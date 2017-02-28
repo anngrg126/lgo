@@ -1,11 +1,11 @@
 div
-  h1 Your Commented Stories
+  h1 Your commented stories
   .subtext This is private and visible only to you.
 .row
   - @commented_stories.each do |s|
     .columns.medium-6
-      == render 'shared/story_card', story: s, admin_view: false
-      div
+      == render 'shared/story_card', story: s, admin_view: false, preview: false
+      /div
         small My last comment:
         div
           /== @user.comments.group_by(&:story_id).select{|story_id| story_id == story.id}.first[1].last.body.truncate(100)

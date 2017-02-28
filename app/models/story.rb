@@ -88,11 +88,11 @@ class Story < ApplicationRecord
     large: '1200x628>' 
   }
   
-  after_commit :reindex_story
+  # after_commit :reindex_story
   
-  def reindex_story
-    Story.reindex # or reindex_async
-  end
+  # def reindex_story
+  #   Story.reindex # or reindex_async
+  # end
   
   def should_index?
     deleted_at.nil? # only index active records

@@ -12,7 +12,11 @@
   .card-section
     .row.columns.clearfix
       .float-right 
-        == render 'bookmarks/bookmark', story: story
+        - if preview
+          .icon-button.primary-icon
+            span.fa.fa-bookmark-o.fa-lg
+        - else
+          == render 'bookmarks/bookmark', story: story
       h2
         -if admin_view
           - unless story.raw_title == ""
@@ -32,15 +36,27 @@
             == story_occasion_tag(story)
           | &nbsp;&nbsp;
           == story_fail_tag(story)
-        
   .card-section[style="padding-top: 0;"]
     - unless story.main_image_file_name.nil?
-      == link_to story_path(story) do
+      - if preview
         div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
+      - else
+        == link_to story_path(story) do
+          div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
   .card-section
     == story_body(story)
-  .card-section
-    == render 'shared/reactions_component', s: story, top: nil 
+  .card-section.last-section
+    == link_to "Read full story", story_path(story), class: "primary-link"
+    - if preview
+      .float-right.reactions
+        .icon-button.primary-icon
+          span.fa.fa-comment-o.fa-lg
+        .icon-button.primary-icon
+          span.fa.fa-thumbs-o-up.fa-lg
+        .icon-button.primary-icon
+          span.fa.fa-heart-o.fa-lg
+    - else
+      == render 'shared/reactions_component', s: story, top: nil 
   - if current_user && story.anonymous? && story.author_id == current_user.id && params[:controller] == "dashboard"
     .card-section
       == story_anonymous(story)

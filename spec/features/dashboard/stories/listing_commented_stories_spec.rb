@@ -27,12 +27,12 @@ RSpec.feature "Listing Commented Stories" do
     expect(page).to have_content(@story1.final_title)
     expect(page).to have_content(@story1.final_body.truncate(275))
     expect(page).to have_link(@story1.final_title)
-    expect(page).to have_content(@comment1.body.truncate(100))
+#    expect(page).to have_content(@comment1.body.truncate(100))
     
     expect(page).to have_content(@story2.final_title)
     expect(page).to have_content(@story2.final_body.truncate(275))
     expect(page).to have_link(@story2.final_title)
-    expect(page).to have_content(@comment2.body.truncate(100))
+#    expect(page).to have_content(@comment2.body.truncate(100))
     
     expect(page).not_to have_content(@story3.final_title)
     expect(page).not_to have_content(@story3.final_body.truncate(275))

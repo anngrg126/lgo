@@ -205,9 +205,9 @@ a.user-thumbnail:hover {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  &:hover {
-    filter: brightness(115%);
-  }
+}
+a:hover .story-card-image {
+  filter: brightness(115%);
 }
 .story-image {
   height: 375px;
@@ -238,6 +238,41 @@ a.user-thumbnail:hover {
     box-shadow: none;
     transform: scale(1.2);
   }
+}
+//image upload buttons
+.image-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.image-input + label {
+  font-size: 1.25em;
+  color: $blue;
+  display: inline-block;
+  padding: 40px;
+  border: 2px dashed $blue;
+  min-width: 190px;
+  margin: 10px;
+  p {
+    font-size: 1.4rem;
+    margin-bottom: 0;
+  }
+  cursor: pointer;
+}
+.image-input:focus + label,
+.image-input + label:hover {
+  color: darken($blue, 14%);
+  border: 2px dashed darken($blue, 14%);
+}
+.image-input:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+.remove_fields {
+  display: none;
 }
 @media only screen and (max-width: 40.063em) {
   .story-card-image {

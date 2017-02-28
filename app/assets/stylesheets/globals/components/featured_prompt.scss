@@ -1,28 +1,52 @@
+.no-link {
+  &:hover {
+    cursor: default;
+    .story-card-image {
+      filter: none;
+    }
+  }
+}
 .featured-prompt {
+  background-color: $white;
+  max-width: 250px;
+  margin: 0 auto;
+  &.extra-padding {
+    padding: 20px;
+  }
+  &.no-share:hover {
+    h3.secondary {
+      color: $primary-color;
+    }
+    .prompts {
+      color: $primary-color;
+      .handwriting {
+        color: darken($primary-color, 14%);
+        border-bottom: 2px solid $primary-color;
+      }
+    }
+  }
   h2 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
   .row:first-child {
-    background-color: $dark-gray;
-    h2 {
-      color: $white;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
+    h3 {
+      margin-bottom: 1.5rem;
     }
   }
   .prompts {
-    padding-top: 10px;
+    padding-top: 25px;
     padding-bottom: 10px;
-    background-color: $light-gray;
-    border: 1px solid $medium-gray;
-    border-top: 0;
     color: $black;
-    &:hover, &:hover h2 {
+    .handwriting {
+      text-transform: uppercase;
+      font-size: 3rem;
       color: $primary-color;
-    }
-    &:hover {
-      background-color: $ultra-light-gray;
+      border-bottom: 2px solid $black;
+      display: inline-block;
+      padding:  10px 8px 3px 8px;
+      margin: 0 5px;
+      line-height: initial;
     }
   }
 }

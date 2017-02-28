@@ -8,7 +8,16 @@
 }
 
 //style for rich text editor
-trix-toolbar .button_groups {
+trix-toolbar .button_row {
+  justify-content: flex-start;
+  display: inline-block;
+  margin-bottom: 5px;
+  span {
+    display: inline-block;
+  }
+  .button_group {
+    margin-bottom: 0;
+  }
   button.code {
     display: none;
   }
@@ -24,6 +33,9 @@ trix-toolbar .button_groups {
   button.link {
     display: none;
   }
+}
+trix-toolbar .button_group button {
+//  border: 1px solid red;
 }
 
 //general override Foundation

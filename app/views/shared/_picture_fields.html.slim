@@ -1,0 +1,8 @@
+.nested-fields
+  = f.file_field :image, multiple: true, :name =>"image[]", class: "image-input"
+  //OTHERWISE, the name would be: /story[pictures_attributes][0][image][]
+  = f.label :image, "Choose a file", class: "image-label" do
+    .text-center
+      .fa.fa-camera.fa-2x
+      p upload an image
+  = link_to_remove_association "remove image", f

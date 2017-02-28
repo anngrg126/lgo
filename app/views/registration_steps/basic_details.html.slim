@@ -26,3 +26,9 @@ p Only one more step:
     input#free_system_input
     span.form-error
   = f.submit "Submit", class: "button"
+
+javascript:
+  //fcn to load all radio buttons as unchecked
+  $(document).ready(function() {
+    $('input[type="radio"]').removeAttr("checked");
+  });

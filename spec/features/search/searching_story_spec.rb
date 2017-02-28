@@ -50,8 +50,10 @@ RSpec.feature "Searching for a story", :type => :feature do
     expect(page).to have_content(@story_foo.final_body.truncate(275))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
+    within ("div.large-9") do
 #    expect(page).to have_css("img[src*='mainimage.png']", count: 1)
-    expect(page).to have_css('div.story-card-image', count: 1)
+      expect(page).to have_css('div.story-card-image', count: 1)
+    end
     expect(page).not_to have_content("No stories matched : "+ @search_word)
     
     expect(SearchQueryLog.last.user_id).to eq (@user.id)
@@ -82,7 +84,9 @@ RSpec.feature "Searching for a story", :type => :feature do
     expect(page).to have_content(@story_foo.final_body.truncate(275))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
-    expect(page).to have_css('div.story-card-image', count: 1)
+    within ("div.large-9") do
+      expect(page).to have_css('div.story-card-image', count: 1)
+    end
     expect(page).not_to have_content("No stories matched : "+ @search_word)
     
     expect(SearchQueryLog.last.user_id).to eq (@user.id)
@@ -112,7 +116,9 @@ RSpec.feature "Searching for a story", :type => :feature do
     expect(page).to have_content(@story_foo.final_body.truncate(275))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
-    expect(page).to have_css('div.story-card-image', count: 1)
+    within ("div.large-9") do
+      expect(page).to have_css('div.story-card-image', count: 1)
+    end
     expect(page).not_to have_content("No stories matched : "+ @search_word)
     
     expect(SearchQueryLog.last.user_id).to eq (@user.id)
@@ -120,7 +126,7 @@ RSpec.feature "Searching for a story", :type => :feature do
 
   end
   
-   scenario "A logged in user searches for a query in gift description" do
+  scenario "A logged in user searches for a query in gift description" do
     
     if @story_foo.updated_gift_description.nil?
       @search_word = @story_foo.final_gift_description.split.first
@@ -143,7 +149,9 @@ RSpec.feature "Searching for a story", :type => :feature do
     expect(page).to have_content(@story_foo.final_body.truncate(275))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
-    expect(page).to have_css('div.story-card-image', count: 1)
+    within ("div.large-9") do
+      expect(page).to have_css('div.story-card-image', count: 1)
+    end
     expect(page).not_to have_content("No stories matched : "+ @search_word)
     
     expect(SearchQueryLog.last.user_id).to eq (@user.id)
@@ -172,7 +180,9 @@ RSpec.feature "Searching for a story", :type => :feature do
     expect(page).to have_content(@story_foo.final_body.truncate(275))
     expect(page).to have_link(@story_foo.final_title)
     expect(page).to have_link("#{@foo.full_name}")
-    expect(page).to have_css('div.story-card-image', count: 1)
+    within ("div.large-9") do
+      expect(page).to have_css('div.story-card-image', count: 1)
+    end
     expect(page).not_to have_content("No stories matched : "+ @search_word)
     
     expect(SearchQueryLog.last.user_id).to eq nil

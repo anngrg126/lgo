@@ -1,0 +1,47 @@
+.row[style="margin: 20px auto;" data-equalizer data-equalize-on="medium"]
+  .columns.medium-6.large-7.form-container[data-equalizer-watch]
+    == render 'form'
+  .columns.medium-6.large-5.form-sidebar[data-equalizer-watch]
+    - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
+      div
+        .text-center
+          h2.secondary Share about
+          .icon-section
+            .icon.secondary-icon
+              i.fi-lightbulb.fa-2x
+            br
+            strong.secondary what inspired the gift idea
+          .icon-section
+            .icon.secondary-icon
+              span.fa.fa-birthday-cake.fa-2x
+            br
+            - if (controller.action_name == "new")
+              strong.secondary what was the relationship &amp; occasion
+            - else 
+              strong.secondary what was the relationship
+          - unless (controller.action_name == "new")
+            .icon-section
+              .icon.secondary-icon
+                span.fa.fa-calendar-o.fa-2x
+              br
+              strong.secondary what was the occasion
+          .icon-section
+            .icon.secondary-icon
+              span.fa.fa-smile-o.fa-2x
+            br
+            strong.secondary what was the reaction
+          - if (controller.action_name == "edit")
+            .icon-section
+              .icon.secondary-icon
+                i.fi-book-bookmark.fa-2x
+              br
+              strong.secondary what made it so memorable
+        - if (controller.action_name == "new")
+          #featured_prompt.text-center.anchor
+            h2.secondary Share any gift story
+          == render 'featured_prompt', share_view: true
+    - elsif controller.action_name == "edit"
+      div
+        .text-center
+          h2.secondary Your story card
+        == render 'shared/story_card', story: @story, admin_view: false, preview: true

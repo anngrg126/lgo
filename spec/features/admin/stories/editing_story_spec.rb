@@ -10,10 +10,10 @@ RSpec.feature "Editing Stories" do
     @story = Story.where(author_id: @user.id).active.first
     @story.update(fail: true)
     @story2 = Story.where(author_id: @user2.id).active.first
-    @final_title1 = Faker::Hipster::sentence(1)
+    @final_title1 = Faker::Hipster::sentence[0..59]
     @final_body1 = Faker::Hipster::paragraph
     @final_gift_description = Faker::Hipster::sentence(2)
-    @final_title2 = Faker::Hipster::sentence(1)
+    @final_title2 = Faker::Hipster::sentence[0..59]
     @final_body2 = Faker::Hipster::paragraph
     NotificationCategory.create([
       {id: 1, name: "Story"},
