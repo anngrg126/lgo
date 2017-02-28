@@ -1,0 +1,14 @@
+.center-on-mobile-left{
+  text-align: left;
+}
+.center-on-mobile-right{
+  text-align: right;
+}
+@media only screen and (max-width: 640px) {
+  .center-on-mobile-left{
+    text-align: center;
+  }
+  .center-on-mobile-right{
+    text-align: center;
+  }
+}

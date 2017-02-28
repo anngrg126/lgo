@@ -218,6 +218,9 @@ h2 a {
     }
   }
 }
+.font-weight-700{
+  font-weight: 700;
+}
 @media only screen and (max-width: 640px) {
   .label{
     padding: 8px;
@@ -247,6 +250,10 @@ h2 a {
   }
   .list.stacked a span:nth-child(2) {
     right: 0px;
+  }
+  h1 {
+  font-size: 4rem;
+  line-height: 1.2;
   }
   .anchor {
     padding-top: 0px;

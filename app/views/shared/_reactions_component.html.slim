@@ -1,18 +1,21 @@
-div.float-right.reactions
-  -if top.nil?
+-if top.nil?
+  /for story card view - only comments, like and lol reactions
+  div.float-right.reactions
     /for story card view - only comments, like and lol reactions
     == render 'comments/comments', story: s, top: top
     - @reactions.each do |r|
       - unless r.name == "cool" || r.name == "omg" || r.name == "lol"
         == render 'reactions/'+(r.name), story: s
-  -elsif top
-    /for story show page top - all reactions except cool
+-elsif top
+  /for story show page top - all reactions except cool
+  div.float-left.reactions
     == render 'comments/comments', story: s, top: top
     - @reactions.each do |r|
       - unless r.name == "cool"
         == render 'reactions/'+(r.name), story: s
-  -else
-    /for story show page bottom - all reactions except comments and cool
+-else
+  /for story show page bottom - all reactions except comments and cool
+  .center-on-mobile-right
     - @reactions.each do |r|
       - unless r.name == "cool"
         == render 'reactions/'+(r.name), story: s

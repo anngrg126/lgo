@@ -209,6 +209,12 @@ a.user-thumbnail:hover {
 a:hover .story-card-image {
   filter: brightness(115%);
 }
+.story-image {
+  height: 375px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .column-block .thumbnail {
   border: 0;
   overflow: hidden;
@@ -271,6 +277,9 @@ a:hover .story-card-image {
 @media only screen and (max-width: 40.063em) {
   .story-card-image {
     height: 175px;
+  }
+  .story-image {
+    height: 225px;
   }
   .column-block .thumbnail {
     height: 125px;
