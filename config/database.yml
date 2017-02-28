@@ -13,7 +13,7 @@
 production:
   adapter: postgresql
   encoding: unicode
-  database: letsgifton_production
+  database: letsgifton-nonprod
   pool: 5
   
 development:
