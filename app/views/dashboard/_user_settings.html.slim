@@ -3,59 +3,66 @@ h1 Your Account Settings
 .card
   div#user_account_settings
     .card-section
-      .row.columns.clearfix
-          .float-left
-            .div[style= "width: calc(100% - 150px);display: inline-block"]
-              h2#user_name
-                == @user.full_name
-            .div [style="width: 150px;display: inline-block;"]   
-              ==link_to "Edit Name", edit_user_dashboard_registration_path(@user, form_render: "user_name"), remote: true
+      .row
+        .columns.large-1.small-2
+          == link_to edit_user_dashboard_registration_path(@user, form_render: "user_name"), remote: true, class: "minor-link" do
+            span.fa.fa-pencil
+            span &nbsp;Edit
+        .columns.large-11.small-10
+          h2#user_name
+            == @user.full_name
     .card-section
-      .row.columns.clearfix
-          .float-left
-            .div[style= "width: calc(100% - 100px);display: inline-block;"]
-              | Email: 
-              span
-                == @user.email
-            .div [style="width: 100px;display: inline-block;"]   
-              == link_to "Change Email", edit_user_dashboard_registration_path(@user, form_render: "user_email")
+      .row
+        .columns.large-1.small-2
+          == link_to edit_user_dashboard_registration_path(@user, form_render: "user_email"), class: "minor-link" do
+            span.fa.fa-pencil
+            span &nbsp;Edit  
+        .columns.large-11.small-10    
+          | Email: 
+          span
+            == @user.email
+    .card-section
+      .row
+        .columns.large-1.small-2
+          == link_to edit_user_dashboard_registration_path(@user, form_render: "user_gender"), remote: true, class: "minor-link" do
+            span.fa.fa-pencil
+            span &nbsp;Edit  
+        .columns.large-11.small-10    
+          | Gender:
+          div#user_gender
+            = form_for @user, url: registration_path(@user), remote: true do |f|
+              div.form-group
+                = f.radio_button :gender, 'male', disabled: true
+                = f.label :gender_male, 'Male'
+                = f.radio_button :gender, 'female', disabled: true
+                = f.label :gender_female, 'Female'
+                = f.radio_button :gender, nil, :id => :custom_defined_gender, disabled: true
+                = f.label :gender_custom, 'Custom'
+                input#free_system_input
+    .card-section
+      .row
+        .columns.large-1.small-2
+          == link_to edit_user_dashboard_registration_path(@user, form_render: "user_birthday"), remote: true, class: "minor-link" do
+            span.fa.fa-pencil
+            span &nbsp;Edit   
+        .columns.large-11.small-10    
+          | Birthday: 
+          div#user_birthday
+            = form_for @user, url: registration_path(@user), remote: true do |f|
+              div.form-group
+                = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}, disabled: true      
+          .card-section
     .card-section
       .row.columns.clearfix
         .float-left
-          .div[style= "width: calc(100% - 100px);display: inline-block;"]
-            | Gender:
-          .div [style="width: 100px;display: inline-block;"]   
-            == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_gender"), remote: true
-          .div  
-            div#user_gender
-              = form_for @user, url: registration_path(@user), remote: true do |f|
-                div.form-group
-                  = f.radio_button :gender, 'male', disabled: true
-                  = f.label :gender_male, 'Male'
-                  = f.radio_button :gender, 'female', disabled: true
-                  = f.label :gender_female, 'Female'
-                  = f.radio_button :gender, nil, :id => :custom_defined_gender, disabled: true
-                  = f.label :gender_custom, 'Custom'
-                  input#free_system_input
-    .card-section
-      .row.columns.clearfix
-        .float-left
-          .div[style= "width: calc(100% - 100px);display: inline-block;"]
-            | Birthday: 
-          .div [style="width: 100px;display: inline-block;"]   
-            == link_to "Edit", edit_user_dashboard_registration_path(@user, form_render: "user_birthday"), remote: true
-          .div  
-            div#user_birthday
-              = form_for @user, url: registration_path(@user), remote: true do |f|
-                div.form-group
-                  = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}, disabled: true
-    .card-section
-      .row.columns.clearfix
-        .float-left
-          .div[style= "width: calc(100% - 150px);display: inline-block;"]
-            == link_to "Change Password", edit_user_dashboard_registration_path(@user, form_render: "user_password") 
-          .div [style="width: 150px;display: inline-block;"]   
-            == link_to "Deactivate account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete
+          .div[style="display:inline-block; margin: 10px"]
+            == link_to edit_user_dashboard_registration_path(@user, form_render: "user_password") , class: "button button-w-icon" do
+              span.fa.fa-pencil
+              span Change Password
+          .div[style="display:inline-block; margin: 10px;"]
+            == link_to registration_path(@user), method: :delete, data: {confirm: "Are you sure you want to deactivate the account?"}, class: "button button-w-icon hollow" do
+              span.fa.fa-trash
+              span &nbsp; Deactivate account
 
 javascript:
   $(".list a").removeClass("active");
