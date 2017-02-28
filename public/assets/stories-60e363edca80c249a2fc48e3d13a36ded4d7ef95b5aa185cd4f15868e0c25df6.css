@@ -1,0 +1,273 @@
+/* line 28, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/globals/_colors.scss */
+.dark-gray {
+  color: #4a4a4a;
+}
+
+/* line 5, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.index_subinfo {
+  display: inline-block;
+  width: calc(100% - 155px);
+}
+
+/* line 9, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.index_story_share {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* line 13, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.row .row.columns.index_sidebar {
+  background-color: #fefefe;
+  padding: 20px 10px;
+  border: 1px solid #e6e6e6;
+}
+
+/* line 19, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.new-story-intro {
+  padding: 40px 0px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+/* line 21, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.new-story-intro h1 {
+  margin-bottom: 20px;
+}
+
+/* line 27, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form {
+  box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 0;
+  padding: 40px 20px;
+  position: relative;
+  height: 100%;
+}
+/* line 33, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form.card {
+  overflow: visible;
+}
+/* line 38, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form .label-container {
+  margin-bottom: 20px;
+}
+/* line 41, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form h2 {
+  display: inline;
+  margin-right: 10px;
+}
+/* line 44, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form h2 label {
+  font-size: inherit;
+  display: inline;
+  line-height: 1.15;
+}
+/* line 50, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form .subtext {
+  display: inline-block;
+}
+/* line 53, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form trix-editor.body {
+  height: 200px;
+}
+/* line 56, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form .card-section {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+/* line 59, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form .card-section:last-child {
+  padding-bottom: 10px;
+}
+/* line 62, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form .card-section:first-child {
+  padding-top: 10px;
+}
+/* line 66, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form .subtext {
+  color: #7b7b7b;
+}
+/* line 69, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form .links {
+  display: none;
+}
+/* line 72, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.story-form .button {
+  margin-bottom: 0;
+}
+
+/* line 76, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-container {
+  padding-right: 0;
+  position: relative;
+}
+/* line 79, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-container:after, .form-container:before {
+  content: '';
+  left: 99%;
+  top: 50%;
+  border: solid transparent;
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+/* line 89, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-container:after {
+  border-color: transparent;
+  border-left-color: #fefefe;
+  border-width: 80px;
+  margin-top: -80px;
+}
+/* line 95, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-container:before {
+  border-color: transparent;
+  border-left-color: #cacaca;
+  border-width: 81px;
+  margin-top: -81px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.75));
+  -webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.75));
+  -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=5, Color='#444')";
+}
+
+/* line 105, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-sidebar {
+  padding-left: 0;
+}
+/* line 107, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-sidebar > div {
+  background-color: #e6e6e6;
+  height: 100%;
+  padding: 40px 40px;
+}
+/* line 112, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-sidebar .text-center h2 {
+  margin-bottom: 20px;
+}
+/* line 115, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-sidebar .story-card {
+  max-width: 350px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+/* line 119, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-sidebar .story-card .float-right div {
+  padding-top: 0;
+  line-height: 1;
+  padding-left: 25px;
+  background-color: white;
+}
+/* line 126, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-sidebar .featured-prompt {
+  max-width: 300px;
+  margin: 0 auto;
+}
+/* line 130, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-sidebar .fa-2x {
+  color: #a3a3a3;
+}
+/* line 133, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-sidebar .icon-section {
+  padding: 40px 10px;
+}
+/* line 136, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+.form-sidebar .anchor h2 {
+  margin: 60px 0 80px;
+}
+
+/* line 140, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+trix-editor {
+  overflow: scroll;
+  margin-bottom: 10px;
+  max-height: 400px;
+}
+
+@media only screen and (max-width: 1024px) {
+  /* line 147, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .form-container:after {
+    border-width: 60px;
+    margin-top: -60px;
+  }
+  /* line 151, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .form-container:before {
+    border-width: 61px;
+    margin-top: -61px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  /* line 159, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .index_subinfo {
+    display: block;
+    text-align: center;
+    width: auto;
+  }
+
+  /* line 164, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .index_story_share {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* line 170, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .new-story-intro {
+    padding: 30px 0px;
+  }
+
+  /* line 173, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .story-form {
+    padding: 40px 10px;
+    box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.25);
+  }
+  /* line 176, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .story-form .card-section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  /* line 184, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .form-sidebar {
+    padding-left: 0.625rem;
+  }
+  /* line 186, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .form-sidebar > div {
+    padding: 50px 20px 40px 20px;
+  }
+  /* line 189, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .form-sidebar .icon-section {
+    padding: 20px 0;
+  }
+
+  /* line 193, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .form-container {
+    padding-right: 0.625rem;
+  }
+  /* line 195, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .form-container:after, .form-container:before {
+    left: 50%;
+    top: 99%;
+  }
+  /* line 199, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .form-container:after {
+    border-left-color: transparent;
+    border-top-color: #fefefe;
+    border-width: 40px;
+    margin-top: 0;
+    margin-left: -40px;
+  }
+  /* line 206, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .form-container:before {
+    border-left-color: transparent;
+    border-top-color: #cacaca;
+    border-width: 41px;
+    margin-top: 0;
+    margin-left: -41px;
+  }
+
+  /* line 214, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/stories.scss */
+  .index_sidebar {
+    margin-bottom: 10px;
+  }
+}

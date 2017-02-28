@@ -26,6 +26,9 @@ test:
   database: letsgifton_test
   pool: 5
 
-#production:
+production:
 #  <<: *default
-#  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: letsgifton_production
+  pool: 5

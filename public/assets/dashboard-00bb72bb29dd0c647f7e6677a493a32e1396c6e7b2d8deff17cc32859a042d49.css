@@ -1,0 +1,165 @@
+/* line 28, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/globals/_colors.scss */
+.dark-gray {
+  color: #4a4a4a;
+}
+
+/**
+ * Foundation for Sites by ZURB
+ * Version 6.3.0
+ * foundation.zurb.com
+ * Licensed under MIT Open Source
+ */
+/* line 1, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+.thank-you {
+  min-height: 350px;
+  background-color: #00b4e2;
+  margin-bottom: 50px;
+  margin-top: -8px;
+  position: relative;
+  padding: 40px;
+  color: #2e2e2e;
+}
+/* line 9, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+.thank-you:after {
+  content: '';
+  left: 50%;
+  top: 100%;
+  border: solid transparent;
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-top-color: #00b4e2;
+  border-width: 40px;
+  margin-left: -40px;
+}
+/* line 22, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+.thank-you .text-center {
+  max-width: 650px;
+  margin: 0 auto;
+}
+/* line 26, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+.thank-you h1 {
+  color: white;
+  padding: 40px 0;
+}
+/* line 30, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+.thank-you a {
+  color: #fefefe;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+/* line 34, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+.thank-you a:hover {
+  color: #0a0a0a;
+}
+/* line 38, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+.thank-you .icon-button {
+  position: absolute;
+  right: 3rem;
+  top: 2rem;
+}
+/* line 43, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+.thank-you img {
+  max-height: 75px;
+  margin-top: 20px;
+}
+/* line 47, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+.thank-you p {
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 640px) {
+  /* line 52, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+  .thank-you {
+    padding: 20px;
+    min-height: 250px;
+    margin-bottom: 20px;
+  }
+  /* line 56, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+  .thank-you:after {
+    border-width: 20px;
+    margin-left: -20px;
+  }
+  /* line 60, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+  .thank-you h1 {
+    padding: 30px 0 40px;
+  }
+  /* line 63, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+  .thank-you .icon-button {
+    right: 1rem;
+    top: 0.5rem;
+  }
+  /* line 67, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/modules/story_thank_you.scss */
+  .thank-you a {
+    font-size: 1.7rem;
+  }
+}
+/* line 6, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+.header-nav {
+  border: 1px solid #e6e6e6;
+  border-left: 0;
+  background-color: #fefefe;
+  margin-left: -1.875rem;
+  padding-left: 1.875rem;
+  padding-right: 0.9375rem;
+}
+/* line 13, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+.header-nav > div {
+  display: inline-block;
+}
+/* line 16, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+.header-nav > div:first-child {
+  width: calc(100% - 155px);
+}
+/* line 20, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+.header-nav > div:nth-child(2) .fa-pencil {
+  margin-top: 0;
+}
+/* line 23, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+.header-nav > div:nth-child(2) .button-w-icon {
+  padding-bottom: 0;
+}
+/* line 27, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+.header-nav .count div {
+  font-size: 1.8rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  /* line 32, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+  .header-nav {
+    margin-right: -0.9375rem;
+    border-right: 0;
+  }
+}
+@media only screen and (max-width: 640px) {
+  /* line 38, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+  .header-nav {
+    margin: 0;
+    border: 1px solid #e6e6e6;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+  }
+  /* line 44, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+  .header-nav > div {
+    display: block;
+  }
+  /* line 47, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+  .header-nav > div:first-child {
+    width: auto;
+  }
+  /* line 50, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+  .header-nav > div:nth-child(2) {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+  }
+  /* line 53, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+  .header-nav > div:nth-child(2) .fa-pencil {
+    margin-top: 4.5px;
+  }
+  /* line 56, /Users/tatyanashestopalova/Desktop/letsgifton/app/assets/stylesheets/dashboard.scss */
+  .header-nav > div:nth-child(2) .button-w-icon {
+    padding-bottom: 4.5px;
+  }
+}
