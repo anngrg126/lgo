@@ -1,10 +1,13 @@
 div
   h1 Your bookmarked stories
-  .subtext This is your private collection of saved stories.
+  .subtext.secondary[style="margin-bottom: 10px;"] Your private collection of saved stories.
 .row
-  - @bookmarked_stories.each do |s|
-    .columns.medium-6
-      == render 'shared/story_card', story: s, admin_view: false, preview: false
+  - unless @bookmarked_stories.length == 0
+    - @bookmarked_stories.each do |s|
+      .columns.medium-6
+        == render 'shared/story_card', story: s, admin_view: false, preview: false
+  - else
+    = render 'dashboard/empty', view: "bookmarked"
 
 javascript:
   $(".list a").removeClass("active");
