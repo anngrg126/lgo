@@ -1,0 +1,27 @@
+.follow-container {
+  .row {
+    border-bottom: 1px solid $light-gray;
+  }
+}
+.follow {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 20px;
+  &>div {
+    &:nth-child(1) {
+      display: inline-block; 
+      width: 50px;
+    }
+    &:nth-child(2) {
+      display: inline-block; 
+      width: calc(100% - 90px - 50px); 
+      vertical-align: top;
+    }
+    &:nth-child(3) {
+      display: inline-block; 
+      width: 90px; 
+      vertical-align: top
+    }
+  }
+}
