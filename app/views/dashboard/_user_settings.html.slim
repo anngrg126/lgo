@@ -51,16 +51,17 @@ h1 Your Account Settings
             = form_for @user, url: registration_path(@user), remote: true do |f|
               div.form-group
                 = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}, disabled: true      
-          .card-section
     .card-section
+      hr
       .row.columns.clearfix
         .float-left
-          .div[style="display:inline-block; margin: 10px"]
+          .div
             == link_to edit_user_dashboard_registration_path(@user, form_render: "user_password") , class: "button button-w-icon" do
               span.fa.fa-pencil
               span Change Password
-          .div[style="display:inline-block; margin: 10px;"]
-            == link_to registration_path(@user), method: :delete, data: {confirm: "Are you sure you want to deactivate the account?"}, class: "button button-w-icon hollow" do
+        .float-right
+          .div
+            == link_to registration_path(@user), method: :delete, data: {confirm: "Are you sure you want to deactivate the account?"}, class: "minor-link" do
               span.fa.fa-trash
               span &nbsp; Deactivate account
 
