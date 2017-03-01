@@ -81,6 +81,7 @@
         div.story_pictures
           - unless @story.pictures.empty?
             .columns.medium-12
+              strong Story Images
               .row.small-up-2.medium-up-3.large-up-4
                 - @story.pictures.each do |picture|
                   div.column.column-block
