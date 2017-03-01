@@ -85,12 +85,12 @@
               .row.small-up-2.medium-up-3.large-up-4
                 - @story.pictures.each do |picture|
                   div.column.column-block
-                    == link_to root_path, class: "thumbnail" do
-                      = image_tag picture.image.url
-                    - if user_signed_in? && @story.author_id == current_user.id
-                      == link_to story_picture_path(@story, picture), method: :delete, data: {confirm: "Are you sure you want to delete the picture?"}, class: "minor-link" do
-                          span.fa.fa-trash-o
-                          span &nbsp;Delete Picture
+                    .card[style="padding:10px"]
+                      == link_to root_path, class: "thumbnail" do
+                        = image_tag picture.image.url
+                      - if user_signed_in? && @story.author_id == current_user.id
+                        == link_to story_picture_path(@story, picture), method: :delete, data: {confirm: "Are you sure you want to delete the picture?"}, class: "minor-link" do
+                            span.fa.fa-trash-o
       .card-section
         .row.center-on-mobile-left[style="padding: 20px 0px"]
           .columns.medium-8
