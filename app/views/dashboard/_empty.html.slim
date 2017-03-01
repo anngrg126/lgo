@@ -4,9 +4,35 @@
       div.db-empty-container
         .text-center.db-empty
           h2 You haven't shared any stories yet! 
-          p.secondary Get started by sharing your first gift story. Need inspiration? Check out our featured prompt.
+          p.secondary 
+            | Get started by sharing your first gift story. Need inspiration? Check out our featured prompt. Or, 
+            == link_to "browse stories", root_path, class: "bold-text-link"
+            |  that others shared.
           div.featured-container
             ==render 'stories/featured_prompt', share_view: false
-      /==image_tag('empty_gift_gray.png')
+  - elsif view == "reacted"
+    .columns
+      div.db-empty-container
+        .text-center.db-empty
+          h2.long You haven't reacted to any stories yet.
+          p[style="display: inline;"]
+            | Find all stories you react to with 
+          span.fa.fa-thumbs-o-up.fa-lg.gray
+          span &nbsp;
+          span.fa.fa-heart.fa-lg.gray
+          span &nbsp;
+          .small-icon.text-stack
+            .fa-stack-1x.circle-text.open.rotate-45 LOL
+          span.text[style="display: inline;"]
+          span.text or 
+          .small-icon.text-stack
+            .fa-stack-1x.circle-text.open.rotate-45 OMG
+          span.text[style="display: inline;"]
+            | here. 
+          p[style="display: inline;"]
+            == link_to "Browse stories", root_path, class: "bold-text-link"
+            |  to start reacting.
+          br
+          == image_tag('empty_gift_gray.png', class: "empty")
       
       /or browse stories that others shared.
