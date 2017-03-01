@@ -46,8 +46,17 @@
       .db-empty-container
         .text-center.db-empty
           h2.long You haven't commented on any stories yet.
-          p Comment on stories and find them here to stay in the loop with any replies. Only you can see this page.
+          p Comment on stories, then find them here to stay in the loop with any replies. Only you can see this page.
           == image_tag('empty_gift_gray.png', class: "empty")
+  - elsif view == "notifications"
+    .columns
+      .db-empty-container
+        .text-center.db-empty
+          h2.long You don't have any notifications yet.
+          p 
+            == link_to "Share a story", new_story_path, class: "bold-text-link"
+            |  and get notified when others react and comment.
+          == image_tag('gray_letter.png', class: "empty letter")
   
       
       /or browse stories that others shared.
