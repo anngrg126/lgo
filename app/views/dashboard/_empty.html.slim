@@ -41,5 +41,13 @@
           h2.long You haven't bookmarked any stories yet.
           p Bookmark stories and find them here. Only you can see this page. Think of this as your personal collection of gift ideas.
           == image_tag('empty_gift_gray.png', class: "empty")
+  - elsif view == "commented"
+    .columns
+      .db-empty-container
+        .text-center.db-empty
+          h2.long You haven't commented on any stories yet.
+          p Comment on stories and find them here to stay in the loop with any replies. Only you can see this page.
+          == image_tag('empty_gift_gray.png', class: "empty")
+  
       
       /or browse stories that others shared.

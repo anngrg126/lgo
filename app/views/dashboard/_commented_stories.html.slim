@@ -1,16 +1,19 @@
 div
   h1 Your commented stories
-  .subtext This is private and visible only to you.
+  .subtext.secondary[style="margin-bottom: 10px;"] This is private and visible only to you.
 .row
-  - @commented_stories.each do |s|
-    .columns.medium-6
-      == render 'shared/story_card', story: s, admin_view: false, preview: false
-      /div
-        small My last comment:
-        div
-          /== @user.comments.group_by(&:story_id).select{|story_id| story_id == story.id}.first[1].last.body.truncate(100)
-          /== Comment.where(story_id: story, user_id: @user).last.body.truncate(100)
-          == @user.comments.select{|c| c.story_id == s.id}.last.body.truncate(100)
+  - unless @commented_stories.length == 0
+    - @commented_stories.each do |s|
+      .columns.medium-6
+        == render 'shared/story_card', story: s, admin_view: false, preview: false
+        /div
+          small My last comment:
+          div
+            /== @user.comments.group_by(&:story_id).select{|story_id| story_id == story.id}.first[1].last.body.truncate(100)
+            /== Comment.where(story_id: story, user_id: @user).last.body.truncate(100)
+            == @user.comments.select{|c| c.story_id == s.id}.last.body.truncate(100)
+  - else
+    = render 'dashboard/empty', view: "commented"
 
 javascript:
   $(".list a").removeClass("active");
