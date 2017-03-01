@@ -42,6 +42,9 @@
   img.empty {
     margin: 40px auto; 
   }
+  img.empty.letter {
+    max-width: 200px;
+  }
 }
 .db-empty-container {
   background-color: $light-gray;
