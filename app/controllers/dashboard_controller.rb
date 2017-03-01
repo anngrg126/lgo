@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_settings]
-  before_action :set_anonymous_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
+  before_action :set_anonymous_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications, :followings, :followers]
   before_action :set_tags, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
   before_action :set_reactions, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
   before_action :get_story_counts, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]

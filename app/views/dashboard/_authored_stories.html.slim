@@ -3,7 +3,10 @@ div
     h1 Your stories
   - else
     h1
-      == "#{@user.first_name.titleize}'s stories"
+      - unless @user == @anonymous_user
+        == "#{@user.first_name.titleize}'s stories"
+      - else
+        | Penguin's stories
 .row
   - unless @dashboard_stories.length == 0
     - @dashboard_stories.each do |s|
