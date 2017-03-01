@@ -1,7 +1,7 @@
 - if @user == current_user
   - if view == "authored"
     .columns
-      div.db-empty-container
+      .db-empty-container
         .text-center.db-empty
           h2 You haven't shared any stories yet! 
           p.secondary 
@@ -12,11 +12,11 @@
             ==render 'stories/featured_prompt', share_view: false
   - elsif view == "reacted"
     .columns
-      div.db-empty-container
+      .db-empty-container
         .text-center.db-empty
           h2.long You haven't reacted to any stories yet.
           p[style="display: inline;"]
-            | Find all stories you react to with 
+            | Find all stories you reacted to with 
           span.fa.fa-thumbs-o-up.fa-lg.gray
           span &nbsp;
           span.fa.fa-heart.fa-lg.gray
@@ -31,8 +31,15 @@
             | here. 
           p[style="display: inline;"]
             == link_to "Browse stories", root_path, class: "bold-text-link"
-            |  to start reacting.
+            |  to get started.
           br
+          == image_tag('empty_gift_gray.png', class: "empty")
+  - elsif view == "bookmarked"
+    .columns
+      .db-empty-container
+        .text-center.db-empty
+          h2.long You haven't bookmarked any stories yet.
+          p Bookmark stories and find them here. Only you can see this page. Think of this as your personal collection of gift ideas.
           == image_tag('empty_gift_gray.png', class: "empty")
       
       /or browse stories that others shared.
