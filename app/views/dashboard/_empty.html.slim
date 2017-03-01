@@ -1,83 +1,93 @@
-- if @user == current_user
-  .columns
-  - if view == "authored"
-    .db-empty-container
-      .text-center.db-empty
-        h2 You haven't shared any stories yet! 
-        p.secondary 
-          | Get started by sharing your first gift story. Need inspiration? Check out our featured prompt. Or, 
-          == link_to "browse stories", root_path, class: "bold-text-link"
-          |  that others shared.
-        div.featured-container
-          ==render 'stories/featured_prompt', share_view: false
-  - elsif view == "reacted"
-    .db-empty-container
-      .text-center.db-empty
-        h2.long You haven't reacted to any stories yet.
-        p[style="display: inline;"]
-          | Find all stories you reacted to with 
-        span.fa.fa-thumbs-o-up.fa-lg.gray
-        span &nbsp;
-        span.fa.fa-heart.fa-lg.gray
-        span &nbsp;
-        .small-icon.text-stack
-          .fa-stack-1x.circle-text.open.rotate-45 LOL
-        span.text[style="display: inline;"]
-        span.text or 
-        .small-icon.text-stack
-          .fa-stack-1x.circle-text.open.rotate-45 OMG
-        span.text[style="display: inline;"]
-          | here. 
-        p[style="display: inline;"]
-          == link_to "Browse stories", root_path, class: "bold-text-link"
-          |  to get started.
-        br
-        == image_tag('empty_gift_gray.png', class: "empty", style: "margin-top: 80px;")
-  - elsif view == "bookmarked"
-    .db-empty-container
-      .text-center.db-empty
-        h2.long You haven't bookmarked any stories yet.
-        p Bookmark stories and find them here. Only you can see this page. Think of this as your personal collection of gift ideas.
-        == image_tag('empty_gift_gray.png', class: "empty")
-  - elsif view == "commented"
-    .db-empty-container
-      .text-center.db-empty
-        h2.long You haven't commented on any stories yet.
-        p Comment on stories, then find them here to stay in the loop with any replies. Only you can see this page.
-        == image_tag('empty_gift_gray.png', class: "empty")
-  - elsif view == "notifications"
-    .db-empty-container
-      .text-center.db-empty
-        h2.long You don't have any notifications yet.
-        p 
-          == link_to "Share a story", new_story_path, class: "bold-text-link"
-          |  and get notified when others react and comment.
-        == image_tag('gray_letter.png', class: "empty letter")
-  - elsif view == "following"
-    .db-empty-container
-      .text-center.db-empty
-        h2.long You haven't followed anyone yet.
-        p 
-          | Follow others and get notified when they post new stories. To get started, why not follow the 
-          == link_to "Anonymous Penguin", dashboard_path(@anonymous_user), class: "bold-text-link"
-          | ?
-        div.penguin-container
-          == link_to dashboard_path(@anonymous_user), class: "user-thumbnail large-thumb" do
-            == user_photo(@anonymous_user)
+.columns
+  .db-empty-container
+    .text-center.db-empty
+      - if @user == current_user
+        - if view == "authored"
+          h2 You haven't shared any stories yet! 
+          p.secondary 
+            | Get started by sharing your first gift story. Need inspiration? Check out our featured prompt. Or, 
+            == link_to "browse stories", root_path, class: "bold-text-link"
+            |  that others shared.
+          div.featured-container
+            ==render 'stories/featured_prompt', share_view: false
+        - elsif view == "reacted"
+          h2.long You haven't reacted to any stories yet.
+          p[style="display: inline;"]
+            | Find all stories you reacted to with 
+          span.fa.fa-thumbs-o-up.fa-lg.gray
+          span &nbsp;
+          span.fa.fa-heart.fa-lg.gray
+          span &nbsp;
+          .small-icon.text-stack
+            .fa-stack-1x.circle-text.open.rotate-45 LOL
+          span.text[style="display: inline;"]
+          span.text or 
+          .small-icon.text-stack
+            .fa-stack-1x.circle-text.open.rotate-45 OMG
+          span.text[style="display: inline;"]
+            | here. 
+          p[style="display: inline;"]
+            == link_to "Browse stories", root_path, class: "bold-text-link"
+            |  to get started.
           br
-          == link_to "Penguin's Dashboard", dashboard_path(@anonymous_user), class: "button skinny-button", style: "margin-top: 20px;"
-  - elsif view == "followers"
-    .db-empty-container
-      .text-center.db-empty
-        h2.long You don't have any followers yet.
-        p 
-          | Get more followers by inviting your friends to join the GiftOn community. Help us to spread the word.
-        div[style="margin-bottom: 40px;"]
-          a.social-icon.footer-icon[href="https://www.facebook.com/letsgifton", target="_blank"]
-            span.fa.fa-facebook-official.fa-2x
-          a.social-icon.footer-icon[href="https://www.instagram.com/letsgifton/", target="_blank"]
-            span.fa.fa-instagram.fa-2x
-          a.social-icon.footer-icon[href="https://twitter.com/letsgifton", target="_blank"]
-            span.fa.fa-twitter-square.fa-2x
+          == image_tag('empty_gift_gray.png', class: "empty", style: "margin-top: 80px;")
+        - elsif view == "bookmarked"
+          h2.long You haven't bookmarked any stories yet.
+          p Bookmark stories and find them here. Only you can see this page. Think of this as your personal collection of gift ideas.
+          == image_tag('empty_gift_gray.png', class: "empty")
+        - elsif view == "commented"
+          h2.long You haven't commented on any stories yet.
+          p Comment on stories, then find them here to stay in the loop with any replies. Only you can see this page.
+          == image_tag('empty_gift_gray.png', class: "empty")
+        - elsif view == "notifications"
+          h2.long You don't have any notifications yet.
+          p 
+            == link_to "Share a story", new_story_path, class: "bold-text-link"
+            |  and get notified when others react and comment.
+          == image_tag('gray_letter.png', class: "empty letter")
+        - elsif view == "following"
+          h2.long You haven't followed anyone yet.
+          p 
+            | Follow others and get notified when they post new stories. To get started, why not follow the 
+            == link_to "Anonymous Penguin", dashboard_path(@anonymous_user), class: "bold-text-link"
+            | ?
+          div.penguin-container
+            == link_to dashboard_path(@anonymous_user), class: "user-thumbnail large-thumb" do
+              == user_photo(@anonymous_user)
+            br
+            == link_to "Penguin's Dashboard", dashboard_path(@anonymous_user), class: "button skinny-button", style: "margin-top: 20px;"
+        - elsif view == "followers"
+          h2.long You don't have any followers yet.
+          p 
+            | Get more followers by inviting your friends to join the GiftOn community. Help us to spread the word.
+          div[style="margin-bottom: 40px;"]
+            a.social-icon.footer-icon[href="https://www.facebook.com/letsgifton", target="_blank"]
+              span.fa.fa-facebook-official.fa-2x
+            a.social-icon.footer-icon[href="https://www.instagram.com/letsgifton/", target="_blank"]
+              span.fa.fa-instagram.fa-2x
+            a.social-icon.footer-icon[href="https://twitter.com/letsgifton", target="_blank"]
+              span.fa.fa-twitter-square.fa-2x
+      - else
+        - if view == "authored"
+          h2 
+            == "#{@user.first_name.titleize} hasn't shared any stories yet" 
+          == image_tag('empty_gift_gray.png', class: "empty", style: "margin-top: 80px;")
+        - if view == "reacted"
+          h2
+            == "#{@user.first_name.titleize} hasn't reacted to any stories yet" 
+          == image_tag('empty_gift_gray.png', class: "empty", style: "margin-top: 80px;")
+        - if view == "followers"
+          h2
+            == "#{@user.first_name.titleize} doesn't have any followers yet" 
+          p 
+            | You can be the first to follow 
+            == "#{@user.first_name.titleize}"
+            | .
+          div[style="width: 1px; height: 1px; margin-bottom: 40px;"]
+        - if view == "following"
+          h2
+            == "#{@user.first_name.titleize} isn't following anyone yet" 
+          div[style="width: 1px; height: 1px; margin-bottom: 40px;"]
+  
       
       /or browse stories that others shared.
