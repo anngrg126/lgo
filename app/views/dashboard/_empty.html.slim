@@ -1,8 +1,12 @@
-if @user == current_user
+- if @user == current_user
   - if view == "authored"
-    .text-center
-      h2.secondary You haven't written any stories yet! 
-      p Get started by sharing your first gift story.
-      ==image_tag('empty_gift_gray.png')
+    .columns
+      div.db-empty-container
+        .text-center.db-empty
+          h2 You haven't shared any stories yet! 
+          p.secondary Get started by sharing your first gift story. Need inspiration? Check out our featured prompt.
+          div.featured-container
+            ==render 'stories/featured_prompt', share_view: false
+      /==image_tag('empty_gift_gray.png')
       
       /or browse stories that others shared.

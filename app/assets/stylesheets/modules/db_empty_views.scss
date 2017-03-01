@@ -1,0 +1,25 @@
+.db-empty { 
+  max-width: 500px;
+  margin: 0 auto;
+  h2 {
+    margin: 20px 0;
+    color: $middark-gray;
+  }
+  p {
+    margin-bottom: 40px;
+    color: $dark-gray;
+  }
+  .featured-container {
+    background-color: white;
+    padding: 20px 0 10px;
+    border: 1px solid $light-gray;
+    max-width: 300px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+}
+.db-empty-container {
+  background-color: $light-gray;
+  padding: 20px;
+  margin-bottom: 20px;
+}
