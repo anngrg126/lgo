@@ -18,13 +18,18 @@
   .fa.gray {
     color: $middark-gray;
   }
-  .featured-container {
+  .featured-container, .penguin-container {
     background-color: white;
     padding: 20px 0 10px;
     border: 1px solid $light-gray;
     max-width: 300px;
     margin: 0 auto;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  .penguin-container {
+    max-width: none;
+    display: inline-block;
+    padding: 20px;
   }
   .small-icon .circle-text.fa-stack-1x {
     width: 2.8rem;
@@ -44,6 +49,11 @@
   }
   img.empty.letter {
     max-width: 200px;
+  }
+  .user-thumbnail.large-thumb {
+    height: 120px;
+    width: 120px;
+    margin-right: 0;
   }
 }
 .db-empty-container {

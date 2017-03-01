@@ -32,7 +32,7 @@
           == link_to "Browse stories", root_path, class: "bold-text-link"
           |  to get started.
         br
-        == image_tag('empty_gift_gray.png', class: "empty")
+        == image_tag('empty_gift_gray.png', class: "empty", style: "margin-top: 80px;")
   - elsif view == "bookmarked"
     .db-empty-container
       .text-center.db-empty
@@ -54,12 +54,18 @@
           |  and get notified when others react and comment.
         == image_tag('gray_letter.png', class: "empty letter")
   - elsif view == "following"
-    .text-center.db-empty
-      h2.long You haven't followed anyone yet.
-      p 
-        | Follow others and get notified when they post new stories. To get started, why not follow the 
-        == link_to "Anonymous Penguin", dashboard_path(@anonymous_user), class: "bold-text-link"
-        | ?
+    .db-empty-container
+      .text-center.db-empty
+        h2.long You haven't followed anyone yet.
+        p 
+          | Follow others and get notified when they post new stories. To get started, why not follow the 
+          == link_to "Anonymous Penguin", dashboard_path(@anonymous_user), class: "bold-text-link"
+          | ?
+        div.penguin-container
+          == link_to dashboard_path(@anonymous_user), class: "user-thumbnail large-thumb" do
+            == user_photo(@anonymous_user)
+          br
+          == link_to "Penguin's Dashboard", dashboard_path(@anonymous_user), class: "button skinny-button", style: "margin-top: 20px;"
   
       
       /or browse stories that others shared.
