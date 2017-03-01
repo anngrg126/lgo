@@ -19,7 +19,7 @@
     color: $middark-gray;
   }
   .featured-container, .penguin-container {
-    background-color: white;
+    background-color: $white;
     padding: 20px 0 10px;
     border: 1px solid $light-gray;
     max-width: 300px;
@@ -30,6 +30,7 @@
     max-width: none;
     display: inline-block;
     padding: 20px;
+    background-color: transparent;
   }
   .small-icon .circle-text.fa-stack-1x {
     width: 2.8rem;
@@ -54,6 +55,11 @@
     height: 120px;
     width: 120px;
     margin-right: 0;
+  }
+  .footer-icon.social-icon {
+    background: transparent;
+    margin: 20px;
+    color: $dark-gray;
   }
 }
 .db-empty-container {

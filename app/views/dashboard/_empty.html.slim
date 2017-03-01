@@ -66,6 +66,18 @@
             == user_photo(@anonymous_user)
           br
           == link_to "Penguin's Dashboard", dashboard_path(@anonymous_user), class: "button skinny-button", style: "margin-top: 20px;"
-  
+  - elsif view == "followers"
+    .db-empty-container
+      .text-center.db-empty
+        h2.long You don't have any followers yet.
+        p 
+          | Get more followers by inviting your friends to join the GiftOn community. Help us to spread the word.
+        div[style="margin-bottom: 40px;"]
+          a.social-icon.footer-icon[href="https://www.facebook.com/letsgifton", target="_blank"]
+            span.fa.fa-facebook-official.fa-2x
+          a.social-icon.footer-icon[href="https://www.instagram.com/letsgifton/", target="_blank"]
+            span.fa.fa-instagram.fa-2x
+          a.social-icon.footer-icon[href="https://twitter.com/letsgifton", target="_blank"]
+            span.fa.fa-twitter-square.fa-2x
       
       /or browse stories that others shared.
