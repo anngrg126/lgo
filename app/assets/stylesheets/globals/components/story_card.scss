@@ -1,4 +1,7 @@
 .story-card {
+  box-shadow: 1px 1px 2px rgba(34, 25, 25, 0.4);
+  -webkit-box-shadow: 1px 1px 1px rgba(34, 25, 25, 0.4);
+  -moz-box-shadow: 1 1px 1px rgba(34, 25, 25, 0.4);
   .fa-bookmark-o, .fa-bookmark {
     padding-top: 0;
     line-height: 1;
