@@ -23,6 +23,3 @@
 
 #Ignore all public test & dev files
 /public/system/*
-
-#Ignore all eb app versions
-/.elasticbeanstalk/app_versions/*

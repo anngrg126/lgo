@@ -3,17 +3,11 @@ div
     h1 Your stories
   - else
     h1
-      - unless @user == @anonymous_user
-        == "#{@user.first_name.titleize}'s stories"
-      - else
-        | Penguin's stories
+      == "#{@user.first_name.titleize}'s stories"
 .row
-  - unless @dashboard_stories.length == 0
-    - @dashboard_stories.each do |s|
-      .columns.medium-6
-        == render 'shared/story_card', story: s, admin_view: false, preview: false
-  - else
-    = render 'dashboard/empty', view: "authored"
+  - @dashboard_stories.each do |s|
+    .columns.medium-6
+      == render 'shared/story_card', story: s, admin_view: false, preview: false
 
 javascript:
   $(".list a").removeClass("active");
