@@ -1,24 +1,27 @@
 h1 Your Notifications
-- unless @unread_notifications.empty?
-  div#new_notifications
-    .card.notifications-container
-      .card-section
-        .row[style="border-bottom: 0;"]
-          .columns.medium-9
-            h2 New Notifications
-          .columns.medium-3
-            == link_to "Mark all as read", mark_all_as_read_path(@user), class: "secondary-link"
-        == consolidate_notifications(@unread_notifications, "false")
-- unless @read_notifications.empty?
-  div#old_notifications
-    .card.notifications-container
-      .card-section
-        .row[style="border-bottom: 0;"]
-          .columns.medium-9
-            h2 Read Notifications
-          .columns.medium-3
-            == link_to "Delete all read notifications", destroy_all_read_notifications_path(@user), class: "secondary-link"
-        == consolidate_notifications(@read_notifications, "true")
+- if !(@unread_notifications.empty?) || !(@read_notifications.empty?)
+  - unless @unread_notifications.empty?
+    div#new_notifications
+      .card.notifications-container
+        .card-section
+          .row[style="border-bottom: 0;"]
+            .columns.medium-9
+              h2 New Notifications
+            .columns.medium-3
+              == link_to "Mark all as read", mark_all_as_read_path(@user), class: "secondary-link"
+          == consolidate_notifications(@unread_notifications, "false")
+  - unless @read_notifications.empty?
+    div#old_notifications
+      .card.notifications-container
+        .card-section
+          .row[style="border-bottom: 0;"]
+            .columns.medium-9
+              h2 Read Notifications
+            .columns.medium-3
+              == link_to "Delete all read notifications", destroy_all_read_notifications_path(@user), class: "secondary-link"
+          == consolidate_notifications(@read_notifications, "true")
+- else
+  = render 'dashboard/empty', view: "notifications"
 
 javascript:
   $(".list a").removeClass("active");

@@ -27,7 +27,7 @@
             == edit_user_about_me(@user)
         - unless @user == current_user
           hr
-          div[style="text-align: center;"]
+          div[style="text-align: center; margin: 40px auto;"]
             == render partial: 'followings/form', locals: { user: @user, follower: current_user }
         .list.stacked
           - if @user == current_user
