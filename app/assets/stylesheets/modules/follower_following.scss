@@ -1,0 +1,21 @@
+.follow-container {
+  .user-snippet {
+    border-bottom: 1px solid $light-gray;
+    padding: 10px 0 30px;
+    display: block;
+  }
+  .user-name >div:first-child {
+    width: calc(100% - 150px);
+  }
+  .button.hollow {
+    border: 0;
+    box-shadow: none;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .follow-container {
+    .user-name >div:first-child {
+      width: 100%;
+    }
+  }
+}
