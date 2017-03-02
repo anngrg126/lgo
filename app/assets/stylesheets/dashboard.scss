@@ -3,6 +3,7 @@
 @import 'foundation';
 @import 'modules/story_thank_you';
 @import 'modules/follower_following';
+@import 'modules/db_empty_views';
 
 .header-nav {
   border: 1px solid $light-gray;
@@ -27,6 +28,30 @@
   }
   .count div {//styles numbers inside divs with dynamic ids
     font-size: 1.8rem;
+  }
+}
+.user-settings {
+  &.card {
+    padding: 30px 40px;
+  }
+  select {
+    max-width: 150px;
+    display: block;
+    padding: 5px;
+    background-color: $white;
+    color: $middark-gray;
+    font-size: 1.5rem;
+  }
+  .card-section .row {
+    >div {
+      display: inline-block;
+    }
+    .edit {
+      width: 70px;
+    }
+    >div:nth-child(2) {
+      width: calc(100% - 70px);
+    }
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -56,6 +81,17 @@
       }
       .button-w-icon {
         padding-bottom: 4.5px;
+      }
+    }
+  }
+  .user-settings {
+    .last {
+      text-align: center;
+      hr {
+        margin: 40px 0;
+      }
+      .float-right {
+        float: none !important;
       }
     }
   }
