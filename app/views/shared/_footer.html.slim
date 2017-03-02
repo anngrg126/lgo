@@ -1,27 +1,28 @@
 footer role="contentinfo"
   .row
-    .large-centered.large-6
-      .columns.small-6.medium-3
+    ul.footer-links.text
+      li
         ==link_to current_user ? root_path : new_user_session_path() do
           h3 Join
-      .columns.small-6.medium-3
-        //i class="fi-html5"
+      li
         == link_to root_path do
           h3 Contact
-      .columns.small-6.medium-3
+      br.show-for-small-only
+      li
         == link_to root_path do
           h3 Terms
-      .columns.small-6.medium-3
+      li
         == link_to root_path do
           h3 Privacy
-  .row.columns
-    ul class="footer-links"
+  .row
+    ul.footer-links
       li
         a.social-icon.footer-icon[href="https://www.facebook.com/letsgifton", target="_blank"]
           span.fa.fa-facebook-official.fa-lg
       li
         a.social-icon.footer-icon[href="https://twitter.com/letsgifton", target="_blank"]
           span.fa.fa-twitter-square.fa-lg
+      br.show-for-small-only
       li
         a.social-icon.footer-icon[href="https://www.instagram.com/letsgifton/", target="_blank"]
           span.fa.fa-instagram.fa-lg
