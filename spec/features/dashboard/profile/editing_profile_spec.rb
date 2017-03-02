@@ -41,7 +41,8 @@ RSpec.feature "Editing Account Settings" do
     visit(dashboard_path(@user))
     click_link "Settings"
     
-    click_link("Edit Name")
+    link = "a[href*='user_name']"
+    find(link).click
     fill_in "First Name", with: @new_first_name
     fill_in "Last Name", with: @new_last_name
     click_button "Update"
@@ -55,7 +56,8 @@ RSpec.feature "Editing Account Settings" do
     visit(dashboard_path(@user))
     click_link "Settings"
     
-    click_link("Edit Name")
+    link = "a[href*='user_name']"
+    find(link).click
     fill_in "First Name", with: ""
     fill_in "Last Name", with: ""
     click_button "Update"
@@ -69,7 +71,8 @@ RSpec.feature "Editing Account Settings" do
     visit(dashboard_path(@user))
     click_link "Settings"
     
-    click_link("Change Email")
+    link = "a[href*='user_email']"
+    find(link).click
     fill_in "Email", with: @new_email
     fill_in "Current password", with: @user.password
     click_button "Update"
@@ -83,7 +86,8 @@ RSpec.feature "Editing Account Settings" do
     visit(dashboard_path(@user))
     click_link "Settings"
     
-    click_link("Change Email")
+    link = "a[href*='user_email']"
+    find(link).click
     fill_in "Email", with: ""
     fill_in "Current password", with: @user.password
     click_button "Update"

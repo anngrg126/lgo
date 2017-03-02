@@ -43,7 +43,7 @@
       - else
         == link_to story_path(story) do
           div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
-  .card-section
+  .card-section.body
     == story_body(story)
   .card-section.last-section
     == link_to "Read full story", story_path(story), class: "primary-link"

@@ -56,7 +56,7 @@ module DashboardHelper
   
   def user_about_me_title(user)
     if !user.about_me.blank? || current_user == user
-      content_tag(:strong, "About Me")
+      content_tag(:h3, "About Me", class: "secondary")
     end
   end
   
