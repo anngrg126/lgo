@@ -1,22 +1,11 @@
-div
-  - if @user == current_user
-    h1 People who follow you
-  - else
-    h1
-      - unless @user == @anonymous_user
-        == "#{@user.first_name.titleize}'s followers"
-      - else
-        | Penguin's followers
-- unless @followers.length == 0
-  - @followers.each do |follower|
-    div
-      ==link_to "#{follower.full_name}", dashboard_path(follower)
-      == render partial: 'followings/form', locals: { user: follower, follower: current_user }
-
-      /== link_to User.find(followers_user.follower_id).full_name, dashboard_path(followers_user.follower_id)  
-      /== render partial: 'followings/form', locals: { user: User.find(followers_user.follower_id), follower: current_user }
-- else
-  = render 'dashboard/empty', view: "followers"
+h2 List of All Followers:
+- @followers.each do |follower|
+  div
+    ==link_to "#{follower.full_name}", dashboard_path(follower)
+    == render partial: 'followings/form', locals: { user: follower, follower: current_user }
+  
+    /== link_to User.find(followers_user.follower_id).full_name, dashboard_path(followers_user.follower_id)  
+    /== render partial: 'followings/form', locals: { user: User.find(followers_user.follower_id), follower: current_user }
 
 javascript:
   $(".list a").removeClass("active");
