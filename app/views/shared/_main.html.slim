@@ -13,4 +13,5 @@ div#flash_notice
         == content_tag :div, msg if msg.is_a?(String)
         button[class="close-button" aria-label="dismiss alert" type="button" data-close]
           span[aria-hidden="true"] &times;
-== yield
+.wrapper
+  == yield
