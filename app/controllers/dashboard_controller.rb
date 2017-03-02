@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :followings, :followers, :notifications, :user_settings]
-  before_action :set_anonymous_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
+  before_action :set_anonymous_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications, :followings, :followers]
   before_action :set_tags, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
   before_action :set_reactions, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
   before_action :get_story_counts, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :reacted_stories, :notifications]
@@ -160,7 +160,7 @@ class DashboardController < ApplicationController
   def set_commented_stories
     if @user == current_user
       @commented_stories = []
-      @user.comments.includes(story: [:user, :classifications, :reactions, :comments, :bookmarks]).select{ |c| c.story.active? && c.story.published?}.each do |comment|
+      @user.comments.includes(story: [:user, :classifications, :reactions, :comments, :bookmarks]).select{ |c| c.story.active? && c.story.published? && c.deleted_at == nil}.each do |comment|
         unless comment.story.author_id == @user.id
           @commented_stories.push(comment.story)
         end
@@ -210,7 +210,7 @@ class DashboardController < ApplicationController
     if @user == current_user
       @bookmark_count = @user.bookmarks.includes(:story).select{ |b| b.story.active? && b.story.published? && b.story.author_id != @user.id}.length
       @reaction_count = @user.reactions.includes(:story).select{|r| r.story.active? && r.story.published? && r.story.author_id != @user.id}.group_by{|r| r.story_id}.length
-      @comment_count = @user.comments.includes(:story).select{ |c| c.story.active? && c.story.published? && c.story.author_id != @user.id}.length
+      @comment_count = @user.comments.includes(:story).select{ |c| c.story.active? && c.story.published? && c.story.author_id != @user.id && c.deleted_at == nil}.length
       @unread_notification_count = @user.notifications.select{|n| n.read == false}.length
     else
       @reaction_count = @user.reactions.includes(:story).select{|r| r.story.active? && r.story.published?}.group_by{|r| r.story_id}.length
