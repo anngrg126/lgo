@@ -8,13 +8,23 @@ div
       - else
         | Penguin's followers
 - unless @followers.length == 0
-  - @followers.each do |follower|
-    div
-      ==link_to "#{follower.full_name}", dashboard_path(follower)
-      == render partial: 'followings/form', locals: { user: follower, follower: current_user }
-
-      /== link_to User.find(followers_user.follower_id).full_name, dashboard_path(followers_user.follower_id)  
-      /== render partial: 'followings/form', locals: { user: User.find(followers_user.follower_id), follower: current_user }
+  .card.follow-container
+    - @followers.each do |follower|
+      .card-section
+        .user-snippet.large
+          div
+            == link_to dashboard_path(follower), class: "user-thumbnail large-thumb"
+              == user_photo(follower)
+          .user-name
+            div[style="margin-right: 10px;"]
+              h2
+                == link_to "#{follower.full_name}", dashboard_path(follower), class: "bold-text-link"
+            div[style="line-height: 1.5;"]
+              /== link_to "Visit Dashboard", dashboard_path(follower), class: "primary-link"
+              .snippet-button
+                == render partial: 'followings/form', locals: { user: follower, follower: current_user }
+        /== link_to User.find(followers_user.follower_id).full_name, dashboard_path(followers_user.follower_id)  
+        /== render partial: 'followings/form', locals: { user: User.find(followers_user.follower_id), follower: current_user }
 - else
   = render 'dashboard/empty', view: "followers"
 
