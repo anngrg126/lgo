@@ -1,15 +1,16 @@
 footer {
+  margin-top: 20px;
   background-color: $dark-gray;
   padding: 2rem 4rem;
   text-align: center;
-  color: $medium-gray;
+  color: $midpt-gray;
   i {
     font-size: 100px;
   }
   a {
-    color: $light-gray;
+    color: $midpt-gray;
     &:hover {
-      color: $medium-gray;
+      color: darken($primary-color, 14%);
     }
   }
 }
@@ -21,9 +22,6 @@ footer {
   }
 }
 @media only screen and (max-width: 640px) {
-.footer {
-  .columns:nth-child(n+2) {
-//    border-left: 1px solid scale-color($white, $lightness: -30%);
+  footer {
   }
- }
 }

@@ -2,7 +2,7 @@ $primary-icon-color: $blue;
 $secondary-icon-color: $middark-gray;
 $background-icon-color: $white;
 $background-icon-color-hover: $ultra-light-gray;
-$footer-icon-color: $black;
+$footer-icon-color: $white;
 
 %icon {
   padding: 7px; //overrides foundation padding
@@ -162,8 +162,9 @@ $footer-icon-color: $black;
     }
   }
   &.footer-icon {
-    color: $footer-icon-color;
-    background: $background-icon-color;
+//    color: $footer-icon-color;
+    color: $light-gray;
+    background: transparent;
     &:hover {
       color: darken($primary-icon-color, 14%);
     }
