@@ -54,6 +54,11 @@
     }
   }
 }
+.db-intro {
+  h1 {
+    margin: 20px 0;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .header-nav  {
     margin-right: -0.9375rem;
@@ -61,11 +66,17 @@
   }
 }
 @media only screen and (max-width: 640px) {
+  .db-intro {
+    text-align: center;
+    h1 {
+      margin: 40px 10px 30px;
+    }
+  }
   .header-nav {
     margin: 0;
     border: 1px solid $light-gray;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
     >div {
       display: block;
@@ -85,6 +96,9 @@
     }
   }
   .user-settings {
+    &.card {
+      padding: 30px 20px;
+    }
     .last {
       text-align: center;
       hr {

@@ -8,7 +8,7 @@
 
 $profile-image-sizes: (
   0: 175px,
-  640px: 250px
+  640px: 225px
 );
 @mixin image-width($fs-map) {
   @each $fs-breakpoint, $fs-font-size in $fs-map {
