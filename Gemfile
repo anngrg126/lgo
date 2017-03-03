@@ -67,7 +67,6 @@ gem 'searchkick'
 #gem for handling cron jobs
 gem 'whenever', :require => false
 
-gem 'pg'
 gem 'puma'
 
 # Use ActiveModel has_secure_password
@@ -110,4 +109,8 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
+end
+
+group :production do
+  gem 'pg'
 end
