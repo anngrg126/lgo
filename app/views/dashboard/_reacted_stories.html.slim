@@ -10,8 +10,7 @@
 .row.all-stories
   - unless @reacted_stories.length == 0
     - @reacted_stories.each do |s|
-      .columns.medium-6
-        == render 'shared/story_card', story: s, admin_view: false, preview: false
+      == render 'shared/story_card', story: s, admin_view: false, preview: false
   - else
     = render 'dashboard/empty', view: "reacted"
       

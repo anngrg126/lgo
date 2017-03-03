@@ -12,8 +12,7 @@
           span Share a Story
     .row.all-stories
       - @stories.each do |s|
-        .columns.medium-6
-          == render 'shared/story_card', story: s, admin_view: false, preview: false
+        == render 'shared/story_card', story: s, admin_view: false, preview: false
   .columns.large-3.large-pull-9
     .row.columns.index_sidebar
       .columns.large-12.medium-6[style="padding-top: 10px; padding-bottom: 10px;"]
