@@ -24,7 +24,15 @@ class StoriesController < ApplicationController
         redirect_to root_path
       end
     else
-      @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active
+      if params[:id]
+        @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active.where('id < ?', params[:id,]).limit(5)
+      else
+        @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active.limit(5)
+      end
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
     
   end
