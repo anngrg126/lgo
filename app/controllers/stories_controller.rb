@@ -31,7 +31,7 @@ class StoriesController < ApplicationController
       end
       respond_to do |format|
         format.html
-        format.js
+        format.js {render :partial => 'stories/index', :locals => {admin_view: false, preview: false}}
       end
     end
     

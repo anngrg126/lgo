@@ -1,0 +1,4 @@
+<% @stories.each do |s| %>
+  console.log("running");
+  $('.row.all-stories').append("<%=  j render(:partial => 'shared/story_card', :locals => {story: s, admin_view: admin_view, preview: preview}) %>");
+<% end %>
