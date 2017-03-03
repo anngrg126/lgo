@@ -1,45 +1,47 @@
-// BEGIN footer styles
-
-.footer {
-  background-color: #2980b9;
+footer {
+  margin-top: 20px;
+  background-color: $dark-gray;
   padding: 2rem 4rem;
   text-align: center;
-  color: $white;
+  color: $midpt-gray;
   i {
     font-size: 100px;
   }
-}
-
-.footer {
-  h4 {
-    color: $white;
-    font-size: 1em;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-top: 2.5rem;
-    margin-bottom: 10px;
-  }
-  p, a {
-    font-weight: 300; 
-    font-size: .8em;
-    color: $white;
+  a {
+    color: $midpt-gray;
+    &:hover {
+      color: darken($primary-color, 14%);
+    }
   }
 }
-
-@media only screen and (min-width: 40.063em) {
-.footer {
-  .columns:nth-child(n+2) {
-    border-left: 1px solid scale-color($white, $lightness: -30%);
-//    min-height: 280px;
-  }
- }
-}
-
 .footer-links {
   list-style-type: none;
   li {
-    margin-top: .5em;
+    margin: 1.5rem;
+    display: inline-block;
+  }
+  &.text {
+    li {
+      margin: 15px 30px 0;
+    }
   }
 }
-
-//END Footer Styles
+@media only screen and (max-width: 640px) {
+  footer {
+    .row.columns:last-child {
+      margin-top: 20px;
+    }
+  }
+  .footer-links {
+    margin: 0;
+    li {
+      margin: .5rem 1.5rem;
+    }
+    &.text {
+      li {
+        margin: 0 10px 10px;
+        width: 35%;
+      }
+    }
+  }
+}
