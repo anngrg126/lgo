@@ -1,0 +1,17 @@
+branch-defaults:
+  aws-config:
+    environment: letsgifton-beta
+    group_suffix: null
+global:
+  application_name: letsgifton
+  branch: null
+  default_ec2_keyname: letsgifton-eb-key
+  default_platform: Ruby 2.3 (Puma)
+  default_region: us-west-2
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: git
+  workspace_type: Application
