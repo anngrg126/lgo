@@ -7,7 +7,7 @@
         == "#{@user.first_name.titleize}'s story reactions"
       - else
         | Penguin's story reactions
-.row
+.row.all-stories
   - unless @reacted_stories.length == 0
     - @reacted_stories.each do |s|
       .columns.medium-6

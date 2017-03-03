@@ -4,13 +4,13 @@
     .row.columns
       .index_subinfo
         div
-          h2[style="display: inline-block;"] Browse real-life gift stories
-          p from people just like you.
+          h2[style="display: inline-block;"] Browse real gift stories
+          p Shared by gift givers and receivers just like you
       .index_story_share
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fa.fa-pencil
           span Share a Story
-    .row
+    .row.all-stories
       - @stories.each do |s|
         .columns.medium-6
           == render 'shared/story_card', story: s, admin_view: false, preview: false
