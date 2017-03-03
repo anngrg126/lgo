@@ -99,6 +99,25 @@ function myFunction() {
       }
     })
   };
+  //fcn to load more stories via ajax
+  $(document).on('click', 'a.load-more', function(e){
+    e.preventDefault();
+    $('.load-more').hide();
+    $('.loading-gif').show();
+    var last_id = $('.story-card').last().attr('data-id');
+    $.ajax({
+      type: "GET",
+      url: $(this).attr('href'),
+      data: {
+          id: last_id
+      },
+      dataType: "script",
+      success: function () {
+        $('.loading-gif').hide();
+        $('.load-more').show();
+      }
+    });
+  });
 };
 
 //*NAVBAR
