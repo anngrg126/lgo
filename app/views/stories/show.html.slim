@@ -92,7 +92,7 @@
                         == link_to story_picture_path(@story, picture), method: :delete, data: {confirm: "Are you sure you want to delete the picture?"}, class: "minor-link" do
                             span.fa.fa-trash-o
                     
-                    .div.reveal[id="picturesModal" data-reveal]
+                    .div.reveal.reveal-orbit[id="picturesModal" data-reveal]
                       .row
                         .columns.small-12.small-centered
                           .div.orbit[role="region" aria-label="Story Images" data-orbit]
