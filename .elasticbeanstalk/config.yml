@@ -2,6 +2,8 @@ branch-defaults:
   aws-config:
     environment: letsgifton-beta
     group_suffix: null
+  aws-es-config:
+    environment: letsgifton-beta
   components:
     environment: letsgifton-beta
 global:
