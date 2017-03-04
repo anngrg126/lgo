@@ -113,4 +113,8 @@ end
 
 group :production do
   gem 'pg'
+  # configure elasticsearch for aws
+  gem 'elasticsearch', '>= 1.0.15'
+  # use signed request for aws elasticsearch - uncomment the next line
+  gem 'faraday_middleware-aws-signers-v4'
 end
