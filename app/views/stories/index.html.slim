@@ -14,6 +14,8 @@
       - @stories.each do |s|
         == render 'shared/story_card', story: s, admin_view: false, preview: false
     .row.columns.load-more-container.text-center
+      i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw.loading-icon[style="display: none;"]
+        span.sr-only Loading...
       == link_to "Load more stories", stories_path, class: "load-more", remote: true
   .columns.large-3.large-pull-9
     .row.columns.index_sidebar

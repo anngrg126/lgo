@@ -214,7 +214,7 @@ document.addEventListener("trix-file-accept", function(event) {
 $(document).on('click', 'a.load-more', function(e){
   e.preventDefault();
   $('.load-more').hide();
-//  $('.loading-gif').show();
+  $('.loading-icon').show();
   var last_id = $('.story-card').last().attr('data-id');
   $.ajax({
     type: "GET",
@@ -224,7 +224,7 @@ $(document).on('click', 'a.load-more', function(e){
     },
     dataType: "script",
     success: function (rtndata) {
-    //      $('.loading-gif').hide();
+      $('.loading-icon').hide();
       if (!(rtndata.includes("Looks like we have no more stories to show. How about you write one?"))) {
         $('.load-more').show();
       };
