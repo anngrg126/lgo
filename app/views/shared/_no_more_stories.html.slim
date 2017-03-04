@@ -1,2 +1,7 @@
-p 
-  | Looks like we have no more stories to show. How about you write one?
+.text-center.no-more-stories
+  h2.secondary No more stories to show
+  p.secondary Why not share one?
+  br
+  == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
+    span.fa.fa-pencil
+    span Share a Story

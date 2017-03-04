@@ -224,9 +224,11 @@ $(document).on('click', 'a.load-more', function(e){
     },
     dataType: "script",
     success: function (rtndata) {
-      $('.loading-icon').hide();
-      if (!(rtndata.includes("Looks like we have no more stories to show. How about you write one?"))) {
+      $('.loading-icon').hide();      
+      if (!(rtndata.includes('text-center no-more-stories'))) {
         $('.load-more').show();
+      } else {
+        $(".load-more-container").hide();
       };
     }
   });
