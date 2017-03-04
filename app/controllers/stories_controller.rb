@@ -8,19 +8,16 @@ class StoriesController < ApplicationController
   def index
     @reactions = ReactionCategory.all
     @active_browse = "active"
-    if params[:search]
-      @results = (Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).search params[:search], operator: "or")
+    if params[:search] || params[:search_tag]
+      if params[:search]
+        @results = (Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).search params[:search], operator: "or")
+        log_search_query(params[:search], @results.count)
+      elsif params[:search_tag]
+        @results = (Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).search params[:search_tag], fields: [tags: :exact])
+      end
       @stories = @results.results.select{|s| s.active? && s.published}
-      log_search_query(params[:search], @results.count)
       if @results.count <=0
         flash[:warning] = "No stories matched : "+ params[:search]
-        redirect_to root_path
-      end
-    elsif params[:search_tag]
-      @results = (Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).search params[:search_tag], fields: [tags: :exact])
-      @stories = @results.results.select{|s| s.active? && s.published}
-      if @results.count <=0
-        flash[:warning] = "No records matched : "+ params[:search_tag]
         redirect_to root_path
       end
     else
