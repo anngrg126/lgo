@@ -223,9 +223,11 @@ $(document).on('click', 'a.load-more', function(e){
       id: last_id
     },
     dataType: "script",
-    success: function () {
-//      $('.loading-gif').hide();
-      $('.load-more').show();
+    success: function (rtndata) {
+    //      $('.loading-gif').hide();
+      if (!(rtndata.includes("Looks like we have no more stories to show. How about you write one?"))) {
+        $('.load-more').show();
+      };
     }
   });
 });
