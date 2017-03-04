@@ -25,13 +25,16 @@ class StoriesController < ApplicationController
       end
     else
       if params[:id]
-        @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active.where('id < ?', params[:id,]).limit(5)
+        if params[:id].to_i > 0
+          @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active.where('id < ?', params[:id,]).limit(5)
+          respond_to do |format|
+            format.js {render :partial => 'stories/index', :locals => {admin_view: false, preview: false}}
+          end
+        else
+          #render partial that says "oops, no more stories, how about you share one?"
+        end
       else
         @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active.limit(5)
-      end
-      respond_to do |format|
-        format.html
-        format.js {render :partial => 'stories/index', :locals => {admin_view: false, preview: false}}
       end
     end
     

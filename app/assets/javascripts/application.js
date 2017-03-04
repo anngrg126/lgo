@@ -220,7 +220,7 @@ $(document).on('click', 'a.load-more', function(e){
     type: "GET",
     url: $(this).attr('href'),
     data: {
-        id: last_id
+      id: last_id
     },
     dataType: "script",
     success: function () {
