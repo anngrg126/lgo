@@ -216,11 +216,15 @@ $(document).on('click', 'a.load-more', function(e){
   $('.load-more').hide();
   $('.loading-icon').show();
   var last_id = $('.story-card').last().attr('data-id');
+  var search = $(".temp_information").attr('search')
+  var search_tag = $(".temp_information").attr('search_tag')
   $.ajax({
     type: "GET",
     url: $(this).attr('href'),
     data: {
-      id: last_id
+      id: last_id,
+      search: search,
+      search_tag: search_tag
     },
     dataType: "script",
     success: function (rtndata) {

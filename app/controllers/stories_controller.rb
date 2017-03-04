@@ -15,10 +15,17 @@ class StoriesController < ApplicationController
       elsif params[:search_tag]
         @results = (Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).search params[:search_tag], fields: [tags: :exact])
       end
-      @stories = @results.results.select{|s| s.active? && s.published}
+      if params[:id]
+#        binding.pry
+      else
+        @stories = @results.results.select{|s| s.active? && s.published}.first(2)
+      end
       if @results.count <=0
         flash[:warning] = "No stories matched : "+ params[:search]
         redirect_to root_path
+      else
+        @search_param = params[:search] ? params[:search] : 0
+        @search_tag_param = params[:search_tag] ? params[:search_tag] : 0
       end
     else
       if params[:id].to_i > 0
