@@ -216,8 +216,8 @@ $(document).on('click', 'a.load-more', function(e){
   $('.load-more').hide();
   $('.loading-icon').show();
   var last_id = $('.story-card').last().attr('data-id');
-  var search = $(".temp_information").attr('data-search')
-  var search_tag = $(".temp_information").attr('data-search-tag')
+  var search = $(".temp_information").attr('data-search');
+  var search_tag = $(".temp_information").attr('data-search-tag');
   $.ajax({
     type: "GET",
     url: $(this).attr('href'),

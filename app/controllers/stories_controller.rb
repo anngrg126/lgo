@@ -52,7 +52,6 @@ class StoriesController < ApplicationController
         end
       end
     end
-    
   end
   
   def new
