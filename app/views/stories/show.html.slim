@@ -3,10 +3,10 @@
   == content_for :og_image, @story.main_image.url(:large)
   - if @story.last_user_to_update == "Admin"
     == content_for :og_title, @story.final_title
-    == content_for :og_description, truncate(@story.final_body.html_safe, length: 200)
+    == content_for :og_description, truncate(sanitize(@story.final_body, tags: []), length: 200)
   - else
     == content_for :og_title, @story.updated_title
-    == content_for :og_description, truncate(@story.updated_body.html_safe, length: 200)
+    == content_for :og_description, truncate(sanitize(@story.updated_body, tags: []), length: 200)
 .row[style="margin-top: 20px"]
   .columns.large-9
     .card.show-story
