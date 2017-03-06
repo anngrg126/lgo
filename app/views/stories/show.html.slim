@@ -134,11 +134,11 @@
               h3 This story is part of the following themed collections
             ul[style="list-style-type: none;"]
               - @relevant_classifications.each do |classif|
-                li  
-                  a.primary-link[href="#{stories_path}?search=#{classif.description}" class="subtext primary-link"] #{classif.description}
+                li
+                  a.primary-link[href="#{stories_path}?search=#{classif.description}" class="primary-link"] #{classif.description.sub(/\S/, &:upcase)}
               - @c_tags.each do |t|
                 li
-                  a[href="#{stories_path}?search_tag=#{t.name}" class="subtext primary-link"] #{t.name}
+                  a[href="#{stories_path}?search_tag=#{t.name}" class="primary-link"] #{t.name.humanize}
       .card-section
         - if @story.published?
           - unless @story.classifications.empty?
