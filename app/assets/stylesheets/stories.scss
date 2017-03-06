@@ -1,6 +1,8 @@
 //globals
 @import 'globals/colors';
-
+@import 'modules/pictures_lightbox.scss';
+@import 'modules/story_show.scss';
+@import 'modules/story_new.scss';
 //story index view
 .index_subinfo {
   display: inline-block;
@@ -15,145 +17,6 @@
   padding: 20px 10px;
   border: 1px solid $light-gray;
 }
-//story new view
-.new-story-intro {
-  padding: 40px 0px;
-  h1 {
-    margin-bottom: 20px;
-  }
-  max-width: 650px;
-  margin: 0 auto;
-}
-.story-form {
-  box-shadow:  4px 4px 5px 0px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow:  4px 4px 5px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow:  4px 4px 5px 0px rgba(0, 0, 0, 0.25);
-  margin-bottom: 0;
-  padding: 40px 20px;
-  &.card {
-    overflow: visible;
-  }
-  position: relative;
-  height: 100%;
-  .label-container {
-    margin-bottom: 20px;
-  }
-  h2 {
-    display: inline;
-    margin-right: 10px;
-    & label {
-      font-size: inherit;
-      display: inline;
-      line-height: 1.15;
-    }
-  }
-  .subtext {
-    display: inline-block;
-  }
-  trix-editor.body {
-    height: 200px;
-  }
-  .card-section {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    &:last-child {
-      padding-bottom: 10px;
-    }
-    &:first-child {
-      padding-top: 10px;
-    }
-  }
-  .subtext {
-    color: $middark-gray;
-  }
-  .links {
-    display: none;
-  }
-  .button {
-    margin-bottom: 0;
-  }
-}
-.form-container {
-  padding-right: 0;
-  position: relative;
-  &:after, &:before {
-    content: '';
-    left: 99%;
-    top: 50%;
-    border: solid transparent;
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-  }
-  &:after {
-    border-color: transparent;
-    border-left-color: $white;
-    border-width: 80px;
-    margin-top: -80px;
-  }
-  &:before {
-    border-color: transparent;
-    border-left-color: $medium-gray;
-    border-width: 81px;
-    margin-top: -81px;
-    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.75));
-    -webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.75));
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=5, Color='#444')";
-  }
-}
-.form-sidebar {
-  padding-left: 0;
-  >div {
-    background-color: $light-gray;
-    height: 100%;
-    padding: 40px 40px;
-  }
-  .text-center h2 {
-    margin-bottom: 20px;
-  }
-  .story-card {
-    max-width: 350px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    .float-right div {
-      padding-top: 0;
-      line-height: 1;
-      padding-left: 25px;
-      background-color: white;
-    }
-  }
-  .featured-prompt {
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  .fa-2x {
-    color: $midpt-gray;
-  }
-  .icon-section {
-    padding: 40px 10px;
-  }
-  .anchor h2 {
-    margin: 60px 0 80px;
-  }
-}
-trix-editor {
-  overflow: scroll;
-  margin-bottom: 10px;
-  max-height: 400px;
-}
-@media only screen and (max-width: 1024px) {
-  .form-container {
-    &:after {
-      border-width: 60px;
-      margin-top: -60px;
-    }
-    &:before {
-      border-width: 61px;
-      margin-top: -61px;
-    }
-  }
-}
 @media only screen and (max-width: 640px) {
   //story index view
   .index_subinfo {
@@ -165,51 +28,6 @@ trix-editor {
     display: block;
     text-align: center;
     margin-bottom: 20px;
-  }
-  //story form view
-  .new-story-intro {
-    padding: 30px 0px;
-  }
-  .story-form {
-//    margin-bottom: 10px;
-    padding: 40px 10px;
-    .card-section {
-      padding-top: 20px;
-      padding-bottom: 20px;
-    }
-    box-shadow:  0px 4px 3px 0px rgba(0, 0, 0, 0.25);
-    -webkit-box-shadow:  0px 4px 3px 0px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow:  0px 4px 3px 0px rgba(0, 0, 0, 0.25);
-  }
-  .form-sidebar {
-    padding-left: 0.625rem;
-    >div {
-      padding: 50px 20px 40px 20px;
-    }
-    .icon-section {
-      padding: 20px 0;
-    }
-  }
-  .form-container {
-    padding-right: 0.625rem;
-    &:after, &:before {
-      left: 50%;
-      top: 99%;
-    }
-    &:after {
-      border-left-color: transparent;
-      border-top-color: $white;
-      border-width: 40px;
-      margin-top: 0;
-      margin-left: -40px;
-    }
-    &:before {
-      border-left-color: transparent;
-      border-top-color: $medium-gray;
-      border-width: 41px;
-      margin-top: 0;
-      margin-left: -41px;
-    }
   }
   .index_sidebar {
     margin-bottom: 10px;
