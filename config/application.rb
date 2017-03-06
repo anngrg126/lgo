@@ -23,5 +23,7 @@ module Letsgifton
     # Do not swallow errors in after_commit/after_rollback callbacks.
     # config.active_record.raise_in_transactional_callbacks = true
     config.action_view.sanitized_allowed_tags = ['strong', 'em', 'a', 'del', 'div', 'h1', 'ul', 'li', 'ol', 'p']
+    
+    config.action_mailer.default_url_options = { host: "http://letsgifton-beta.us-west-2.elasticbeanstalk.com/" }
   end
 end
