@@ -73,6 +73,7 @@ module NotificationsHelper
     id_array = []
     @followers_id_array = []  
     my_message = []
+    @mailer=false
     
     #consolidate all stories to avoid N+1 db queries
     notifications_array.each do |n|

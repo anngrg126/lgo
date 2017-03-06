@@ -52,16 +52,17 @@
             == "#{time} ago" 
           - else
             == "#{date}"
-        div
-          -unless read == "true"
-            == link_to mark_as_read_array_path(notification: my_message["message_id"]), remote: true, class: "minor-link mark-as-read" do
-              span.fa.fa-check-square-o
-              span &nbsp;Mark as read&nbsp;&nbsp;
-            .subtext.read.minor-link[style="display: none;"]
-              span.fa.fa-check
-              span &nbsp;Read
-        div
-          == link_to notification_path(notification: my_message["message_id"]), method: :delete, remote: true, class: "minor-link" do
-            span.fa.fa-trash-o
-            span &nbsp;Delete&nbsp;&nbsp;
+        - unless @mailer
+          div
+            -unless read == "true"
+              == link_to mark_as_read_array_path(notification: my_message["message_id"]), remote: true, class: "minor-link mark-as-read" do
+                span.fa.fa-check-square-o
+                span &nbsp;Mark as read&nbsp;&nbsp;
+              .subtext.read.minor-link[style="display: none;"]
+                span.fa.fa-check
+                span &nbsp;Read
+          div
+            == link_to notification_url(notification: my_message["message_id"]), method: :delete, remote: true, class: "minor-link" do
+              span.fa.fa-trash-o
+              span &nbsp;Delete&nbsp;&nbsp;
       
