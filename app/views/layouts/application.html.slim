@@ -10,6 +10,7 @@ html lang="en"
     == stylesheet_link_tag "application"
     - if params[:controller].present?
       == stylesheet_link_tag params[:controller]
+    == stylesheet_link_tag "assets/stylesheets/vendor/foundation-emails.css" 
     == javascript_include_tag "application", 'data-turbolinks-track' => true
     == csrf_meta_tags
     meta name="description"             content="Real-life gift stories and ideas."

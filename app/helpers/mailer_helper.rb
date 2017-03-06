@@ -249,7 +249,7 @@ module MailerHelper
     my_message.uniq!
     index = -1
     output = [""]
-     
+    concat "<table  class='body' data-made-with-foundation>".html_safe 
     ordered_ids.each do |i|     
       index = id_array.index(i)
       if id_array[index].instance_of? Fixnum
@@ -263,6 +263,7 @@ module MailerHelper
       end
       output.push(partial)
     end
+    concat "</table>".html_safe 
     return output.join(" ")
   end
 end
