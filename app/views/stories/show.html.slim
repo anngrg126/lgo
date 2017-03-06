@@ -1,6 +1,6 @@
 .row[style="margin-top: 20px"]
   .columns.large-9
-    .card
+    .card.show-story
       .card-section
         -if @story.anonymous?
           - user = @anonymous_user
@@ -8,7 +8,7 @@
           - user = @story.user 
         .row.columns.clearfix
           .float-left
-            .columns[style= "line-height: 0.9;padding-left: 40px; padding-top: 20px; width: auto;"]
+            .columns[style= "line-height: 0.9; width: auto;"]
               == render 'shared/poster_user', story: @story, user: user, featured: nil, cnt_stories: 0, comment:nil 
           - if user_signed_in? && @story.author_id == current_user.id
             .float-right 
@@ -111,26 +111,19 @@
                       button.close-button[data-close aria-label="Close reveal" type="button"]
                         span.icon[aria-hidden="true"] &times;
                             
-      .card-section
-        .row.center-on-mobile-left[style="padding: 20px 0px"]
-          .columns.medium-8
-            <!-- Reactions -->
-            h2[style="padding-left: 10px"] Whats your Reaction?
-          .columns.medium-4[style="min-width: 200px;"]
-            == render 'shared/reactions_component', s: @story, top: false 
-      .card-divider[style="text-align:center"]
-        h2[style="padding-bottom:10px;"] Feeling Inspired?
+      .card-section.what-reaction
+        h2 Whats your Reaction?
+        .reactions
+          == render 'shared/reactions_component', s: @story, top: false 
+      .card-divider.text-center
+        h2 Feeling Inspired?
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fa.fa-pencil
-          span Share my Gift Story
-
-    div
-      <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
+          span Share a Story
+    .comments-container
       #comments
         == render 'comments/form'
         == render 'comments/show'
-    
-
   .columns.large-3
     .card
       .card-divider[style="text-align:center"]
