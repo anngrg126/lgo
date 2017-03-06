@@ -52,7 +52,12 @@
               == story_fail_tag(@story)
         div
           == render 'bookmarks/bookmark', story: @story
-          == link_to root_path, class: "social-icon facebook" do
+          /== link_to "" "https://www.facebook.com/dialog/share?app_id=776198432492129&href=#{request.original_url}&redirect_uri=#{request.original_url}" do
+            span.fa.fa-facebook-official.fa-lg
+          /https://www.facebook.com/dialog/share?app_id=776198432492129&href=##{request.original_url}&redirect_uri=#{request.original_url}
+          /a.social-icon.facebook[href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" onclick="window.open(this.href,'','scrollbars=no,resizable=yes, location=no,menubar=no,status=no,toolbar=no,left='+(screen.availWidth/2-350)+ ', top='+(screen.availHeight/2-350)+',width=700,height=263');return false;"]
+            span.fa.fa-facebook-official.fa-lg
+          a.social-icon.facebook[href="https://www.facebook.com/dialog/feed?app_id=776198432492129&display=popup&amp;caption=#{:og_title}&link=#{request.original_url}&redirect_uri=http://letsgifton-beta.us-west-2.elasticbeanstalk.com/" onclick="window.open(this.href,'','scrollbars=no,resizable=yes, location=no,menubar=no,status=no,toolbar=no,left='+(screen.availWidth/2-350)+ ', top='+(screen.availHeight/2-350)+',width=700,height=263');return false;"]
             span.fa.fa-facebook-official.fa-lg
       .card-section[style="padding-top: 0;"]
         #top_reactions_bar
