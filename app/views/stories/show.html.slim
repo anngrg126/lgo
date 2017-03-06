@@ -116,10 +116,10 @@
         == render 'comments/form'
         == render 'comments/show'
   .columns.large-3
-    .card.continue-browsing
-      .card-divider.text-center
-        h3 Browse Similar Stories
-      - if @story.published?
+    - if @story.published?
+      .card.continue-browsing
+        .card-divider.text-center
+          h3 Browse Similar Stories
         - @c_tags = []
         - @relevant_classifications = []
         - @story.classifications.each do |c|
@@ -139,23 +139,23 @@
               - @c_tags.each do |t|
                 li
                   a[href="#{stories_path}?search_tag=#{t.name}" class="primary-link"] #{t.name.humanize}
-      .card-section
-        - if @story.published?
-          - unless @story.classifications.empty?
-            div
-              h3 More stories about
-            .story_tags
-              - @story.classifications.each do |classif|                  
-                - @t = @tags.select{|t| t.id == classif.tag_id}.first
-                - unless @t.tag_category_id == 7
-                  - unless @t.name == "other"
-                    - unless @t.name == "fail"
-                      span.label
-                        a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext primary-link"] #{@t.name}
+        .card-section
+          - if @story.published?
+            - unless @story.classifications.empty?
+              div
+                h3 More stories about
+              .story_tags
+                - @story.classifications.each do |classif|                  
+                  - @t = @tags.select{|t| t.id == classif.tag_id}.first
+                  - unless @t.tag_category_id == 7
+                    - unless @t.name == "other"
+                      - unless @t.name == "fail"
+                        span.label
+                          a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext primary-link"] #{@t.name}
+                      - else
+                        span.label
+                          a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext fail-link"] #{@t.name}
                     - else
-                      span.label
-                        a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext fail-link"] #{@t.name}
-                  - else
-                    - if classif.description?
-                      span.label
-                        a[href="#{stories_path}?search=#{classif.description}" class="subtext primary-link"] #{classif.description}
+                      - if classif.description?
+                        span.label
+                          a[href="#{stories_path}?search=#{classif.description}" class="subtext primary-link"] #{classif.description}
