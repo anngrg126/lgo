@@ -6,10 +6,10 @@ html lang="en"
 
     title
       == content_for?(:title) ? yield(:title) : "Let's GiftOn"
-
     == stylesheet_link_tag "application"
     - if params[:controller].present?
       == stylesheet_link_tag params[:controller]
+    == stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css"
     == javascript_include_tag "application", 'data-turbolinks-track' => true
     == csrf_meta_tags
     meta name="description"             content="Real-life gift stories and ideas."

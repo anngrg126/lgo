@@ -8,7 +8,7 @@
         == render 'reactions/'+(r.name), story: s
 -elsif top
   /for story show page top - all reactions except cool
-  div.float-left.reactions
+  .reactions
     == render 'comments/comments', story: s, top: top
     - @reactions.each do |r|
       - unless r.name == "cool"
