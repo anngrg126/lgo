@@ -123,11 +123,12 @@
     margin-bottom: 20px;
   }
   .card-divider {
-    background-color: $dark-gray;
+    background-color: $light-gray;
+    border-radius: 5px;
     margin-bottom: 10px;
     padding: 20px;
     h3 {
-      color: $ultra-light-gray;
+//      color: $white;
       margin-bottom: 0;
     }
   }

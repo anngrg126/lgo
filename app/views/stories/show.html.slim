@@ -32,7 +32,7 @@
                     span Edit Story
                 .div[style="display:inline-block; margin: 10px;"]
                   == link_to  story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "minor-link" do
-                    span.fa.fa-trash
+                    span.fa.fa-trash-o
                     span &nbsp; Delete Story
       hr
       .card-section.story-intro
@@ -67,38 +67,36 @@
           h2.secondary Story images
           .row.small-up-2.medium-up-3.large-up-4
             - @story.pictures.each do |picture|
-              .column.column-block
+              .columns.column-block
                 .card
                   .thumbnail[data-toggle="picturesModal"]
                     = image_tag picture.image.url
                   - if user_signed_in? && @story.author_id == current_user.id
                     == link_to story_picture_path(@story, picture), method: :delete, data: {confirm: "Are you sure you want to delete the picture?"}, class: "minor-link" do
                       span.fa.fa-trash-o
-          .reveal.reveal-orbit[id="picturesModal" data-reveal]
-            .row
-              .columns.small-centered
-                .orbit[role="region" aria-label="Story Images" data-orbit]
-                  ul.orbit-container[style="min-height: 375px;"]
-                    - if @story.pictures.length > 1
-                      button.orbit-previous
-                        span.icon.primary-icon &#9664;&#xFE0E;
-                      button.orbit-next
-                        span.icon.primary-icon &#9654;&#xFE0E;
-                    - @story.pictures.each do |picture|
-                      li.orbit-slide
-                        img.orbit-image[src="#{picture.image.url}"]
-                  nav.orbit-bullets
-                    - @i=0
-                    - @story.pictures.each do |picture|
-                      - if @i==0
-                        button.is-active[data-slide="#{@i}"]
-                      - else
-                        button[data-slide="#{@i}"]
-                      - @i += 1
-                    /button[data-slide="1"]
-                    /button[data-slide="2"]
-            button.close-button[data-close aria-label="Close reveal" type="button"]
-              span.icon[aria-hidden="true"] &times;
+      - unless @story.pictures.empty?
+        .reveal.reveal-orbit[id="picturesModal" data-reveal]
+          .small-centered
+              .orbit[role="region" aria-label="Story Images" data-orbit]
+                ul.orbit-container[style="min-height: 375px;"]
+                  - if @story.pictures.length > 1
+                    button.orbit-previous
+                      span.icon.primary-icon &#9664;&#xFE0E;
+                    button.orbit-next
+                      span.icon.primary-icon &#9654;&#xFE0E;
+                  - @story.pictures.each do |picture|
+                    li.orbit-slide
+                      img.orbit-image[src="#{picture.image.url}"]
+                nav.orbit-bullets
+                  - @i=0
+                  - @story.pictures.each do |picture|
+                    - if @i==0
+                      button.is-active[data-slide="#{@i}"]
+                    - else
+                      button[data-slide="#{@i}"]
+                    - @i += 1
+          button.close-button[data-close aria-label="Close reveal" type="button"]
+            span.icon[aria-hidden="true"] &times;
       - if user_signed_in? && @story.author_id == current_user.id
         .card-section.upload-pictures
           == link_to new_story_picture_path(@story), class: "button button-w-icon" do
