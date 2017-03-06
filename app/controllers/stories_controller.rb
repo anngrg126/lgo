@@ -8,22 +8,35 @@ class StoriesController < ApplicationController
   def index
     @reactions = ReactionCategory.all
     @active_browse = "active"
-    if params[:search] || params[:search_tag]
-      if params[:search]
+    if (params[:search] != nil && params[:search] != "0") || (params[:search_tag] !=nil && params[:search_tag] != "0")
+      if params[:search]!=nil && params[:search] != "0"
         @results = (Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).search params[:search], operator: "or")
-        log_search_query(params[:search], @results.count)
-      elsif params[:search_tag]
+        unless params[:id]
+          #log search query unless if user is already on results page & clicks 'show more stories'
+          log_search_query(params[:search], @results.count)
+        end
+      elsif params[:search_tag]!=nil && params[:search_tag] != "0"
         @results = (Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).search params[:search_tag], fields: [tags: :exact])
+#        DELETE **** can verify that we get here when user clicks "fail"...
+#        DELETE **** can verify that we get here when user clicks 'show more stories'
       end
-      if params[:id]
-#        binding.pry
+      if params[:id].to_i > 0
+        @stories = @results.results.reverse!.select{|s| s.active? && s.published && s.id < params[:id].to_i}.first(8)
+        respond_to do |format|
+          format.js {render :partial => 'stories/index', :locals => {admin_view: false, preview: false}}
+        end
       else
-        @stories = @results.results.select{|s| s.active? && s.published}.first(2)
+        @stories = @results.results.reverse!.select{|s| s.active? && s.published}.first(8)
       end
       if @results.count <=0
-        flash[:warning] = "No stories matched : "+ params[:search]
+        if (params[:search] != nil && params[:search] != "0")
+          flash[:warning] = "No stories matched : "+ params[:search]
+        else
+          flash[:warning] = "No stories matched : "+ params[:search_tag]
+        end
         redirect_to root_path
       else
+        #pass search params to temp info div
         @search_param = params[:search] ? params[:search] : 0
         @search_tag_param = params[:search_tag] ? params[:search_tag] : 0
       end
@@ -34,7 +47,9 @@ class StoriesController < ApplicationController
           format.js {render :partial => 'stories/index', :locals => {admin_view: false, preview: false}}
         end
       else
-        @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active.limit(8)
+        if params[:search].nil? && params[:search_tag].nil?
+          @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active.limit(8)
+        end
       end
     end
     

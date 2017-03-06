@@ -1,5 +1,5 @@
 == render 'stories/hero'
-.temp_information[data= "search: #{@search_param.nil? ? 0 : @search_param }, search_tag: #{@search_tag_param.nil? ? 0 : @search_tag_param }"]
+.temp_information[data-search= "#{@search_param.nil? ? 0 : @search_param }" data-search-tag="#{@search_tag_param.nil? ? 0 : @search_tag_param }"]
 .row[style="margin-top: 20px;"]
   .columns.large-9.large-push-3
     .row.columns.page-intro
