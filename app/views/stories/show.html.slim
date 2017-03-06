@@ -3,10 +3,10 @@
   == content_for :og_image, @story.main_image.url(:large)
   - if @story.last_user_to_update == "Admin"
     == content_for :og_title, @story.final_title
-    == content_for :og_description, truncate(@story.final_body, length: 200)
+    == content_for :og_description, truncate(@story.final_body.html_safe, length: 200)
   - else
     == content_for :og_title, @story.updated_title
-    == content_for :og_description, truncate(@story.updated_body, length: 200)
+    == content_for :og_description, truncate(@story.updated_body.html_safe, length: 200)
 .row[style="margin-top: 20px"]
   .columns.large-9
     .card.show-story
@@ -52,7 +52,7 @@
               == story_fail_tag(@story)
         div
           == render 'bookmarks/bookmark', story: @story
-          == link_to "https://www.facebook.com/dialog/feed?app_id=776198432492129&caption=#{:og_title};picture=#{:og_image};description=#{:og_description}&link=#{request.original_url}&redirect_uri=http://www.letsgifton.com", class: "social-icon facebook", onclick: "window.open(this.href,'','scrollbars=no,resizable=yes, location=no,menubar=no,status=no,toolbar=no,left='+(screen.availWidth/2-350)+ ', top='+(screen.availHeight/2-350)+',width=700,height=263');return false;" do
+          == link_to "https://www.facebook.com/dialog/feed?app_id=776198432492129&link=#{request.original_url}&redirect_uri=#{request.original_url}", class: "social-icon facebook", onclick: "window.open(this.href,'','scrollbars=no,resizable=yes, location=no,menubar=no,status=no,toolbar=no,left='+(screen.availWidth/2-350)+ ', top='+(screen.availHeight/2-350)+',width=700,height=263');return false;" do
             span.fa.fa-facebook-official.fa-lg
       .card-section[style="padding-top: 0;"]
         #top_reactions_bar
