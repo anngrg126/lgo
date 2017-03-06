@@ -82,6 +82,8 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    css_parser (1.4.9)
+      addressable
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     devise (4.2.0)
@@ -143,6 +145,7 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     hashie (3.5.5)
+    htmlentities (4.3.4)
     i18n (0.8.1)
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
@@ -202,6 +205,12 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
     pg (0.19.0)
+    premailer (1.10.0)
+      css_parser (>= 1.4.9)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.9.5)
+      actionmailer (>= 3, < 6)
+      premailer (~> 1.7, >= 1.7.9)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -360,9 +369,11 @@ DEPENDENCIES
   guard-rspec
   jbuilder (~> 2.0)
   jquery-rails
+  nokogiri
   omniauth-facebook
   paperclip
   pg
+  premailer-rails
   pry
   puma
   rails (~> 5.0.0)
