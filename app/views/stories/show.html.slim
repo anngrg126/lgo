@@ -1,3 +1,12 @@
+== content_for :og_url, request.base_url + request.original_fullpath
+- if @story.published? 
+  == content_for :og_image, @story.main_image.url(:large)
+  - if @story.last_user_to_update == "Admin"
+    == content_for :og_title, @story.final_title
+    == content_for :og_description, truncate(@story.final_body, length: 200)
+  - else
+    == content_for :og_title, @story.updated_title
+    == content_for :og_description, truncate(@story.updated_body, length: 200)
 .row[style="margin-top: 20px"]
   .columns.large-9
     .card.show-story
@@ -25,92 +34,76 @@
                   == link_to  story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "minor-link" do
                     span.fa.fa-trash
                     span &nbsp; Delete Story
-      hr[style="margin: 10px; max-width: 100%"]
-      .card-section
-        .columns.large-12
-          == content_for :og_url, request.base_url + request.original_fullpath
-          - if @story.published? 
-            == content_for :og_image, @story.main_image.url(:large)
-            - if @story.last_user_to_update == "Admin"
-              == content_for :og_title, @story.final_title
-              == content_for :og_description, truncate(@story.final_body, length: 200)
-            - else
-              == content_for :og_title, @story.updated_title
-              == content_for :og_description, truncate(@story.updated_body, length: 200) 
-        .row
-          .columns[style="width: calc(100% - 50px);"]
-            h1
-              == story_title_show(@story)
-
-            .subtext
-              == story_gift_description_show(@story)
-            - unless @story.classifications.empty?
-              .story_tags
-                span.label
-                  == story_recipient_tag(@story)
-                | &nbsp;&nbsp;
-                span.label
-                  == story_occasion_tag(@story)
-                | &nbsp;&nbsp;
-                == story_fail_tag(@story)
-            div#top_reactions_bar
-              == render 'shared/reactions_component', s: @story, top: true
-              
-          .columns[style="width: 50px;"]
-            .float-right 
-              == render 'bookmarks/bookmark', story: @story
-              == link_to root_path, class: "social-icon facebook" do
-                span.fa.fa-facebook-official.fa-lg[style="font-size: 1.6em; margin-top: 12px"]
-
+      hr
+      .card-section.story-intro
+        div
+          h1
+            == story_title_show(@story)
+          p.secondary
+            == story_gift_description_show(@story)
+          - unless @story.classifications.empty?
+            .story_tags
+              span.label
+                == story_recipient_tag(@story)
+              | &nbsp;&nbsp;
+              span.label
+                == story_occasion_tag(@story)
+              | &nbsp;&nbsp;
+              == story_fail_tag(@story)
+        div
+          == render 'bookmarks/bookmark', story: @story
+          == link_to root_path, class: "social-icon facebook" do
+            span.fa.fa-facebook-official.fa-lg
       .card-section[style="padding-top: 0;"]
+        #top_reactions_bar
+          == render 'shared/reactions_component', s: @story, top: true
+      .card-section
         - unless @story.main_image_file_name.nil?
           .story-image[style="background-image: url(#{story_main_image_show_path(@story)})"]
-          
-      .card-section
-        p
-          == story_body_show(@story)
-      .card-section.upload-pictures
-        - if user_signed_in? && @story.author_id == current_user.id
-          .row.columns[style="text-align: center;margin-top: 10px"]
-            .div[style="display:inline-block; margin: 10px"]
-              == link_to  new_story_picture_path(@story), class: "button button-w-icon" do
-                span.fa.fa-cloud-upload
-                span Upload More Pictures
-              
-      .card-section
-        div.story_pictures
-          - unless @story.pictures.empty?
-            .columns.medium-12
-              strong Story Images
-              .row.small-up-2.medium-up-3.large-up-4
-                - @story.pictures.each do |picture|
-                  div.column.column-block
-                    .card[style="padding:10px"]
-                      .div.thumbnail[data-toggle="picturesModal"]
-                        = image_tag picture.image.url
-                      - if user_signed_in? && @story.author_id == current_user.id
-                        == link_to story_picture_path(@story, picture), method: :delete, data: {confirm: "Are you sure you want to delete the picture?"}, class: "minor-link" do
-                            span.fa.fa-trash-o
-                    
-                    .div.reveal.reveal-orbit[id="picturesModal" data-reveal]
-                      .row
-                        .columns.small-12.small-centered
-                          .div.orbit[role="region" aria-label="Story Images" data-orbit]
-                            ul.orbit-container[style="min-height: 375px;"]
-                              button.orbit-previous
-                                span.icon.primary-icon &#9664;&#xFE0E;
-                              button.orbit-next
-                                span.icon.primary-icon &#9654;&#xFE0E;
-                              - @story.pictures.each do |picture|
-                                li.orbit-slide
-                                  img.orbit-image[src="#{picture.image.url}"]
-                            nav.orbit-bullets
-                              button.is-active [data-slide="0"]
-                              button[data-slide="1"]
-                              button[data-slide="2"]
-                      button.close-button[data-close aria-label="Close reveal" type="button"]
-                        span.icon[aria-hidden="true"] &times;
-                            
+      .card-section.story-body
+        == story_body_show(@story)
+      - unless @story.pictures.empty?
+        .card-section.story-pictures
+          h2.secondary Story images
+          .row.small-up-2.medium-up-3.large-up-4
+            - @story.pictures.each do |picture|
+              .column.column-block
+                .card
+                  .thumbnail[data-toggle="picturesModal"]
+                    = image_tag picture.image.url
+                  - if user_signed_in? && @story.author_id == current_user.id
+                    == link_to story_picture_path(@story, picture), method: :delete, data: {confirm: "Are you sure you want to delete the picture?"}, class: "minor-link" do
+                      span.fa.fa-trash-o
+          .reveal.reveal-orbit[id="picturesModal" data-reveal]
+            .row
+              .columns.small-centered
+                .orbit[role="region" aria-label="Story Images" data-orbit]
+                  ul.orbit-container[style="min-height: 375px;"]
+                    - if @story.pictures.length > 1
+                      button.orbit-previous
+                        span.icon.primary-icon &#9664;&#xFE0E;
+                      button.orbit-next
+                        span.icon.primary-icon &#9654;&#xFE0E;
+                    - @story.pictures.each do |picture|
+                      li.orbit-slide
+                        img.orbit-image[src="#{picture.image.url}"]
+                  nav.orbit-bullets
+                    - @i=0
+                    - @story.pictures.each do |picture|
+                      - if @i==0
+                        button.is-active[data-slide="#{@i}"]
+                      - else
+                        button[data-slide="#{@i}"]
+                      - @i += 1
+                    /button[data-slide="1"]
+                    /button[data-slide="2"]
+            button.close-button[data-close aria-label="Close reveal" type="button"]
+              span.icon[aria-hidden="true"] &times;
+      - if user_signed_in? && @story.author_id == current_user.id
+        .card-section.upload-pictures
+          == link_to new_story_picture_path(@story), class: "button button-w-icon" do
+            span.fa.fa-cloud-upload
+            span Upload More Pictures          
       .card-section.what-reaction
         h2 Whats your Reaction?
         .reactions
@@ -125,40 +118,46 @@
         == render 'comments/form'
         == render 'comments/show'
   .columns.large-3
-    .card
-      .card-divider[style="text-align:center"]
-        h3 Browse
-      .card-section
-        - if @story.published?
-          - @c_tags = @story.classifications.select{|c| c.tag.tag_category_id==7}
-          - unless @c_tags.empty?
-            .div
-              h4 This story is part of the following themed collections:
-            .story_tags
-              - @c_tags.each do |classif|
-                - @t = @tags.select{|t| t.id == classif.tag_id}.first
-                span.label
-                  a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext primary-link"] #{@t.name}
-                | &nbsp;&nbsp;
+    .card.continue-browsing
+      .card-divider.text-center
+        h3 Browse Similar Stories
+      - if @story.published?
+        - @c_tags = []
+        - @relevant_classifications = []
+        - @story.classifications.each do |c|
+          - unless @tags.select{|t| t.id == c.tag_id && t.tag_category_id ==7}.empty?
+            - unless @tags.select{|t| t.id == c.tag_id && t.tag_category_id ==7}.first.name=="other"
+              - @c_tags.push(@tags.select{|t| t.id == c.tag_id && t.tag_category_id ==7}.first)
+            - else
+              - @relevant_classifications.push(c)
+        - if !@c_tags.empty? || !@relevant_classifications.empty?
+          .card-section
+            div
+              h3 This story is part of the following themed collections
+            ul[style="list-style-type: none;"]
+              - @relevant_classifications.each do |classif|
+                li  
+                  a.primary-link[href="#{stories_path}?search=#{classif.description}" class="subtext primary-link"] #{classif.description}
+              - @c_tags.each do |t|
+                li
+                  a[href="#{stories_path}?search_tag=#{t.name}" class="subtext primary-link"] #{t.name}
       .card-section
         - if @story.published?
           - unless @story.classifications.empty?
-            .div
-              h4 More stories about
+            div
+              h3 More stories about
             .story_tags
-              - @story.classifications.each do |classif|
+              - @story.classifications.each do |classif|                  
                 - @t = @tags.select{|t| t.id == classif.tag_id}.first
-                - unless @t.name == "other"
-                  - unless @t.name == "fail"
-                    span.label
-                      a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext primary-link"] #{@t.name}
-                    | &nbsp;&nbsp;
+                - unless @t.tag_category_id == 7
+                  - unless @t.name == "other"
+                    - unless @t.name == "fail"
+                      span.label
+                        a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext primary-link"] #{@t.name}
+                    - else
+                      span.label
+                        a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext fail-link"] #{@t.name}
                   - else
-                    span.label
-                      a[href="#{stories_path}?search_tag=#{tag_search(@t.name)}" class="subtext fail-link"] #{@t.name}
-                    | &nbsp;&nbsp;
-                - else
-                  - if classif.description?
-                    span.label
-                      a[href="#{stories_path}?search=#{classif.description}" class="subtext primary-link"] #{classif.description}
-                    | &nbsp;&nbsp;
+                    - if classif.description?
+                      span.label
+                        a[href="#{stories_path}?search=#{classif.description}" class="subtext primary-link"] #{classif.description}

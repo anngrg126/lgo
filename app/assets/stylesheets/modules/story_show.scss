@@ -3,6 +3,18 @@
       padding: 40px;
       margin: 0 10px 20px 20px;
     }
+  hr {
+    margin: 20px auto 10px;
+  }
+  h1 {
+    padding-right: 40px;
+    margin-bottom: 10px;
+  }
+  .story-body {
+    color: $dark-gray;
+    line-height: 1.8;
+    padding: 30px 10px;
+  }
   .card-divider {
     background: $dark-gray;
     h2 {
@@ -14,7 +26,7 @@
   }
   .what-reaction {
     padding: 20px 40px;
-    margin: 20px 0;
+    margin: 20px 0 40px;
     border: 1px solid $dark-gray;
     border-radius: 5px;
     min-height: 90px;
@@ -30,22 +42,101 @@
       float: right;
     }
   }
+  .story-intro {
+    >div:first-child {
+      width: calc(100% - 33px); 
+      display: inline-block;
+    }
+    >div:last-child {
+      display: inline-block; 
+      vertical-align: top;
+      a.icon-button {
+        padding-right: 0;
+      }
+    }
+  }
+  .fa-facebook {
+    font-size: 1.6em; 
+    margin-top: 12px;
+  }
+  .upload-pictures {
+    text-align: center;
+    margin: 10px 0 40px;
+  }
+  .story-pictures {
+    .card {
+      padding: 10px;
+    }
+    .thumbnail {
+      margin-bottom: 0;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+  }
 }
 .comments-container {
-  margin: 0 20px 10px 20px;
+  margin: 0 10px 40px 20px;
+  label {
+    color: $dark-gray;
+    margin: 30px 0 20px;
+  }
+  input {
+    margin: 10px 0 30px;
+  }
+  textarea {
+    width: 90%;
+  }
+  .show-comments {
+    > strong {
+      display: block;
+      color: $dark-gray;
+      margin-bottom: 10px;
+    }
+    > p {
+      padding-top: 10px;
+    }
+  }
+  .user-thumbnail {
+    margin-right: 20px;
+  }
 }
 @media only screen and (max-width: 1024px) {
   .show-story {
     .what-reaction {
       padding: 20px;
-      h2 {
-        
-      }
+    }
+  }
+}
+.continue-browsing {
+  li {
+    padding-bottom: 20px;
+  }
+  .label {
+    margin: 10px;
+  }
+  .story_tags {
+    margin: 0 -10px;
+  }
+  h3 {
+    color: $dark-gray;
+    margin-bottom: 20px;
+  }
+  .card-divider {
+    background-color: $dark-gray;
+    margin-bottom: 10px;
+    padding: 20px;
+    h3 {
+      color: $ultra-light-gray;
+      margin-bottom: 0;
     }
   }
 }
 @media only screen and (max-width: 640px) {
   .show-story {
+    h1 {
+      padding-right: 20px;
+    }
     &.card {
       padding: 20px 10px;
       margin: 0;
@@ -62,6 +153,15 @@
       .reactions {
         float: none;
       }
+    }
+  }
+  .comments-container {
+    margin: 0 0 20px 10px;
+    .user-thumbnail {
+      margin-right: 10px;
+    }
+    textarea {
+      width: 100%;
     }
   }
 }

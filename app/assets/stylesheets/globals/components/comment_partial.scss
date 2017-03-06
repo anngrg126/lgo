@@ -1,17 +1,31 @@
 .comment {
   display: inline-block;
   width: 100%;
-  padding-top: 10px;
+  padding: 10px 20px;
   &>div {
     display: inline-block;
     width: 100%;
     border-bottom: 1px solid $light-gray;
       &>div {
         &:nth-child(2){
-        margin-left:50px;
-        
-        padding-bottom: 10px;
+        margin-left:60px;
+        padding-bottom: 20px;
       }
     }
+  }
+  .edit-comment {
+    margin-top: 20px;
+  }
+  p {
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .comment {
+    padding: 10px 0px;
+  }
+  .comment>div>div:nth-child(2) {
+    margin-left: 50px;
   }
 }

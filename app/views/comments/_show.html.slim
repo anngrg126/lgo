@@ -1,6 +1,7 @@
-strong Comments
-- if @story_comments.any?
-  - @story_comments.each do |comment|
-    == render 'shared/comment_partial', story: @story, user: comment.user, comment: comment
-- else
-  | There are no comments to show.
+.show-comments
+  strong Comments
+  - if @story_comments.any?
+    - @story_comments.each do |comment|
+      == render 'shared/comment_partial', story: @story, user: comment.user, comment: comment
+  - else
+    p.secondary Be the first to leave a comment.

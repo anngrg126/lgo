@@ -1,10 +1,11 @@
 == form_for [@story, @comment], :html => {class: "form"}, remote: true do |f|
   div
     - if controller.action_name == "new" or  controller.action_name == "show"
-      = f.label :body, 'Share your thoughts', class: "font-weight-700"
+      = f.label :body do
+        strong Share your thoughts
     - else controller.action_name == "edit"
       = f.label :body, 'Edit Comment'
-    = f.text_area :body, autofocus: true, rows: 3, class: "form-control"
+    = f.text_area :body, rows: 2, class: "form-control"
     span class="form-error"
   div
     - if controller.action_name == "new" or controller.action_name == "show"

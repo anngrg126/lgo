@@ -1,12 +1,12 @@
-.columns.comment
+.comment
   .div
     == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0, comment:comment
     div
       div id="comment_#{comment.id}"
-        div
+        p
           == comment.body
-        div
-          - if user_signed_in? && current_user == comment.user
+        - if user_signed_in? && current_user == comment.user
+          div.edit-comment
             == link_to edit_story_comment_path(story, comment), remote: true, class: "minor-link" do
               span.fa.fa-pencil
               span &nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
