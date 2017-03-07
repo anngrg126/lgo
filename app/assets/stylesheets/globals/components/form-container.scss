@@ -1,9 +1,48 @@
 .form-container-standalone {
   padding-top: 100px;
+  padding-bottom: 100px;
   >.columns {
     background-color: $white;
     border: 1px solid $medium-gray;
     padding: 40px;
+  }
+  a.button-w-icon.facebook {
+    width: 100%;
+    padding: 10px 10px 15px;
+    span {
+      font-size: 1.9rem;
+    }
+    .fi-social-facebook {
+      font-size: 2.7rem;
+    }
+  }
+  .actions .button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  h1 {
+    margin-bottom: 40px;
+    .secondary {
+      font-size: 2rem;
+    }
+  }
+  h3.secondary {
+    margin: 40px 0;
+  }
+  input {
+    height: 50px;
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: $middark-gray;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: $middark-gray;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: $middark-gray;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+      color: $middark-gray;
+    }
   }
 }
 @media only screen and (max-width: 640px) {
@@ -11,7 +50,19 @@
     padding: 10px;
     padding-top: 50px;
     >.columns {
-      padding: 10px;
+      padding: 20px 10px;
+    }
+    h3.secondary {
+      margin: 25px 0;
+    }
+    a.button-w-icon.facebook {
+      padding: 5px 5px 7.5px;
+      span {
+        font-size: 1.7rem;
+      }
+      .fi-social-facebook {
+        font-size: 2.6rem;
+      }
     }
   }
 }

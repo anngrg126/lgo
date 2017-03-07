@@ -1,12 +1,14 @@
-h2 Forgot your password?
+.row.form-container-standalone
+  .columns.medium-7.large-6.medium-centered
+    h1 Forgot your password?
 
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  /= devise_error_messages!
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      /= devise_error_messages!
 
-  div.field
-    = devise_email_field
+      div.field
+        = devise_email_field
 
-  div.actions
-    = f.submit "Send me reset password instructions", class: "button"
+      div.actions
+        = f.submit "Send me reset password instructions", class: "button"
 
-= render "devise/shared/links"
+    = render "devise/shared/links"
