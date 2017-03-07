@@ -7,11 +7,12 @@
         == "#{@user.first_name.titleize}'s story reactions"
       - else
         | Penguin's story reactions
-.row.all-stories
-  - unless @reacted_stories.length == 0
+- unless @reacted_stories.length == 0
+  .row.all-stories
     - @reacted_stories.each do |s|
       == render 'shared/story_card', story: s, admin_view: false, preview: false
-  - else
+- else
+  .row
     = render 'dashboard/empty', view: "reacted"
       
 javascript:
