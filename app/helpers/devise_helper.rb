@@ -6,7 +6,6 @@ module DeviseHelper
     sentence = I18n.t("errors.messages.not_saved",
                       :count => resource.errors.count,
                       :resource => resource.class.model_name.human.downcase)
-
     html = "<div class='callout alert' data-closable><button class='close-button' aria-label='dismiss alert' type='button' data-close><span aria-hidden='true'>&times;</span></button><p><i class='fi-alert'></i>#{sentence}</p>
     </div>".html_safe
   end
@@ -53,6 +52,18 @@ module DeviseHelper
       tag(:input, id: "user_password", autocomplete: "off", name: "user[password]", type: "password", placeholder: "Password")
     end
   end
+  
+  def devise_token_field
+    messages = resource.errors.full_messages.join(" ")
+    messages_array = resource.errors.full_messages
+    errormessage = messages_array.index{|s| s.include?("token")}
+    if messages.include? "token"
+    content_tag(:div, 
+      content_tag(:div, "#{messages_array[errormessage]}") +
+      content_tag(:button, 
+        content_tag(:span, "x"), class: "close-button", type: "button", data: {close: ''}), class: "callout alert", data: {closable: ''})
+    end
+  end
   def devise_password_confirmation_field
     messages = resource.errors.full_messages.join(" ")
     messages_array = resource.errors.full_messages
@@ -61,7 +72,8 @@ module DeviseHelper
     if messages.include? "Password confirmation" 
       html = "<label for='user_password_confirmation' class='is-invalid-label'>Confirm new password</label><input id='user_password_confirmation' autocomplete='off' name='user[password_confirmation]' type='password' class='is-invalid-input form-control'><span class='form-error is-visible'>#{messages_array[errormessage]}</span>".html_safe
     else
-      html = "<label for='user_password_confirmation'>Confirm new password</label><input class='form-control' id='user_password_confirmation' autocomplete='off' name='user[password_confirmation]' type='password'>".html_safe
+#      content_tag(:label, "Confirm new password", for: "user_password_confirmation") +
+      tag(:input, id: "user_password_confirmation", autocomplete: "off", name: "user[password_confirmation]", type: "password", placeholder: "Confirm Password", class: "form-control")
     end
   end
   def devise_current_password_field
