@@ -1,8 +1,8 @@
 div.db-intro
   h1 Your commented stories
   .subtext.secondary[style="margin-bottom: 10px;"] A private collection of your story comments.
-.row.all-stories
-  - unless @commented_stories.length == 0
+- unless @commented_stories.length == 0
+  .row.all-stories
     - @commented_stories.each do |s|
       == render 'shared/story_card', story: s, admin_view: false, preview: false
       /div
@@ -11,7 +11,8 @@ div.db-intro
           /== @user.comments.group_by(&:story_id).select{|story_id| story_id == story.id}.first[1].last.body.truncate(100)
           /== Comment.where(story_id: story, user_id: @user).last.body.truncate(100)
           == @user.comments.select{|c| c.story_id == s.id}.last.body.truncate(100)
-  - else
+- else
+  .row
     = render 'dashboard/empty', view: "commented"
 
 javascript:
