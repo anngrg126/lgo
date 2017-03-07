@@ -5,6 +5,9 @@
 @import 'modules/story_new.scss';
 
 //story index view
+.row .row.row.columns.page-intro {
+  padding: 0 .9375rem .9375rem;
+}
 .index_subinfo {
   display: inline-block;
   width: calc(100% - 155px);

@@ -28,7 +28,8 @@ body {
 .row.all-stories {
   column-count: 2;
   column-gap: 0;
-  margin: 0 -1.875rem;
+//  margin: 0 -.9375rem 0 -1.875rem;
+  margin: 0 -.9375rem 0 -.9375rem;
   >.medium-6 {
     width: 100%;
     padding: 0 1.875rem;
@@ -37,6 +38,11 @@ body {
       display: inline-block;
       margin: 0 0 40px;
     }
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .card {
+    padding: 10px;
   }
 }
 @media only screen and (max-width: 640px) {
@@ -49,9 +55,11 @@ body {
   }
   .row.all-stories {
     column-count: 1;
-    margin: 0 0.9375rem;
+//    margin: 0 0.9375rem;
+    margin: 0;
     >.medium-6 {
-      padding: 0 0.9375rem;
+//      padding: 0 0.9375rem;
+      padding: 0;
       .card {
         display: block;
         margin: 0 0 20px;
