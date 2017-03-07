@@ -34,8 +34,8 @@ module DeviseHelper
         content_tag(:span, "#{messages_array[errormessage]}", class:'form-error is-visible')
       end
     else
-      content_tag(:label, "Email", for: "user_email") +
-      tag(:input, id: "user_email", name: "user[email]", type: "email")
+#      content_tag(:label, "Email", for: "user_email") +
+      tag(:input, id: "user_email", name: "user[email]", type: "email", placeholder: "Email")
     end
   end
 
@@ -49,8 +49,8 @@ module DeviseHelper
       tag(:input, id: "user_password", autocomplete: "off", name: "user[password]", type: "password", class: "is-invalid-input form-control") +
       content_tag(:span, "#{messages_array[errormessage]}", class: "form-error is-visible")
     else
-      content_tag(:label, "Password", for: "user_password") +
-      tag(:input, id: "user_password", autocomplete: "off", name: "user[password]", type: "password")
+#      content_tag(:label, "Password", for: "user_password") +
+      tag(:input, id: "user_password", autocomplete: "off", name: "user[password]", type: "password", placeholder: "Password")
     end
   end
   def devise_password_confirmation_field

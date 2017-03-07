@@ -1,6 +1,10 @@
 .row.form-container-standalone
   .columns.medium-7.large-6.medium-centered
-    h1 Sign up
+    h1.text-center 
+      | Sign up
+      br
+      .secondary We're so happy you're here
+    == render "devise/shared/omnilinks"
     == form_for(resource, as: resource_name, :html => {role: "form"}, url: registration_path(resource_name)) do |f|
       /= devise_error_messages!
       div
@@ -8,7 +12,13 @@
           == devise_email_field
         div
           == devise_password_field
-      div
+      .actions
         == f.submit "Sign up", class: "button"
     p
       == render 'devise/shared/links'
+    strong.subtext.secondary
+      | By signing up you agree to our 
+      == link_to "terms", root_path, class: "secondary-link"
+      |  and 
+      == link_to "privacy policy", root_path, class: "secondary-link"
+      | .

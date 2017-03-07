@@ -4,12 +4,7 @@
       | Welcome back! 
       br
       .secondary Log in to continue
-    - if devise_mapping.omniauthable?
-      - resource_class.omniauth_providers.each do |provider|
-        == link_to omniauth_authorize_path(resource_name, provider), class: "button button-w-icon facebook" do
-          span.fi-social-facebook
-          span Continue with #{OmniAuth::Utils.camelize(provider)}
-        h3.secondary.text-center or
+    == render "devise/shared/omnilinks"
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .field
         /= f.label :email
