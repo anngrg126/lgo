@@ -8,8 +8,8 @@ html lang="en"
       == content_for?(:title) ? yield(:title) : "Let's GiftOn - a positive community for sharing gift stories & ideas"
     == stylesheet_link_tag "application"
     - if params[:controller].present?
-      - if [“dashboard”, “pictures”, “registration_steps”, stories”].any? {|controller| params[:controller].include? controller]
-        == stylesheet_link_tag params[:controller]
+      - if ["dashboard", "pictures", "registration_steps", "stories"].any? {|controller| params[:controller].include? controller}
+        == stylesheet_link_tag params[:controller] 
     == stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css"
     == javascript_include_tag "application", 'data-turbolinks-track' => true
     
