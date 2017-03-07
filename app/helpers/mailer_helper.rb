@@ -195,7 +195,7 @@ module MailerHelper
         end
         bookmarkers = bookmarkers.uniq.count
         my_message_bookmarks["users"] = bookmarks_users
-        link = link_to s.final_title, story_url(s), class: "bold-text-link", target: "_blank", target: "_blank"
+        link = link_to s.final_title, story_url(s), class: "bold-text-link", target: "_blank"
         link_bookmark = link_to "bookmarked", bookmarked_stories_dashboard_url(@user), class: "bold-text-link", target: "_blank"
         if bookmarkers == 1 
           id_array.push(noti_ids)
