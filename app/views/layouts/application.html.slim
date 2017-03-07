@@ -30,6 +30,9 @@ html lang="en"
     meta name="twitter:site"            content="@letsgifton"
     meta name="twitter:creator"         content="@letsgifton"
   body
-    == render 'shared/header'
+    /- binding.pry
+    - if params[:controller].present?
+      - unless ["devise", "users"].any? {|controller| params[:controller].include? controller}
+        == render 'shared/header'
     == render 'shared/main'
     == render 'shared/footer'

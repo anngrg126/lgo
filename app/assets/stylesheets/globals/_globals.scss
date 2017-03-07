@@ -23,6 +23,10 @@ body {
   min-height: 100vh;
   margin-top: -55px;
   padding-top: 55px;
+  &.no-header {
+    margin-top: 0;
+    padding-top: 0;
+  }
 }
 //grid format
 .row.all-stories {
