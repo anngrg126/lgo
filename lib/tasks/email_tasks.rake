@@ -11,6 +11,8 @@ task send_digest_email: :environment do
   @users.uniq!
 
   @users.each do |user|
-    NotificationsMailer.daily_email(User.find(user)).deliver_now
+    unless user == nil
+      NotificationsMailer.daily_email(User.find(user)).deliver_now
+    end
   end
 end
