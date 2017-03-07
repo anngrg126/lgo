@@ -3,14 +3,16 @@ html lang="en"
   head
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
+    link rel="icon" href=image_url("favicon.ico")
     title
       == content_for?(:title) ? yield(:title) : "Let's GiftOn - a positive community for sharing gift stories & ideas"
     == stylesheet_link_tag "application"
     - if params[:controller].present?
-      - if stylesheet_exists?(params[:controller])
-        == stylesheet_link_tag params[:controller] 
+      - if [“dashboard”, “pictures”, “registration_steps”, stories”].any? {|controller| params[:controller].include? controller]
+        == stylesheet_link_tag params[:controller]
     == stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css"
     == javascript_include_tag "application", 'data-turbolinks-track' => true
+    
     == csrf_meta_tags
     meta name="description"             content="Be inspired by real gift stories from real people like you."
     <!-- Facebook -->
