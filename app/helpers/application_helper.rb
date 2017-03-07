@@ -8,6 +8,14 @@ module ApplicationHelper
 #    end
 #  end
 #  
+  def stylesheet_exists?(stylesheet)
+    stylesheet = "#{Rails.root}/app/assets/stylesheets/#{stylesheet}.scss"
+    extensions = %w(.scss .erb .scss.erb) + [""]
+    extensions.inject(false) do |truth, extension|
+      truth || File.exists?("#{stylesheet}#{extension}")
+    end
+  end
+  
   def user_notifications_link
     unless current_user
       link_to "My Notifications", new_user_session_path, class: "inactive-link"
