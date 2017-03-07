@@ -18,9 +18,9 @@ RSpec.feature "Editing Account Settings" do
     click_link "Settings"
     
     click_link("Change Password")
-    fill_in "Password", with: @new_password
-    fill_in "Confirm new password", with: @new_password
-    fill_in "Current password", with: @user.password
+    fill_in "user_password", with: @new_password
+    fill_in "user_password_confirmation", with: @new_password
+    fill_in "user_current_password", with: @user.password
     click_button "Update"
     expect(page).to have_content("Profile has been updated")
   end
@@ -31,7 +31,7 @@ RSpec.feature "Editing Account Settings" do
     click_link "Settings"
     
     click_link("Change Password")
-    fill_in "Current password", with: @new_password
+    fill_in "user_current_password", with: @new_password
     click_button "Update"
     expect(page).to have_content("Current password is invalid")
   end
@@ -74,7 +74,7 @@ RSpec.feature "Editing Account Settings" do
     link = "a[href*='user_email']"
     find(link).click
     fill_in "Email", with: @new_email
-    fill_in "Current password", with: @user.password
+    fill_in "user_current_password", with: @user.password
     click_button "Update"
     expect(page).to have_content("Profile has been updated")
     click_link "Settings"
@@ -89,7 +89,7 @@ RSpec.feature "Editing Account Settings" do
     link = "a[href*='user_email']"
     find(link).click
     fill_in "Email", with: ""
-    fill_in "Current password", with: @user.password
+    fill_in "user_current_password", with: @user.password
     click_button "Update"
     expect(page).to have_content("Profile has not been updated")
     expect(page).to have_content("Email can't be blank")

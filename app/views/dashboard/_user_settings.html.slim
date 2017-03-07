@@ -30,9 +30,9 @@
             span &nbsp;Edit  
         div
           h3.secondary Gender
-          p#user_gender
+          #user_gender
             = form_for @user, url: registration_path(@user), remote: true do |f|
-              div.form-group
+              .form-group
                 = f.radio_button :gender, 'male', disabled: true
                 = f.label :gender_male, 'Male'
                 = f.radio_button :gender, 'female', disabled: true

@@ -1,20 +1,23 @@
-h2 Change your password
-
-== form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  /== devise_error_messages!
-  == f.hidden_field :reset_password_token
-
-  div.field
-    == devise_password_field
-
-  div.field
-    == devise_password_confirmation_field
-
-  div.actions
-    == f.submit "Change my password", class: "button"
-
-- if devise_mapping.omniauthable?
-  p 
-    | Or, 
-    - resource_class.omniauth_providers.each do |provider|
-      == link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider)
+.row.form-container-standalone
+  .columns.medium-7.large-6.medium-centered
+    h1.text-center Change your password
+    == form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      /== devise_error_messages!
+      == f.hidden_field :reset_password_token
+      == devise_token_field
+      .field
+        == devise_password_field
+      .field
+        == devise_password_confirmation_field
+      .actions
+        == f.submit "Change my password", class: "button"
+    - if devise_mapping.omniauthable?
+      br
+      p.secondary 
+        | Or, 
+        - resource_class.omniauth_providers.each do |provider|
+          == link_to "connect your #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "primary-link"
+        |  for password authentication.
+    br
+    == link_to "Resend password instructions?", new_password_path(resource_name), class: "secondary-link"
+      
