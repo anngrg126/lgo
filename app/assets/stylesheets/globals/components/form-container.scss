@@ -1,0 +1,17 @@
+.form-container-standalone {
+  padding-top: 100px;
+  >.columns {
+    background-color: $white;
+    border: 1px solid $medium-gray;
+    padding: 40px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .form-container-standalone {
+    padding: 10px;
+    padding-top: 50px;
+    >.columns {
+      padding: 10px;
+    }
+  }
+}
