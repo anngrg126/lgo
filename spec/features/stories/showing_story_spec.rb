@@ -19,8 +19,8 @@ RSpec.feature "Showing Stories" do
     expect(page).to have_link("#{@foo.full_name}")
     expect(current_path).to eq(story_path(@story))
     
-    expect(page).not_to have_link("Edit Story")
-    expect(page).not_to have_link("Delete Story")
+    expect(page).not_to have_link("Edit story")
+    expect(page).not_to have_link("Delete story")
     expect(page).to have_css("img[src*='image.png']")
 #    expect(page).to have_css("img[src*='mainimage.png']")
     expect(page).to have_css('div.story-image')
@@ -39,8 +39,8 @@ RSpec.feature "Showing Stories" do
     expect(current_path).to eq(story_path(@story))
     expect(page).to have_link("#{@foo.full_name}")
     
-    expect(page).not_to have_link("Edit Story")
-    expect(page).not_to have_link("Delete Story")
+    expect(page).not_to have_link("Edit story")
+    expect(page).not_to have_link("Delete story")
   end
   
   scenario "A signed-in owner sees both edit and delete links" do
@@ -56,8 +56,8 @@ RSpec.feature "Showing Stories" do
     expect(current_path).to eq(story_path(@story))
     expect(page).to have_link("#{@foo.full_name}")
     
-    expect(page).to have_link("Edit Story")
-    expect(page).to have_link("Delete Story")
+    expect(page).to have_link("Edit story")
+    expect(page).to have_link("Delete story")
   end
   
   scenario "Display individual story" do

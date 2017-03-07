@@ -2,12 +2,12 @@
 / == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0
 - if featured.nil?
   / to use for story show page
-  div.user-snippet.large
+  .user-snippet.large
     div
       == link_to dashboard_path(user), class: "user-thumbnail large-thumb"
         == user_photo(user)
     div
-      div[style="margin-right: 10px;"]
+      div
         h2
           == link_to "#{user.full_name}", dashboard_path(user)
         .subtext.dark-gray
@@ -20,7 +20,7 @@
 - elsif featured
   / to use for story show page
   /- cnt_stories = user.stories_posted.count
-  div.user-snippet
+  .user-snippet
     div
       == link_to dashboard_path(user), class: "user-thumbnail medium-thumb"
         == user_photo(user)
@@ -31,7 +31,7 @@
           | Shared #{cnt_stories.to_s} stories
 - else
   / to use for story cards & comments partial
-  div.user-snippet
+  .user-snippet
     div
       ==link_to dashboard_path(user), class: "user-thumbnail medium-thumb"
         == user_photo(user)

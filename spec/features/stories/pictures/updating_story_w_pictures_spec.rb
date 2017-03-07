@@ -13,7 +13,7 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
   scenario "Logged-in user can add one picture to a story after creating" do
 #    expect(page).not_to have_content("Delete Picture")
     within (".upload-pictures") do
-      click_link "Upload More Pictures"
+      click_link "Upload more pictures"
     end
     attach_file('image[]', './spec/fixtures/image.png')
     
@@ -37,7 +37,7 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
   
   scenario "Logged-in user can add multiple pictures to a story after creating", js: true do
     within (".upload-pictures") do
-      click_link "Upload More Pictures"
+      click_link "Upload more pictures"
     end
     attach_file('image[]', './spec/fixtures/image.png')
     
@@ -58,7 +58,7 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
   
   scenario "Logged-in user fails to add pictures to a story after creating", js: true do
     within (".upload-pictures") do
-      click_link "Upload More Pictures"
+      click_link "Upload more pictures"
     end
     click_button "Create Picture"
     
