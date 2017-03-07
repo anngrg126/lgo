@@ -17,7 +17,9 @@ RSpec.feature "Users signup" do
   scenario "with valid credentials" do
     visit "/"
     
-    click_link "Join"
+    within ('.nav-toptier') do
+      click_link "Join"
+    end
     fill_in "Email", with: @email
     fill_in "Password", with: @password
     
@@ -48,7 +50,9 @@ RSpec.feature "Users signup" do
   scenario "with invalid credentials - step 1" do
     visit "/"
     
-    click_link "Join"
+    within ('.nav-toptier') do
+      click_link "Join"
+    end
     fill_in "Email", with: ""
     fill_in "Password", with: ""
     
@@ -61,7 +65,9 @@ RSpec.feature "Users signup" do
   scenario "with invalid credentials - step 2", :js => true do
     visit "/"
     
-    click_link "Join"
+    within ('.nav-toptier') do
+      click_link "Join"
+    end
     fill_in "Email", with: Faker::Internet.email
     fill_in "Password", with: @password2
     
@@ -78,7 +84,9 @@ RSpec.feature "Users signup" do
   scenario "with valid credentials (custom gender) - step 2", :js => true do
     visit "/"
     
-    click_link "Join"
+    within ('.nav-toptier') do
+      click_link "Join"
+    end
     fill_in "Email", with: @email2
     fill_in "Password", with: @password2
     

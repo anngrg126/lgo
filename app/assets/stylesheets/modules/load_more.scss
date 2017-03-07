@@ -15,6 +15,13 @@
   background-color: $light-gray;
   margin-bottom: 20px;
   padding: 20px 0;
+  p {
+    margin: 20px;
+  }
+  img {
+    max-width: 200px;
+    margin: 20px auto;
+  }
 }
 @media only screen and (max-width: 1024px) {
   .load-more-container {
