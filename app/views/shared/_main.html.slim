@@ -1,17 +1,17 @@
-div#flash_notice
-  - flash.each do |name, msg|
-    - if name == "notice" && msg != nil
-      div[class="callout primary" data-closable]
-        == content_tag :div, msg if msg.is_a?(String)
-        button[class="close-button" aria-label="dismiss alert" type="button" data-close]
-          span[aria-hidden="true"] &times;
-    - elsif msg == nil
-    - elsif name == "partial"
-      == render 'shared/thank_you', locals: {var: msg}
-    - else
-      div[class="callout #{name}" data-closable]
-        == content_tag :div, msg if msg.is_a?(String)
-        button[class="close-button" aria-label="dismiss alert" type="button" data-close]
-          span[aria-hidden="true"] &times;
 .wrapper
+  div#flash_notice
+    - flash.each do |name, msg|
+      - if name == "notice" && msg != nil
+        div[class="callout primary" data-closable]
+          == content_tag :div, msg if msg.is_a?(String)
+          button[class="close-button" aria-label="dismiss alert" type="button" data-close]
+            span[aria-hidden="true"] &times;
+      - elsif msg == nil
+      - elsif name == "partial"
+        == render 'shared/thank_you', locals: {var: msg}
+      - else
+        div[class="callout #{name}" data-closable]
+          == content_tag :div, msg if msg.is_a?(String)
+          button[class="close-button" aria-label="dismiss alert" type="button" data-close]
+            span[aria-hidden="true"] &times;
   == yield

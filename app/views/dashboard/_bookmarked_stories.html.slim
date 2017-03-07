@@ -1,11 +1,12 @@
 div.db-intro
   h1 Your bookmarked stories
   .subtext.secondary[style="margin-bottom: 10px;"] A private collection of your bookmarked stories.
-.row.all-stories
-  - unless @bookmarked_stories.length == 0
+- unless @bookmarked_stories.length == 0
+  .row.all-stories
     - @bookmarked_stories.each do |s|
       == render 'shared/story_card', story: s, admin_view: false, preview: false
-  - else
+- else
+  .row
     = render 'dashboard/empty', view: "bookmarked"
 
 javascript:

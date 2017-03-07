@@ -7,11 +7,12 @@
         == "#{@user.first_name.titleize}'s stories"
       - else
         | Penguin's stories
-.row.all-stories
-  - unless @dashboard_stories.length == 0
+- unless @dashboard_stories.length == 0
+  .row.all-stories
     - @dashboard_stories.each do |s|
       == render 'shared/story_card', story: s, admin_view: false, preview: false
-  - else
+- else
+  .row
     = render 'dashboard/empty', view: "authored"
 
 javascript:
