@@ -1,23 +1,29 @@
-h2 
-  | Edit 
-  = resource_name.to_s.humanize
-  
-= form_for(resource, as: resource_name, url: registration_path(resource_name, with_password: true, form_render: form_render), html: { method: :put }) do |f|
-  - if form_render == "user_email"
-    div.field
-      = devise_email_field
-      
-  - if form_render == "user_password"
-    div.field
-      == devise_password_field
+.row.form-container-standalone
+  .columns.medium-7.large-6.medium-centered
+    h1.text-center
+      | Edit 
+      = resource_name.to_s.humanize
+      |  Information
+    = form_for(resource, as: resource_name, url: registration_path(resource_name, with_password: true, form_render: form_render), html: { method: :put }) do |f|
+      - if form_render == "user_email"
+        .field
+          label 
+            h3.secondary[style="margin-bottom: 10px;"] New email address
+          = devise_email_field
 
-    div.field
-      == devise_password_confirmation_field
+      - if form_render == "user_password"
+        .field
+          == devise_password_field
 
-  div.field
-    = devise_current_password_field
+        .field
+          == devise_password_confirmation_field
 
-  div.actions
-    = f.submit "Update", class: "button"
+      .field
+        == f.label :current_password, id: "user_current_password" do
+          h3.secondary[style="margin-bottom: 10px;"] Verify current password
+        = devise_current_password_field
 
-= link_to "Back", :back
+      .actions
+        = f.submit "Update", class: "button"
+
+    = link_to "Back", :back
