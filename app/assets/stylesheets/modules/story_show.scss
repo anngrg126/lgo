@@ -1,14 +1,31 @@
 .show-story {
-    &.card {
-      padding: 40px;
-      margin: 0 10px 20px 20px;
-    }
+  &.card {
+    padding: 40px;
+    margin: 0 10px 20px 20px;
+  }
   hr {
     margin: 20px auto 10px;
   }
   h1 {
     padding-right: 40px;
     margin-bottom: 10px;
+  }
+  .user-section {
+    >div {
+      display: inline-block;
+    }
+    >div:first-child {
+      width: calc(100% - 220px);
+    }
+    .text-right {
+      > div {
+        margin-bottom: 5px;
+        display: block;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
   .story-body {
     color: $dark-gray;
@@ -132,6 +149,9 @@
       margin-bottom: 0;
     }
   }
+  .subtext {
+    color: $dark-gray;
+  }
 }
 @media only screen and (max-width: 640px) {
   .show-story {
@@ -142,6 +162,23 @@
       padding: 20px 10px;
       margin: 0;
       margin-bottom: 20px;
+    }
+    .user-section {
+      >div {
+        display: block;
+      }
+      .text-right {
+        margin-top: 20px;
+        text-align: center;
+        > div {
+          display: block;
+        }
+        a {
+          width: 100%;
+          max-width: 350px;
+          margin: 0 auto;
+        }
+      }
     }
     .what-reaction {
       text-align: center;

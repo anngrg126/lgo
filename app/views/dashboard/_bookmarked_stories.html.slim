@@ -1,7 +1,7 @@
 div.db-intro
   h1 Your bookmarked stories
   .subtext.secondary[style="margin-bottom: 10px;"] A private collection of your bookmarked stories.
-.row
+.row.all-stories
   - unless @bookmarked_stories.length == 0
     - @bookmarked_stories.each do |s|
       .columns.medium-6

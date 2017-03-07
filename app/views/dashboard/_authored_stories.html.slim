@@ -7,7 +7,7 @@
         == "#{@user.first_name.titleize}'s stories"
       - else
         | Penguin's stories
-.row
+.row.all-stories
   - unless @dashboard_stories.length == 0
     - @dashboard_stories.each do |s|
       .columns.medium-6

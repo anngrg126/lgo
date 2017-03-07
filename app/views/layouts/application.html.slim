@@ -5,27 +5,27 @@ html lang="en"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
 
     title
-      == content_for?(:title) ? yield(:title) : "Let's GiftOn"
+      == content_for?(:title) ? yield(:title) : "Let's GiftOn - a positive community for sharing gift stories & ideas"
     == stylesheet_link_tag "application"
     - if params[:controller].present?
       == stylesheet_link_tag params[:controller]
     == stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css"
     == javascript_include_tag "application", 'data-turbolinks-track' => true
     == csrf_meta_tags
-    meta name="description"             content="Real-life gift stories and ideas."
+    meta name="description"             content="Be inspired by real gift stories from real people like you."
     <!-- Facebook -->
     meta property="fb:app_id"           content="776198432492129"
     meta property="og:site_name"        content="GiftOn"
     
     meta property="og:url"              content="#{content_for?(:og_url) ? yield(:og_url) : 'http://www.letsgifton.com'}"
-    meta property="og:title"            content="#{content_for?(:og_title) ? yield(:og_title) : 'GiftOn | Real-life gift stories and ideas.'}"
-    meta property="og:description"      content="#{content_for?(:og_description) ? yield(:og_description) : 'Get inspired by people\'s best & worst gift stories across all occasions.'}"
+    meta property="og:title"            content="#{content_for?(:og_title) ? yield(:og_title) : "Let's GiftOn - a positive community for sharing gift stories & ideas"}"
+    meta property="og:description"      content="#{content_for?(:og_description) ? yield(:og_description) : 'Be inspired by real gift stories from real people like you.'}"
     meta property="og:image"            content="#{content_for?(:og_image) ? yield(:og_image) : 'https://s3.amazonaws.com/letsgifton/GiftOn_OG_325x325.png'}"
      <!-- Twitter -->
     meta name="twitter:url"             content="#{content_for?(:og_url) ? yield(:og_url) : 'http://www.letsgifton.com'}"
     meta name="twitter:card"            content="summary"
-    meta name="twitter:title"           content="#{content_for?(:og_title) ? yield(:og_title) : 'GiftOn | People-powered gift ideas.'}"
-    meta name="twitter:description"     content="#{content_for?(:og_description) ? yield(:og_description) : 'Get inspired by people\'s best & worst gift stories across all occasions.'}"
+    meta name="twitter:title"           content="#{content_for?(:og_title) ? yield(:og_title) : "Let's GiftOn - a positive community for sharing gift stories & ideas"}"
+    meta name="twitter:description"     content="#{content_for?(:og_description) ? yield(:og_description) : 'Be inspired by real gift stories from real people like you.'}"
     meta name="twitter:image"           content="#{content_for?(:og_image) ? yield(:og_image) : 'https://s3.amazonaws.com/letsgifton/GiftOn_OG_325x325.png'}"
     meta name="twitter:site"            content="@letsgifton"
     meta name="twitter:creator"         content="@letsgifton"

@@ -24,6 +24,27 @@ body {
   margin-top: -55px;
   padding-top: 55px;
 }
+//grid format
+.row.all-stories {
+  column-count: 2;
+  column-gap: 0;
+//  margin: 0 -.9375rem 0 -1.875rem;
+  margin: 0 -.9375rem 0 -.9375rem;
+  >.medium-6 {
+    width: 100%;
+    padding: 0 1.875rem;
+    .card {
+      width: 100%;
+      display: inline-block;
+      margin: 0 0 40px;
+    }
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .card {
+    padding: 10px;
+  }
+}
 @media only screen and (max-width: 640px) {
   .card {
     padding: 10px;
@@ -31,5 +52,18 @@ body {
   .wrapper {
     margin-top: -75px;
     padding-top: 75px;
+  }
+  .row.all-stories {
+    column-count: 1;
+//    margin: 0 0.9375rem;
+    margin: 0;
+    >.medium-6 {
+//      padding: 0 0.9375rem;
+      padding: 0;
+      .card {
+        display: block;
+        margin: 0 0 20px;
+      }
+    }
   }
 }

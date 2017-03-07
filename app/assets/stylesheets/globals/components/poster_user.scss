@@ -13,6 +13,9 @@
   .secondary-link {
     line-height: 2;
   }
+  h2 {
+    margin-right: 30px;
+  }
 }
 .user-snippet.large {
   &>div {
@@ -30,7 +33,7 @@
 }
 .snippet-button {
   height: 35px;//height of follow/unfollow button
-  margin-left: 20px;
+//  margin-left: 20px;
 }
 .snippet-button:before {
   content: "";

@@ -53,7 +53,7 @@ RSpec.feature "Editing Stories" do
     within(".large-9 .story_tags") do
       expect(page).to have_content("fail")
     end
-    click_link "Edit Story"
+    click_link "Edit story"
     
     fill_in "Your story title", with: @updated_title
     fill_in_trix_editor('story_updated_body_trix_input_story_'+@story.id.to_s, @updated_body)
@@ -76,12 +76,12 @@ RSpec.feature "Editing Stories" do
     visit(dashboard_path(@user2))
     
     click_link @story2.raw_title
-    click_link "Edit Story"
+    click_link "Edit story"
     
     fill_in "Your story title", with: @updated_title2
     fill_in_trix_editor('story_raw_body_trix_input_story_'+@story2.id.to_s, @updated_body2)
     fill_in "In 10 words or less, what was the gift?", with: @updated_description
-    click_button "Edit Story"
+    click_button "Edit story"
     
     expect(page).to have_content("Story has been updated")
     expect(page).to have_content(@updated_title2)
@@ -95,7 +95,7 @@ RSpec.feature "Editing Stories" do
     visit "/"
     
     click_link @story.final_title
-    click_link "Edit Story"
+    click_link "Edit story"
     
     fill_in "Your story title", with: ""
     fill_in "In 10 words or less, what was the gift?", with: ""

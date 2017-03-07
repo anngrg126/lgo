@@ -25,8 +25,8 @@ RSpec.feature "Showing Stories" do
     expect(page).to have_content(@story.raw_gift_description)
     expect(page).to have_css("img[src*='image.png']")
     expect(current_path).to eq(admin_story_path(@story))
-    expect(page).to have_link("Edit Story")
-    expect(page).to have_link("Delete Story")
+    expect(page).to have_link("Edit story")
+    expect(page).to have_link("Delete story")
   end
   
   scenario "Logged-in admin can see individual story - with review request" do
