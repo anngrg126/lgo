@@ -31,7 +31,7 @@ html lang="en"
     meta name="twitter:creator"         content="@letsgifton"
   body
     - if params[:controller].present?
-      - unless ["devise", "users"].any? {|controller| params[:controller].include? controller}
+      - unless ["devise", "users", "registration_steps"].any? {|controller| params[:controller].include? controller}
         == render 'shared/header'
     == render 'shared/main'
     == render 'shared/footer'

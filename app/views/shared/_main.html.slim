@@ -1,4 +1,4 @@
-.wrapper[class="#{params[:controller].present? && ["devise", "users"].any? {|controller| params[:controller].include? controller} ? 'no-header' : ''}"]
+.wrapper[class="#{params[:controller].present? && ["devise", "users", "registration_steps"].any? {|controller| params[:controller].include? controller} ? 'no-header' : ''}"]
   div#flash_notice
     - flash.each do |name, msg|
       - if name == "notice" && msg != nil

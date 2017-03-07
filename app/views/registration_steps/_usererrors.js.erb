@@ -1,6 +1,5 @@
 <% field_array = ["first_name", "last_name", "birthday", "gender"] %>
 
-  
 $("#edit_user_<%= j @user[:id].to_s %> label.is-invalid-label").removeClass("is-invalid-label");
 $("#edit_user_<%= j @user[:id].to_s %> input.is-invalid-input").removeClass("is-invalid-input");
 $("#edit_user_<%= j @user[:id].to_s %> select.is-invalid-input").removeClass("is-invalid-input");
@@ -15,7 +14,7 @@ $("#edit_user_<%= j @user[:id].to_s %> span.form-error.is-visible").removeClass(
       <% if @user.errors.full_messages[i].downcase.include? field %>
         $("#edit_user_<%= j @user[:id].to_s %>").each(function() {
   
-          $(this).find('label[for="user_<%= field.split.join('_') %>"]').addClass("is-invalid-label");
+          $(this).find('label[for="user_<%= field.split.join('_') %>"]').addClass("is-invalid-label").removeClass("hidden");
           $(this).find('#user_<%= field.split.join('_') %>').addClass("is-invalid-input");
           $(this).find('#user_<%= field.split.join('_')%>').closest('div').find('span.form-error').addClass("is-visible").html('<p><%= @user.errors.full_messages[i] %></p>');
         });

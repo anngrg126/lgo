@@ -1,34 +1,38 @@
 == javascript_include_tag "registration_steps", 'data-turbolinks-track' => true
+.row.form-container-standalone
+  .columns.medium-7.large-6.medium-centered
+    h2.text-center One last step
+    = form_for @user, :url => wizard_path, :method => :put, remote: true do |f|
+      label
+        h3.secondary Name
+      div
+        = f.label :first_name, "First Name", class: "hidden"
+        = f.text_field :first_name, autofocus: true, class: "form-control", placeholder: "First name"
+        span.form-error
+      div
+        = f.label :last_name, "Last Name", class: "hidden"
+        = f.text_field :last_name, autofocus: true, class: "form-control", placeholder: "Last name"
+        span.form-error
+      div
+        = f.label :birthday do
+          h3.secondary Birthday
+        = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}
+        span.form-error
+      div.form-group
+        = f.label :gender do
+          h3.secondary Gender
+        = f.radio_button :gender, 'male'
+        = f.label :gender_male, 'Male'
+        = f.radio_button :gender, 'female'
+        = f.label :gender_female, 'Female'
+        = f.radio_button :gender, nil, :id => :custom_defined_gender
+        = f.label :gender_custom, 'Custom'
+        input#free_system_input
+        span.form-error
+      = f.submit "Submit", class: "button"
 
-p Only one more step:
-
-= form_for @user, :url => wizard_path, :method => :put, remote: true do |f|
-  div
-    = f.label :first_name, "First Name"
-    = f.text_field :first_name, autofocus: true, class: "form-control"
-    span.form-error
-  div
-    = f.label :last_name, "Last Name"
-    = f.text_field :last_name, autofocus: true, class: "form-control"
-    span.form-error
-  div
-    = f.label :birthday, "Birthday"
-    = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}
-    span.form-error
-  div.form-group
-    = f.label :gender, "Gender"
-    = f.radio_button :gender, 'male'
-    = f.label :gender_male, 'Male'
-    = f.radio_button :gender, 'female'
-    = f.label :gender_female, 'Female'
-    = f.radio_button :gender, nil, :id => :custom_defined_gender
-    = f.label :gender_custom, 'Custom'
-    input#free_system_input
-    span.form-error
-  = f.submit "Submit", class: "button"
-
-javascript:
-  //fcn to load all radio buttons as unchecked
-  $(document).ready(function() {
-    $('input[type="radio"]').removeAttr("checked");
-  });
+    javascript:
+      //fcn to load all radio buttons as unchecked
+      $(document).ready(function() {
+        $('input[type="radio"]').removeAttr("checked");
+      });

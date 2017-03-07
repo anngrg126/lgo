@@ -47,6 +47,12 @@
   strong.subtext.secondary {
     color: $middark-gray;
   }
+  .hidden {
+    display: none;
+  }
+  label h3.secondary {
+    margin-bottom: 10px;
+  }
 }
 @media only screen and (max-width: 640px) {
   .form-container-standalone {
