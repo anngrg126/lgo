@@ -13,12 +13,12 @@
 #   rake "some:great:rake:task"
 # end
 #
-# every 4.days do
-#   runner "AnotherModel.prune_old_records"
+# every 2.minutes do
+#   rake "send_digest_email", :output => "#{path}/log/cron.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
 
 every 1.day, :at => '7:00 am' do
- rake "send_digest_email", :output => "log/cron.log"
+  rake "send_digest_email", :output => "#{path}/log/cron.log"
 end

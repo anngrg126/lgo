@@ -14,7 +14,10 @@ html
     p 
       | You have 
       == @new_notifications.count 
-      |  new updates from your friends and followers.
+      - if @new_notifications.length > 1
+        |  new updates from your friends and followers.
+      - else
+        |  new update from your friends and followers.
   
     == consolidate_notifications(@new_notifications, "true")
     
