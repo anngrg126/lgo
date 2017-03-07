@@ -70,11 +70,10 @@ module DeviseHelper
     errormessage = messages_array.index{|s| s.include?("Password confirmation")}
     
     if messages.include? "Password confirmation" 
-      html = "<label for='user_password_confirmation' class='is-invalid-label'>Confirm new password</label><input id='user_password_confirmation' autocomplete='off' name='user[password_confirmation]' type='password' class='is-invalid-input form-control'><span class='form-error is-visible'>#{messages_array[errormessage]}</span>".html_safe
-      
-#      content_tag(:label, "Verify Current Password", for: "user_current_password", class: "is-invalid-label") + 
-#      tag(:input, id: "user_current_password", autocomplete: "off", name: "user[current_password]", type: "password", class: "is-invalid-input form-control") +
-#      content_tag(:span, "#{messages_array[errormessage]}", class: "form-error is-visible")
+#      html = "<label for='user_password_confirmation' class='is-invalid-label'>Confirm new password</label><input id='user_password_confirmation' autocomplete='off' name='user[password_confirmation]' type='password' class='is-invalid-input form-control'><span class='form-error is-visible'>#{messages_array[errormessage]}</span>".html_safe
+      content_tag(:label, "Confirm new password", for: "user_password_confirmation", class: "is-invalid-label") + 
+      tag(:input, id: "user_password_confirmation", autocomplete: "off", name: "user[password_confirmation]", type: "password", class: "is-invalid-input form-control") +
+      content_tag(:span, "#{messages_array[errormessage]}", class: "form-error is-visible")
     else
 #      content_tag(:label, "Confirm new password", for: "user_password_confirmation") +
       tag(:input, id: "user_password_confirmation", autocomplete: "off", name: "user[password_confirmation]", type: "password", placeholder: "Confirm Password", class: "form-control")

@@ -7,5 +7,12 @@
         = devise_email_field
       .actions
         = f.submit "Send me reset password instructions", class: "button"
+    - if devise_mapping.omniauthable?
       br
+      p.secondary 
+        | Or, 
+        - resource_class.omniauth_providers.each do |provider|
+          == link_to "connect your #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "primary-link"
+        |  for password authentication.
+    br
     = render "devise/shared/links"
