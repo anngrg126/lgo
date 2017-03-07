@@ -7,13 +7,10 @@
       == devise_token_field
       .field
         == devise_password_field
-
       .field
         == devise_password_confirmation_field
-
       .actions
         == f.submit "Change my password", class: "button"
-
     - if devise_mapping.omniauthable?
       br
       p.secondary 
