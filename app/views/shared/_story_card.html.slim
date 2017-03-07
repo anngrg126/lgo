@@ -1,62 +1,63 @@
-.card.story-card
-  - unless story.published?
-    .card-section
-      .subtext.italic Pending
-  .card-section.row
-    -if story.anonymous?
-      - user = @anonymous_user
-    - else
-      - user = story.user
-    .columns[style="line-height: 0.9;"]
-      == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0, comment:nil
-  .card-section
-    .row.columns.clearfix
-      .float-right 
-        - if preview
-          .icon-button.primary-icon
-            span.fa.fa-bookmark-o.fa-lg
-        - else
-          == render 'bookmarks/bookmark', story: story
-      h2
-        -if admin_view
-          - unless story.raw_title == ""
-            == link_to story.raw_title, admin_story_path(story)
-          - else
-            == link_to "Untitled Story", admin_story_path(story)
-        -else
-          == link_to story_title(story), story_path(story)
-      .subtext
-        == story_gift_description_show(story)
-      - unless story.classifications.empty?
-        .story_tags
-          span.label
-            == story_recipient_tag(story)
-          | &nbsp;&nbsp;
-          span.label
-            == story_occasion_tag(story)
-          | &nbsp;&nbsp;
-          == story_fail_tag(story)
-  .card-section[style="padding-top: 0;"]
-    - unless story.main_image_file_name.nil?
-      - if preview
-        div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
+.columns.medium-6
+  .card.story-card[data-id="#{story.id}"]
+    - unless story.published?
+      .card-section
+        .subtext.italic Pending
+    .card-section.row
+      -if story.anonymous?
+        - user = @anonymous_user
       - else
-        == link_to story_path(story) do
-          div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
-  .card-section.body
-    == story_body(story)
-  .card-section.last-section
-    == link_to "Read full story", story_path(story), class: "primary-link"
-    - if preview
-      .float-right.reactions
-        .icon-button.primary-icon
-          span.fa.fa-comment-o.fa-lg
-        .icon-button.primary-icon
-          span.fa.fa-thumbs-o-up.fa-lg
-        .icon-button.primary-icon
-          span.fa.fa-heart-o.fa-lg
-    - else
-      == render 'shared/reactions_component', s: story, top: nil 
-  - if current_user && story.anonymous? && story.author_id == current_user.id && params[:controller] == "dashboard"
+        - user = story.user
+      .columns[style="line-height: 0.9;"]
+        == render 'shared/poster_user', story: story, user: user, featured: false, cnt_stories: 0, comment:nil
     .card-section
-      == story_anonymous(story)
+      .row.columns.clearfix
+        .float-right 
+          - if preview
+            .icon-button.primary-icon
+              span.fa.fa-bookmark-o.fa-lg
+          - else
+            == render 'bookmarks/bookmark', story: story
+        h2
+          -if admin_view
+            - unless story.raw_title == ""
+              == link_to story.raw_title, admin_story_path(story)
+            - else
+              == link_to "Untitled Story", admin_story_path(story)
+          -else
+            == link_to story_title(story), story_path(story)
+        .subtext
+          == story_gift_description_show(story)
+        - unless story.classifications.empty?
+          .story_tags
+            span.label
+              == story_recipient_tag(story)
+            | &nbsp;&nbsp;
+            span.label
+              == story_occasion_tag(story)
+            | &nbsp;&nbsp;
+            == story_fail_tag(story)
+    .card-section[style="padding-top: 0;"]
+      - unless story.main_image_file_name.nil?
+        - if preview
+          div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
+        - else
+          == link_to story_path(story) do
+            div.story-card-image[style="background-image: url(#{story_main_image_show_path(story)})"]
+    .card-section.body
+      == story_body(story)
+    .card-section.last-section
+      == link_to "Read full story", story_path(story), class: "primary-link"
+      - if preview
+        .float-right.reactions
+          .icon-button.primary-icon
+            span.fa.fa-comment-o.fa-lg
+          .icon-button.primary-icon
+            span.fa.fa-thumbs-o-up.fa-lg
+          .icon-button.primary-icon
+            span.fa.fa-heart-o.fa-lg
+      - else
+        == render 'shared/reactions_component', s: story, top: nil 
+    - if current_user && story.anonymous? && story.author_id == current_user.id && params[:controller] == "dashboard"
+      .card-section
+        == story_anonymous(story)

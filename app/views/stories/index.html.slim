@@ -1,4 +1,5 @@
 == render 'stories/hero'
+.temp_information[data-search= "#{@search_param.nil? ? 0 : @search_param }" data-search-tag="#{@search_tag_param.nil? ? 0 : @search_tag_param }"]
 .row[style="margin-top: 20px;"]
   .columns.large-9.large-push-3
     .row.columns.page-intro
@@ -12,8 +13,11 @@
           span Share a Story
     .row.all-stories
       - @stories.each do |s|
-        .columns.medium-6
-          == render 'shared/story_card', story: s, admin_view: false, preview: false
+        == render 'shared/story_card', story: s, admin_view: false, preview: false
+    .row.columns.load-more-container.text-center
+      i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw.loading-icon[style="display: none;"]
+        span.sr-only Loading...
+      == link_to "Load more stories", stories_path, class: "load-more button", remote: true
   .columns.large-3.large-pull-9
     .row.columns.index_sidebar
       .columns.large-12.medium-6[style="padding-top: 10px; padding-bottom: 10px;"]

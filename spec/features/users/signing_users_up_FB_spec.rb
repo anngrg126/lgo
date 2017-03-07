@@ -11,7 +11,9 @@ RSpec.feature "New users sign up via Facebook" do
   scenario "with valid credentials" do
     visit "/"
     
-    click_link "Join"
+    within ('.nav-toptier') do
+      click_link "Join"
+    end
     click_link "Continue with Facebook"
     
     expect(page).to have_content("Successfully signed in from Facebook.")

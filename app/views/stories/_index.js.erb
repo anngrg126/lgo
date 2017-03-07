@@ -1,0 +1,8 @@
+$('.row.all-stories').after("<div class='row all-stories'></div>");
+<% unless @stories.count == 0 %>
+  <% @stories.each do |s| %>
+    $('.row.all-stories:last').append("<%= j render(:partial => 'shared/story_card', :locals => {story: s, admin_view: admin_view, preview: preview}) %>");
+  <% end %>
+<% else %>
+  $('.row.all-stories:last').after("<%= j render(:partial => 'shared/no_more_stories') %>");
+<% end %>

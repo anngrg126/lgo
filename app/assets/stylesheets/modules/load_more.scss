@@ -1,0 +1,49 @@
+.load-more-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  .button {
+    padding: 1.7rem 2rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .fa {
+    color: $blue;
+  }
+}
+.no-more-stories {
+  background-color: $light-gray;
+  margin-bottom: 20px;
+  padding: 20px 0;
+  p {
+    margin: 20px;
+  }
+  img {
+    max-width: 200px;
+    margin: 20px auto;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .load-more-container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    .button {
+      max-width: 400px;
+    }
+  }
+}
+@media only screen and (max-width: 640px) {
+  .row.row.columns.load-more-container { //override foundation
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 30px auto 50px;
+    .button {
+      max-width: none;
+      width: 100%;
+    }
+  }
+  .no-more-stories {
+    margin-bottom: 20px;
+    padding: 20px 0;
+  }
+}

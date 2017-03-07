@@ -210,6 +210,32 @@ function uploadLabel() {
 document.addEventListener("trix-file-accept", function(event) {
   event.preventDefault()
 })
-
+//fcn to load more stories via ajax
+$(document).on('click', 'a.load-more', function(e){
+  e.preventDefault();
+  $('.load-more').hide();
+  $('.loading-icon').show();
+  var last_id = $('.story-card').last().attr('data-id');
+  var search = $(".temp_information").attr('data-search');
+  var search_tag = $(".temp_information").attr('data-search-tag');
+  $.ajax({
+    type: "GET",
+    url: $(this).attr('href'),
+    data: {
+      id: last_id,
+      search: search,
+      search_tag: search_tag
+    },
+    dataType: "script",
+    success: function (rtndata) {
+      $('.loading-icon').hide();      
+      if (!(rtndata.includes('text-center no-more-stories'))) {
+        $('.load-more').show();
+      } else {
+        $(".load-more-container").hide();
+      };
+    }
+  });
+});
 $(document).ready(myFunction);
 $(document).on('turbolinks:load', myFunction);
