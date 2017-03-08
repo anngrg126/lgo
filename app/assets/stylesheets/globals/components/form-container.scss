@@ -59,6 +59,12 @@
   label.gray {
     color: $dark-gray;
   }
+  .penguin {
+    img {
+      padding: 40px 0;
+      max-height: 300px;
+    }
+  }
 }
 @media only screen and (max-width: 640px) {
   .form-container-standalone {

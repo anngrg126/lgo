@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'pages/terms'
+
+  get 'pages/contacts'
+
   devise_for :models
   devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'devise/user_sessions', passwords: 'devise/user_passwords', unlocks: 'devise/user_unlocks' }
   # The priority is based upon order of creation: first created -> highest priority.

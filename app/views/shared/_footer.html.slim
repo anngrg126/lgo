@@ -6,14 +6,14 @@ footer role="contentinfo"
           h3 Join
       li
         == link_to root_path do
+          h3 Home
+      li
+        == link_to pages_contacts_path do
           h3 Contact
       br.show-for-small-only
       li
-        == link_to root_path do
-          h3 Terms
-      li
-        == link_to root_path do
-          h3 Privacy
+        == link_to pages_terms_path do
+          h3 Terms of use
   .row
     ul.footer-links
       li
