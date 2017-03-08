@@ -1,4 +1,6 @@
 == javascript_include_tag "registration_steps", 'data-turbolinks-track' => true
+.text-center
+  ==image_tag("GiftonLogo_White.png", alt: "GiftOn: Real gift stories and Ideas", style: "max-height: 60px; margin: 20px auto;")
 .row.form-container-standalone
   .columns.medium-7.large-6.medium-centered
     h2.text-center One last step
@@ -18,18 +20,18 @@
           h3.secondary Birthday
         = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}
         span.form-error
-      div.form-group
+      .form-group
         = f.label :gender do
           h3.secondary Gender
-        = f.radio_button :gender, 'male'
-        = f.label :gender_male, 'Male'
-        = f.radio_button :gender, 'female'
-        = f.label :gender_female, 'Female'
-        = f.radio_button :gender, nil, :id => :custom_defined_gender
-        = f.label :gender_custom, 'Custom'
+        = f.radio_button :gender, 'male', class: "radios"
+        = f.label :gender_male, 'Male', class: "gray"
+        = f.radio_button :gender, 'female', class: "radios"
+        = f.label :gender_female, 'Female', class: "gray"
+        = f.radio_button :gender, nil, :id => :custom_defined_gender, class: "radios"
+        = f.label :gender_custom, 'Custom', class: "gray"
         input#free_system_input
         span.form-error
-      = f.submit "Submit", class: "button"
+      = f.submit "Complete signup", class: "button", style: "width: 100%; margin-top: 40px;"
 
     javascript:
       //fcn to load all radio buttons as unchecked

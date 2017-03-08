@@ -43,6 +43,9 @@
     &:-moz-placeholder { /* Firefox 18- */
       color: $middark-gray;
     }
+    &.radios {
+      height: 20px;
+    }
   }
   strong.subtext.secondary {
     color: $middark-gray;
@@ -52,6 +55,9 @@
   }
   label h3.secondary {
     margin-bottom: 10px;
+  }
+  label.gray {
+    color: $middark-gray;
   }
 }
 @media only screen and (max-width: 640px) {
