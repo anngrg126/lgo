@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => '7:00 am' do
+every 1.day, :at => '1:00 pm' do
   rake "send_digest_email", :output => "#{path}/log/cron.log"
 end
