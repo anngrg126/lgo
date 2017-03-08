@@ -1,5 +1,5 @@
 .form-container-standalone {
-  padding-top: 100px;
+//  padding-top: 100px;
   padding-bottom: 100px;
   >.columns {
     background-color: $white;
@@ -57,7 +57,7 @@
 @media only screen and (max-width: 640px) {
   .form-container-standalone {
     padding: 10px;
-    padding-top: 50px;
+//    padding-top: 50px;
     >.columns {
       padding: 20px 10px;
     }
