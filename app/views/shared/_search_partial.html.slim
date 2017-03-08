@@ -1,9 +1,16 @@
-.search-results
-  - if @active_search <= 0
-    h2 No stories matched
-    p
-      | #{locals[:var]}
-  - else
-    h2 Searching for
-    p
-      | #{locals[:var]}
+.search-results.row
+  .columns
+    - if @active_search <= 0
+      .text-center
+        h2 No stories matched
+        span.handwriting #{locals[:var]}
+        br
+        == image_tag('empty_gift_gray.png', class: "empty")
+        p.secondary How about adding a memorable gift story of your own?
+        br
+        == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
+          span.fa.fa-pencil
+          span Share a Story
+    - else
+      h2 Showing story results for 
+      span.handwriting #{locals[:var]}
