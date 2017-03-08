@@ -14,6 +14,8 @@ div#stickhere[data-sticky-container]
           li.hide-for-small-only[class="#{@active_share}"]
             == link_to new_story_path do
               h5[class="#{@active_share}"] Share
+          li.beta.handwriting
+            | (BETA)
         - unless params[:controller].include? "users"
           - unless current_page? registration_step_path(:basic_details)
             div.user-info
