@@ -66,11 +66,6 @@ function myFunction() {
   } else {
     $(".sticky-container").css("height", 52);
   };
-  //*STORY FORM*
-  //fcns to append extra image upload fields
-  $('#add_image_fields').click(function(){
-    $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
-  });
   //*Story Show View*
   $('a[href^="#comments"], a[href^="#stickhere"], a[href^="#featured_prompt"]').on('click', function(e){
     e.preventDefault();

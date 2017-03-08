@@ -1,12 +1,33 @@
-= form_for [@story, @picture], :html => {class: "form", multipart: true}, remote: true do |f|
-  div
-    | Add More Pictures
-    = f.label :image
-    #image_fields
-      .upload_image
-        = f.file_field :image, url: stories_path(), multiple: true, :name =>"image[]"
-    span class="form-error"
-    = link_to 'Add another image', 'javascript:', id: "add_image_fields", remote: true
-  div
-    = f.submit class: "button"
-    = link_to "Cancel", story_path(@story)
+.buffer
+.row.form-container-standalone
+  .columns.medium-7.large-6.medium-centered
+    = form_for [@story, @picture], :html => {class: "form", multipart: true}, remote: true do |f|
+      div
+        h1.text-center[style="margin-bottom: 0;"] Upload more pictures
+        h2.text-center.secondary
+          | to  
+          == story_title(@story)
+        #image_fields
+          == render 'shared/picture_fields', f: f
+        .links
+          = link_to_add_association 'Add another image', f, :story, partial: 'shared/picture_fields'
+      div.text-center
+        = f.submit class: "button", style: "height: initial; margin-right: 10px;"
+        = link_to "Cancel", story_path(@story), class: "button hollow"
+        
+javascript:
+  'use strict';
+  ;( function( $, window, document, undefined ) {
+    uploadLabel(); 
+    var ids;
+    ids = 0;
+    $( '.add_fields').click( function() {
+      $( document ).on('cocoon:after-insert', function(e, insertedItem) {
+        uploadLabel();
+        $(".links").css("display", "none"); 
+        $(".nested-fields:last").find(".image-label").attr("for", "picture_image_"+ ids.toString());
+        $(".nested-fields:last").find(".image-input").attr("id", "picture_image_"+ ids.toString());
+        ids += 1;
+      });  
+    });
+  })( jQuery, window, document );
