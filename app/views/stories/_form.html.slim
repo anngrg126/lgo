@@ -1,3 +1,31 @@
+script
+  == render partial: 'trix_input_id.js.erb', story: @story
+javascript:
+  'use strict';
+  ;( function( $, window, document, undefined ) {
+    uploadLabel(); 
+    $( '.add_fields').click( function() {
+      $( document ).on('cocoon:after-insert', function(e, insertedItem) {
+        uploadLabel();
+        $(".links").css("display", "none"); 
+      });  
+    });
+    $('#story_fail').click(function() {
+      if ($(this.checked).length > 0) {
+        $('#no_fail').attr('checked', false);
+      } 
+    });
+    $('#no_fail').click(function() {
+      if ($(this.checked).length > 0) {
+        $('#story_fail').attr('checked', false);
+      } 
+    });
+  })( jQuery, window, document );
+
+
+
+
+
 .card.story-form
   - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
     = form_for(@story, :html => {class: "form", multipart: true}, remote: true) do |f|
@@ -113,26 +141,3 @@
         - sanitize @story.updated_body
         = f.submit class: "button"
         = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true, class: "hollow button", style: "margin-left: 10px;"
-script
-  == render partial: 'trix_input_id.js.erb', story: @story
-javascript:
-  'use strict';
-  ;( function( $, window, document, undefined ) {
-    uploadLabel(); 
-    $( '.add_fields').click( function() {
-      $( document ).on('cocoon:after-insert', function(e, insertedItem) {
-        uploadLabel();
-        $(".links").css("display", "none"); 
-      });  
-    });
-    $('#story_fail').click(function() {
-      if ($(this.checked).length > 0) {
-        $('#no_fail').attr('checked', false);
-      } 
-    });
-    $('#no_fail').click(function() {
-      if ($(this.checked).length > 0) {
-        $('#story_fail').attr('checked', false);
-      } 
-    });
-  })( jQuery, window, document );
