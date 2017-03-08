@@ -9,6 +9,7 @@ class StoriesController < ApplicationController
   def index
     @reactions = ReactionCategory.all
     @active_browse = "active"
+    @active_search = nil
     if (params[:search] != nil && params[:search] != "0") || (params[:search_tag] !=nil && params[:search_tag] != "0")
       if params[:search]!=nil && params[:search] != "0"
         @results = (Story.search params[:search], operator: "or")
@@ -29,15 +30,13 @@ class StoriesController < ApplicationController
 #        @stories = @results.results.reverse!.select{|s| s.active? && s.published}.first(8)
         @stories = Story.includes(:user, :classifications, :reactions, :comments, :bookmarks).published.active.where(id: @results.map(&:id)).limit(8)
       end
-      if @results.count <=0
-        if (params[:search] != nil && params[:search] != "0")
-          flash[:warning] = "No stories matched : "+ params[:search]
-        else
-          flash[:warning] = "No stories matched : "+ params[:search_tag]
-        end
-        redirect_to root_path
+      @active_search = @stories.count
+      if (params[:search] != nil && params[:search] != "0")
+        flash[:search_partial] = params[:search]
       else
-        #pass search params to temp info div
+        flash[:search_partial] = params[:search_tag]
+      end
+      unless @results.count <=0
         @search_param = params[:search] ? params[:search] : 0
         @search_tag_param = params[:search_tag] ? params[:search_tag] : 0
       end
