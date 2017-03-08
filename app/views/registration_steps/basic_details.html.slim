@@ -3,7 +3,10 @@
   ==image_tag("GiftonLogo_White.png", alt: "GiftOn: Real gift stories and Ideas", style: "max-height: 60px; margin: 20px auto;")
 .row.form-container-standalone
   .columns.medium-7.large-6.medium-centered
-    h2.text-center One last step
+    h2.text-center 
+      | One last step
+    h3.text-center[style="color: #4a4a4a;"]
+      | to join GiftOn
     = form_for @user, :url => wizard_path, :method => :put, remote: true do |f|
       label
         h3.secondary Name
