@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'pages/terms'
 
-  get 'pages/privacy'
+  get 'pages/contacts'
 
   devise_for :models
   devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'devise/user_sessions', passwords: 'devise/user_passwords', unlocks: 'devise/user_unlocks' }

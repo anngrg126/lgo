@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def terms
   end
 
-  def privacy
+  def contacts
   end
   
   def set_tags
