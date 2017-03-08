@@ -11,6 +11,10 @@
         == link_to user_signed_in? ? new_story_path : new_user_session_path, class: "button button-w-icon" do
           span.fa.fa-pencil
           span Share a Story
+    - if @active_search
+      - flash.each do |name, msg|
+        - if name == "search_partial"
+          == render 'shared/search_partial', locals: {var: msg}
     .row.all-stories
       - @stories.each do |s|
         == render 'shared/story_card', story: s, admin_view: false, preview: false

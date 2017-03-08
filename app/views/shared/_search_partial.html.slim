@@ -1,0 +1,9 @@
+.search-results
+  - if @active_search <= 0
+    h2 No stories matched
+    p
+      | #{locals[:var]}
+  - else
+    h2 Searching for
+    p
+      | #{locals[:var]}
