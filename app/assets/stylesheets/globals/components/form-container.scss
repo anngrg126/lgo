@@ -1,5 +1,5 @@
 .form-container-standalone {
-  padding-top: 100px;
+//  padding-top: 100px;
   padding-bottom: 100px;
   >.columns {
     background-color: $white;
@@ -43,15 +43,27 @@
     &:-moz-placeholder { /* Firefox 18- */
       color: $middark-gray;
     }
+    &.radios {
+      height: 20px;
+    }
   }
   strong.subtext.secondary {
     color: $middark-gray;
+  }
+  .hidden {
+    display: none;
+  }
+  label h3.secondary {
+    margin-bottom: 10px;
+  }
+  label.gray {
+    color: $dark-gray;
   }
 }
 @media only screen and (max-width: 640px) {
   .form-container-standalone {
     padding: 10px;
-    padding-top: 50px;
+//    padding-top: 50px;
     >.columns {
       padding: 20px 10px;
     }

@@ -11,3 +11,12 @@
         | or 
         == link_to "browse more stories", root_path
         | .
+    - if locals[:var].has_key?("email")
+      == image_tag("GiftOn-White-lightbulb.png")
+      h1 Welcome to GiftOn!
+      button.icon-button.white-icon[aria-label = "dismiss alert" type="button" data-close]
+        i.fi-x.fa-lg[aria-hidden="true"]
+      h2[style="color: white; margin-bottom: 20px;"] Upload a profile photo to finish getting set up.
+      p.secondary[style="color: white;"] 
+        | (That default image is an awful look!)
+        

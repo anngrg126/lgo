@@ -32,7 +32,8 @@ class RegistrationStepsController < ApplicationController
   end
   
   def finish_wizard_path
-    flash[:primary] = "You have signed up successfully."
+#    flash[:primary] = "You have signed up successfully."
+    flash[:partial] = current_user
     log_user_sign_in(current_user)
     dashboard_path(current_user)
   end

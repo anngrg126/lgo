@@ -29,4 +29,12 @@ class ApplicationController < ActionController::Base
   def log_user_sign_in(resource)
     UserSessionLog.log(resource, "sign_in")
   end
+  
+  def require_complete_user
+    if current_user
+      if current_user.first_name == nil || current_user.last_name == nil
+        redirect_to registration_step_path(:basic_details)
+      end
+    end
+  end
 end

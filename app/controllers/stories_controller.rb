@@ -4,6 +4,7 @@ class StoriesController < ApplicationController
   before_action :redirect_cancel, :only => [:update]
   before_action :set_tags, only: [:show, :index, :new, :edit]
   before_action :set_anonymous_user
+  before_action :require_complete_user
   
   def index
     @reactions = ReactionCategory.all
