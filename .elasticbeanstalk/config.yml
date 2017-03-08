@@ -8,6 +8,8 @@ branch-defaults:
     environment: letsgifton-beta
   daily_email_cronjob:
     environment: letsgifton-beta
+  resolve_log_errors:
+    environment: letsgifton-beta
 global:
   application_name: letsgifton
   branch: null
