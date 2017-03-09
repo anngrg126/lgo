@@ -35,8 +35,8 @@ class Admin::StoriesController < ApplicationController
   
   def update
     @story = Story.includes(:classifications).find(params[:id])
-    @story.validate_final_fields = true
-    @story.validate_main_image = true
+#    @story.validate_final_fields = true
+#    @story.validate_main_image = true
     @published_changed = nil 
     delete_old_tags(@story)
     
@@ -64,7 +64,7 @@ class Admin::StoriesController < ApplicationController
       end
     end
     
-    @story.validate_all_tags = true
+#    @story.validate_all_tags = true
     
     @story.admin_id = current_user[:id]
     unless @story.published? 
