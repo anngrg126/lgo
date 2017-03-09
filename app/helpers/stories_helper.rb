@@ -150,11 +150,12 @@ module StoriesHelper
         concat "</div><div style='display: block;'><input id='story_classifications_attributes_0_tag_id_#{@other.id}' value='#{@other.id}' name='story[classifications_attributes][0][tag_id][]' #{other_checked} type='checkbox'><label for='story_classifications_attributes_0_family'>#{@other.name.humanize}</label><input id='story_classifications_attributes_0_description' name='story[classifications_attributes][0][description][#{@other.id}][]' type='text' #{other_description}>".html_safe
         primary_tag(scope, @other)
       end
-      # concat "</div>".html_safe
+      concat "</div>".html_safe
     end
     
     tag_scope_array.each do |scope|
 #      print correct header
+      concat "<div>".html_safe
       case scope
       when @relationship_tags
         concat "<h4>Relationship</h4>".html_safe
@@ -178,6 +179,7 @@ module StoriesHelper
       scope.each do |tag|
         add_checkbox(scope, tag)
       end
+      concat "</div><div>".html_safe
     end
   end
   
