@@ -35,9 +35,9 @@ RSpec.feature "Users signup" do
     select_date @birthday, :from => "user_birthday"
     choose('user_gender_female')
     
-    click_button "Submit"
+    click_button "Complete signup"
     
-    expect(page).to have_content("You have signed up successfully.")
+    expect(page).to have_content("Welcome to GiftOn!")
     expect(page).to have_content("#{@first_name} #{@last_name.first}")
 #    expect(page).to have_link("Sign out")
     expect(page).to have_css("a.logged-in")
@@ -73,7 +73,7 @@ RSpec.feature "Users signup" do
     
     click_button "Sign up"
     
-    click_button "Submit"
+    click_button "Complete signup"
     
     expect(page).to have_content("First name can't be blank")
     expect(page).to have_content("Last name can't be blank")
@@ -102,9 +102,9 @@ RSpec.feature "Users signup" do
     expect(page).to have_css("input#free_system_input")
     fill_in "free_system_input", with: "custom"
     
-    click_button "Submit"
+    click_button "Complete signup"
     
-    expect(page).to have_content("You have signed up successfully.")
+    expect(page).to have_content("Welcome to GiftOn!")
     
     @user_log = UserSessionLog.where(user_id: User.find_by(email: @email2).id).last.sign_in
     expect(@user_log).not_to eq nil

@@ -39,14 +39,20 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
     within (".upload-pictures") do
       click_link "Upload more pictures"
     end
+    execute_script("$('input[name=\"image[]\"]').removeClass('image-input')")
     attach_file('image[]', './spec/fixtures/image.png')
     
     click_link "Add another image"
-    
-    within('#new_picture > div > .upload_image:nth-child(3)') do
+    expect(page).to have_css(".fa-camera", count: 5)
+     within('.nested-fields') do
+      execute_script("$('input[name=\"image[]\"]').removeClass('image-input')")
       attach_file('image[]', './spec/fixtures/image.png')
     end
-    click_button "Create Picture"
+  
+#    within('#new_picture > div > .upload_image:nth-child(3)') do
+#      attach_file('image[]', './spec/fixtures/image.png')
+#    end
+#    click_button "Create Picture"
     
     # cnt_images = Picture.where(story_id: @story.id).count
     cnt_images=3
@@ -61,8 +67,8 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
       click_link "Upload more pictures"
     end
     click_button "Create Picture"
-    
-    expect(page).to have_content("Image can't be blank")
+    expect(page).to have_content("Picture has not been uploaded.")
+#    expect(page).to have_content("Image can't be blank")
   end
   
 end

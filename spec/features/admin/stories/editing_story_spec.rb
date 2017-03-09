@@ -47,7 +47,7 @@ RSpec.feature "Editing Stories" do
     visit "/admin"
     
     click_link @story.raw_title
-    click_link "Edit story"
+    click_link "Edit Story"
     
     expect(page).to have_content("#{User.find(@story.author_id).full_name}")
     expect(page).to have_content(@story.created_at.strftime("%b %d, %Y"))
@@ -104,7 +104,7 @@ RSpec.feature "Editing Stories" do
     visit "/admin"
     
     click_link @story2.raw_title
-    click_link "Edit story"
+    click_link "Edit Story"
     
     expect(page).to have_content(@story2.updated_title)
     expect(page).to have_content(@story2.updated_body)
@@ -135,7 +135,7 @@ RSpec.feature "Editing Stories" do
     visit "/admin"
     
     click_link @story.raw_title
-    click_link "Edit story"
+    click_link "Edit Story"
     
     fill_in "Final Title", with: ""
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, "")

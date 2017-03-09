@@ -81,7 +81,7 @@ RSpec.feature "Editing Stories" do
     fill_in "Your story title", with: @updated_title2
     fill_in_trix_editor('story_raw_body_trix_input_story_'+@story2.id.to_s, @updated_body2)
     fill_in "In 10 words or less, what was the gift?", with: @updated_description
-    click_button "Edit story"
+    click_button "Edit Story"
     
     expect(page).to have_content("Story has been updated")
     expect(page).to have_content(@updated_title2)
